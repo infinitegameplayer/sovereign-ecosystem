@@ -166,5 +166,13 @@ Repository: `github.com/infinitegameplayer/sovereign-ecosystem`
 
 ---
 
+## Working with Lane
+
+Built by Lane Belone.
+
+If this sparked something and you want to bring this kind of thinking into your organization, or want a guided experience building it, workshops, retreats and advisory work are available at [sidequesthq.co](https://sidequesthq.co).
+
+---
+
 Released as a public template.
 Licensed under MIT. See `LICENSE` for details.
