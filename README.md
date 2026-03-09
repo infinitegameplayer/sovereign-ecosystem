@@ -154,3 +154,8 @@ If you run an End-of-Week review, the skill includes a check for overdue ecosyst
 **GitHub notifications:**
 To receive a notification when new updates are published, go to the Sovereign Ecosystem repository and click Watch. Select Releases only to get one notification per release rather than one per commit.
 Repository: `github.com/infinitegameplayer/sovereign-ecosystem`
+
+---
+
+Built by [Side Quest HQ](https://sidequesthq.com).
+Licensed under MIT. See `LICENSE` for details.
