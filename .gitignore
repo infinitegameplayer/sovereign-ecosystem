@@ -1,4 +1,4 @@
-# Obsidian workspace state (local only — do not publish)
+# Obsidian workspace state (local only, do not publish)
 .obsidian/workspace.json
 .obsidian/workspace-mobile.json
 .obsidian/graph.json
@@ -25,3 +25,6 @@ Thumbs.db
 
 # Token replacement log (user-specific, generated on first run)
 scripts/replace-tokens-log.txt
+
+# Local backup configuration
+scripts/backup.config.json

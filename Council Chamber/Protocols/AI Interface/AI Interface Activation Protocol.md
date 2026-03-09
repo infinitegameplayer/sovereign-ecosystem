@@ -28,7 +28,7 @@ Purpose: Bring {{AI_INTERFACE_NAME}} online with governed context, explicit cons
 5. Run Activation Checklist.
 5b. Run AI Interface Engagement Checklist (mode, tone, humor, illumination cadence). After activation 5, this is optional unless requested.
 6. Present or update `Sovereign Command` (proposal-first):
-   - **End-of-Week check:** If today is the end of the week, surface `[[Council Chamber/Protocols/Session/End-of-Week Protocol]]` as part of this SC briefing. The End-of-Week Protocol does not appear in `Sovereign Command.md` â€” it is {{AI_INTERFACE_NAME}}-surfaced during activation only.
+   - **End-of-Week check:** If today is the end of the week, surface `[[Council Chamber/Protocols/Session/End-of-Week Protocol]]` as part of this SC briefing. The End-of-Week Protocol does not appear in `Sovereign Command.md` - it is {{AI_INTERFACE_NAME}}-surfaced during activation only.
    - Use `[[Council Chamber/Checklists/Sovereign Command Review Checklist]]` during the refresh so all relevant source lanes are re-scanned, even if some sections are currently omitted
    - Present the lean command surface starting with `Most Alive Next Move`, then only the currently earned promoted sections
    - Do not prompt on `North Star` during activation unless explicitly requested; use the North Star Recalibration flow for North Star updates/refinements
@@ -42,10 +42,10 @@ Purpose: Bring {{AI_INTERFACE_NAME}} online with governed context, explicit cons
    - Inbox scan (light):
      - Detect obvious new/changed items in `Inbox/` (manual-triggered scan, not an always-on watcher)
      - Surface blockers, approvals or opportunities relevant to today's command surface
-   - Transcription service check (optional â€” requires Transcription Module):
+   - Transcription service check (optional - requires Transcription Module):
      - Read `Council Chamber/Tools/Support Files/transcription-sync-state.json`
      - Query your configured transcription service for new transcripts not yet ingested
-     - If new transcripts found: surface count, titles, dates and durations â€” proposal only
+     - If new transcripts found: surface count, titles, dates and durations - proposal only
      - Propose routing per Transcript Inbox Protocol; no auto-ingest
      - Update sync state only after approved ingestion completes
    - Active focus visibility check:
@@ -89,7 +89,7 @@ Purpose: Bring {{AI_INTERFACE_NAME}} online with governed context, explicit cons
 
 ## Startup Sweep Sources (Default)
 - `Inbox/` (primary)
-- Your configured transcription service â€” new transcript check via API (approval-gated ingestion; requires Transcription Module)
+- Your configured transcription service - new transcript check via API (approval-gated ingestion; requires Transcription Module)
 - Other creator-designated landing zones inside the Sovereign Ecosystem (for example collaboration export drop points)
 - Additional sources may be added as habits stabilize; detection remains manual-triggered until automation is explicitly approved.
 
@@ -123,3 +123,6 @@ Internal Contrast Layer
 ## Continuity Check
 - Review or update `[[Council Chamber/AI Interface/Continuity Log]]` before activation.
 - Surface any active continuity items for awareness.
+
+
+

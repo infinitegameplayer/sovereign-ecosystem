@@ -76,7 +76,7 @@ Internal Contrast Layer
 - Consults: if downstream artifacts were created and the Consult is now primarily provenance, propose `status: complete` (approval-gated) and Vault eligibility.
 - Pending Plans: check for topic overlap with new artifacts and archive or update.
 - Pending Plans: write breadcrumb updates into matched PendingPlan notes even when no status change is approved.
-- Pending Plans: scan for any `status: proposed` plans whose goals were fulfilled via indirect paths â€” other plans, organic governance work, or prior sessions. Ask "Is this effectively done?" even if the work never ran through that plan's own execution path. Propose closure for approval.
+- Pending Plans: scan for any `status: proposed` plans whose goals were fulfilled via indirect paths - other plans, organic governance work, or prior sessions. Ask "Is this effectively done?" even if the work never ran through that plan's own execution path. Propose closure for approval.
 - Classification drift: check whether any newly created/updated Quest or PendingPlan should be reclassified (Quest vs PendingPlan boundary); propose conversion for approval.
 - Quests: if completed or retired, apply Quest Completion Protocol and move to Vault.
 - Quests: if completed and Trifecta Reflection + Archetypal ROI are present, run [[Council Chamber/Protocols/Flywheels/Conduction Flywheel Protocol]] before Vault handoff.
@@ -90,6 +90,9 @@ Internal Contrast Layer
 ## Continuity Notes
 - Add 1-3 lightweight process improvements to [[Council Chamber/AI Interface/Continuity Log]].
 - Review active continuity items and propose resolution candidates for approval.
+
+
+
 
 
 

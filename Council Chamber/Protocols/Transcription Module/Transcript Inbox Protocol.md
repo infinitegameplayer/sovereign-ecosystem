@@ -109,7 +109,7 @@ Purpose: Define how transcripts enter `Inbox/`, are classified and routed (Libra
   - original imported filename
 - On processing: run Oxford comma removal pass on all {{AI_INTERFACE_NAME}}-generated sections. Raw transcript body is exempt and never edited for style.
 
-### Solo Voice Note Transcript (Active â€” Requires Solo Voice Note Protocol)
+### Solo Voice Note Transcript (Active - Requires Solo Voice Note Protocol)
 - Applies to solo captures recorded on walks or personal voice sessions.
 - Full protocol: `[[Council Chamber/Protocols/Transcription Module/Solo Voice Note Protocol]]`
 - Route to: `Library/Transcripts/Solo/` (not standard `Library/Transcripts/`)
@@ -150,3 +150,6 @@ Tier: 1 (foundational).
 Internal Contrast Layer
 - Add contrast notes here if needed.
 -->
+
+
+

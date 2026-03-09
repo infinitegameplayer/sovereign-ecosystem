@@ -18,7 +18,7 @@ Solo voice notes are fundamentally different from collaboration or meeting trans
 - The Sovereign is the only speaker
 - There are no action items by collaborator, no meeting decisions, no partner tracking
 - The primary downstream is Expression (Scriptorium), not action extraction
-- The energy is often exploratory, intuitive and raw â€” preserve that quality in the analysis
+- The energy is often exploratory, intuitive and raw - preserve that quality in the analysis
 
 ## Classification Signal
 - 0 or 1 participant (Sovereign only)
@@ -78,7 +78,7 @@ Run after Signal Analysis. These checks sharpen routing and downstream proposals
 
 ### North Star Alignment
 - Does the content declare or update a trajectory, paradigm or value orientation?
-- If yes: flag for North Star review â€” specifically Calibration Field, current Horizons or Long Term sections
+- If yes: flag for North Star review - specifically Calibration Field, current Horizons or Long Term sections
 - Reference: `[[Library/North Star]]`
 
 ### Weekly Story Relevance (Optional)
@@ -87,7 +87,7 @@ Run after Signal Analysis. These checks sharpen routing and downstream proposals
 - Reference your weekly story protocol or reflection practice if one is installed.
 
 ### Active Pending Plan Connections
-- Does the content relate to any open Pending Plan â€” by topic, project area or named initiative?
+- Does the content relate to any open Pending Plan - by topic, project area or named initiative?
 - Scan: `[[Council Chamber/Pending Plans/Index]]`
 - If yes: note the plan name and the nature of the connection; do not auto-create tasks
 
@@ -96,7 +96,7 @@ Run after Signal Analysis. These checks sharpen routing and downstream proposals
 - This context allows Pattern Signal to surface cross-session patterns rather than generic observations
 
 ## Development Decision (Proposal-First)
-- Promote to Expression Seed? (yes / no / maybe â€” with brief rationale)
+- Promote to Expression Seed? (yes / no / maybe - with brief rationale)
 - If yes: create `Scriptorium/Expression Seeds/Expression Seed - Solo - {Core Theme} - YYYY-MM-DD.md`
 - If no: note why and leave in Library for future pass or Vault descent
 - Priority signal: low / medium / high
@@ -109,7 +109,7 @@ Run after Signal Analysis. These checks sharpen routing and downstream proposals
 ## {{AI_INTERFACE_NAME}} Activation Integration
 - During {{AI_INTERFACE_NAME}} Activation, new transcripts from your transcription service are checked (standard flow)
 - Solo voice notes are identified during classification step
-- Routing proposal surfaces count, title and date â€” no auto-ingest
+- Routing proposal surfaces count, title and date - no auto-ingest
 - Processing pass (Signal Analysis + Development Decision) is proposal-first and approval-gated
 
 ## Transcription Service Note
@@ -129,5 +129,8 @@ Tier: 2 (operational).
 Internal Contrast Layer
 - Solo voice notes are NOT collaboration transcripts; do not apply action-by-participant extraction.
 - The Scriptorium is the primary downstream; do not treat solo notes as governance inputs.
-- Preserve the raw, exploratory energy of voice capture â€” do not over-formalize the analysis pass.
+- Preserve the raw, exploratory energy of voice capture - do not over-formalize the analysis pass.
 -->
+
+
+

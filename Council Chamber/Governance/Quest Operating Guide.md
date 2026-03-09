@@ -128,7 +128,7 @@ Note: Status updates are sufficient for Obsidian filtering. For cleaner active v
 
 ## Quest Update Conversation (Recommended)
 - Use [[Council Chamber/Protocols/Quest Progress Update Protocol]] for structured single-Quest updates, especially after real-world progress.
-- Use [[Council Chamber/Skills/Quest Progress Update Skill]] when {{AI_INTERFACE_NAME}} should lead the questioning and writeback flow.
+- Use [[Council Chamber/Skills/Quest Progress Update/SKILL]] when {{AI_INTERFACE_NAME}} should lead the questioning and writeback flow.
 - This process complements (does not replace) [[Council Chamber/Protocols/North Star Recalibration Protocol]].
 - If classification drift appears (Quest vs PendingPlan), pause and request approval before converting.
 

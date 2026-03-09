@@ -5,3 +5,18 @@ All updates to the Sovereign Ecosystem are recorded here, newest first.
 Each entry corresponds to one publish cycle. For full implementation details, see the matching file in `UPDATES/`.
 
 ---
+
+## v1.0.0 — 2026-03-09
+
+Initial public release of the Sovereign Ecosystem.
+
+**Foundation** includes governance core (Constitution, Interface Adapter Registry, Layer Map, Object Model, Structural Containers, Security, Translation to Action, Flywheel Integration Standard, Quest Operating Guide), AI Interface baseline (Operating Charter, Knowledge Map, activation and engagement protocols, checklists, Sovereign Command), core codices (Challenge and Illumination, Contrast Layer, Tag Dictionary, Humor Codex, Writing Style, Codices Index), 40+ protocols across planning, session, archival, inbox, governance and expression, Foundation skills (Batch Archival, Security Check, Backup, Pending Plan Implementation and Update, Quest Progress Update, Session Closeout, End-of-Week) and Foundation templates.
+
+**Onboarding arc** includes 9 Getting Started sessions (Session 0 Prerequisites through Session 9 First Real Capture and Closeout Practice) plus 4 optional post-Foundation paths (Creator or Venture HQ Initialization, AI Interface Personalization and Calibration, First Creator Work Surface or Expression Prep, Lightweight Business or Life Operating Surface).
+
+**Module architecture** defined in MODULES.md. Six optional modules available for installation after Foundation is stable: Expression, Transcription, Weekly Review, Stewardship, Collaboration and Consult, Builder. Each module includes boundary rules, install timing guidance and dependency mapping.
+
+**Ecosystem Update Check skill** ships with Foundation for future update discovery and implementation.
+
+For full details on this release, see `UPDATES/2026-03-09-v1-initial-release.md`.
+

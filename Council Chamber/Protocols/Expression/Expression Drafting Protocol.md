@@ -93,7 +93,7 @@ Formats may merge or skip steps when clarity is preserved.
 ## Codex Application (Default)
 Apply your configured expression codices when they are installed. Recommended starting set:
 - If installed: `[[Council Chamber/Codices/Expression/Writing Style Codex]]`
-- Your Taste Profile Codex (if configured â€” see Personalization Module)
+- Your Taste Profile Codex (if configured - see Personalization Module)
 
 ## Status and Routing Rules
 - `draft` or `active`: in-progress in Expression folder
@@ -128,3 +128,6 @@ Internal Contrast Layer
 - This protocol governs pre-archive drafting flow only.
 - Keep legal exclusion explicit until approval gates and disclaimers are codified.
 -->
+
+
+

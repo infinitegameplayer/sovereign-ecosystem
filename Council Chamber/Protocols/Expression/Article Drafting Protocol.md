@@ -3,7 +3,7 @@ status: active
 version: 1.0
 tier: foundational
 module: Expression Module
-purpose: Full workflow for drafting a new long-form article Ã¢â‚¬â€ platform-agnostic skeleton
+purpose: Full workflow for drafting a new long-form article — platform-agnostic skeleton
 links:
   - "[[Council Chamber/Protocols/Expression/Expression Drafting Protocol]]"
   - "[[Council Chamber/Protocols/AI Interface/AI Interface Activation Protocol]]"
@@ -45,7 +45,7 @@ Goal: identify emergent themes, state shifts, insight patterns and alive energy 
 Surface 3-4 article thread options, each with:
 - Thread label (short title or concept name)
 - One-paragraph exploration of what the article could be
-- Why now Ã¢â‚¬â€ connection to current alive energy or pattern
+- Why now — connection to current alive energy or pattern
 
 Present all options. Await Sovereign's selection.
 
@@ -57,15 +57,15 @@ Present all options. Await Sovereign's selection.
 
 ### 5. Four-Engagement Sourcing
 
-Run 4 sequential engagements Ã¢â‚¬â€ one question at a time, await full response before proceeding. Do not draft until all 4 are complete.
+Run 4 sequential engagements — one question at a time, await full response before proceeding. Do not draft until all 4 are complete.
 
-**Engagement 1 Ã¢â‚¬â€ The Felt Experience:** What did it feel like? The texture of the shift, the moment it became different.
+**Engagement 1 — The Felt Experience:** What did it feel like? The texture of the shift, the moment it became different.
 
-**Engagement 2 Ã¢â‚¬â€ The Friction or Limit:** What was the gap before? What felt disjointed, incomplete or held back?
+**Engagement 2 — The Friction or Limit:** What was the gap before? What felt disjointed, incomplete or held back?
 
-**Engagement 3 Ã¢â‚¬â€ The Self as Creator:** How did you experience yourself differently as you moved through this? What changed in how you showed up?
+**Engagement 3 — The Self as Creator:** How did you experience yourself differently as you moved through this? What changed in how you showed up?
 
-**Engagement 4 Ã¢â‚¬â€ The Invitation:** What would you want to pass on? The insight, the permission, the invitation distilled to its essence.
+**Engagement 4 — The Invitation:** What would you want to pass on? The insight, the permission, the invitation distilled to its essence.
 
 After each response: hold the thread. Take notes. Do not comment in ways that shape the next answer before it arrives. After all 4: synthesize, identify the strongest verbatim phrases, note the arc.
 
@@ -85,13 +85,13 @@ Write the article using the sourced material as the core.
 
 Voice calibration:
 - If installed: `[[Council Chamber/Codices/Expression/Writing Style Codex]]`
-- Your Taste Profile Codex (if configured Ã¢â‚¬â€ see Personalization Module)
+- Your Taste Profile Codex (if configured — see Personalization Module)
 
 **Platform tags (if applicable):** Before drafting, confirm whether your publishing platform uses tags or categories to organize content for readers. If yes, propose 3-5 tags. Await Sovereign approval, then include the approved tags in the article frontmatter under `platform_tags`.
 
 Save to `Scriptorium/Articles/Article - [Title].md`.
 
-Naming convention: `Article - [Title].md` Ã¢â‚¬â€ no "Artifact" prefix.
+Naming convention: `Article - [Title].md` — no "Artifact" prefix.
 
 **Single source file only.** No platform-specific duplicate sections. Handle platform variations at publish time.
 
@@ -105,7 +105,7 @@ Sovereign edits the draft directly in Obsidian. No suggestions from {{AI_INTERFA
 
 After Sovereign confirms edits are complete:
 - Read the final file
-- Compare to the drafted version Ã¢â‚¬â€ identify editorial decisions and voice patterns
+- Compare to the drafted version — identify editorial decisions and voice patterns
 - Extract learnings: punctuation choices, metaphor preferences, tone calibration, structural adjustments
 - If installed, propose additions to Writing Style Codex when patterns are new or refine existing sections
 - If installed and approved, update Writing Style Codex with those additions
@@ -124,7 +124,7 @@ If the Writing Style Codex is installed, run its Pre-Publish QA checklist and fl
 
 Publish to your chosen platform(s). The Sovereign decides their distribution workflow based on the platforms they use.
 
-After publishing: Update frontmatter to `distribution_state: published` Ã¢â‚¬â€ this is the trigger for the social breakdown workflow.
+After publishing: Update frontmatter to `distribution_state: published` — this is the trigger for the social breakdown workflow.
 
 ### 13. Social Posts (Separate Session)
 
@@ -165,7 +165,7 @@ revision_round: 0
 
 Apply these codices during drafting and review when they are installed:
 - If installed: `[[Council Chamber/Codices/Expression/Writing Style Codex]]`
-- Your Taste Profile Codex (if configured Ã¢â‚¬â€ see Personalization Module)
+- Your Taste Profile Codex (if configured — see Personalization Module)
 
 ---
 
@@ -181,5 +181,5 @@ Internal Contrast Layer
 - This protocol governs article drafting from ideation through publication readiness only.
 - Social post creation is explicitly out of scope.
 - Voice anchoring via archive scan is a one-time step, not a recurring requirement.
-- The "verbatim rule" applies to source language as the core spine Ã¢â‚¬â€ not a prohibition on {{AI_INTERFACE_NAME}} structure or framing.
+- The "verbatim rule" applies to source language as the core spine — not a prohibition on {{AI_INTERFACE_NAME}} structure or framing.
 -->
