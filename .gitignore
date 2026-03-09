@@ -1,0 +1,27 @@
+# Obsidian workspace state (local only — do not publish)
+.obsidian/workspace.json
+.obsidian/workspace-mobile.json
+.obsidian/graph.json
+
+# Obsidian cache
+.obsidian/cache
+
+# Runtime logs and working files
+.runtime/
+
+# Node dependencies
+node_modules/
+
+# Trash
+.trash/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Local environment files
+.env
+*.local
+
+# Token replacement log (user-specific, generated on first run)
+scripts/replace-tokens-log.txt

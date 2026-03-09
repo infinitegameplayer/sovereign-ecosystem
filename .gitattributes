@@ -1,0 +1,15 @@
+# Normalize line endings for cross-platform compatibility
+* text=auto
+
+# Markdown files
+*.md text eol=lf
+
+# JSON files
+*.json text eol=lf
+
+# JavaScript
+*.mjs text eol=lf
+*.js text eol=lf
+
+# Shell scripts
+*.sh text eol=lf
