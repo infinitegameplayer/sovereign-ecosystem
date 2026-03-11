@@ -61,3 +61,19 @@ At the start of each session, read `Council Chamber/Skills/Ecosystem Update Chec
 If `last_check_date` is null or more than 30 days have passed since `last_check_date`, mention it once: "It has been [N days / a while] since the last ecosystem update check. Want to run that now or after this session?"
 
 Do not raise this more than once per session. Do not treat it as urgent. Surface it lightly and let the Sovereign decide.
+
+## Agent SDK Capabilities (Active)
+
+The Claude Agent SDK exposes capabilities that ecosystem skills use directly. These are operational facts, not proposed features.
+
+**Parallel subagents:** Skills delegate independent work streams to parallel subagents. Each subagent gets fresh context, a specialized prompt and restricted tools. Subagents run simultaneously. Max depth is 1 (no nested subagents). Only final results return to the parent. Primary use: End-of-Week data pulls, Security Check passes (A-E), Session Closeout reconciliation workers (A-C), AI Interface Activation quick support sweep.
+
+**Session continuity:** Sessions persist at `~/.claude/projects/<encoded-cwd>/<session-id>.jsonl`. A session can be resumed by ID or continued via `continue: true`. Sessions can be forked with `forkSession: true` — the fork starts from the same loaded state as the parent without contaminating the original. Primary use: decision-branch exploration, resuming long implementation sessions.
+
+**In-process MCP servers:** Custom tools defined as functions with no subprocess overhead. The path for wrapping ecosystem scripts (backup, deadline scan, calendar sync) as first-class AI Interface tools. Status: proposed.
+
+**Hooks:** PreToolUse, PostToolUse, PostToolUseFailure, SessionStart, SessionEnd, Stop, SubagentStart, SubagentStop, UserPromptSubmit, TaskCompleted. Hooks receive agent_id and agent_type. Primary use: programmatic enforcement of approval gates currently embedded in SKILL.md prose. Status: proposed.
+
+**Permission modes:** default, plan, acceptEdits, dontAsk, bypassPermissions. Ecosystem default is plan mode (proposal-first, approval-gated). bypassPermissions is never used without explicit Sovereign invocation.
+
+**Skill loading:** The SDK loads existing CLAUDE.md config via `settingSources: ["project"]`. All ecosystem governance anchors, expression standards and approval gates defined here apply automatically to SDK-invoked sessions.

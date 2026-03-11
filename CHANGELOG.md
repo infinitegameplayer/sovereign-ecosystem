@@ -6,6 +6,22 @@ Each entry corresponds to one publish cycle. For full implementation details, se
 
 ---
 
+## v1.3.0 — 2026-03-11
+
+### Added
+- Agent SDK Capabilities section added to `.claude/CLAUDE.md`: covers parallel subagents, session continuity, in-process MCP servers (proposed), hooks (proposed), permission modes and skill loading. These are operational facts available to all skills.
+- **Weekly Story skill (new):** Weekly narrative skill added to Foundation. 6-worker parallel data pull (calendar, transcripts, collaborations, operations and creation, AI Interface Change Log and session logs, last 3 stories). Three-part narrative format: opening scene, week's chronicle, thread forward. Hard save gate — Sovereign must confirm before file is written. Output: `Scriptorium/Weekly Stories/YYYY-MM-DD - [Title].md`.
+
+### Changed
+- **AI Interface Activation:** Quick Support Sweep (Step 6) upgraded to 4-worker parallel fire (Worker A: Inbox scan, Worker B: Transcript check, Worker C: Active focus scan, Worker D: Index drift check). Session ID handling and session fork pattern (`forkSession: true`) added to activation confirmation step.
+- **End-of-Week:** 7-worker parallel data pull added as a dedicated phase in Step 0 (before engagement briefings). Workers fire simultaneously and feed all five engagements. Inline data pulls in Steps 1-3 replaced with worker result references.
+- **Security Check:** Parallel pass architecture formalized as 5 explicit workers (Pass A-E: Surface, Structural, Adversarial, Resilience, Continuity) with explicit reconvene and synthesis step. Replaces hedged "if multiple agents available" language.
+- **Session Closeout:** 3-worker parallel pattern added (Worker A: Pending Plan reconciliation, Worker B: Inadvertent completions sweep, Worker C: Inbox and consult closeout). Unified approval gate presents all proposals as a single list before any execution.
+
+For full details, see `UPDATES/2026-03-11-v1.3.0-agent-sdk-integration.md`.
+
+---
+
 ## v1.2.0 — 2026-03-11
 
 ### Changed

@@ -16,3 +16,4 @@ Fields:
 - Security Check (active, tier: foundational)
 - Session Closeout (draft, tier: foundational)
 - Weekly Backup (active, tier: foundational)
+- Weekly Story (active, tier: operational)

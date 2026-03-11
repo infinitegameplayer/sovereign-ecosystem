@@ -47,15 +47,24 @@ Check `Council Chamber/Skills/Ecosystem Update Check/sync-state.json`. If `last_
 
 State the session: "Beginning End-of-Week Review - 3 this-week engagements, 2 next-week engagements, then Sovereign Command update."
 
+**Parallel data pull:** Fire all 7 workers simultaneously. Hold results — do not present yet. Workers feed the engagement briefings in Steps 1-5.
+
+- **Worker 1 — Session logs:** Scan `Vault (Archive)/Session Logs/` for files created in the past 7 days — note build/creation activity and structural changes
+- **Worker 2 — AI Interface Change Log:** Read `Council Chamber/AI Interface/AI Interface Change Log.md` filtered to the past 7 days — flag execution-density pattern if consecutive heavy sessions appear
+- **Worker 3 — Transcripts:** Check transcription service for any new transcripts in the past 7 days (if using Transcription Module) — coaching sessions, recorded calls, notable conversations
+- **Worker 4 — Operations + Collaborations:** Read primary business/projects dashboard and active collaboration dashboards in `Collaborations/` filtered for recent movement
+- **Worker 5 — To-Do Dock + Pending Plans:** Scan `To-Do Dock.md` for completed/stale/new items; scan `Pending Plans/` for plans that moved, resolved, activated or need attention; read `Council Chamber/AI Interface/Field Decisions.md` filtered to this week
+- **Worker 6 — North Star + Operations finances:** Read `Library/North Star.md` for active 0-3 month horizons and Drift Check prompts; scan `Operations/` for financial notes updated this week
+- **Worker 7 — Ecosystem SDK intelligence:** Check for Agent SDK changelog updates or ecosystem updates since last review; surface relevant deltas only
+
+All workers complete before any briefing begins.
+
 ---
 
 ### Step 1 - THIS WEEK: Engagement 1 - Inner State + Creation
 
 **Data pull (before prompting):**
-- Scan `Vault (Archive)/Session Logs/` for files created in the past 7 days - note build/creation activity and any structural changes
-- Read `Council Chamber/AI Interface/AI Interface Change Log.md` - filter to the past 7 days
-- Check your transcription service for any transcripts in the past 7 days (if using Transcription Module) - coaching sessions, recorded calls, notable conversations
-- Surface 2-3 concrete observations from the creation and expression lane
+Using Worker 1, Worker 2 and Worker 3 results from Step 0.
 
 **Briefing:**
 Two layers, presented in sequence:
@@ -78,11 +87,7 @@ The scan line surfaces everything; the Sovereign may recognize something to spea
 ### Step 2 - THIS WEEK: Engagement 2 - Operations + Collaborations
 
 **Data pull (before prompting):**
-- Read your primary business or projects dashboard (adapt this path to your domain) - filter for this week's activity
-- Read active collaboration dashboards in `Collaborations/` - filter for recent movement
-- Scan `To-Do Dock.md` - note any completed, stale, or newly emerged items
-- Scan `Pending Plans/` - note any plans that moved, resolved, activated, or need attention this week
-- Read `Council Chamber/AI Interface/Field Decisions.md` - filter to this week
+Using Worker 4 and Worker 5 results from Step 0.
 
 **Briefing:**
 Two layers:
@@ -102,10 +107,7 @@ Two layers:
 ### Step 3 - THIS WEEK: Engagement 3 - Resource + Trajectory
 
 **Data pull (before prompting):**
-- Scan `Operations/` for any financial notes or wealth flow entries updated this week
-- Read `Library/North Star.md` - extract the active 0-3 month horizons as a short reference list
-- Pull the Drift Check prompts from `Library/North Star.md` (Section IV) as framing context
-- Note: this is a pattern and alignment read, not an accounting report
+Using Worker 6 results from Step 0. Note: this is a pattern and alignment read, not an accounting report.
 
 **Briefing:**
 Two layers:

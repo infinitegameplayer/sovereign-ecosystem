@@ -43,15 +43,13 @@ Constraints:
 5. Present or update `Sovereign Command` (proposal-first), prioritizing the alive-energy layer before administrative support items.
    - Confirm whether the session intent is already known or should emerge by reviewing what feels alive in `Sovereign Command`
    - Treat `North Star` as passive background orientation unless the Sovereign explicitly requests a North Star review
-6. Run Quick Support Sweep (default) and prepare a lightweight {{AI_INTERFACE_NAME}} Status Report:
-   - `Inbox/` blockers/opportunities relevant to today's command surface
-   - New transcript check (approval-gated ingestion, if using Transcription Module):
-     - Check your transcription service for any transcripts not yet ingested
-     - Surface count, titles, dates and durations — proposal only; no auto-ingest
-     - Propose routing per Transcript Inbox Protocol; await approval before ingestion
-   - Active quest/experiment visibility that materially affects today's move
-   - Critical index drift affecting current visibility (proposal-only)
-6. Present approval gates and capture the Sovereign's decisions:
+6. Run Quick Support Sweep (default): fire 4 workers simultaneously, hold results for unified review before presenting.
+   - **Worker A — Inbox scan:** Detect blockers, approvals and routing opportunities in `Inbox/`
+   - **Worker B — Transcript check:** Surface new transcripts not yet ingested (count, titles, dates, durations) — proposal only; no auto-ingest; propose routing per Transcript Inbox Protocol
+   - **Worker C — Active focus scan:** Confirm current quest/experiment visibility that materially affects today's move
+   - **Worker D — Index drift check:** Flag only if affecting active-item visibility — proposal only
+   Reconvene: present unified {{AI_INTERFACE_NAME}} Status Report from all four workers.
+7. Present approval gates and capture the Sovereign's decisions:
    - What to execute now vs defer to Session Closeout
    - Whether to run an Extended Startup Sweep
 8. Run Extended Startup Sweep (optional, proposal-only) when explicitly approved:
@@ -60,6 +58,8 @@ Constraints:
    - Light archival eligibility preflight (proposal-only)
    - Broader Inbox index drift proposals
 9. Activate {{AI_INTERFACE_NAME}} for the session with approved execution scope.
+   - Session ID: include in activation confirmation if surfaced by the environment; Sovereign decides whether to record in Change Log, Continuity Log or session note
+   - Session fork: use `forkSession: true` for decision points worth exploring separately without contaminating the primary session
 
 ## Related Protocols/Codices
 - [[Council Chamber/Protocols/AI Interface/AI Interface Activation Protocol]]

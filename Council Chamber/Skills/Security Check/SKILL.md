@@ -26,8 +26,13 @@ Outputs:
 
 ## Steps
 1. Load `Council Chamber/Governance/Sovereign Ecosystem Security.md` and `Council Chamber/Protocols/Flywheels/Security Flywheel Protocol.md`.
-2. Run layered passes (surface, structural, adversarial, resilience, continuity) as defined in the Security note.
-3. If multiple agents are available, run parallel passes per phase and reconvene before moving to the next phase.
+2. Fire 5 passes simultaneously. Hold all results before presenting.
+   - **Pass A (Surface):** Exposed data, public-facing artifacts, external access vectors
+   - **Pass B (Structural):** Governance integrity, link validity, canonical container drift
+   - **Pass C (Adversarial):** Misuse scenarios, trust boundary stress-tests, escalation paths
+   - **Pass D (Resilience):** Backup state, recovery paths, single points of failure
+   - **Pass E (Continuity):** Protocol coverage, skill coverage, gap detection
+3. Reconvene: synthesize into a single audit summary — findings by severity, cross-pass patterns elevated one tier if appearing in multiple passes, top 3 proposed remediations.
 4. Check for security updates online (NIST CSF, CIS Controls, MITRE ATT&CK). Summarize relevant deltas only.
 5. Propose any adjustments as approval-gated deltas; do not execute changes.
 6. Record findings in a summary note or session log as approved.
