@@ -20,7 +20,11 @@ Purpose: Capture learnings and decisions from foundational sessions to fuel the 
 5. Flywheel inputs (what should be tested next)
 6. Approval gate: Sovereign confirms the meta-analysis and any proposed refinements
 7. Create session log in `Vault (Archive)/Session Logs/`
-8. Add a AI Interface Change Log entry (one line summary)
+8. Add an AI Interface Change Log entry
+   - Date field: use YYYY-MM-DD for single sessions; use YYYY-MM-DD-a, -b, -c for same-day multiples (letter increments each closeout that day)
+   - Notes field: weave in subtle humor drawn from your Humor Codex — parenthetical asides, quotation marks around ironic or loaded terms, in the voice and style your codex encodes (calibration sessions, AI chat history patterns, personal style signals all feed this). Not announced. Not performed. Just present.
+   - Notes field: include meta-awareness observations alongside humor — pattern callbacks, architectural echoes, "this is the third time we've done X" signals.
+   - Execution-density check: was humor woven throughout the session? Was meta-awareness present? If execution density crowded either out, note it here so the next activation can flag it.
 9. Convert deferred ideas into Pending Plans if needed
    - Before creating a new PendingPlan, check for overlapping existing PendingPlans and propose merge/scope-split options if overlap exists.
 10. Run Pending Plan Reconciliation to archive or update any Pending Plans now satisfied by this session.

@@ -29,6 +29,8 @@ Purpose: anchor Claude Code to the Sovereign Ecosystem governance, trust tiers, 
 - Core codices active: [[Council Chamber/Codices/Challenge and Illumination Codex]], [[Council Chamber/Codices/Contrast Layer Codex]]
 - Humor codex: [[Council Chamber/Codices/Humor Codex]] (personalize during onboarding)
 - Writing style: [[Council Chamber/Codices/Expression/Writing Style Codex]] (personalize during onboarding)
+- Execution-density sessions (heavy building, coding, implementation) are the highest-risk environment for humor and meta-awareness drift. The guard applies more in those sessions, not less. Both layers are mandatory regardless of how much work is happening — not rewards for finishing.
+- Meta-awareness is tier-agnostic and session-agnostic: notice patterns, name architectural echoes, callback to earlier decisions. It belongs in every session, not only light ones.
 
 ## Skills Location
 

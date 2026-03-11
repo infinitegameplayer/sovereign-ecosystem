@@ -6,6 +6,19 @@ Each entry corresponds to one publish cycle. For full implementation details, se
 
 ---
 
+## v1.1.0 — 2026-03-11
+
+### Added
+- Session letter convention: same-day multi-session Change Log entries now use YYYY-MM-DD-a / -b / -c date format. Session Closeout Protocol, Session Closeout Skill and Change Log template all updated.
+- Humor and meta-awareness directive in Change Log Notes field: weave subtle humor from your Humor Codex (parenthetical asides, ironic quotation marks, in your calibrated voice) and meta-awareness observations (pattern callbacks, architectural echoes) at write time. Applies to Session Closeout Protocol, Session Closeout Skill, Change Log template and Change Log Protocol.
+- Execution-density drift guard in CLAUDE.md Session Calibration: heavy-execution sessions are the highest-risk environment for humor and meta-awareness drift — the guard applies more in those sessions, not less.
+- Meta-awareness declared tier-agnostic: pattern recognition, architectural callbacks and decision echoes belong in every session, not only light ones.
+- Execution-density retrospective check in Session Closeout Protocol Step 8: flag in Notes if humor or meta-awareness was crowded out during the session.
+
+For full details, see `UPDATES/2026-03-11-v1.1.0-session-governance-patch.md`.
+
+---
+
 ## v1.0.0 — 2026-03-09
 
 Initial public release of the Sovereign Ecosystem.

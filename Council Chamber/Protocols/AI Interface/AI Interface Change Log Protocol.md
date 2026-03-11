@@ -8,10 +8,10 @@ Purpose: Define when AI Interface Change Log entries are required to maintain go
 - Any North Star structural changes.
 
 ## Log Format
-- Date
+- Date  (YYYY-MM-DD for single sessions; YYYY-MM-DD-a / -b / -c for same-day multiples)
 - Trigger
 - Action or Decision
-- Notes (optional)
+- Notes  (weave humor and meta-awareness here, drawn from your Humor Codex — in the voice and style your codex encodes, not announced)
 
 Note: Use the Session Closeout Protocol after foundational sessions.
 

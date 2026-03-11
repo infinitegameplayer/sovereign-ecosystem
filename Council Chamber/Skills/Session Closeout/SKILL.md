@@ -28,6 +28,9 @@ Related Protocols/Codices: [[Council Chamber/Protocols/Session/Session Closeout 
 6. Obtain Sovereign approval before any archival or status changes.
 7. Explicit approval prompt: confirm or decline each proposed archival/status change before execution.
 8. Create session log in `Vault (Archive)/Session Logs/` and add AI Interface Change Log entry, including a breadcrumb writeback summary for PendingPlans.
+   - Date field: YYYY-MM-DD for single sessions; YYYY-MM-DD-a / -b / -c for same-day multiples.
+   - Notes field: weave subtle humor drawn from your Humor Codex (parenthetical asides, ironic quotation marks — in the voice and style your codex encodes) and meta-awareness observations (pattern callbacks, architectural echoes). Neither announced.
+   - Execution-density check: flag in Notes if humor or meta-awareness was crowded out during heavy-execution work.
 
 ## Contrast Layer Integration (Mandatory)
 Tier: 1 (foundational).
