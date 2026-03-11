@@ -6,6 +6,18 @@ Each entry corresponds to one publish cycle. For full implementation details, se
 
 ---
 
+## v1.2.0 — 2026-03-11
+
+### Changed
+- AI Interface Activation Protocol Step 2: AI Interface Change Log is now the primary callback and orientation source at activation. Gap-adaptive tier logic determines read depth based on gap since last session (Tier 1-4, same-day to 7+ days). Continuity Log demoted to Tier 3-4 source.
+- AI Interface Activation Protocol Continuity Check section updated to reflect Change Log as primary, Continuity Log as process-pattern reference only.
+- AI Interface Activation Skill updated to mirror protocol: Step 2 added for gap-adaptive orientation load, step numbering updated, Related Protocols list updated.
+- Execution-density drift flag added to activation: consecutive heavy-execution Change Log entries trigger a humor and meta-awareness drift warning at session start.
+
+For full details, see `UPDATES/2026-03-11-v1.2.0-activation-protocol-update.md`.
+
+---
+
 ## v1.1.0 — 2026-03-11
 
 ### Added

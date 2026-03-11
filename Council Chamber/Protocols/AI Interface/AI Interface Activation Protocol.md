@@ -16,10 +16,20 @@ Purpose: Bring {{AI_INTERFACE_NAME}} online with governed context, explicit cons
    - `[[Council Chamber/AI Interface/Operating Charter]]`
    - `[[Council Chamber/AI Interface/AI Interface Knowledge Map]]`
 2. Load current orientation:
-   - `[[Library/North Star]]`
-   - `[[Sovereign Command]]`
+   - `[[Council Chamber/AI Interface/AI Interface Change Log]]` — primary callback source; use gap-adaptive tier logic (see below)
+   - `[[Sovereign Command]]` — primary session entry surface
+   - `[[Library/North Star]]` — background orientation only; do not prompt unless explicitly requested
    - Active quests/experiments (if any)
-   - Treat `North Star` as background orientation during activation unless the Sovereign explicitly requests a North Star review/recalibration.
+
+   **Gap-Adaptive Tier Logic** (gap = today's date minus most recent Change Log entry date):
+   | Tier | Gap | Depth | Sources |
+   |---|---|---|---|
+   | 1 | 0 days (same day, session B+) | Last 2-3 Change Log entries | Change Log |
+   | 2 | 1-3 days | Last 5 Change Log entries | Change Log + SC scan |
+   | 3 | 4-7 days | Full active Change Log window | Change Log + SC + Continuity Log (active section) |
+   | 4 | 7+ days | Full active Change Log window | Change Log + SC + Continuity Log (active section) |
+
+   **Execution-density drift flag:** If the most recent Change Log entries show consecutive heavy-execution sessions (implementation, coding, building), flag at activation that humor and meta-awareness are at highest drift risk. Both are mandatory in execution-mode sessions — not rewards for finishing.
 3. Confirm mode:
    - Plan / Execute / Review
 4. Confirm consent and scope:
@@ -121,8 +131,9 @@ Internal Contrast Layer
 -->
 
 ## Continuity Check
-- Review or update `[[Council Chamber/AI Interface/Continuity Log]]` before activation.
-- Surface any active continuity items for awareness.
+- `[[Council Chamber/AI Interface/AI Interface Change Log]]` is the primary activation source for callbacks and meta-awareness. Read at every activation using gap-adaptive tier logic.
+- `[[Council Chamber/AI Interface/Continuity Log]]` is a Tier 3-4 source only — process patterns and lessons, not session callbacks. Read when gap is 4+ days or when a specific process pattern question surfaces.
+- Surface any active continuity items for awareness when Continuity Log is read.
 
 
 

@@ -33,12 +33,17 @@ Constraints:
 
 ## Steps
 1. Load required governance documents.
-2. Confirm activation mode and scope/consent boundaries.
-3. Confirm readiness checklist completion.
-4. Present or update `Sovereign Command` (proposal-first), prioritizing the alive-energy layer before administrative support items.
+2. Load current orientation using gap-adaptive tier logic (see AI Interface Activation Protocol Step 2):
+   - AI Interface Change Log — primary callback source; read depth determined by gap since last entry
+   - Sovereign Command — primary session entry surface
+   - North Star — background only; do not prompt unless explicitly requested
+   - Execution-density drift flag: if recent Change Log entries show consecutive heavy-execution sessions, flag at activation that humor and meta-awareness are at highest drift risk
+3. Confirm activation mode and scope/consent boundaries.
+4. Confirm readiness checklist completion.
+5. Present or update `Sovereign Command` (proposal-first), prioritizing the alive-energy layer before administrative support items.
    - Confirm whether the session intent is already known or should emerge by reviewing what feels alive in `Sovereign Command`
    - Treat `North Star` as passive background orientation unless the Sovereign explicitly requests a North Star review
-5. Run Quick Support Sweep (default) and prepare a lightweight {{AI_INTERFACE_NAME}} Status Report:
+6. Run Quick Support Sweep (default) and prepare a lightweight {{AI_INTERFACE_NAME}} Status Report:
    - `Inbox/` blockers/opportunities relevant to today's command surface
    - New transcript check (approval-gated ingestion, if using Transcription Module):
      - Check your transcription service for any transcripts not yet ingested
@@ -49,12 +54,11 @@ Constraints:
 6. Present approval gates and capture the Sovereign's decisions:
    - What to execute now vs defer to Session Closeout
    - Whether to run an Extended Startup Sweep
-7. Run Extended Startup Sweep (optional, proposal-only) when explicitly approved:
+8. Run Extended Startup Sweep (optional, proposal-only) when explicitly approved:
    - Consult route/status/archive candidates
    - Transcript/coaching Inbox routing proposals (if present)
    - Light archival eligibility preflight (proposal-only)
    - Broader Inbox index drift proposals
-8. Confirm continuity log reviewed or updated.
 9. Activate {{AI_INTERFACE_NAME}} for the session with approved execution scope.
 
 ## Related Protocols/Codices
@@ -64,7 +68,8 @@ Constraints:
 - [[Council Chamber/Protocols/Inbox/Consult Inbox Protocol]]
 - [[Council Chamber/Protocols/Transcription Module/Transcript Inbox Protocol]]
 - [[Council Chamber/Protocols/AI Interface/Sovereign Command Protocol]]
-- [[Council Chamber/AI Interface/Continuity Log]]
+- [[Council Chamber/AI Interface/AI Interface Change Log]] (primary callback source)
+- [[Council Chamber/AI Interface/Continuity Log]] (Tier 3-4 only — process patterns)
 - [[Council Chamber/AI Interface/AI Interface Knowledge Map]]
 
 ## Contrast Layer Integration (Mandatory)
