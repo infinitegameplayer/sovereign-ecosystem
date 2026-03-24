@@ -10,3 +10,4 @@ A log of Easter eggs planted in the Sovereign Ecosystem. Entries describe withou
 |---|---|---|
 | 2026-03-24 | v1.4.0-skills-expansion | A note about what separates a real skill from an ambitious template — hidden in the Skill Creator update package |
 | 2026-03-24 | v1.5.0-hook-infrastructure | A reflection on sovereignty and intentional ignorance — hidden in the hook infrastructure update package |
+| 2026-03-24 | v1.6.0-governance-protocols | A note on what governance documents are actually for — hidden in the governance protocols update package |

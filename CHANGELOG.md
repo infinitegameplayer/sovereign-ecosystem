@@ -6,6 +6,18 @@ Each entry corresponds to one publish cycle. For full implementation details, se
 
 ---
 
+## v1.6.0 — 2026-03-24
+
+### Added
+- **Release Hygiene Protocol:** Seven standing rules for any personal-to-public release. Export-truth audit, two-tier publish gate (Blockers vs Improvements), allowed-public-identity rule, public-safe automation checklist, repo-health baseline, encoding-repair fallback, connective-tissue audit.
+- **Sovereign Tech Watch Protocol:** Sovereign-triggered watch loop for GitHub repos and infrastructure ideas. Includes starter list of six Claude Code and Obsidian repos. Pairs with new deferred items tracker.
+- **Deferred Items Template** (`Council Chamber/Tools/Support Files/sovereign-deferred-items.md`): Companion file for the Tech Watch Protocol. Four statuses: deferred, proposed, permanent-hold, retired.
+- **Continuity Log — Immediate Capture Rule:** Standing entry added to Continuity Log. Capture corrections at the moment they occur, not at closeout.
+
+For full details, see `UPDATES/2026-03-24-v1.6.0-governance-protocols.md`.
+
+---
+
 ## v1.5.0 — 2026-03-24
 
 ### Added
