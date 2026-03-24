@@ -6,6 +6,7 @@ Run the Ecosystem Update Check Skill to discover which updates apply to your bui
 
 | Date | Type | Optional | Slug | Title |
 |---|---|---|---|---|
+| 2026-03-24 | core | no | v1.5.0-hook-infrastructure | v1.5.0 Hook Infrastructure + Vault Hygiene |
 | 2026-03-24 | module | no | v1.4.0-skills-expansion | v1.4.0 Skills Expansion + Refinements Standard |
 | 2026-03-11 | core | no | v1.3.0-agent-sdk-integration | v1.3.0 Agent SDK Integration |
 | 2026-03-11 | core | no | v1.2.0-activation-protocol-update | v1.2.0 Activation Protocol Update |

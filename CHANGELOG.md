@@ -6,6 +6,17 @@ Each entry corresponds to one publish cycle. For full implementation details, se
 
 ---
 
+## v1.5.0 — 2026-03-24
+
+### Added
+- **PreCompact hook:** `Council Chamber/scripts/hooks/pre-compact-state-capture.sh` — captures session state to `.runtime/pre-compact-state.md` before /compact fires. Prevents context loss during long sessions.
+- **PostCompact hook:** `Council Chamber/scripts/hooks/post-compact-reorienter.sh` — re-injects pre-compact state immediately after /compact completes. Closes the continuity loop.
+- **`.claudeignore`:** Vault-root context filter. Excludes `node_modules/`, `.git/`, `.trash/`, `*.log`, `.runtime/`, and Playwright install artifacts from Claude's context window.
+
+For full details, see `UPDATES/2026-03-24-v1.5.0-hook-infrastructure.md`.
+
+---
+
 ## v1.4.0 — 2026-03-24
 
 ### Added
