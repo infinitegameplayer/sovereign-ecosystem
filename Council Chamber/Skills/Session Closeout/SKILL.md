@@ -43,3 +43,7 @@ Tier: 1 (foundational).
 Internal Contrast Layer
 - Add contrast notes here if needed.
 -->
+
+## Refinements
+
+*(Empty — populated when execution mistakes occur during sessions.)*

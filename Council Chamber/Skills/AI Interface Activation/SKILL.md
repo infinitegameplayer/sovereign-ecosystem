@@ -82,3 +82,7 @@ Tier: 1 (foundational).
 Internal Contrast Layer
 - Add activation edge cases here.
 -->
+
+## Refinements
+
+*(Empty — populated when execution mistakes occur during sessions.)*

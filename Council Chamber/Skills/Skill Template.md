@@ -47,3 +47,7 @@ Internal Contrast Layer
 - [anti_patterns: what approaches this skill deliberately avoids]
 - [boundary_conditions: edge cases, escalation triggers]
 -->
+
+## Refinements
+
+*(Empty — populated when execution mistakes occur during sessions.)*

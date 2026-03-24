@@ -44,3 +44,7 @@ Internal Contrast Layer
 - Git status in Step 6 is ambient awareness, not a compliance check. Do not block or alarm on git ownership warnings.
 - The skill is the ritual. The script is the execution. Both must run for a complete backup.
 -->
+
+## Refinements
+
+*(Empty — populated when execution mistakes occur during sessions.)*

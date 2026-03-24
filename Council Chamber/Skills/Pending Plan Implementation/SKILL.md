@@ -31,3 +31,7 @@ Related Protocols/Codices: [[Council Chamber/Protocols/Planning/Pending Plan Imp
 
 ## Planning Mode Rule
 - If status is proposed or draft, execution is not authorized.
+
+## Refinements
+
+*(Empty — populated when execution mistakes occur during sessions.)*

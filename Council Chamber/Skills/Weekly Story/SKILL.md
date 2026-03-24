@@ -112,3 +112,7 @@ Internal Contrast Layer
 - The Sovereign's own words from transcripts or session logs are the richest source material. Use them.
 - Three parts: door in, movement through, living edge. Do not collapse them into a single essay.
 -->
+
+## Refinements
+
+*(Empty — populated when execution mistakes occur during sessions.)*

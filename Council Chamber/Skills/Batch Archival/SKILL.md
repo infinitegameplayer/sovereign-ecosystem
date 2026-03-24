@@ -43,3 +43,7 @@ Tier: 1 (foundational).
 Internal Contrast Layer
 - Note scanning edge cases and ambiguous objects here.
 -->
+
+## Refinements
+
+*(Empty — populated when execution mistakes occur during sessions.)*

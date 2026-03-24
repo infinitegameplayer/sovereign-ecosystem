@@ -210,3 +210,7 @@ Internal Contrast Layer
 - The End-of-Week Review is the intel ring. A Weekly Story session (if the Sovereign runs one) transforms this material into narrative. They serve different purposes.
 - Business dashboard path in Engagement 2 is intentionally generic. Each Sovereign adapts it to their domain structure.
 -->
+
+## Refinements
+
+*(Empty — populated when execution mistakes occur during sessions.)*

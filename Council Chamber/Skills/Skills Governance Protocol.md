@@ -13,6 +13,7 @@ A skill is a repeatable operational procedure {{AI_INTERFACE_NAME}} uses to perf
 - Outputs
 - Status (draft/active)
 - Related Protocols/Codices
+- Refinements (empty at creation — populated as execution mistakes occur)
 
 ## Governance Rules
 - Skills follow Plan -> Consent -> Execute.

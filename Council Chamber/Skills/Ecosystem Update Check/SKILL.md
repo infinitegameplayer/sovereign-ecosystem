@@ -160,3 +160,7 @@ Internal Contrast Layer
 - Implementation happens step by step, one update at a time. Speed is not the priority. Correctness is.
 - optional: false is a recommendation, not an override. The user still approves.
 -->
+
+## Refinements
+
+*(Empty — populated when execution mistakes occur during sessions.)*

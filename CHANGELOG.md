@@ -6,6 +6,19 @@ Each entry corresponds to one publish cycle. For full implementation details, se
 
 ---
 
+## v1.4.0 — 2026-03-24
+
+### Added
+- **Playwright skill (new):** Headless Chromium browser automation. Scrapes pages, extracts structured data, returns clean JSON. Token-efficient (~200-500 tokens per page). Includes `scripts/run.js`. Requires one-time `npm install playwright` and `npx playwright install chromium`.
+- **Researcher skill (new):** Parallel sub-agent research — up to 4 workers per topic, each covering a different angle, synthesized into a single structured report. Research feeds decisions; never auto-implements.
+- **Self-Healing skill (new):** Autonomous error recovery during implementation sessions. Recoverable errors (syntax, path, missing file) handled silently. Governance-class errors and external API failures always surface to the Sovereign.
+- **Skill Creator skill (new):** Interview-first skill design in 5 phases. Requires Sovereign interview before any drafting begins. Cross-platform junction commands included (Windows PowerShell and Mac/Linux).
+- **Refinements section standard:** `## Refinements` section added to all 11 existing skills (empty stubs), Skill Template, and Skills Governance Protocol. Each skill now tracks date-stamped execution mistakes and prevention rules. The skill-level equivalent of the Continuity Log.
+
+For full details, see `UPDATES/2026-03-24-v1.4.0-skills-expansion.md`.
+
+---
+
 ## v1.3.0 — 2026-03-11
 
 ### Added

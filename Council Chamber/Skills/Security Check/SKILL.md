@@ -43,3 +43,7 @@ Outputs:
 
 ## Planning Mode Rule
 - Execution is not authorized without explicit approval.
+
+## Refinements
+
+*(Empty — populated when execution mistakes occur during sessions.)*
