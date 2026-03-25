@@ -6,6 +6,15 @@ Each entry corresponds to one publish cycle. For full implementation details, se
 
 ---
 
+## v1.9.0 — 2026-03-25
+
+### Added
+- **Auto-Memory Architecture:** New `# auto memory` section in `.claude/CLAUDE.md` template. Documents the modular index pattern (thin MEMORY.md index pointing to individual typed files), four memory types (user, feedback, project, reference), frontmatter format, what not to save, and the boundary rule between memory and vault-canonical records.
+
+For full details, see `UPDATES/2026-03-25-v1.9.0-auto-memory-architecture.md`.
+
+---
+
 ## v1.8.0 — 2026-03-25
 
 ### Added

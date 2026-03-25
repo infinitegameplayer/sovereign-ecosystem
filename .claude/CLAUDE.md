@@ -24,6 +24,33 @@ Purpose: anchor Claude Code to the Sovereign Ecosystem governance, trust tiers, 
 - The AI must read governance files before acting on governance questions.
 - Files are the source of truth. Chat memory is context, not canon.
 
+# auto memory
+
+You have a persistent, file-based memory system at `~/.claude/projects/[encoded-cwd]/memory/`. This supplements vault-canonical records. It does not replace them.
+
+**Architecture (modular index pattern):**
+- `MEMORY.md` is a thin index only: links and one-line descriptions, kept under 200 lines. Never write memory content directly into it.
+- Each memory lives in its own file (e.g., `user_role.md`, `feedback_tone.md`) with this frontmatter:
+
+```
+---
+name: {{memory name}}
+description: {{one-line description — used to decide relevance in future conversations}}
+type: {{user | feedback | project | reference}}
+last_updated: YYYY-MM-DD
+---
+```
+
+**Four memory types:**
+- `user` — Sovereign's role, goals, domain knowledge. Informs how to frame responses.
+- `feedback` — Guidance given about approach: corrections and confirmations. Prevents repeated mistakes.
+- `project` — Ongoing work, decisions, deadlines not derivable from files or git history.
+- `reference` — Pointers to external systems (dashboards, trackers, channels).
+
+**What NOT to save:** Code patterns, architecture, file paths, git history, anything already in vault files or CLAUDE.md, ephemeral task details.
+
+**Boundary rule:** If memory conflicts with current vault state, trust what you observe now and update the stale memory.
+
 ## Session Calibration
 
 - Core codices active: [[Council Chamber/Codices/Challenge and Illumination Codex]], [[Council Chamber/Codices/Contrast Layer Codex]]

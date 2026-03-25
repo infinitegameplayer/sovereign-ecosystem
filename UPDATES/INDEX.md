@@ -6,6 +6,7 @@ Run the Ecosystem Update Check Skill to discover which updates apply to your bui
 
 | Date | Type | Optional | Slug | Title |
 |---|---|---|---|---|
+| 2026-03-25 | core | no | v1.9.0-auto-memory-architecture | v1.9.0 Auto-Memory Architecture — Modular Memory Configuration for Claude Code |
 | 2026-03-25 | core | no | v1.8.0-living-axis-doctrine | v1.8.0 Living Axis Doctrine — Inner Mastery, Structural Sovereignty, Propagation Pattern |
 | 2026-03-25 | core | no | v1.7.0-ambassador-doctrine | v1.7.0 Ambassador Doctrine — External Engagement Framework |
 | 2026-03-24 | core | no | v1.6.0-governance-protocols | v1.6.0 Governance Protocols — Release Hygiene, Tech Watch, Continuity Capture |
