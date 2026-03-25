@@ -19,6 +19,9 @@ Purpose: Map the codices currently shipped in the Sovereign Ecosystem Foundation
 ## Governance
 - [[Council Chamber/Codices/Ṣāḍguṇya — Six Strategies of External Engagement]] — Vedic statecraft framework governing all external engagement; philosophical foundation for the Ambassador Doctrine
 
+## Sovereignty
+- [[Council Chamber/Codices/Sovereignty/Living Axis of Sovereignty]] — Three-layer framework for principled, durable sovereign operating systems: Ṣaṭsthala (inner mastery), Svarāja (structural sovereignty), Ṣāḍguṇya (strategic engagement). Philosophical anchor for the three Living Axis doctrine protocols.
+
 ## Reference
 - [[Council Chamber/Codices/Tag Dictionary]]
 

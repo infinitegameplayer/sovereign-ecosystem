@@ -6,6 +6,19 @@ Each entry corresponds to one publish cycle. For full implementation details, se
 
 ---
 
+## v1.8.0 — 2026-03-25
+
+### Added
+- **Living Axis of Sovereignty Codex:** Umbrella framework tying the three-doctrine system together. Maps Ṣaṭsthala (inner mastery), Svarāja (structural sovereignty) and Ṣāḍguṇya (external strategy) as a recursive, self-reinforcing system. Includes operational coverage table linking all three to their protocols, and practical application sections for AI systems, communities and personal sovereignty. New `Council Chamber/Codices/Sovereignty/` subdirectory.
+- **Svarāja Doctrine:** Structural governance protocol. Maps six pillars of sovereign architecture (Self-Rule, Ethical Governance, Economic Sovereignty, Strategic Defense, Cultural Intelligence, Collective Intelligence) to Foundation structures. Includes maturity assessments for each pillar, structural coverage map and gap assessment. Pairs with the ecosystem's existing Constitution, Operating Charter and governance architecture.
+- **Ṣaṭsthala Doctrine:** Inner mastery protocol. Maps six stages of personal development (Bhakta, Maheśa, Prāṇaliṅga, Śaraṇa, Aikya, Siddha) to ecosystem practices. Includes Stage Mirror reflective tool, Inner Mastery Flywheel (five-step return pattern), archetypal development mapping and the recursive loop explanation. Designed to load during coaching sessions, North Star recalibrations and any inner-development-oriented work.
+- **Propagation Triad:** Meta-governance design pattern for any standard that needs to travel forward as the ecosystem grows. Three layers: self-describing protocol (Propagation Rules section), creation gate (skill-level constraint), and CLAUDE.md standing rule. Ambassador Doctrine is the first instance of all three layers applied together.
+- **Codices Index — Sovereignty section:** New section pointing to the Living Axis as the philosophical anchor for all three doctrine protocols.
+
+For full details, see `UPDATES/2026-03-25-v1.8.0-living-axis-doctrine.md`.
+
+---
+
 ## v1.7.0 — 2026-03-25
 
 ### Added
