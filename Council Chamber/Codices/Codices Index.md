@@ -16,6 +16,9 @@ Purpose: Map the codices currently shipped in the Sovereign Ecosystem Foundation
 ## Expression
 - [[Council Chamber/Codices/Expression/Writing Style Codex]] — placeholder, complete during onboarding
 
+## Governance
+- [[Council Chamber/Codices/Ṣāḍguṇya — Six Strategies of External Engagement]] — Vedic statecraft framework governing all external engagement; philosophical foundation for the Ambassador Doctrine
+
 ## Reference
 - [[Council Chamber/Codices/Tag Dictionary]]
 

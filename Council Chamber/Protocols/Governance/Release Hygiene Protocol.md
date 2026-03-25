@@ -73,3 +73,9 @@ Before any publish, verify:
 - [ ] No hidden assumptions exist inside the exported structure (no "just knows" that only a vault-native reader would understand)
 
 If any item fails: fix before publish, or explicitly document as a known limitation.
+
+---
+
+## Ambassador Doctrine
+
+This protocol operates within the [[Council Chamber/Protocols/Governance/Ambassador Doctrine]]. Every public release is an act of sovereign representation. The Allowed-Public-Identity Rule (Rule 3) and Public-Safe Automation Rule (Rule 4) are Vigraha in practice. The Two-Tier Publish Gate (Rule 2) is Āsana before Yāna executes.

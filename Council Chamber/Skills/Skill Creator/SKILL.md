@@ -75,6 +75,7 @@ After junction is approved and created, propose updates to:
 - Never auto-create junctions — always propose first
 - Never skip the Refinements section
 - Skills that call external APIs or write to canonical files require an explicit approval gate in their Constraints section
+- **Ambassador Doctrine gate:** Before finalizing any SKILL.md, ask: does this skill interact with any external system (APIs, git remotes, web, messaging services, calendar tools, image generation, browser automation, MCP tools)? If yes, add `## External Orientation` before `## Refinements`. Use the `[!info]` callout pattern. Wikilink to `[[Council Chamber/Protocols/Governance/Ambassador Doctrine]]`. Identify primary and secondary strategies from the Application Matrix in that protocol.
 
 ## Refinements
 

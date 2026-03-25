@@ -6,6 +6,20 @@ Each entry corresponds to one publish cycle. For full implementation details, se
 
 ---
 
+## v1.7.0 — 2026-03-25
+
+### Added
+- **Ṣāḍguṇya Codex:** Six strategies of statecraft — Sandhi (alliance), Vigraha (conflict), Yāna (expansion), Āsana (neutrality), Dvaidhibhāva (dual policy), Saṃśraya (fortification) — mapped to principled AI engagement in a multi-agent world. Philosophical foundation for the Ambassador Doctrine.
+- **Ambassador Doctrine:** Governing protocol for all external-facing activity. Three duties: Represent, Protect, Advance. Application Matrix, Sub-Agent Prompt Pattern, and Propagation Rules. Answers: when your ecosystem reaches outward, what does it stand for?
+- **External Orientation sections:** Added to Playwright and Researcher skills. Each identifies its primary and secondary Ṣāḍguṇya strategies and the governing posture for that surface.
+- **Skill Creator — Ambassador Doctrine gate:** New constraint ensures any new external-facing skill exits Skill Creator with the External Orientation section applied. Propagation is enforced at creation, not retroactively.
+- **Protocol cross-references:** Platform-Agnostic Interface Adapter Protocol, Release Hygiene Protocol, and Sovereign Tech Watch Protocol now reference the Ambassador Doctrine as the strategic posture layer for their respective external surfaces.
+- **CLAUDE.md — External Engagement Doctrine section:** Session-load anchor with sub-agent prompt template and standing creation rule.
+
+For full details, see `UPDATES/2026-03-25-v1.7.0-ambassador-doctrine.md`.
+
+---
+
 ## v1.6.0 — 2026-03-24
 
 ### Added

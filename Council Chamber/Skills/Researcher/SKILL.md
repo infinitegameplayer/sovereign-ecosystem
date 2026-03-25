@@ -77,6 +77,14 @@ Present the report. Do not act on findings. The Sovereign decides what moves for
 - **Pre-Pending Plan:** Workers cover problem landscape, existing ecosystem patterns, risk surface, and adoption examples; report feeds plan design
 - **Protocol design:** Workers cover existing protocols for conflicts, relevant codices, external precedents, and implementation complexity
 
+## External Orientation
+
+> [!info] Ambassador Doctrine Active
+> This skill operates under the [[Council Chamber/Protocols/Governance/Ambassador Doctrine]].
+> Primary strategy: Āsana — this skill is an intelligence-gathering operation; observe fully before the Sovereign decides.
+> Secondary: Dvaidhibhāva (parallel workers on multiple angles is strategic sophistication, not fragmentation), Vigraha (reject low-quality sources; hold the research standard).
+> Researcher never auto-implements. Every report returns to the Sovereign. That boundary is Saṃśraya at the sub-agent layer.
+
 ## Refinements
 
 - [2026-03-23] Research output is always a structured report for Sovereign review — never auto-implement findings. Research feeds decision-making; it does not trigger execution.

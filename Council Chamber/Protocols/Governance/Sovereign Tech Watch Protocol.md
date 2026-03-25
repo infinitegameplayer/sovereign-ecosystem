@@ -49,6 +49,10 @@ A proposed update to `sovereign-deferred-items.md` with:
 
 Proposed changes are presented to Sovereign before writing. No automatic status updates.
 
+## Ambassador Doctrine
+
+This protocol operates under the [[Council Chamber/Protocols/Governance/Ambassador Doctrine]]. Sovereign Tech Watch is a pure Āsana practice. It observes, classifies, and defers. No external action is taken. Intelligence returns to the Sovereign before any adoption decision moves forward.
+
 ## Watched Repos
 
 Starter list — add, remove, or replace as your ecosystem evolves.

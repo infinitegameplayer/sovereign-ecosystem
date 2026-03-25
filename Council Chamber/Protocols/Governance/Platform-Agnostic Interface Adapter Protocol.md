@@ -33,6 +33,10 @@ Purpose: Define how new interfaces connect to the Sovereign Ecosystem without be
 - Prefer read-only access until stable.
 - Audit adapters after major tool updates or container moves.
 
+## Ambassador Doctrine
+
+All external-facing adapters registered through this protocol operate under the [[Council Chamber/Protocols/Governance/Ambassador Doctrine]]. The Ambassador Doctrine is the strategic layer governing how ecosystem interfaces engage the world. This protocol governs structural integrity. The Ambassador Doctrine governs posture and intent.
+
 ## Contrast Layer Integration (Mandatory)
 Tier: 1 (foundational).
 - Include contrast fields in frontmatter for foundational updates.

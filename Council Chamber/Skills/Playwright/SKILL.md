@@ -64,6 +64,14 @@ Your AI reads this SKILL.md, runs the script, and returns the data.
 
 - Script: `Council Chamber/Skills/Playwright/scripts/run.js`
 
+## External Orientation
+
+> [!info] Ambassador Doctrine Active
+> This skill operates under the [[Council Chamber/Protocols/Governance/Ambassador Doctrine]].
+> Primary strategy: Āsana — browser automation is an intelligence retrieval tool; extract, clean, and return before acting.
+> Secondary: Vigraha (assert data quality; surface failed or blocked scrapes rather than returning corrupted output), Saṃśraya (the browser always closes in a finally block; no persistent external state).
+> Playwright does not write to external surfaces. It reads. The read-before-act posture is the doctrine embodied.
+
 ## Refinements
 
 *(Empty — populated when execution mistakes occur during sessions.)*
