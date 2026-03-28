@@ -6,6 +6,22 @@ Each entry corresponds to one publish cycle. For full implementation details, se
 
 ---
 
+## v2.0.0 — 2026-03-27
+
+### Added
+- **Cheat Sheet - Tool Roles:** Answers "why do I need so many programs?" — one paragraph per tool, summary table, Mac and Windows noted, includes Claude Code Notifier.
+- **Cheat Sheet - Claude Code Quick Reference:** Session start, permission approvals, session closeout, commit strategy, cost awareness.
+- **Cheat Sheet - Common Setup Issues:** Six friction points from real sessions as preventive guidance — cloud sync, Obsidian Sync vault password, Windows git fix, folder selection, ChatGPT export timing, commit deferral.
+
+### Improved
+- **Session 0:** Cloud sync pre-flight check and ChatGPT async export timing added to checklist.
+- **Session 1:** Permission approval explanation, commit strategy deferral, and optional Mobile Setup section added.
+- **Getting Started Index:** Cheat Sheets section added with links to all three new files.
+
+For full details, see `UPDATES/2026-03-27-v2.0.0-getting-started-improvements.md`.
+
+---
+
 ## v1.9.0 — 2026-03-25
 
 ### Added

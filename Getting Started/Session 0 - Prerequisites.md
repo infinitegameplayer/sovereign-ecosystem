@@ -27,13 +27,14 @@ Before you build, get honest about where you are actually starting.
 
 ## Session 0 Checklist
 
+- [ ] **Pre-flight:** check whether your Desktop or Documents folder syncs to OneDrive (Windows) or iCloud Drive (Mac). If it does, note a plain local path to use for the ecosystem folder instead — something outside the sync boundary. Minor to catch early, harder to fix later.
 - [ ] Install Obsidian.
 - [ ] Confirm you can open a local vault.
 - [ ] Decide whether you want mobile access and quick mobile capture.
 - [ ] Install or confirm your primary AI coding interface.
 - [ ] Confirm you have a GitHub account.
-- [ ] Confirm the Sovereign Ecosystem exists locally on your machine.
-- [ ] If you may want to mine previous AI history, start exporting it now.
+- [ ] Confirm the Sovereign Ecosystem exists locally on your machine — not inside a cloud-synced folder.
+- [ ] If you may want to mine previous AI history, start exporting it now. Exports from platforms like ChatGPT are processed asynchronously — the download link arrives by email and can take 3–12 hours. Start early and continue setup while you wait.
 - [ ] Choose an ecosystem name or keep the placecard for now.
 - [ ] Choose an AI interface name or keep the placecard for now.
 

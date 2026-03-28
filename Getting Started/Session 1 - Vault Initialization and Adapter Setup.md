@@ -98,6 +98,14 @@ The goal is a trustworthy first bridge between:
 - your files
 - your AI interface
 
+**Permission approvals:** as you work, Claude Code will ask for permission to take certain actions. Two options appear each time:
+- "Yes" — approves this action once
+- "Yes, allow for this project" — approves permanently for this folder
+
+Choose "Yes, allow for this project" when working inside your ecosystem folder. Choosing "yes once" means the same prompt will appear again next session.
+
+**Commit strategy:** do not commit changes during Session 1. Git will occasionally surface commit suggestions — ignore them until you run session closeout at the end. Session closeout creates commits organized by theme automatically. Mid-session commits fragment history and make rollback harder.
+
 ## Step 5 - Handle AI Naming
 
 If you already know your AI interface name, this is the moment to make the visible rename after the adapter is working.
@@ -152,6 +160,20 @@ That is iteration.
 Follow your aliveness.
 Follow your authenticity.
 Take it one step at a time.
+
+## Mobile Setup (Optional)
+
+If you want your vault accessible on your phone, Obsidian Sync ($5/month) is the recommended path.
+
+To set it up:
+1. Install the Obsidian mobile app on your phone
+2. In Obsidian desktop, go to Settings > Sync and create an account
+3. You will be asked to create a **vault password** — this is separate from your Obsidian account login. It encrypts the synced vault. Write it down somewhere safe. It cannot be recovered if lost.
+4. On mobile, log in to your Obsidian account and connect to the same vault
+
+Once synced, your governance documents, notes, and templates are readable on your phone in real time.
+
+This is entirely optional. The ecosystem works fully without mobile sync.
 
 ## Exit Condition
 
