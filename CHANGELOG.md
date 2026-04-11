@@ -6,6 +6,15 @@ Each entry corresponds to one publish cycle. For full implementation details, se
 
 ---
 
+## v2.1.0 — 2026-04-11
+
+### Added
+- **AGENTS.md:** Root AI context file — project identity, ecosystem position, stack, build commands, critical rules, content and voice, AI discoverability status, and cross-ecosystem links. Read automatically by any AI coding tool.
+- **Repo Context Architecture Protocol:** Defines the AGENTS.md + CLAUDE.md two-layer standard for any ecosystem-adjacent repo. Includes initialization sequence and Active Instances tracking table.
+- **Public Publish Audit - 2026-03-09:** Historical governance audit from the initial release arc, now committed as a record artifact.
+
+---
+
 ## v2.0.0 — 2026-03-27
 
 ### Added
