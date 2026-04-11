@@ -6,6 +6,8 @@ Run the Ecosystem Update Check Skill to discover which updates apply to your bui
 
 | Date | Type | Optional | Slug | Title |
 |---|---|---|---|---|
+| 2026-04-11 | refinement | no | v2.2.1-governance-refinements | v2.2.1 Governance Refinements — Release Hygiene Rule 8 and PPI Audit Gate |
+| 2026-04-11 | core | no | v2.2.0-phase-audit-protocol | v2.2.0 Phase Audit Protocol |
 | 2026-04-11 | core | no | v2.1.0-agents-and-repo-context | v2.1.0 AGENTS.md and Repo Context Architecture |
 | 2026-03-27 | instruction | no | v2.0.0-getting-started-improvements | v2.0.0 Getting Started Improvements — Cheat Sheets and Session Refinements |
 | 2026-03-25 | core | no | v1.9.0-auto-memory-architecture | v1.9.0 Auto-Memory Architecture — Modular Memory Configuration for Claude Code |

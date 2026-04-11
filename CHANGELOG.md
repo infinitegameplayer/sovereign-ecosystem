@@ -6,6 +6,17 @@ Each entry corresponds to one publish cycle. For full implementation details, se
 
 ---
 
+## v2.2.1 — 2026-04-11
+
+### Changed
+- **Release Hygiene Protocol — Rule 8:** Pre-Deploy Review gate added. Structured review prompt before any Vercel-linked push; severity-high findings must resolve before push proceeds.
+- **Pending Plan Implementation Skill — Step 7:** Optional Gemini audit gate inserted before final step. Offer in one line at plan close; applies to codices, protocols and governance artifacts only.
+
+## v2.2.0 — 2026-04-11
+
+### Added
+- **Phase Audit Protocol:** Concurrent two-pass audit method (Claude Explore + Gemini challenger) for reviewing phase outputs before the next phase begins. Includes expression standard scan, aggregation pattern, filing convention and phase gate statement.
+
 ## v2.1.0 — 2026-04-11
 
 ### Added

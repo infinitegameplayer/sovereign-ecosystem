@@ -74,6 +74,16 @@ Before any publish, verify:
 
 If any item fails: fix before publish, or explicitly document as a known limitation.
 
+### 8. Pre-Deploy Review
+
+Before any `git push` to a Vercel-linked repo, run a pre-deploy review:
+
+> Review the changes I'm about to push.
+> Check for: bugs and unhandled edge cases, security vulnerabilities (injection, auth gaps, data exposure), performance issues (blocking calls, N+1 patterns), missing error handling, anything that breaks under concurrent load.
+> For each issue: file, line range, problem, and fix.
+
+Gate: do not push until all severity-high findings are resolved. Severity-low findings may be deferred with a note.
+
 ---
 
 ## Ambassador Doctrine

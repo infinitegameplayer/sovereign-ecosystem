@@ -21,7 +21,10 @@ Related Protocols/Codices: [[Council Chamber/Protocols/Planning/Pending Plan Imp
 4. Execute approved work and log actions in `Implementation Actions (Execution Log)`.
 5. Update `Evidence / Implementation Refs` and `Implementation Outcome (This Run)`.
 6. Propose `implementation_state` and any status/archival changes (approval-gated).
-7. Read back the implementation summary and apply approval-gated changes only with explicit consent.
+7. **Optional audit gate:** Before closing, assess whether the primary output document (codex, protocol, governance artifact, finished argument) would benefit from a Gemini challenger pass. Offer it in one line — "Audit warranted?" — without requiring it. If yes, call your configured Gemini interface tool with the document content inline. Do not offer for operational outputs (scripts, logs, sync results, backup records).
+   - The audit is a session event. Findings get worked through and acted on in the session.
+   - At audit close, ask one question: "Anything worth a long-term note?" The filter is recurrence — not whether the finding was surfaced, but whether a future session would benefit from knowing it. If yes, append a single date-stamped entry to `## Refinements` in the audited document. Keep it to the durable insight, not a transcript of the full report. If no, close and move on.
+8. Read back the implementation summary and apply approval-gated changes only with explicit consent.
 
 ## Quick Entry Tags (Optional, Dataview-Friendly)
 - `#field`
