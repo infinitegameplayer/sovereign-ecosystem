@@ -60,3 +60,7 @@ The goal is not a style guide for a corporation.
 The goal is a description of how you already write when you are at your best.
 
 If Session 0.5 surfaced style patterns from your AI history, bring those observations here as a starting point.
+
+## Refinements
+
+- **2026-04-11:** This file is a generic template placeholder. The operator's Kingdom vault may contain a fully populated Writing Style Codex that is personal and specific to their voice. These are different documents for different audiences — the Kingdom version documents actual style; this SE version is the unfilled template. Do not sync from Kingdom to SE. They have intentionally diverged.

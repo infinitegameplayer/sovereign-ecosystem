@@ -77,13 +77,18 @@ drop a quick line into your to-do surface from your phone, get it out of your he
 
 ### AI Interface
 
-Claude Code and Codex are the recommended starting path right now.
-Use whichever one you are actually going to use consistently.
+Claude Code is the recommended starting path. Two options:
+
+**VS Code + Claude Code Extension (recommended):** A full code editor with file tree, terminal and extensions. More capability as you grow into the workspace. Install VS Code, then install the Claude Code extension by Anthropic from the Extensions sidebar.
+
+**Claude Code App:** A standalone desktop app with a simpler interface. Opens folders as projects, reads and writes files directly. Good for someone who wants the AI conversation without the code editor. Download from claude.ai/code.
+
+Either option works. VS Code gives you more tools around the conversation. The Claude Code app gives you a cleaner, focused interface. Both read and write the same files.
 
 The ecosystem is designed to become more tool-agnostic over time.
 The long-term direction is more sovereign tooling, not dependency on one vendor forever.
 
-**Cost note:** Claude Code uses the Anthropic API, which has usage costs based on how much you use it. Onboarding the full Foundation at a comfortable, session-based pace typically runs in the range of $10–25 USD total — roughly the cost of a book. You control session length and pacing, so you control the cost. There is no subscription required; you pay per token used. If this is a concern, start with shorter sessions and check your Anthropic dashboard after each one to get a feel for your usage.
+**Cost note:** Claude Code authenticates through your Anthropic account. Two paths: (1) Claude Pro subscription ($20/month, usage included), or (2) the free tier with usage limits. When you open Claude Code in VS Code or the Claude Code app, you sign in with your Anthropic account. No API keys or billing console required. If you are using the CLI version of Claude Code, it can also authenticate via API key with pay-per-token pricing.
 
 If you have a prior AI platform with a meaningful history, start the export request now.
 Session 0.5 can use that material later for pattern analysis, but the export may take time to arrive.

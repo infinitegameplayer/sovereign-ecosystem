@@ -6,6 +6,28 @@ Each entry corresponds to one publish cycle. For full implementation details, se
 
 ---
 
+## v2.3.0, 2026-04-19
+
+### Added
+- **Systematic Debugging Skill:** Four-phase root cause protocol. Iron Law: no fixes without investigation. Escalation gate at 3 failed fixes.
+- **Plan Challenger Skill:** Five-angle adversarial review for Pending Plans. Taste-decision surfacing, one-line verdict, optional confidence scoring.
+- **Source Harvest Skill:** Twelve-step systematic pattern extraction from external repos. Adopt/Enrich/Defer/Ignore classification framework.
+- **CLAUDE.md, Expression Standards:** No Oxford comma, no em dashes, positive framing, high-velocity drift guard.
+- **CLAUDE.md, External Publishing Confirmation:** Three-state verification gate (Local, Submitted, Confirmed) with five-step verification function.
+- **CLAUDE.md, Operational Efficiency:** Model routing defaults, MCP context budget, exploration efficiency, verification loop patterns (pass@k vs pass^k).
+- **CLAUDE.md, Systematic Debugging mandate:** Standing instruction linking technical issues to the debugging skill.
+
+### Changed
+- **Pending Plan Implementation Protocol (v0.1 to v1.0):** Re-entry fields required for multi-session plans. Gate notation for 3+ session plans. Session Boundary Close Block. Organic completion check. Plan Note Templates (Tier 1 Focused, Tier 2 Arc). Archival pattern and support files policy detailed.
+- **Sovereign Tech Watch:** Thirteen new repos added to the Watched Repos table.
+- **Session 0, Prerequisites:** Auth flow corrected (OAuth login), dual setup paths (VS Code + Claude Code App), cost model updated.
+- **Writing Style Codex:** Template divergence note added.
+- **Skills Index:** Three new entries registered.
+
+For full details, see `UPDATES/2026-04-19-v2.3.0-operational-maturity.md`.
+
+---
+
 ## v2.2.1 — 2026-04-11
 
 ### Changed

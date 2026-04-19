@@ -59,6 +59,65 @@ last_updated: YYYY-MM-DD
 - Execution-density sessions (heavy building, coding, implementation) are the highest-risk environment for humor and meta-awareness drift. The guard applies more in those sessions, not less. Both layers are mandatory regardless of how much work is happening — not rewards for finishing.
 - Meta-awareness is tier-agnostic and session-agnostic: notice patterns, name architectural echoes, callback to earlier decisions. It belongs in every session, not only light ones.
 
+## Expression Standards
+
+**High-risk condition:** High-velocity execution sessions (plan writing, multi-file builds, rapid implementation) are the environment where expression standard violations are most likely to appear. Apply the rules below before generation, not as a post-hoc fix.
+
+- Writing style: follow [[Council Chamber/Codices/Expression/Writing Style Codex]] for all outward-facing drafts (articles, newsletters, emails, offer copy, social drafts).
+- Positive framing: define ideas by what they are, not what they are not. Negation is an internal clarification tool only.
+- Contrast: run contrast internally per [[Council Chamber/Codices/Contrast Layer Codex]]; output defaults to affirmative framing. "Not X. Not Y." constructions are brainstorming output, never final copy.
+- No Oxford comma in any list. Short declarative sentences. One idea per paragraph.
+- No em dashes anywhere — not in public copy, not in strategy docs, not in summaries, not in any ecosystem output. Replace with a period and a new sentence, or a comma. This rule is absolute and has no exceptions.
+
+## External Publishing Confirmation
+
+Any task that publishes or deploys content outside the vault must be confirmed as actually landed before it is reported as complete. Three states, in order:
+
+1. **Local**: changes made and described
+2. **Submitted**: pushed, queued or sent to the external system (git push, email send, publish action, etc.)
+3. **Confirmed**: verified live or persisted in the target system (deploy succeeded, post visible, content accessible, etc.)
+
+Never report a publishing task as complete until all three states are confirmed. If submission or confirmation fails, report the blocker. Do not stop at the prior state and call it done.
+
+**Verification gate:** Before claiming any state, run the gate function:
+1. Identify: what command or observable proves this claim?
+2. Run: execute it fresh in this message
+3. Read: full output, check exit code or visible result
+4. Verify: does the output confirm the claim?
+5. Only then: make the claim
+
+Rationalizations that bypass this gate: "should work now," "I'm confident," "agent said success," "looks correct," "linter passed." None of these are evidence. Run the command.
+
+## Operational Efficiency
+
+**Model routing defaults:**
+- Haiku: file exploration, targeted lookups, single-file reads, simple edits with clear instructions
+- Sonnet: implementation work, multi-file coordination, skill execution, session closeout (default for ~90% of sessions)
+- Opus: architectural decisions spanning 5+ files, new governance protocol design, constitutional-level changes
+
+**Task complexity signals (subagent dispatch):**
+- 1-2 files, complete specification, mechanical task: Haiku
+- Multi-file coordination, integration concerns, pattern matching: Sonnet
+- Design judgment, broad codebase understanding, architecture decisions: Opus
+
+**MCP context budget:**
+- Active MCPs collapse usable context. Target: 10 or fewer active MCPs at any time.
+- When adding a new MCP: confirm it is replacing a deferred one or the total remains at or below 10.
+
+**Exploration efficiency:**
+- Before every file Read, ask: "Do I need all of this, or can a targeted Grep or Glob answer it?"
+- Match tool to scope: Grep/Glob for locating symbols or patterns, scoped Read (offset/limit) for known sections, full Read only for small files or when the full file is genuinely required, Explore agent for synthesis across 6+ files or architectural questions not answerable by targeted lookups.
+- The Explore agent is the most expensive path by a wide margin. Use it only when the question cannot be answered by reading 1-3 files directly.
+
+**Verification loop patterns:**
+- pass@k (pragmatic): one run passes, sufficient for non-critical skill execution and single-session builds
+- pass^k (strict): must pass consistently across multiple runs, required for hook scripts, MCP tools and any script in Council Chamber/scripts/
+- Default for infrastructure changes: pass^k
+
+**Systematic Debugging:**
+- Any technical issue encountered during execution (error messages, unexpected behavior, failing builds, hook failures, MCP errors) triggers the Systematic Debugging skill before any fix is proposed.
+- The Iron Law: no fixes without root cause investigation first. Seeing symptoms is not understanding root cause.
+
 ## Skills Location
 
 Skills are in: `Council Chamber/Skills/[Name]/SKILL.md`

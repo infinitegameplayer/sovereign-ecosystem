@@ -1,6 +1,6 @@
 ---
-status: draft
-version: 0.1
+status: active
+version: 1.0
 tier: foundational
 contrast_not:
 false_twins:
@@ -36,14 +36,14 @@ Scope: One Pending Plan selected for active implementation in a focused session 
 - Evidence links and dependencies
 - Approval boundaries (what {{AI_INTERFACE_NAME}} may and may not change)
 
-## Optional Re-Entry Field Guidance
-For complex, long-running or multi-session plans, the following optional note sections are recommended because they reduce restart friction:
+## Re-Entry Fields (Required for Multi-Session Plans)
+For plans spanning 2 or more sessions or phases, these fields are required before execution begins in each subsequent session. For single-session plans, they are optional.
 - `Current State`
 - `Decision Point`
 - `Next Move`
 - `Re-Entry Context`
 
-These are optional support fields, not mandatory requirements for every `PendingPlan`.
+If these fields are missing on a multi-session plan, populate them from the breadcrumb history before proceeding with execution.
 
 ## Optional Command-Surface Candidate Guidance
 When a `PendingPlan` may need to surface into `Sovereign Command`, an optional note section may be used:
@@ -55,6 +55,7 @@ Keep it to one line so the plan note stays the source of truth and `Sovereign Co
 ## Implementation Workflow
 1. Select and Re-anchor the Pending Plan
    - Read `Proposed Changes`, `Risk Level`, `Affected Areas`, `Current State`, `decision_gate` and breadcrumb sections.
+   - Organic completion check: scan the Activity Log for recent entries that match the proposed scope. If multiple sessions have already delivered the core signals organically, confirm whether formal gate execution is still warranted before committing to a gate plan.
    - If the newly requested work appears to overlap another PendingPlan, pause and propose merge/scope-split before execution.
 2. Build Implementation Snapshot
    - Fill or refresh `Implementation Snapshot (When Executing)`.
@@ -79,6 +80,8 @@ Keep it to one line so the plan note stays the source of truth and `Sovereign Co
    - Summarize implemented scope, remaining scope and proposed status changes.
 10. Apply Approved Status / Archival Changes
    - Only after explicit approval.
+   - Archival pattern: move the plan file from `Council Chamber/Pending Plans/` to `Vault (Archive)/Pending Plans/`, then edit the moved file to update status fields. Do not write a new archive copy and delete the original.
+   - Support files policy review: at archival time, confirm `support_files_policy` in the plan frontmatter. Transient = clean up the support files folder. Durable = move the folder to `Vault (Archive)/Pending Plans/Support Files/`. Update the policy field in the archived plan if it was set incorrectly.
    - `status: archived` should only be applied after the Pending Plan is in the Vault and its associated support-files subtree has been cleared from `Council Chamber/Pending Plans/Support Files/`.
 11. Sync Pending Plans Index (when Pending Plans changed)
    - Recommended after approved status/archive/move changes: run `Council Chamber/Tools/Pending Plans Index Sync.ps1`.
@@ -107,7 +110,7 @@ Use `complete` as the short pre-archive status when approved scope is done but t
   - Use when the plan's approved scope is fully implemented and it is ready for archival, but it has not yet been moved to `Vault (Archive)/Pending Plans/`.
 - `status: archived`
   - Use only after the plan has been moved to `Vault (Archive)/Pending Plans/`.
-- Do not leave a plan at `proposed` once approved implementation is actively happening.
+- Do not leave a plan at `proposed` once approved implementation is actively happening. If execution is about to begin and status is still `proposed`, stop and prompt Sovereign for approval before proceeding.
 - Do not keep a plan `active` once its approved scope is fully implemented.
 - Do not use `archived` before the plan is actually in the Vault.
 - If downstream work was intentionally split into other Pending Plans, the original plan should still move to `complete` and then to `archived` once its own approved scope is done.
@@ -129,6 +132,107 @@ Recommended `implementation_state` values:
 - `implemented`
 - `blocked`
 - `superseded`
+
+## Gate Notation (Optional, Multi-Session Plans)
+
+**When to use:** Plans that span 3 or more sessions, or plans with clear sequential dependencies between work blocks where a later block cannot begin until an earlier one is approved. Small plans do not need gates. The existing flat format remains fully valid.
+
+**Gate format:**
+
+```
+### Gate N — [Name]
+
+**Scope:** What this gate covers. What is explicitly out of scope.
+**Entry condition:** What must be true before this gate begins.
+**Exit condition:** What must be true for this gate to close.
+**Status:** pending | in_progress | complete
+**Handoff note:** (Written at gate completion) One short paragraph orienting the next session — what was decided, what the next gate opens with, any live constraints.
+```
+
+**Session Boundary Close Block (required for multi-session gates):**
+At the end of each execution run within a gate, append to the plan note immediately after the most recent `Implementation Actions` entry:
+
+```
+### Session Boundary — YYYY-MM-DD
+**Completed this run:** [one sentence]
+**Decision point:** [any approval or gate holding next session]
+**Next move:** [first action next session picks up]
+**Live constraints:** [blockers, dependencies, anything that changed]
+```
+
+This block is the re-entry anchor. The next session reads it first.
+
+**Gate status tracking:** Each gate's status line is updated in place as work progresses. The main Activity Log records gate transitions with `[Decision]` or `[AI]` tags as appropriate.
+
+**Approval gate convention:** Gate transitions follow the same approval pattern as the overall plan. Sovereign approval closes a gate and opens the next unless the plan explicitly delegates that authority within a gate.
+
+## Plan Note Template
+
+Use these templates when creating new Pending Plans. Select the tier that matches the plan's scope.
+
+### Tier 1: Focused Plan
+For single-session, low complexity plans with 1-3 implementation steps.
+
+```yaml
+---
+status: proposed
+created: YYYY-MM-DD
+source: [[...]]
+links: []
+timing: soon
+decision_gate: [condition for approval]
+risk_level: low
+affected_areas: [area1, area2]
+implementation_state: proposed
+last_reviewed: YYYY-MM-DD
+support_files_path:
+support_files_policy:
+---
+```
+
+Required sections:
+```
+## Proposed Changes
+## Risk Level
+## Affected Areas
+## PendingPlan Activity Log
+## Applicability Updates
+## Evidence / Implementation Refs
+## Reconciliation Notes
+## Implementation Snapshot (When Executing)
+## Approved Execution Scope (This Run)
+## Implementation Actions (Execution Log)
+## Implementation Outcome (This Run)
+```
+
+### Tier 2: Arc Plan
+For multi-session, phased or complex plans (3+ sessions or gates).
+
+All Tier 1 frontmatter and sections, plus:
+
+```yaml
+# Additional frontmatter fields:
+support_files_path: [path if needed]
+support_files_policy: transient
+```
+
+Additional required sections:
+```
+## Current State
+## Decision Point
+## Next Move
+## Re-Entry Context
+## [Development Arc / Session Sequence / Phase structure as appropriate]
+## Arc Closeout Protocol
+## Support Files
+## Partial Implementation Notes
+```
+
+### Template Notes
+- `ring` field: do not include. No defined value set.
+- `Planning Mode Rule` section: do not include in plan notes. It lives in the skill only.
+- `Breadcrumbs` / `Breadcrumb Writebacks`: use `PendingPlan Activity Log` as the canonical section name
+- `Applicability Updates` and `Reconciliation Notes` are standard sections in both tiers
 
 ## Relationship to Other Pending Plan Protocols
 - [[Council Chamber/Protocols/Planning/Pending Plan Progress Update Protocol]] is for breadcrumb updates and applicability changes (often via Session Closeout).
@@ -153,13 +257,12 @@ Recommended `implementation_state` values:
 - The protocol's main job is to reduce fragmentation between approval, execution and breadcrumb history.
 
 ### What Changes Now
-- When implementing a `PendingPlan`, it is worth explicitly preserving re-entry context and outcome clarity inside the note.
+- When implementing a `PendingPlan`, explicitly preserve re-entry context and outcome clarity inside the note.
 - Execution sessions should favor narrow approved scope, visible logging and clear remaining-scope readback.
 - Implementation can now be read not just as task execution, but as continuity-preserving note shaping.
 
 ### Next Move
 - Use this protocol as the operational guardrail when executing future `PendingPlans`, especially longer-running or partial implementations.
-- If the optional re-entry fields keep proving useful, consider weaving that convention more explicitly into the protocol in a later approved refinement pass.
 
 ## Contrast Layer Integration (Mandatory)
 Tier: 1 (foundational).
@@ -171,18 +274,3 @@ Internal Contrast Layer
 - Avoid treating Pending Plan implementation as one-shot; partial implementation is a normal steady-state.
 - Keep the execution context in the plan note to reduce fragmentation and re-derivation.
 -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

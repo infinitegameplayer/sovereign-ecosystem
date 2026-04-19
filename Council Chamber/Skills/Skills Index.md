@@ -21,3 +21,9 @@ Fields:
 - Skill Creator (active, tier: operational)
 - Weekly Backup (active, tier: foundational)
 - Weekly Story (active, tier: operational)
+
+### Added 2026-04-19
+
+- Plan Challenger (active, tier: operational) — Adversarial pre-build pass on Pending Plans. Five angles, one verdict.
+- Source Harvest (active, tier: operational) — Systematic pattern extraction from external repos at source level. Adopt/Enrich/Defer/Ignore classification.
+- Systematic Debugging (active, tier: foundational) — Four-phase root cause protocol. Iron Law: no fixes without investigation.
