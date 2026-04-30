@@ -6,6 +6,26 @@ Each entry corresponds to one publish cycle. For full implementation details, se
 
 ---
 
+## v2.4.0, 2026-04-30
+
+### Removed (graduated to IGOS public library)
+- **Pending Plan Implementation Skill:** Now installable from infinitegameos.io as a Claude Code plugin.
+- **Plan Challenger Skill:** Now installable from infinitegameos.io.
+- **Researcher Skill:** Now installable from infinitegameos.io.
+- **Skill Creator Skill:** Now installable from infinitegameos.io.
+- **Systematic Debugging Skill:** Now installable from infinitegameos.io.
+
+### Changed
+- **Skills Index:** Five entries removed; new "Graduated to Infinite Game OS Public Library" section added with direct links to each skill page.
+- **MODULES.md:** Foundation Skills list trimmed to nine entries; graduation note added at the top of the Foundation section explaining the lean shape.
+
+### Posture
+The Sovereign Ecosystem now ships as the lean on-ramp template. Cool extras live in the IGOS public library at infinitegameos.io. Pick the ones that fit your build. Source Harvest stays in the Foundation as a dual-distribution surface.
+
+For full details, see `UPDATES/2026-04-30-v2.4.0-igos-graduation.md`.
+
+---
+
 ## v2.3.0, 2026-04-19
 
 ### Added

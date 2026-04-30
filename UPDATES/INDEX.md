@@ -6,6 +6,7 @@ Run the Ecosystem Update Check Skill to discover which updates apply to your bui
 
 | Date | Type | Optional | Slug | Title |
 |---|---|---|---|---|
+| 2026-04-30 | core | no | v2.4.0-igos-graduation | v2.4.0 IGOS Graduation — Foundation Trim and Public Library Distribution |
 | 2026-04-19 | core | no | v2.3.0-operational-maturity | v2.3.0 Operational Maturity — Skills, Protocols and Trust Anchor Hardening |
 | 2026-04-11 | refinement | no | v2.2.1-governance-refinements | v2.2.1 Governance Refinements — Release Hygiene Rule 8 and PPI Audit Gate |
 | 2026-04-11 | core | no | v2.2.0-phase-audit-protocol | v2.2.0 Phase Audit Protocol |

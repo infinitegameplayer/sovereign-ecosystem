@@ -19,6 +19,8 @@ It explains what belongs together, what depends on what, and when each layer sho
 
 ## Foundation
 
+As of v2.4.0, five skills graduated from this Foundation to the Infinite Game OS public library at infinitegameos.io: Pending Plan Implementation, Plan Challenger, Researcher, Skill Creator, Systematic Debugging. The Foundation now ships lean. Practitioners install graduated skills from the IGOS library on demand. Source Harvest stays in the Foundation as a dual-distribution surface.
+
 The Foundation is the smallest complete system that can:
 - activate the AI interface
 - capture and route new material
@@ -64,11 +66,11 @@ The Foundation is the smallest complete system that can:
 - Foundation skills
   - AI Interface Activation
   - Batch Archival
-  - Pending Plan Implementation
   - Pending Plan Progress Update
   - Quest Progress Update
   - Security Check
   - Session Closeout
+  - Source Harvest (dual-distribution with IGOS public library)
   - Weekly Backup
   - Skills Index
   - Skills Governance Protocol
