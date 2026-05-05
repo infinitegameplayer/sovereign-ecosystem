@@ -5,11 +5,12 @@ created: 2026-03-08
 
 # North Star
 
-Purpose: Hold longer-horizon direction so daily execution can stay aligned without carrying the entire horizon into every session.
+Purpose: Hold longer-horizon direction so daily execution can stay aligned without carrying the entire horizon into every session. The AI reads this file and organizes work around it.
 
 ## Direction
 - What are you building toward?
 - What kind of life or work does this system exist to support?
+- What feels most alive in this direction right now?
 
 ## 0-3 Month Horizons
 - Horizon 1:
@@ -18,6 +19,7 @@ Purpose: Hold longer-horizon direction so daily execution can stay aligned witho
 
 ## Active Quests
 - Add active quest links here as they emerge.
+- Name each quest in language that feels embark-able, not like a task on a list.
 
 ## Drift Check
 - What feels most alive right now?
@@ -26,3 +28,4 @@ Purpose: Hold longer-horizon direction so daily execution can stay aligned witho
 
 ## Notes
 - Keep this note directional, not overloaded.
+- For recalibration practice, see: Council Chamber/Protocols/Flywheels/North Star Recalibration Protocol.md.

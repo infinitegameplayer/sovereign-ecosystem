@@ -6,6 +6,22 @@ Each entry corresponds to one publish cycle. For full implementation details, se
 
 ---
 
+## v2.5.0, 2026-05-05
+
+### Added
+- **Getting Started/Quick Start Guide.md:** Universal install foundation guide. Print-friendly companion to Sessions 0 and 1. Platform-aware Windows and Mac steps from zero to first activation test.
+- **Getting Started/Build Sequence.md:** Universal session-by-session orientation guide. One paragraph per session naming what it does, the principle behind it, what to expect and one idea to play with before beginning. Session 8 carries the deepest refresh with Aliveness-vs-script anchor, zero-to-three-month horizon framing and active-quests-not-tasks reframe.
+
+### Changed
+- **Library/North Star.md:** Four surgical template additions. Purpose line expansion ("The AI reads this file and organizes work around it"), Aliveness prompt added to Direction section, embark-able quest framing line added to Active Quests, Recalibration Protocol pointer added to Notes. Minimal posture preserved.
+
+### Posture
+The Foundation arc gets a print-friendly orientation layer. The session files remain canonical; the orientation guides give operators the option to read the whole arc at a glance before opening any single session.
+
+For full details, see `UPDATES/2026-05-05-v2.5.0-orientation-guides-and-north-star-refresh.md`.
+
+---
+
 ## v2.4.0, 2026-04-30
 
 ### Removed (graduated to IGOS public library)
