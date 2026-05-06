@@ -72,13 +72,14 @@ Either option reads and writes files in your workspace. VS Code gives you more t
 
 ### Download the Sovereign Ecosystem
 
-1. Go to [github.com/infinitegameplayer/sovereign-ecosystem](https://github.com/infinitegameplayer/sovereign-ecosystem)
-2. Click the green **Code** button, then **Download ZIP**
-3. Unzip to a permanent local folder:
+1. Go to [infinitegameos.io/sovereign-ecosystem](https://infinitegameos.io/sovereign-ecosystem) and click the **Download ZIP** button
+2. Unzip to a permanent local folder:
    - **Windows:** `C:/Users/YourName/Documents/Sovereign Ecosystem`
    - **Mac:** `~/Documents/Sovereign Ecosystem`
-4. Rename the folder if you want. This is your workspace. Call it whatever feels right
-5. Confirm the folder contains: `Council Chamber/`, `Library/`, `README.md`, `Sovereign Command.md`
+3. Rename the folder if you want. This is your workspace. Call it whatever feels right
+4. Confirm the folder contains: `Council Chamber/`, `Library/`, `README.md`, `Sovereign Command.md`
+
+> **Prefer GitHub?** Clone or download directly at [github.com/infinitegameplayer/sovereign-ecosystem](https://github.com/infinitegameplayer/sovereign-ecosystem). Both paths give you the same files.
 
 > **Do not place this folder inside a cloud-synced folder.** Windows: avoid OneDrive. Mac: avoid iCloud Drive. If your Documents folder syncs, use an alternative local path.
 

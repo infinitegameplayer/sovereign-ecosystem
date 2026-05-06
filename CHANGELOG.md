@@ -6,6 +6,18 @@ Each entry corresponds to one publish cycle. For full implementation details, se
 
 ---
 
+## v2.6.0, 2026-05-06
+
+### Added
+- **Article XIII — Foundational Covenant** in the Constitution. Seven operative commitments for the human-AI relationship: Generational Stewardship, Transparent Process, Benevolence as Default, Consent as Foundation, Reciprocal Responsibility, Authentic Unfolding, Active Uplift.
+- **Getting Started/Quick Start Guide.pdf** — PDF version of the Quick Start Guide ships with the repo.
+- **Getting Started/Build Sequence.pdf** — PDF version of the Build Sequence ships with the repo.
+
+### Changed
+- **Getting Started/Quick Start Guide.md:** Download step now leads with `infinitegameos.io/sovereign-ecosystem` (Download ZIP button). GitHub retained as secondary path for the technically familiar.
+
+---
+
 ## v2.5.0, 2026-05-05
 
 ### Added

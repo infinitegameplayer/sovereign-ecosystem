@@ -6,6 +6,7 @@ Run the Ecosystem Update Check Skill to discover which updates apply to your bui
 
 | Date | Type | Optional | Slug | Title |
 |---|---|---|---|---|
+| 2026-05-06 | core | no | v2.6.0-accord-and-install-refinements | v2.6.0 Foundational Covenant + Install Guide Refinements |
 | 2026-05-05 | instruction | no | v2.5.0-orientation-guides-and-north-star-refresh | v2.5.0 Orientation Guides and North Star Refresh |
 | 2026-04-30 | core | no | v2.4.0-igos-graduation | v2.4.0 IGOS Graduation — Foundation Trim and Public Library Distribution |
 | 2026-04-19 | core | no | v2.3.0-operational-maturity | v2.3.0 Operational Maturity — Skills, Protocols and Trust Anchor Hardening |
