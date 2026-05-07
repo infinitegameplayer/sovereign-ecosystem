@@ -34,10 +34,10 @@ Constraints:
 ## Steps
 1. Load required governance documents.
 2. Load current orientation using gap-adaptive tier logic (see AI Interface Activation Protocol Step 2):
-   - AI Interface Change Log — primary callback source; read depth determined by gap since last entry
+   - Session Logs Index — primary callback source; read depth determined by gap since last entry
    - Sovereign Command — primary session entry surface
    - North Star — background only; do not prompt unless explicitly requested
-   - Execution-density drift flag: if recent Change Log entries show consecutive heavy-execution sessions, flag at activation that humor and meta-awareness are at highest drift risk
+   - Execution-density drift flag: if recent session logs show consecutive heavy-execution sessions, flag at activation that humor and meta-awareness are at highest drift risk
 3. Confirm activation mode and scope/consent boundaries.
 4. Confirm readiness checklist completion.
 5. Present or update `Sovereign Command` (proposal-first), prioritizing the alive-energy layer before administrative support items.
@@ -58,7 +58,7 @@ Constraints:
    - Light archival eligibility preflight (proposal-only)
    - Broader Inbox index drift proposals
 9. Activate {{AI_INTERFACE_NAME}} for the session with approved execution scope.
-   - Session ID: include in activation confirmation if surfaced by the environment; Sovereign decides whether to record in Change Log, Continuity Log or session note
+   - Session ID: include in activation confirmation if surfaced by the environment; Sovereign decides whether to record in the session log or session note
    - Session fork: use `forkSession: true` for decision points worth exploring separately without contaminating the primary session
 
 ## Related Protocols/Codices
@@ -68,8 +68,7 @@ Constraints:
 - [[Council Chamber/Protocols/Inbox/Consult Inbox Protocol]]
 - [[Council Chamber/Protocols/Transcription Module/Transcript Inbox Protocol]]
 - [[Council Chamber/Protocols/AI Interface/Sovereign Command Protocol]]
-- [[Council Chamber/AI Interface/AI Interface Change Log]] (primary callback source)
-- [[Council Chamber/AI Interface/Continuity Log]] (Tier 3-4 only — process patterns)
+- [[Vault (Archive)/Session Logs/Index]] (primary callback source)
 - [[Council Chamber/AI Interface/AI Interface Knowledge Map]]
 
 ## Contrast Layer Integration (Mandatory)

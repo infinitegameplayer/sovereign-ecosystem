@@ -101,8 +101,6 @@ The Foundation is the smallest complete system that can:
 - `Library/North Star.md` is onboarding-generated
 - `Council Chamber/Codices/Humor Codex.md` is onboarding-generated
 - `Sovereign Command.md` is runtime-created
-- `Council Chamber/AI Interface/Continuity Log.md` is runtime-created
-- `Council Chamber/AI Interface/AI Interface Change Log.md` is runtime-created
 - `Council Chamber/AI Interface/AI Interface Engagement Calibration Log.md` is runtime-created
 - `Council Chamber/AI Interface/AI Interface Readiness Snapshot.md` is runtime-created
 - `Council Chamber/AI Interface/Sovereign Command Refresh Log.md` is runtime-created

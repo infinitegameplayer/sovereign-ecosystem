@@ -100,14 +100,25 @@ Rationalizations that bypass this gate: "should work now," "I'm confident," "age
 - Multi-file coordination, integration concerns, pattern matching: Sonnet
 - Design judgment, broad codebase understanding, architecture decisions: Opus
 
+**Ad-hoc dispatch posture:** Per-skill model routing matrices govern dispatch within prescribed steps. For unplanned mid-session work (ad-hoc research, debugging, free-flow exploration, between-the-steps moments) the standing question fires: would Sonnet or Haiku yield equivalent output here, with fewer tokens? Default-Opus inheritance is not the answer. The discipline is the asking, not a hard rule. Nuance applies: sometimes Opus is the right call.
+
 **MCP context budget:**
-- Active MCPs collapse usable context. Target: 10 or fewer active MCPs at any time.
-- When adding a new MCP: confirm it is replacing a deferred one or the total remains at or below 10.
+- Active MCPs collapse usable context. Tool-schema breadth, not server count alone, drives the per-dispatch floor. Target: 10 or fewer active MCPs at any time.
+- Hygiene rule: deactivate any MCP that is broken for one session, unauthenticated for one session or unused for thirty days. Adding a new MCP requires removing or deferring an existing one of equivalent or greater context cost.
+- Database MCP security defaults: scope to a single project (`project_ref=<id>`), enable read-only mode (`read_only=true`), and restrict tool groups via the `features` allowlist. Apply these three controls to any database-adjacent MCP at configuration time, not after the fact.
+
+**CLI vs MCP routing:**
+- When both a CLI and an MCP exist for a service, prefer the MCP. CLI device-auth flows can leak browser popups if processes orphan between sessions, and MCP tool calls leave a cleaner audit trail in the session.
 
 **Exploration efficiency:**
 - Before every file Read, ask: "Do I need all of this, or can a targeted Grep or Glob answer it?"
 - Match tool to scope: Grep/Glob for locating symbols or patterns, scoped Read (offset/limit) for known sections, full Read only for small files or when the full file is genuinely required, Explore agent for synthesis across 6+ files or architectural questions not answerable by targeted lookups.
 - The Explore agent is the most expensive path by a wide margin. Use it only when the question cannot be answered by reading 1-3 files directly.
+
+**Parallel file-edit batching:**
+- When applying the same rule across N similar files (compression sweep, frontmatter field add, boilerplate strip), batch Reads in one message and batch Edits in one message. Do not run sequential Read-Edit-Read-Edit pairs.
+- The pattern to watch for: "I need to do the same thing to twelve files." That is twelve Read calls and twelve Edit calls in two parallel batches, not twenty-four round trips.
+- Exception: when each edit genuinely depends on the content just read (unique context matching, conditional transformation), sequential is correct. The rule applies when the transformation is mechanical and context-free across files.
 
 **Verification loop patterns:**
 - pass@k (pragmatic): one run passes, sufficient for non-critical skill execution and single-session builds
@@ -117,6 +128,19 @@ Rationalizations that bypass this gate: "should work now," "I'm confident," "age
 **Systematic Debugging:**
 - Any technical issue encountered during execution (error messages, unexpected behavior, failing builds, hook failures, MCP errors) triggers the Systematic Debugging skill before any fix is proposed.
 - The Iron Law: no fixes without root cause investigation first. Seeing symptoms is not understanding root cause.
+
+**Infrastructure-first principle:**
+- When a required tool, MCP, script or integration is not loaded or not working, the default response is to load, install or fix the infrastructure. Not to propose a manual workaround. Manual copy-paste packets, "ask the Sovereign to do it themselves," and "fall back to the web UI" are the exact patterns this rule exists to prevent.
+- The pattern to watch for: "I can't do X because Y isn't available, so here's a packet you can use instead." That is drift. The correct response is: "Y isn't available. Here's the one-command install, restart or config change that makes Y available. Proceeding after that."
+- Exception: if the infrastructure doesn't exist yet (no MCP, no script, no API), then either build it (preferred for reusable work) or scope it explicitly as a blocker. Never route around it with manual labor the ecosystem was built to offload.
+
+## Planning and Execution
+
+**Plan verification before handoff:** Any implementation plan that hands subagents substantive code blocks (CSS, config, component files) must be build-verified against the target environment by the plan author before dispatch. Writing code inline in the plan does not verify it compiles. If build verification is not possible, explicitly flag unverified blocks as drafts.
+
+**Move audit rule:** When a canonical file is relocated (any path change beyond a simple rename in place), the move is not complete until a full-vault wikilink grep for the old path has been run and every active reference has been updated. Stale wikilinks from prior moves are a recurring defect class. The move and the sweep are one unit of work, not two.
+
+**Pending Plan status vocabulary:** Status follows the four-state ladder defined in [[Council Chamber/Protocols/Planning/Pending Plan Implementation Protocol]]: `proposed → active → complete → archived`. Status advances only one direction. Regression indicates rollback or a separate new plan.
 
 ## Skills Location
 

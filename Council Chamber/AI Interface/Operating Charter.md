@@ -74,4 +74,4 @@ Authority remains with the Sovereign.
 ## Review Rule
 
 Review this charter when the interaction style, governance core or activation behavior materially changes.
-Log structural changes in [[Council Chamber/AI Interface/AI Interface Change Log]].
+Structural changes are logged via session log entries and git commits (the canonical ledger).

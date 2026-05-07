@@ -6,6 +6,9 @@ Run the Ecosystem Update Check Skill to discover which updates apply to your bui
 
 | Date | Type | Optional | Slug | Title |
 |---|---|---|---|---|
+| 2026-05-06 | refinement | yes | v2.7.2-pdf-title-metadata-fix | v2.7.2 PDF Title Metadata Fix. Quick Start Guide and Build Sequence |
+| 2026-05-06 | core | no | v2.7.1-operational-discipline | v2.7.1 Operational Discipline. CLAUDE.md Hardening with Six Sub-Rules + Plan Verification + Move Audit |
+| 2026-05-06 | core | no | v2.7.0-lean-closeout | v2.7.0 Lean Closeout. Retire Change Log + Continuity Log, Lightweight Default |
 | 2026-05-06 | core | no | v2.6.0-accord-and-install-refinements | v2.6.0 Foundational Covenant + Install Guide Refinements |
 | 2026-05-05 | instruction | no | v2.5.0-orientation-guides-and-north-star-refresh | v2.5.0 Orientation Guides and North Star Refresh |
 | 2026-04-30 | core | no | v2.4.0-igos-graduation | v2.4.0 IGOS Graduation — Foundation Trim and Public Library Distribution |

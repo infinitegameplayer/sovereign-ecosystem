@@ -41,8 +41,7 @@ Purpose: Canonical map of the AI interface governance, protocols and continuity 
 ## Core Systems
 - North Star: [[Library/North Star]]
 - Sovereign Command: [[Sovereign Command]]
-- Continuity Log: [[Council Chamber/AI Interface/Continuity Log]]
-- Change Log: [[Council Chamber/AI Interface/AI Interface Change Log]]
+- Session Logs Index: [[Vault (Archive)/Session Logs/Index]]
 - Engagement Calibration Log: [[Council Chamber/AI Interface/AI Interface Engagement Calibration Log]]
 - Readiness Snapshot: [[Council Chamber/AI Interface/AI Interface Readiness Snapshot]]
 - Sovereign Command Refresh Log: [[Council Chamber/AI Interface/Sovereign Command Refresh Log]]
@@ -59,4 +58,4 @@ Purpose: Canonical map of the AI interface governance, protocols and continuity 
 
 ## Audit Cadence
 - Suggested: quarterly or after major governance changes.
-- Record structural updates in `last_audited` and log material changes in [[Council Chamber/AI Interface/AI Interface Change Log]].
+- Record structural updates in `last_audited`. Material changes are logged via session log entries and git commits (the canonical ledger).

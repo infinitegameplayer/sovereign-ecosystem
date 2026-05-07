@@ -6,6 +6,57 @@ Each entry corresponds to one publish cycle. For full implementation details, se
 
 ---
 
+## v2.7.2, 2026-05-06
+
+### Fixed
+- **Getting Started/Quick Start Guide.pdf** — `/Title` metadata corrected. No content changes.
+- **Getting Started/Build Sequence.pdf** — `/Title` metadata corrected. No content changes.
+
+For full details, see `UPDATES/2026-05-06-v2.7.2-pdf-title-metadata-fix.md`.
+
+---
+
+## v2.7.1, 2026-05-06
+
+### Added (Operational Efficiency)
+- **Ad-hoc dispatch posture.** Standing question for unplanned mid-session work: would Sonnet or Haiku yield equivalent output here, with fewer tokens?
+- **MCP context budget hygiene rule.** Deactivate broken/unauthenticated MCPs after one session, unused after thirty days. Adding requires removing or deferring an existing MCP of equivalent or greater context cost.
+- **Database MCP security defaults.** Three controls at config time: `project_ref=<id>`, `read_only=true`, `features` allowlist.
+- **CLI vs MCP routing.** When both exist, prefer the MCP. Cleaner audit trail, no orphaned device-auth popups.
+- **Parallel file-edit batching.** Same edit across N files = batch Reads in one message, batch Edits in one message. Sequential round-trips waste tokens.
+- **Infrastructure-first principle.** When a tool is broken or missing, fix the infrastructure. Manual workarounds are the pattern this rule prevents.
+
+### Added (Planning and Execution — new section)
+- **Plan verification before handoff.** Substantive code blocks in plans must be build-verified before subagent dispatch.
+- **Move audit rule.** File relocation is incomplete until a wikilink grep has been run and every active reference updated.
+- **Pending Plan status vocabulary reference.** Four-state ladder (`proposed → active → complete → archived`) defined in the Implementation Protocol; advances one direction.
+
+For full details, see `UPDATES/2026-05-06-v2.7.1-operational-discipline.md`.
+
+---
+
+## v2.7.0, 2026-05-06
+
+### Removed (archived to Vault)
+- **AI Interface Change Log** (`Council Chamber/AI Interface/AI Interface Change Log.md`). The session log is the permanent record. The Change Log was redundant.
+- **Continuity Log** (`Council Chamber/AI Interface/Continuity Log.md`). Auto-memory carries process patterns forward across sessions.
+- **AI Interface Change Log Protocol** (`Council Chamber/Protocols/AI Interface/AI Interface Change Log Protocol.md`). No longer in active flow.
+
+### Changed
+- **Session Closeout SKILL.md:** Lightweight is now the default. Single inline Reconciliation Summary covers Pending Plans (max 3 bullets, named plans only), Quests/Experiments/Intake, and Inbox/Consults. Full mode (parallel Workers A/B/C) is opt-in for sessions with 3+ Pending Plans touched, governance edits, structural reorganization, plan implementation advance, or explicit Sovereign request.
+- **Standardized session log template:** YAML frontmatter (`date`, `title`, `status`, `skills`, `primary_skill`, `commits`, `dispatches`) + `## What Happened` + `## Decisions` + `## Risks` + `## Next` + `## Reconciliation Summary` + `## Notes`. Removes format-decision overhead at write time.
+- **Sovereign Command sweep mandatory in both modes.** Live-signal sections of `Sovereign Command.md` are scanned at every closeout; entries this session resolved or rendered obsolete are removed in the same closeout.
+- **Breadcrumb Propagation Sweep tightened.** Default in lightweight mode is skip. Runs only when this session created new governance artifacts.
+- **Append session log to Index.** New step: append a row to `Vault (Archive)/Session Logs/Index.md` and update `last_updated` and `entry_count`. The log is not fully logged until the row exists.
+- **Cross-reference cleanup (high-traffic files):** AI Interface Knowledge Map, Operating Charter, AI Interface Activation Protocol, AI Interface Activation skill, Session Closeout Protocol, MODULES.md updated to remove references to retired artifacts and route to session log Index + auto-memory.
+
+### Posture
+Three artifacts retired after a structural audit. Each one was either redundant (Change Log duplicated session logs), absorbed by another mechanism (Continuity Log absorbed by auto-memory), or no-longer-load-bearing (the Change Log Protocol it served). Closeout overhead compounds across same-day sessions; the lean default reclaims tokens at every cycle.
+
+For full details, see `UPDATES/2026-05-06-v2.7.0-lean-closeout.md`.
+
+---
+
 ## v2.6.0, 2026-05-06
 
 ### Added

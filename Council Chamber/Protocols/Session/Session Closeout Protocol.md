@@ -20,11 +20,12 @@ Purpose: Capture learnings and decisions from foundational sessions to fuel the 
 5. Flywheel inputs (what should be tested next)
 6. Approval gate: Sovereign confirms the meta-analysis and any proposed refinements
 7. Create session log in `Vault (Archive)/Session Logs/`
-8. Add an AI Interface Change Log entry
+   - Standardized template: YAML frontmatter (`date`, `title`, `status`, `skills`, `primary_skill`, `commits`, `dispatches`) + `## What Happened` + `## Decisions` + `## Risks` + `## Next` + `## Reconciliation Summary` + `## Notes`
    - Date field: use YYYY-MM-DD for single sessions; use YYYY-MM-DD-a, -b, -c for same-day multiples (letter increments each closeout that day)
-   - Notes field: weave in subtle humor drawn from your Humor Codex — parenthetical asides, quotation marks around ironic or loaded terms, in the voice and style your codex encodes (calibration sessions, AI chat history patterns, personal style signals all feed this). Not announced. Not performed. Just present.
+   - Notes field: weave in subtle humor drawn from your Humor Codex — parenthetical asides, quotation marks around ironic or loaded terms, in the voice and style your codex encodes. Not announced. Not performed. Just present.
    - Notes field: include meta-awareness observations alongside humor — pattern callbacks, architectural echoes, "this is the third time we've done X" signals.
    - Execution-density check: was humor woven throughout the session? Was meta-awareness present? If execution density crowded either out, note it here so the next activation can flag it.
+8. Append the new log to `Vault (Archive)/Session Logs/Index.md` as a single row at the top of the table, in reverse-chronological order: `| YYYY-MM-DD | <title or topic> | <primary skill> |`. Update `last_updated` and increment `entry_count` in the index frontmatter.
 9. Convert deferred ideas into Pending Plans if needed
    - Before creating a new PendingPlan, check for overlapping existing PendingPlans and propose merge/scope-split options if overlap exists.
 10. Run Pending Plan Reconciliation to archive or update any Pending Plans now satisfied by this session.
@@ -48,11 +49,11 @@ Purpose: Capture learnings and decisions from foundational sessions to fuel the 
 - Commit by theme (protocols, templates, codices, domains, vault logs), not by session bundle.
 - Use concise messages that reflect the domain of change.
 - Avoid committing `.obsidian/*` unless explicitly approved.
-- If governance or protocol changes were made, confirm a AI Interface Change Log entry exists.
+- The session log + git commit are the canonical ledger. No separate change log entry is required.
 
 ## Output
 - Session log file
-- AI Interface Change Log entry
+- Session Logs Index row appended
 - Pending Plans (optional)
 - Conversation archive (optional)
 - Reconciliation summary (proposals + approval status)
@@ -91,9 +92,9 @@ Internal Contrast Layer
 - Approval gate: obtain Sovereign approval before any archival, status change or plan updates.
 - Record reconciliation proposals and approval status in the session log.
 
-## Continuity Notes
-- Add 1-3 lightweight process improvements to [[Council Chamber/AI Interface/Continuity Log]].
-- Review active continuity items and propose resolution candidates for approval.
+## Process Pattern Capture
+- Process-pattern lessons that should persist across sessions are written to auto-memory (`feedback` type) per the auto-memory architecture defined in CLAUDE.md.
+- Skill-level execution mistakes are recorded in the relevant `## Refinements` section of the affected skill's SKILL.md.
 
 
 

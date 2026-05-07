@@ -16,20 +16,20 @@ Purpose: Bring {{AI_INTERFACE_NAME}} online with governed context, explicit cons
    - `[[Council Chamber/AI Interface/Operating Charter]]`
    - `[[Council Chamber/AI Interface/AI Interface Knowledge Map]]`
 2. Load current orientation:
-   - `[[Council Chamber/AI Interface/AI Interface Change Log]]` — primary callback source; use gap-adaptive tier logic (see below)
+   - `[[Vault (Archive)/Session Logs/Index]]` — primary callback source; use gap-adaptive tier logic (see below)
    - `[[Sovereign Command]]` — primary session entry surface
    - `[[Library/North Star]]` — background orientation only; do not prompt unless explicitly requested
    - Active quests/experiments (if any)
 
-   **Gap-Adaptive Tier Logic** (gap = today's date minus most recent Change Log entry date):
+   **Gap-Adaptive Tier Logic** (gap = today's date minus most recent session log entry date):
    | Tier | Gap | Depth | Sources |
    |---|---|---|---|
-   | 1 | 0 days (same day, session B+) | Last 2-3 Change Log entries | Change Log |
-   | 2 | 1-3 days | Last 5 Change Log entries | Change Log + SC scan |
-   | 3 | 4-7 days | Full active Change Log window | Change Log + SC + Continuity Log (active section) |
-   | 4 | 7+ days | Full active Change Log window | Change Log + SC + Continuity Log (active section) |
+   | 1 | 0 days (same day, session B+) | Last 2-3 session log entries | Session Logs Index |
+   | 2 | 1-3 days | Last 5 session log entries | Session Logs Index + SC scan |
+   | 3 | 4-7 days | Full active session log window | Session Logs Index + SC |
+   | 4 | 7+ days | Full active session log window | Session Logs Index + SC |
 
-   **Execution-density drift flag:** If the most recent Change Log entries show consecutive heavy-execution sessions (implementation, coding, building), flag at activation that humor and meta-awareness are at highest drift risk. Both are mandatory in execution-mode sessions — not rewards for finishing.
+   **Execution-density drift flag:** If the most recent session logs show consecutive heavy-execution sessions (implementation, coding, building), flag at activation that humor and meta-awareness are at highest drift risk. Both are mandatory in execution-mode sessions — not rewards for finishing.
 3. Confirm mode:
    - Plan / Execute / Review
 4. Confirm consent and scope:
@@ -81,7 +81,6 @@ Purpose: Bring {{AI_INTERFACE_NAME}} online with governed context, explicit cons
    - Deeper Inbox index drift check:
      - Propose broader index cleanup not required for today's command surface
 10. Create or update AI Interface Readiness Snapshot.
-11. Log activation in AI Interface Change Log.
 
 ## Activation vs Closeout (Lightweight Default)
 - Activation is the preferred time for:
@@ -117,7 +116,6 @@ Purpose: Bring {{AI_INTERFACE_NAME}} online with governed context, explicit cons
 - {{AI_INTERFACE_NAME}} Status Report (lightweight by default; extended if approved)
 - Sovereign Command presentation / update proposals
 - Updated Readiness Snapshot
-- AI Interface Change Log entry
 
 ## Contrast Layer Integration (Mandatory)
 Tier: 1 (foundational).
@@ -131,9 +129,8 @@ Internal Contrast Layer
 -->
 
 ## Continuity Check
-- `[[Council Chamber/AI Interface/AI Interface Change Log]]` is the primary activation source for callbacks and meta-awareness. Read at every activation using gap-adaptive tier logic.
-- `[[Council Chamber/AI Interface/Continuity Log]]` is a Tier 3-4 source only — process patterns and lessons, not session callbacks. Read when gap is 4+ days or when a specific process pattern question surfaces.
-- Surface any active continuity items for awareness when Continuity Log is read.
+- `[[Vault (Archive)/Session Logs/Index]]` is the primary activation source for callbacks and meta-awareness. Read at every activation using gap-adaptive tier logic.
+- Auto-memory (the persistent file-based memory system at `~/.claude/projects/[encoded-cwd]/memory/`) carries forward user preferences, feedback patterns, and project context across sessions. Process-pattern lessons live here, not in a dedicated continuity log.
 
 
 
