@@ -6,6 +6,8 @@ Run the Ecosystem Update Check Skill to discover which updates apply to your bui
 
 | Date | Type | Optional | Slug | Title |
 |---|---|---|---|---|
+| 2026-05-22 | core | no | v2.8.1-anti-ai-writing-patterns-codex | v2.8.1 Anti-AI Writing Patterns Codex. Negative-Space Companion to the Writing Style Codex |
+| 2026-05-22 | core | no | v2.8.0-cross-model-perspectives-and-decision-discipline | v2.8.0 Cross-Model Perspectives, Three Solutions Rule, Edit-Time and Verification Discipline |
 | 2026-05-06 | refinement | yes | v2.7.2-pdf-title-metadata-fix | v2.7.2 PDF Title Metadata Fix. Quick Start Guide and Build Sequence |
 | 2026-05-06 | core | no | v2.7.1-operational-discipline | v2.7.1 Operational Discipline. CLAUDE.md Hardening with Six Sub-Rules + Plan Verification + Move Audit |
 | 2026-05-06 | core | no | v2.7.0-lean-closeout | v2.7.0 Lean Closeout. Retire Change Log + Continuity Log, Lightweight Default |

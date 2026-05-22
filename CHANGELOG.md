@@ -6,6 +6,33 @@ Each entry corresponds to one publish cycle. For full implementation details, se
 
 ---
 
+## v2.8.1, 2026-05-22
+
+### Added
+- **Anti-AI Writing Patterns Codex** at `Council Chamber/Codices/Expression/Anti-AI Writing Patterns Codex.md`. Sixty patterns across eight categories (lexical blacklist, opener tells, hedging and padding, negation and pivot, rhetorical reflexes, voice and register, structural tics, formatting and visual tics). Names the RLHF training pressure behind each tell and the affirmative-voice replacement. Ships in template form. Personalization happens during onboarding via a Vocabulary Reconciliation pass.
+
+### Changed
+- **CLAUDE.md Expression Standards.** New reference bullet linking to the Anti-AI Writing Patterns Codex as the negative-space companion to the Writing Style Codex. Both codices run simultaneously on any draft.
+
+For full details, see `UPDATES/2026-05-22-v2.8.1-anti-ai-writing-patterns-codex.md`.
+
+---
+
+## v2.8.0, 2026-05-22
+
+### Added (CLAUDE.md trust anchor)
+- **Cross-Model Perspectives section.** Four standing questions that fire at decision-density moments mapped to substrate types (web-current research, independent challenger, cheap-parallel external workers, complementary corpus). Perspective is distinct from dispatch. Sanitization rule for any output flowing back into ecosystem artifacts.
+- **Held-by-Structure principle.** The ecosystem holds its own discipline. Reviews happen at scheduled moments, not on demand. The AI Interface does not nudge the Sovereign.
+- **Edit-Time Discipline subsection.** Three rules for small code edits: surface assumptions before acting, match existing style, every changed line traces directly to the request.
+- **Verify Worker Findings subsection.** Orchestrator verifies subagent and external worker output against live state before treating it as authoritative.
+
+### Added (new protocol)
+- **Three Solutions Rule** at `Council Chamber/Protocols/Governance/Three Solutions Rule.md`. When uncertain or when multiple paths are viable, the AI Interface surfaces three options it believes in, states a recommendation, names the trade-off, and lets the Sovereign decide. Four guardrails plus a trust-ladder model.
+
+For full details, see `UPDATES/2026-05-22-v2.8.0-cross-model-perspectives-and-decision-discipline.md`.
+
+---
+
 ## v2.7.2, 2026-05-06
 
 ### Fixed
