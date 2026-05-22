@@ -6,6 +6,18 @@ Each entry corresponds to one publish cycle. For full implementation details, se
 
 ---
 
+## v2.8.2, 2026-05-22
+
+### Changed
+- **CLAUDE.md body prose.** Four em dashes removed: one in Session Calibration, one in Expression Standards (the no-em-dash rule statement itself), one in the Approval Gate, one in Agent SDK Capabilities. Each replaced with a period and a new sentence, or a comma. Structural exemptions preserved (file title, frontmatter description, definition list labels under auto memory, wikilink filename containing "Ṣāḍguṇya — Six Strategies of External Engagement").
+
+### Posture
+The template's own stated rule now observes itself inside the template. The irony from the v2.8.0/v2.8.1 publish closes.
+
+For full details, see `UPDATES/2026-05-22-v2.8.2-em-dash-cleanup.md`.
+
+---
+
 ## v2.8.1, 2026-05-22
 
 ### Added
