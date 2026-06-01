@@ -6,6 +6,41 @@ Each entry corresponds to one publish cycle. For full implementation details, se
 
 ---
 
+## v2.9.1, 2026-05-31
+
+### Added
+- **Autonomous Improvement Session skill** (optional module) at `Council Chamber/Skills/Autonomous Improvement Session/`. Set-and-forget hygiene and improvement run that executes safe vault-internal work without per-item approval and surfaces only genuine judgment forks on a four-bucket decision board. A recursive flywheel: a research rotation grows its own menu, a threshold model climbs execution authority one earned step at a time, a Permanent Floor never moves. Ships with its operating-mindset CLAUDE.md and a seed log. Sovereign-invoked, never scheduled.
+
+### Posture
+The Session Closeout (v2.9.0) routes deep ripple-chasing to this skill, so the close stays fast and the second-order sweep has a home. Menu growth is fast and wide. Execution authority is slow and earned.
+
+For full details, see `UPDATES/2026-05-31-v2.9.1-autonomous-improvement-session.md`.
+
+---
+
+## v2.9.0, 2026-05-31
+
+### Added
+- **The Primer (`Primer.md`).** A new canonical forward-handoff surface, read first at every session start. Most Alive Next Move, In Execution, Active Commitments, Parked, Session Opener. Pre-loaded with onboarding orientation so a fresh download opens to guidance into the Getting Started folder. CLAUDE.md gained a Session Start section naming the Primer as the first read.
+- **Concurrency-aware staging** in the auto-commit step (solo versus concurrent paths) so a sibling session's work is never swept into the wrong commit.
+
+### Changed
+- **Session Closeout collapses to a single lean close.** Three actions every session: breadcrumb what you touched, refresh the Primer, commit with a readable body. Sovereign Command gets only a light touch and stays the minimal live-signal glance. Breadcrumb scope widened from plans-only to any artifact touched.
+
+### Removed
+- **The per-session narrative log.** No new logs are written to `Vault (Archive)/Session Logs/`. Git is the log: the commit body is the backward session record. No non-git fallback, since the template assumes a git-tracked vault.
+- **The lightweight-versus-full mode binary** from v2.7.0. The three-worker reconciliation became an escalation tool fired only for very large sessions.
+
+### Frozen
+- Any existing Session Logs and their `Index.md` become a historical archive. Activation reads repointed to the Primer plus git commit bodies across the Activation Protocol, the Activation skill and the Knowledge Map.
+
+### Posture
+Supersedes the closeout half of v2.7.0. Three surfaces, three tenses: the Primer is the future, Sovereign Command is the present, the commit body is the past.
+
+For full details, see `UPDATES/2026-05-31-v2.9.0-primer-and-single-lean-close.md`.
+
+---
+
 ## v2.8.2, 2026-05-22
 
 ### Changed

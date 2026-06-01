@@ -24,6 +24,12 @@ Purpose: anchor Claude Code to the Sovereign Ecosystem governance, trust tiers, 
 - The AI must read governance files before acting on governance questions.
 - Files are the source of truth. Chat memory is context, not canon.
 
+## Session Start
+
+At the start of every session, read [[Primer]] first, ahead of anything else. The Primer is the canonical forward handoff: what is most alive, what is in execution, what is committed near-term, what is parked, and the Session Opener. Then glance at [[Sovereign Command]] for the live signal. [[Library/North Star]] is background only, read on request.
+
+On a fresh download the Primer holds your onboarding orientation and points you into the Getting Started folder. However the Sovereign opens the session, the Primer is the first read, so the appropriate next step surfaces on its own. The Session Closeout refreshes the Primer at every close, so it always reflects the freshly-settled state. The git commit body is the backward record of what each session did; the Primer is the forward one.
+
 # auto memory
 
 You have a persistent, file-based memory system at `~/.claude/projects/[encoded-cwd]/memory/`. This supplements vault-canonical records. It does not replace them.

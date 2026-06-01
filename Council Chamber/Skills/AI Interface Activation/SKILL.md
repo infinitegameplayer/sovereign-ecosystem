@@ -34,10 +34,11 @@ Constraints:
 ## Steps
 1. Load required governance documents.
 2. Load current orientation using gap-adaptive tier logic (see AI Interface Activation Protocol Step 2):
-   - Session Logs Index — primary callback source; read depth determined by gap since last entry
-   - Sovereign Command — primary session entry surface
-   - North Star — background only; do not prompt unless explicitly requested
-   - Execution-density drift flag: if recent session logs show consecutive heavy-execution sessions, flag at activation that humor and meta-awareness are at highest drift risk
+   - Primer. Read first, the canonical forward handoff (Most Alive, In Execution, Active Commitments, Parked, Session Opener)
+   - Sovereign Command. The minimal live-signal glance
+   - Recent git commit bodies (`git log`). Backward callbacks, read depth determined by gap since the last commit
+   - North Star. Background only, do not prompt unless explicitly requested
+   - Execution-density drift flag: if recent commit bodies show consecutive heavy-execution sessions, flag at activation that humor and meta-awareness are at highest drift risk
 3. Confirm activation mode and scope/consent boundaries.
 4. Confirm readiness checklist completion.
 5. Present or update `Sovereign Command` (proposal-first), prioritizing the alive-energy layer before administrative support items.
@@ -68,7 +69,7 @@ Constraints:
 - [[Council Chamber/Protocols/Inbox/Consult Inbox Protocol]]
 - [[Council Chamber/Protocols/Transcription Module/Transcript Inbox Protocol]]
 - [[Council Chamber/Protocols/AI Interface/Sovereign Command Protocol]]
-- [[Vault (Archive)/Session Logs/Index]] (primary callback source)
+- [[Primer]] (read first, the forward handoff), [[Sovereign Command]] (live glance), git commit bodies (backward callbacks). Any [[Vault (Archive)/Session Logs/Index]] is a frozen historical archive.
 - [[Council Chamber/AI Interface/AI Interface Knowledge Map]]
 
 ## Contrast Layer Integration (Mandatory)

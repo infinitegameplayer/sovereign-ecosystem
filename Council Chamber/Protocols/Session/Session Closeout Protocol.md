@@ -1,64 +1,45 @@
 # Session Closeout Protocol
 
-Purpose: Capture learnings and decisions from foundational sessions to fuel the flywheel without bloat.
+Purpose: Capture what a session changed to fuel the flywheel without bloat. This protocol is the doctrine. [[Council Chamber/Skills/Session Closeout/SKILL]] is the operational authority and runs the actual close.
 
 ## Triggers
 - Governance changes
 - New codices, protocols or skills
 - System-level reorganizations
 - Major North Star updates
+- Any session that made commits
 
-## Closeout Steps (5-12 minutes, lightweight by default)
-1. Session summary (3 bullets)
-2. Decisions made (3 bullets)
-3. Meta-Analysis Capsule (3-6 bullets)
-   - Patterns observed
-   - Learnings
-   - Process improvements
-   - One small change to implement (if any)
-4. New risks or gaps (1-3)
-5. Flywheel inputs (what should be tested next)
-6. Approval gate: Sovereign confirms the meta-analysis and any proposed refinements
-7. Create session log in `Vault (Archive)/Session Logs/`
-   - Standardized template: YAML frontmatter (`date`, `title`, `status`, `skills`, `primary_skill`, `commits`, `dispatches`) + `## What Happened` + `## Decisions` + `## Risks` + `## Next` + `## Reconciliation Summary` + `## Notes`
-   - Date field: use YYYY-MM-DD for single sessions; use YYYY-MM-DD-a, -b, -c for same-day multiples (letter increments each closeout that day)
-   - Notes field: weave in subtle humor drawn from your Humor Codex — parenthetical asides, quotation marks around ironic or loaded terms, in the voice and style your codex encodes. Not announced. Not performed. Just present.
-   - Notes field: include meta-awareness observations alongside humor — pattern callbacks, architectural echoes, "this is the third time we've done X" signals.
-   - Execution-density check: was humor woven throughout the session? Was meta-awareness present? If execution density crowded either out, note it here so the next activation can flag it.
-8. Append the new log to `Vault (Archive)/Session Logs/Index.md` as a single row at the top of the table, in reverse-chronological order: `| YYYY-MM-DD | <title or topic> | <primary skill> |`. Update `last_updated` and increment `entry_count` in the index frontmatter.
-9. Convert deferred ideas into Pending Plans if needed
-   - Before creating a new PendingPlan, check for overlapping existing PendingPlans and propose merge/scope-split options if overlap exists.
-10. Run Pending Plan Reconciliation to archive or update any Pending Plans now satisfied by this session.
-    - Write PendingPlan breadcrumb updates automatically for matched plans (activity/applicability/partial implementation/evidence/reconciliation notes).
-    - Do not change PendingPlan status or archive any PendingPlan without explicit Sovereign approval.
-    - If Pending Plans changed, sync `Council Chamber/Pending Plans/Index.md` (recommended: `Council Chamber/Tools/Pending Plans Index Sync.ps1`).
-11. Run Inbox + Consult Closeout Sweep (proposal-only until approved):
-   - Process deferred Activation recommendations first (especially extended-sweep items not required for in-session execution)
-   - Apply approved Inbox routing moves deferred from Activation
-   - Re-check Consults that produced downstream artifacts in-session and propose/confirm `status: complete` where appropriate
-   - Apply approved Consult status changes and Vault descent moves
-   - Apply approved transcript/coaching routing or Vault descent moves per transcript protocol
-   - Sync `Inbox/Index.md` if changed
-12. Approval prompt: confirm or decline each proposed archival or status change before execution
-13. Archive the session conversation (if available) to `Vault (Archive)/Session Logs/`
-14. Engagement calibration (first 5 activations + closeout; optional after activation 5):
-   - Ask for one adjustment (humor, illumination, tone, cadence).
-   - Log it in [[Council Chamber/AI Interface/AI Interface Engagement Calibration Log]].
+## The Close (three actions, under 3 minutes)
 
-## Commit Strategy (If Changes Were Made)
-- Commit by theme (protocols, templates, codices, domains, vault logs), not by session bundle.
-- Use concise messages that reflect the domain of change.
-- Avoid committing `.obsidian/*` unless explicitly approved.
-- The session log + git commit are the canonical ledger. No separate change log entry is required.
+The closeout is a single lean close. There is no lightweight-versus-full mode binary, and no per-session narrative log. Three surfaces carry the trail: the Primer is the forward handoff, Sovereign Command is the live glance, the git commit body is the backward record. Archived vault artifacts and governance breadcrumbs hold the rest.
 
-## Output
-- Session log file
-- Session Logs Index row appended
-- Pending Plans (optional)
-- Conversation archive (optional)
-- Reconciliation summary (proposals + approval status)
-- PendingPlan breadcrumb writeback summary (which plans were annotated, if any)
-- Inbox/Consult closeout summary (approved routes/status changes/archive moves)
+1. **Breadcrumbs wherever they belong.** Write a one-line breadcrumb into every artifact this session directly touched, in its own location: Pending Plans, codices, dashboards, notes, memory files. The breadcrumb in the artifact is the reconciliation. No separate summary section. For a Pending Plan, the breadcrumb is an activity-log line, an applicability change, a partial-implementation note or an evidence link. Do not change plan status without approval. Second-order ripple-chasing across parallel documents batches to the [[Council Chamber/Skills/Autonomous Improvement Session/SKILL]].
+
+2. **Refresh the Primer.** `Primer.md` is the canonical forward handoff, the first thing the AI reads at session start. Purge stale Parked items first (any item referencing a plan now in `Vault (Archive)/Pending Plans/` is implemented; drop it). Rewrite to the rolling horizon: Most Alive Next Move, In Execution, Active Commitments, Parked, Session Opener. Remove anything this session resolved. Then give Sovereign Command its light touch only: it is the minimal live-signal glance, not the handoff, so drop what resolved and shift the headline if the lead moved. The Primer carries the detail. Sovereign Command stays short.
+
+3. **Record the session.** Auto-commit with a 2-3 sentence readable body (what shipped, key decision, what comes next). Git is the log: the commit body is the always-on searchable backward record. No separate per-session log, and no non-git fallback. The template assumes a git-tracked vault, which is why git is wired into the build. A Sovereign who opts out of git owns that tradeoff and adds their own record surface.
+
+## Conditional Steps
+
+- **Plan exit-criteria verification.** If this session advanced a Pending Plan, read its exit-criteria block and verify each criterion against named evidence (file, commit, script output, live test). Do not accept a self-reported "all criteria met."
+- **Reconciliation escalation (rare).** For a session touching 6 or more plans, or on a Sovereign "full reconciliation" request, dispatch parallel proposal-only workers (Pending Plan reconciliation, inadvertent completions sweep, inbox and consult closeout). This is an escalation tool, not a mode.
+- **Convert deferred ideas into Pending Plans** if needed. Check for overlapping existing plans first and propose merge or scope-split options if overlap exists.
+
+## The Session Log Index (historical)
+
+Any logs in `Vault (Archive)/Session Logs/` are a frozen historical archive from the pre-slim era. No new logs are written and nothing appends to the index. The weekly review and the Weekly Story read git commit bodies for recent activity, not the log index.
+
+## Commit Strategy (if changes were made)
+
+- Commit by theme, not by session bundle.
+- Use concise messages that reflect the domain of change, with the 2-3 sentence readable body.
+- Avoid committing editor or runtime state files unless explicitly approved.
+- The session record plus the breadcrumbs plus archived artifacts are the canonical ledger. No separate change-log entry is required.
+
+## Process Pattern Capture
+
+- Process-pattern lessons that should persist across sessions are written to auto-memory (`feedback` type) per the auto-memory architecture defined in CLAUDE.md.
+- Skill-level execution mistakes are recorded in the relevant `## Refinements` section of the affected skill's SKILL.md.
 
 ## Contrast Layer Integration (Mandatory)
 Tier: 1 (foundational).
@@ -68,40 +49,6 @@ Tier: 1 (foundational).
 
 <!--
 Internal Contrast Layer
-- Add contrast notes here if needed.
+- The per-session log was retired. It served a retroactive lookup that almost never fired, and the commit body carries the summary the lookup wanted.
+- Three surfaces, three jobs: the Primer is the forward handoff and the central refresh, Sovereign Command is the minimal live glance and gets only a light touch, the git commit body is the backward record. Keeping them distinct is what lets Sovereign Command stay a glance.
 -->
-
-## Compliance Checklist
-- Use [[Council Chamber/Checklists/Sovereign Ecosystem Compliance Checklist]].
-- Use [[Council Chamber/Checklists/Pending Plan Reconciliation Checklist]] after governance/system changes.
-
-## Reconciliation Sweep (Inadvertent Completions)
-- Activation/Closeout split: Activation may produce proposal-only Inbox and archival eligibility reports; Closeout is the default execution point for approved archival/flywheel cleanup.
-- Activation/Closeout split: deeper startup sweep items not required for the current `Sovereign Command` direction should be deferred to Closeout by default.
-- Consults: if downstream artifacts were created and the Consult is now primarily provenance, propose `status: complete` (approval-gated) and Vault eligibility.
-- Pending Plans: check for topic overlap with new artifacts and archive or update.
-- Pending Plans: write breadcrumb updates into matched PendingPlan notes even when no status change is approved.
-- Pending Plans: scan for any `status: proposed` plans whose goals were fulfilled via indirect paths - other plans, organic governance work, or prior sessions. Ask "Is this effectively done?" even if the work never ran through that plan's own execution path. Propose closure for approval.
-- Classification drift: check whether any newly created/updated Quest or PendingPlan should be reclassified (Quest vs PendingPlan boundary); propose conversion for approval.
-- Quests: if completed or retired, apply Quest Completion Protocol and move to Vault.
-- Quests: if completed and Trifecta Reflection + Archetypal ROI are present, run [[Council Chamber/Protocols/Flywheels/Conduction Flywheel Protocol]] before Vault handoff.
-- Experiments: if concluded, update status and ensure log is complete.
-- Intake items: if resolved, mark complete/archived and remove from active queues.
-- Transcripts/Coaching Sessions: route or archive only via [[Council Chamber/Protocols/Inbox/Transcript Inbox Protocol]] and with approval.
-- Superseded governance protocols/templates: propose archival with breadcrumbs to active replacements.
-- Approval gate: obtain Sovereign approval before any archival, status change or plan updates.
-- Record reconciliation proposals and approval status in the session log.
-
-## Process Pattern Capture
-- Process-pattern lessons that should persist across sessions are written to auto-memory (`feedback` type) per the auto-memory architecture defined in CLAUDE.md.
-- Skill-level execution mistakes are recorded in the relevant `## Refinements` section of the affected skill's SKILL.md.
-
-
-
-
-
-
-
-
-
-

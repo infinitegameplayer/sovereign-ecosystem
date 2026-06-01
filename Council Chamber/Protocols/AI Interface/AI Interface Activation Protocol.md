@@ -16,20 +16,21 @@ Purpose: Bring {{AI_INTERFACE_NAME}} online with governed context, explicit cons
    - `[[Council Chamber/AI Interface/Operating Charter]]`
    - `[[Council Chamber/AI Interface/AI Interface Knowledge Map]]`
 2. Load current orientation:
-   - `[[Vault (Archive)/Session Logs/Index]]` — primary callback source; use gap-adaptive tier logic (see below)
-   - `[[Sovereign Command]]` — primary session entry surface
-   - `[[Library/North Star]]` — background orientation only; do not prompt unless explicitly requested
+   - `[[Primer]]`. Read first. The canonical forward handoff: Most Alive Next Move, In Execution, Active Commitments, Parked, Session Opener. On a fresh download it holds the onboarding orientation.
+   - `[[Sovereign Command]]`. The minimal live-signal glance of what is most alive.
+   - The recent git commit bodies (`git log`). Backward callbacks for meta-awareness. Use gap-adaptive tier logic (see below).
+   - `[[Library/North Star]]`. Background orientation only. Do not prompt unless explicitly requested.
    - Active quests/experiments (if any)
 
-   **Gap-Adaptive Tier Logic** (gap = today's date minus most recent session log entry date):
+   **Gap-Adaptive Tier Logic** (gap = today's date minus most recent commit date):
    | Tier | Gap | Depth | Sources |
    |---|---|---|---|
-   | 1 | 0 days (same day, session B+) | Last 2-3 session log entries | Session Logs Index |
-   | 2 | 1-3 days | Last 5 session log entries | Session Logs Index + SC scan |
-   | 3 | 4-7 days | Full active session log window | Session Logs Index + SC |
-   | 4 | 7+ days | Full active session log window | Session Logs Index + SC |
+   | 1 | 0 days (same day, session B+) | Last 2-3 commit bodies | Primer + Sovereign Command |
+   | 2 | 1-3 days | Last 5 commit bodies | Primer + git log scan |
+   | 3 | 4-7 days | Full recent commit window | Primer + git log |
+   | 4 | 7+ days | Full recent commit window | Primer + git log |
 
-   **Execution-density drift flag:** If the most recent session logs show consecutive heavy-execution sessions (implementation, coding, building), flag at activation that humor and meta-awareness are at highest drift risk. Both are mandatory in execution-mode sessions — not rewards for finishing.
+   **Execution-density drift flag:** If the most recent commit bodies show consecutive heavy-execution sessions (implementation, coding, building), flag at activation that humor and meta-awareness are at highest drift risk. Both are mandatory in execution-mode sessions, not rewards for finishing.
 3. Confirm mode:
    - Plan / Execute / Review
 4. Confirm consent and scope:
@@ -129,7 +130,7 @@ Internal Contrast Layer
 -->
 
 ## Continuity Check
-- `[[Vault (Archive)/Session Logs/Index]]` is the primary activation source for callbacks and meta-awareness. Read at every activation using gap-adaptive tier logic.
+- `[[Primer]]` is the primary activation source, read first at every session. It carries the forward handoff. `[[Sovereign Command]]` is the live glance. Git commit bodies (`git log`) are the backward callbacks for meta-awareness, read at every activation using gap-adaptive tier logic. Any `[[Vault (Archive)/Session Logs/Index]]` is a frozen historical archive from the pre-slim era, read only for deep historical callbacks.
 - Auto-memory (the persistent file-based memory system at `~/.claude/projects/[encoded-cwd]/memory/`) carries forward user preferences, feedback patterns, and project context across sessions. Process-pattern lessons live here, not in a dedicated continuity log.
 
 

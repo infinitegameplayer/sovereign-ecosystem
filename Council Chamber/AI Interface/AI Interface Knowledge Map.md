@@ -41,7 +41,8 @@ Purpose: Canonical map of the AI interface governance, protocols and continuity 
 ## Core Systems
 - North Star: [[Library/North Star]]
 - Sovereign Command: [[Sovereign Command]]
-- Session Logs Index: [[Vault (Archive)/Session Logs/Index]]
+- Primer (forward handoff, first read): [[Primer]]
+- Session record: git commit bodies (`git log`). Any [[Vault (Archive)/Session Logs/Index]] is a frozen historical archive.
 - Engagement Calibration Log: [[Council Chamber/AI Interface/AI Interface Engagement Calibration Log]]
 - Readiness Snapshot: [[Council Chamber/AI Interface/AI Interface Readiness Snapshot]]
 - Sovereign Command Refresh Log: [[Council Chamber/AI Interface/Sovereign Command Refresh Log]]
