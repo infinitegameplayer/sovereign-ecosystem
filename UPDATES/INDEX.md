@@ -6,6 +6,7 @@ Run the Ecosystem Update Check Skill to discover which updates apply to your bui
 
 | Date | Type | Optional | Slug | Title |
 |---|---|---|---|---|
+| 2026-06-03 | core | no | v2.10.0-llms-discoverability-manifest | v2.10.0 llms.txt Discoverability Manifest. Repo-Root Navigation Surface for AI Agents |
 | 2026-05-31 | module | yes | v2.9.1-autonomous-improvement-session | v2.9.1 Autonomous Improvement Session. Set Your Ecosystem Improving Without Active Attention |
 | 2026-05-31 | core | no | v2.9.0-primer-and-single-lean-close | v2.9.0 Primer Surface and Single Lean Close. A Forward Handoff, a Glance and a Git Log |
 | 2026-05-22 | refinement | yes | v2.8.2-em-dash-cleanup | v2.8.2 Em Dash Cleanup. CLAUDE.md Body Prose Compliance with the No-Em-Dash Rule |

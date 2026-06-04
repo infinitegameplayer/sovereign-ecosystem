@@ -6,6 +6,18 @@ Each entry corresponds to one publish cycle. For full implementation details, se
 
 ---
 
+## v2.10.0, 2026-06-03
+
+### Added
+- **llms.txt** at the repo root. The navigation manifest for AI agents arriving at the repository. Leads with an atomic definition of the Sovereign Ecosystem, carries a seven-question FAQ, indexes the repository structure and core concepts and links the surrounding ecosystem. Pairs with AGENTS.md: llms.txt declares structure, AGENTS.md declares behavior. The README stays a human onboarding document while the citation surface lives here.
+
+### Posture
+Discoverability load moves to the machine surfaces that humans rarely open by hand. Human and machine audiences never share a page. Repo topic tags were also sharpened for entity disambiguation toward the agentic-infrastructure positioning.
+
+For full details, see `UPDATES/2026-06-03-v2.10.0-llms-discoverability-manifest.md`.
+
+---
+
 ## v2.9.1, 2026-05-31
 
 ### Added
