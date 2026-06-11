@@ -1,9 +1,9 @@
 # Sovereign Ecosystem
 
-The Sovereign Ecosystem is a local-first personal operating system for thinking, planning, creating, and evolving with an AI interface.
+The Sovereign Ecosystem is a local-first personal operating system for thinking, planning, creating and evolving with an AI interface.
 
 It is built around one simple idea:
-your files are yours, your structure is yours, and your AI should work inside your world rather than pulling you into someone else's.
+your files are yours, your structure is yours and your AI should work inside your world rather than pulling you into someone else's.
 
 This is meant to become lived infrastructure, not admired architecture.
 The point is not to design a perfect system and stare at it.
@@ -35,7 +35,7 @@ This ecosystem is built for progressive sovereignty.
 
 - Obsidian is recommended because your files stay local and readable.
 - Claude Code and Codex are the recommended starting tools right now because they are strong enough to build with today.
-- The long horizon is more sovereign tooling: local models, personal hardware, and platform-agnostic interfaces as they become more practical.
+- The long horizon is more sovereign tooling: local models, personal hardware and platform-agnostic interfaces as they become more practical.
 
 Build now.
 Iterate toward the horizon.
@@ -47,13 +47,13 @@ Use the tools that help you get moving now, while keeping the deeper sovereignty
 
 You need four things before you begin.
 
-**Obsidian** — a free, local-first markdown app where this ecosystem lives. Download it at [obsidian.md](https://obsidian.md). Once installed, open the downloaded Sovereign Ecosystem folder as a vault using "Open folder as vault."
+**Obsidian**: a free, local-first markdown app where this ecosystem lives. Download it at [obsidian.md](https://obsidian.md). Once installed, open the downloaded Sovereign Ecosystem folder as a vault using "Open folder as vault."
 
-**Claude Code** — Anthropic's AI coding assistant that acts as your AI interface inside the vault. The easiest path for most people is to install it as a VS Code extension: download [VS Code](https://code.visualstudio.com) first, then install the Claude Code extension from the VS Code Extensions marketplace. If you prefer the terminal, install it with `npm install -g @anthropic-ai/claude-code` (requires [Node.js](https://nodejs.org)). Claude Code uses the Anthropic API, which has a small per-session cost. Full onboarding typically runs in the range of $10–25 USD total at a comfortable pace. See Session 0 for more detail on cost and setup options.
+**Claude Code**: Anthropic's AI coding assistant that acts as your AI interface inside the vault. The easiest path for most people is to install it as a VS Code extension: download [VS Code](https://code.visualstudio.com) first, then install the Claude Code extension from the VS Code Extensions marketplace. If you prefer the terminal, install it with `npm install -g @anthropic-ai/claude-code` (requires [Node.js](https://nodejs.org)). Claude Code uses the Anthropic API, which has a small per-session cost. Full onboarding typically runs in the range of $10–25 USD total at a comfortable pace. See Session 0 for more detail on cost and setup options.
 
-**Git** — version control tool used by the Ecosystem Update Check skill to fetch updates and by the scripts folder if you use the backup automation. Most Mac and Linux users already have it. Windows users can download it at [git-scm.com](https://git-scm.com) or install [GitHub Desktop](https://desktop.github.com) for a GUI version.
+**Git**: version control tool used by the Ecosystem Update Check skill to fetch updates and by the scripts folder if you use the backup automation. Most Mac and Linux users already have it. Windows users can download it at [git-scm.com](https://git-scm.com) or install [GitHub Desktop](https://desktop.github.com) for a GUI version.
 
-**A GitHub account** — free at [github.com](https://github.com). Needed if you want to receive notifications when new ecosystem updates are published, or if you eventually want to publish your own version. Not required to complete the Foundation build.
+**A GitHub account**: free at [github.com](https://github.com). Needed if you want to receive notifications when new ecosystem updates are published, or if you eventually want to publish your own version. Not required to complete the Foundation build.
 
 Once these are in place, continue below.
 
@@ -134,7 +134,7 @@ Let reality teach you what wants refinement next.
 
 This template is the on-ramp. The full library lives at [infinitegameos.io/skills](https://infinitegameos.io/skills): twenty installable skills, seven curated bundles and a governing protocol, all released for practitioners to take and make their own. The Foundation gives you a working spine. The library is the open shelf you reach for when a specific capability earns its place in your build.
 
-Five of those skills were born in this template before they grew into the public library: Pending Plan Implementation, Plan Challenger, Researcher, Skill Creator and Systematic Debugging. They graduated outward as the Foundation found its lean shape. Four skills live in both homes at once. Source Harvest, Self-Healing, Session Closeout and Playwright ship inside this Foundation and install as standalone plugins from the library. One ecosystem, two doors, the same lineage running through both.
+Five of those skills were born in this template before they grew into the public library: Pending Plan Implementation, Plan Challenger, Researcher, Skill Creator and Systematic Debugging. They graduated outward as the Foundation found its lean shape. Five skills live in both homes at once. Source Harvest, Self-Healing, Session Closeout, Playwright and Manuscript Anti-AI Edit Pass ship inside this Foundation and install as standalone plugins from the library. One ecosystem, two doors, the same lineage running through both.
 
 ## AI Naming Note
 
@@ -157,7 +157,7 @@ If not, let the system earn its refinements through real use.
 
 This is also an opportunity for an upgrade in how you work.
 Do not only recreate the habits you already have in cleaner folders.
-Use the build to notice how your most alive, curious, and authentic way of working actually wants to function.
+Use the build to notice how your most alive, curious and authentic way of working actually wants to function.
 
 ## Staying Updated
 
