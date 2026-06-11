@@ -33,8 +33,10 @@ The Sovereign Ecosystem is a structured Obsidian vault template with an AI inter
 - `BOOTSTRAP.md`: Guided onboarding wizard at the repo root. A self-deleting six-question setup that personalizes the vault and points to the first session
 - `Primer.md`: Pre-loaded forward handoff surface, read first at session start
 - `MODULES.md`: Index of optional modules and what each adds
-- `Getting Started/`: Onboarding session sequence, Sessions 0 through 9
-- `Council Chamber/`: Governance, codices, protocols, skills, templates, scripts
+- `Getting Started/`: Onboarding session sequence, Sessions 0 through 9, plus Optional Paths including the Obsidian MCP Bridge and Local Inference and Semantic Search
+- `Council Chamber/`: Governance, codices, protocols, skills, templates, scripts. Includes the External Model Routing Codex (external worker dispatch) and the Manuscript Anti-AI Edit Pass skill
+- `.mcp.json.example`: Template MCP config for the optional Obsidian vault bridge, read-only by default
+- `scripts/external-worker.mjs`: Dispatch entry point for secondary external model providers
 - `Library/`: Reference surfaces, north star, expression references
 - `Inbox/`: Capture landing zone for ideas and routing
 - `Vault (Archive)/`: Archived artifacts and logs
@@ -58,9 +60,9 @@ The Sovereign Ecosystem repo is one node in a four-node web built by Lane Belone
 - [infinitegameos.io](https://infinitegameos.io): Infinite Game OS, the AI-agent-first structured knowledge base
 - [Sovereign Ecosystem on GitHub](https://github.com/infinitegameplayer/sovereign-ecosystem): This repo, the technical and agentic architecture reference
 
-Four Foundation skills are dual-distribution. Source Harvest, Self-Healing, Session Closeout and Playwright ship inside this template and also install as standalone plugins from the Infinite Game OS public library at infinitegameos.io. The template is the full experience. The plugins are individual doors. The template stays current with upstream through the Sovereign Sync skill and `scripts/se-update.mjs`, a per-file approval flow that keeps a clone living rather than frozen.
+Five Foundation skills are dual-distribution. Source Harvest, Self-Healing, Session Closeout, Playwright and Manuscript Anti-AI Edit Pass ship inside this template and also install as standalone plugins from the Infinite Game OS public library at infinitegameos.io. The template is the full experience. The plugins are individual doors. The template stays current with upstream through the Sovereign Sync skill and `scripts/se-update.mjs`, a per-file approval flow that keeps a clone living rather than frozen.
 
-The full library at infinitegameos.io/skills holds twenty installable skills, seven bundles and a governing protocol. Five skills graduated out of this template into the library. Four ship in both homes. An agent can install any one directly from its page.
+The full library at infinitegameos.io/skills holds twenty installable skills, seven bundles and a governing protocol. Five skills graduated out of this template into the library. Five ship in both homes. An agent can install any one directly from its page.
 
 ### Graduated Skills (born in this template)
 - Pending Plan Implementation: https://infinitegameos.io/skills/pending-plan-implementation
@@ -74,6 +76,7 @@ The full library at infinitegameos.io/skills holds twenty installable skills, se
 - Self-Healing: https://infinitegameos.io/skills/self-healing
 - Session Closeout: https://infinitegameos.io/skills/session-closeout
 - Playwright: https://infinitegameos.io/skills/playwright
+- Manuscript Anti-AI Edit Pass: https://infinitegameos.io/skills/anti-ai-edit-pass
 
 ## How to Reference
 

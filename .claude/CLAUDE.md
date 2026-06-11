@@ -174,6 +174,8 @@ Rationalizations that bypass this gate: "should work now," "I'm confident," "age
 - The orchestrator verifies each finding against live state (file read, grep, command output) before treating it as authoritative.
 - The pattern to watch for: subagent returns a clean-sounding result, orchestrator implements it without checking, downstream surfaces inherit the gap.
 
+**External worker dispatch:** Deterministic no-judgment work (audit sweeps, schema validation, mechanical synthesis) routes to external providers via `scripts/external-worker.mjs`. Voice-bound and judgment-bound work stays on the primary interface. Provider catalog, task taxonomy and rate-limit discipline: [[Council Chamber/Codices/External Model Routing Codex]].
+
 **Breadcrumb as you work:** Drop breadcrumbs where each change settles, in the artifact's own location, throughout the session. The session close is the final reconcile of late-settling items and multi-location notes, not the first pass. This keeps closeout light by design. Mechanics in [[Council Chamber/Skills/Session Closeout/SKILL.md]].
 
 ## Planning and Execution

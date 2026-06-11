@@ -21,7 +21,7 @@ It explains what belongs together, what depends on what, and when each layer sho
 
 As of v2.4.0, five skills graduated from this Foundation to the Infinite Game OS public library at infinitegameos.io: Pending Plan Implementation, Plan Challenger, Researcher, Skill Creator, Systematic Debugging. The Foundation now ships lean. Practitioners install graduated skills from the IGOS library on demand.
 
-As of v3.0.0, four Foundation skills are dual-distribution: they stay in the Foundation as part of the full experience and also ship as standalone installable plugins in the Infinite Game OS public library. Source Harvest (since v2.4.0) plus Self-Healing, Session Closeout and Playwright (v3.0.0). The template stays the complete system. The plugins are individual doors.
+As of v3.1.0, five Foundation skills are dual-distribution: they stay in the Foundation as part of the full experience and also ship as standalone installable plugins in the Infinite Game OS public library. Source Harvest (since v2.4.0), Self-Healing, Session Closeout and Playwright (v3.0.0) plus Manuscript Anti-AI Edit Pass (v3.1.0). The template stays the complete system. The plugins are individual doors.
 
 The Foundation is the smallest complete system that can:
 - activate the AI interface
@@ -68,6 +68,7 @@ The Foundation is the smallest complete system that can:
 - Foundation skills
   - AI Interface Activation
   - Batch Archival
+  - Manuscript Anti-AI Edit Pass (Expression-aligned; dual-distribution with the Infinite Game OS public library)
   - Pending Plan Progress Update
   - Quest Progress Update
   - Security Check
@@ -133,6 +134,14 @@ The rule is simple:
 | Stewardship | deeper flywheels, governance sensing, taste/archetype refinement | Foundation, enough lived system data | later |
 | Collaboration and Consult | consult intake preservation and collaboration archival boundaries | Foundation | only when those workflows are real |
 | Builder | extension-authoring and packaging surfaces | Foundation | maintainer-only or advanced users |
+
+## Optional Infrastructure
+
+A small set of optional surfaces are infrastructure rather than modules. They do not add a capability bundle. They connect the ecosystem to an external surface or extend where work can run. They open after the Foundation loop is stable, through a Getting Started Optional Path rather than module selection.
+
+- **External Model Routing.** The `Council Chamber/Codices/External Model Routing Codex.md` plus `scripts/external-worker.mjs` give deterministic no-judgment work a verified path to secondary model providers. Voice-bound and judgment-bound work stays on the primary interface. The layer is only as active as the keys configured in `scripts/.env`. Added v3.1.0.
+- **Obsidian MCP Bridge.** `Getting Started/Optional Path - Obsidian MCP Bridge.md` plus `.mcp.json.example` connect the Obsidian vault to the AI interface as a live context source. Read-only by default. Added v3.1.0.
+- **Local Inference and Semantic Search.** `Getting Started/Optional Path - Local Inference and Semantic Search.md` documents an offline inference fallback via Jan.ai and an optional semantic search layer. Documentation only. Markdown stays the source of truth. Added v3.1.0.
 
 ## Expression Module
 

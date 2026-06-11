@@ -37,6 +37,8 @@ Look through:
 - [Optional Path - AI Interface Personalization and Calibration.md](Optional%20Path%20-%20AI%20Interface%20Personalization%20and%20Calibration.md)
 - [Optional Path - First Creator Work Surface or Expression Prep.md](Optional%20Path%20-%20First%20Creator%20Work%20Surface%20or%20Expression%20Prep.md)
 - [Optional Path - Lightweight Business or Life Operating Surface.md](Optional%20Path%20-%20Lightweight%20Business%20or%20Life%20Operating%20Surface.md)
+- [Optional Path - Local Inference and Semantic Search.md](Optional%20Path%20-%20Local%20Inference%20and%20Semantic%20Search.md)
+- [Optional Path - Obsidian MCP Bridge.md](Optional%20Path%20-%20Obsidian%20MCP%20Bridge.md)
 
 Do not ask:
 "Which one should I do right now?"

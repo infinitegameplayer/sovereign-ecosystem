@@ -6,6 +6,7 @@ Run the Ecosystem Update Check Skill to discover which updates apply to your bui
 
 | Date | Type | Optional | Slug | Title |
 |---|---|---|---|---|
+| 2026-06-10 | core | no | v3.1.0-sovereignty-modules | v3.1.0 Sovereignty Modules. External Model Routing, a Manuscript Anti-AI Edit Pass, an Obsidian MCP Bridge and a Local-Inference Path |
 | 2026-06-10 | refinement | no | v3.0.1-constellation-seam | v3.0.1 Constellation Seam. README Library Paragraph and llms.txt Graduated-Skills Enumeration |
 | 2026-06-10 | core | no | v3.0.0-plugin-era | v3.0.0 The Plugin Era. Guided Bootstrap, a Versioned Upgrade Path, Cross-Platform Skills and a Public Library Wave |
 | 2026-06-10 | core | no | v2.11.0-harvest-sync | v2.11.0 Harvest Sync. Doctrine Pass, Status Ladder, Seeded Humor, Deeper Autonomous Menu and Two Write-Time Hooks |

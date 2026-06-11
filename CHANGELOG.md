@@ -6,6 +6,32 @@ Each entry corresponds to one publish cycle. For full implementation details, se
 
 ---
 
+## v3.1.0, 2026-06-10
+
+Sovereignty Modules. Four optional pieces that extend reach without changing the spine. External model routing, a manuscript anti-AI edit pass, an Obsidian MCP bridge and a local-inference path. Each is a door, not a default. The template runs complete without any of them.
+
+### Added (External Model Routing module)
+- **External Model Routing Codex** at `Council Chamber/Codices/External Model Routing Codex.md`. The single source of truth for how external model providers enter worker dispatch. Ships in template form with a provider table (OpenRouter, NVIDIA NIM, DeepSeek, Groq), env-var slots for each, a Worker-Eligible Task Taxonomy with a five-condition eligibility test, and Model Era Notes covering refusal as HTTP 200, the effort parameter and always-on thinking on the newest model tier. Provider catalogs ship as placeholders, populated after live verification.
+- **`scripts/external-worker.mjs`.** The dispatch entry point and the template's first API-calling script. Parameterized by `--provider`, `--model`, `--prompt` and `--context-pack`. Reads keys from `scripts/.env`, auto-injects the Ṣāḍguṇya ambassador orientation, logs metadata and fails loud on missing keys or refusals. Handles a refusal as a distinct non-completion state rather than a silent success.
+- **CLAUDE.md Operational Efficiency line.** A standing dispatch rule. Deterministic no-judgment work routes to external providers. Voice-bound and judgment-bound work stays on the primary interface.
+
+### Added (Manuscript Anti-AI Edit Pass skill)
+- **Manuscript Anti-AI Edit Pass skill** at `Council Chamber/Skills/Manuscript Anti-AI Edit Pass/`. An Expression-aligned skill that runs the canonical anti-AI editing pass over a long-form manuscript. It loads the Anti-AI Writing Patterns Codex, sweeps the text in phases (mechanical lexical first, then judgment-heavy structural and voice passes), assembles a structured edit packet for review and applies approved edits. Surface-then-approve by default. No auto-apply on the judgment passes.
+
+### Added (public library wave)
+- **Manuscript Anti-AI Edit Pass also ships as a standalone installable plugin** in the Infinite Game OS public library at infinitegameos.io as `anti-ai-edit-pass`. It joins the four existing dual-distribution skills (Source Harvest, Self-Healing, Session Closeout, Playwright), making five. Each stays in the Foundation as part of the full experience and installs as an individual plugin for anyone who wants that one door.
+
+### Added (Getting Started Optional Paths)
+- **Optional Path - Obsidian MCP Bridge** at `Getting Started/Optional Path - Obsidian MCP Bridge.md`, plus `.mcp.json.example` at the repo root. Connects the Obsidian vault directly to the AI interface through the cyanheads/obsidian-mcp-server and the Local REST API plugin. Read-only by default. Writes unlock only by deliberate choice.
+- **Optional Path - Local Inference and Semantic Search** at `Getting Started/Optional Path - Local Inference and Semantic Search.md`. Two documented layers. A fully offline inference fallback via Jan.ai, and an optional semantic search layer with a memsearch option and a sovereignty-preferred local SQLite-plus-embeddings variant. Documentation only. Markdown stays the source of truth, the vector index stays a rebuildable cache. The Optional Paths selector now lists this path.
+
+### Posture
+Four sovereignty modules, each optional, each additive. The codex and the script give the ecosystem a verified path to external workers without touching the primary layer. The edit pass gives long-form prose a canonical anti-AI sweep. The MCP bridge and the local-inference path are Getting Started infrastructure, not modules. They open the door to a live vault connection and to offline capability for Sovereigns building toward a lower-cloud setup. Nothing here is required to run the Foundation.
+
+For full details, see `UPDATES/2026-06-10-v3.1.0-sovereignty-modules.md`.
+
+---
+
 ## v3.0.1, 2026-06-10
 
 The Constellation Seam. A documentation pass that lets the template and the public library read as one connected ecosystem.
