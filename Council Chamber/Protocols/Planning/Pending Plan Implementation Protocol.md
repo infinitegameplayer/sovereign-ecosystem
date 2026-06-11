@@ -20,7 +20,7 @@ Scope: One Pending Plan selected for active implementation in a focused session 
 - Implementation may occur across multiple runs; partial delivery is normal.
 - Breadcrumbs, links and constraints should be visible before execution begins.
 - {{AI_INTERFACE_NAME}} may implement approved scope, but status/archival changes remain approval-gated.
-- Preserve traceability from `proposed` -> `active` -> `complete` -> archive.
+- Preserve traceability from `proposed` -> `approved` -> `ready-for-execution` -> `implemented` -> archive.
 
 ## Preconditions
 - A specific Pending Plan is selected.
@@ -82,7 +82,7 @@ Keep it to one line so the plan note stays the source of truth and `Sovereign Co
    - Only after explicit approval.
    - Archival pattern: move the plan file from `Council Chamber/Pending Plans/` to `Vault (Archive)/Pending Plans/`, then edit the moved file to update status fields. Do not write a new archive copy and delete the original.
    - Support files policy review: at archival time, confirm `support_files_policy` in the plan frontmatter. Transient = clean up the support files folder. Durable = move the folder to `Vault (Archive)/Pending Plans/Support Files/`. Update the policy field in the archived plan if it was set incorrectly.
-   - `status: archived` should only be applied after the Pending Plan is in the Vault and its associated support-files subtree has been cleared from `Council Chamber/Pending Plans/Support Files/`.
+   - `status: implemented` is the terminal status. Archival is a lifecycle event that happens after `implemented`; the plan moves to the Vault with status unchanged at `implemented`. Clear the associated support-files subtree from `Council Chamber/Pending Plans/Support Files/` before the Vault move.
 11. Sync Pending Plans Index (when Pending Plans changed)
    - Recommended after approved status/archive/move changes: run `Council Chamber/Tools/Pending Plans Index Sync.ps1`.
 
@@ -93,36 +93,36 @@ Keep it to one line so the plan note stays the source of truth and `Sovereign Co
 - What dependencies or blockers should be considered first?
 - What changed during implementation?
 - What was actually implemented vs deferred?
-- Should `status` now be `active` because approved implementation has begun?
+- Should `status` now be `approved` or `ready-for-execution` because approved implementation has begun?
 - What should `implementation_state` be now?
 - Do we propose `status` change or keep status unchanged pending approval?
 
 ## Implementation State Guidance (using existing status + `implementation_state`)
-Use `status` for proposal/active/archive lifecycle and `implementation_state` for implementation nuance.
-Use `complete` as the short pre-archive status when approved scope is done but the Vault move has not happened yet.
+Use `status` for the plan lifecycle and `implementation_state` for implementation nuance.
+Use `implemented` when approved scope is done. Archival is the subsequent lifecycle event, not a separate status value.
 
 ### Status Lifecycle Rule
 - `status: proposed`
-  - Use when the plan is awaiting approval and no approved execution has started.
-- `status: active`
-  - Use once explicit execution approval is granted and implementation is underway across one or more runs.
-- `status: complete`
-  - Use when the plan's approved scope is fully implemented and it is ready for archival, but it has not yet been moved to `Vault (Archive)/Pending Plans/`.
-- `status: archived`
-  - Use only after the plan has been moved to `Vault (Archive)/Pending Plans/`.
-- Do not leave a plan at `proposed` once approved implementation is actively happening. If execution is about to begin and status is still `proposed`, stop and prompt Sovereign for approval before proceeding.
-- Do not keep a plan `active` once its approved scope is fully implemented.
-- Do not use `archived` before the plan is actually in the Vault.
-- If downstream work was intentionally split into other Pending Plans, the original plan should still move to `complete` and then to `archived` once its own approved scope is done.
+  - Use when the plan is written and scoped but not yet approved.
+- `status: approved`
+  - Use once the direction is approved and decisions are locked, but the implementation plan has not been written yet.
+- `status: ready-for-execution`
+  - Use once the implementation plan is written and execution is authorized.
+- `status: implemented`
+  - Use when the plan's approved scope is fully shipped and the activity log is final. Archival to `Vault (Archive)/Pending Plans/` follows as a lifecycle event; the status stays `implemented` in the Vault.
+- Do not leave a plan at `proposed` once approved execution is actively happening. If execution is about to begin and status is still `proposed`, stop and prompt Sovereign for approval before proceeding.
+- Do not keep a plan at `ready-for-execution` once its approved scope is fully implemented.
+- Archival is not a status value. A plan in the Vault retains `status: implemented`.
+- If downstream work was intentionally split into other Pending Plans, the original plan should still advance to `implemented` once its own approved scope is done.
 
 ### Support Files Rule
 - `Council Chamber/Pending Plans/Support Files/` is a transient working area, not a permanent storage layer.
-- It may be used by both `proposed` and `active` Pending Plans as temporary execution support.
+- It may be used by `proposed`, `approved` and `ready-for-execution` Pending Plans as temporary execution support.
 - Use a plan-specific `support_files_path` only for temporary drafts, source exports, mapping scratchpads or other execution-only support material.
 - Durable markdown notes should be created directly in their real Sovereign Ecosystem home whenever possible.
-- A plan may remain `complete` briefly while its support-files disposition is being finalized, but those materials should not linger once archival is approved.
-- When a plan reaches `complete` or is being prepared for archival, run a support-files disposition check for that plan's folder only.
-- No plan should move to `archived` while its associated support files are still lingering in `Council Chamber/Pending Plans/Support Files/`.
+- A plan may remain at `implemented` briefly while its support-files disposition is being finalized, but those materials should not linger once archival is approved.
+- When a plan reaches `implemented` or is being prepared for archival, run a support-files disposition check for that plan's folder only.
+- No plan should move to the Vault while its associated support files are still lingering in `Council Chamber/Pending Plans/Support Files/`.
 
 Recommended `implementation_state` values:
 - `proposed`
@@ -242,7 +242,7 @@ Additional required sections:
 ## Approval Gate
 - {{AI_INTERFACE_NAME}} may prepare the implementation snapshot, execute approved scope and write execution breadcrumbs.
 - Status changes, archival moves and closure actions require explicit approval.
-- When approved, `status: complete` may be used as a temporary holding state before a later archival pass or Batch Archival run.
+- When approved, `status: implemented` marks the plan as shipped. Archival to the Vault follows as a separate lifecycle step or via a later Batch Archival run.
 - `Council Chamber/Pending Plans/Index.md` changes remain approval-gated when tied to status/archival changes.
 
 ## Outputs

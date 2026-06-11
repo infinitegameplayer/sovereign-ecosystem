@@ -45,26 +45,11 @@ The Permanent Floor (see Constraints) is the guardrail and it is absolute. Every
 
 ## Menu
 
-The starter menu is below. New items arrive through the research rotation and the Sovereign's decision-board ratifications. As the menu grows past what fits inline comfortably, move the catalog to a `references/menu-catalog.md` file and load it at Step 2.
+The full Tier 1 and Tier 2 menu (per-item execution specs, eligibility rules and output artifacts) lives in [[Council Chamber/Skills/Autonomous Improvement Session/references/menu-catalog]]. Load it at Step 2 and keep it open through Tier 1 and Tier 2 execution.
 
-**Tier 1 (autonomous, edits land directly):**
-- **T1-1 wikilink integrity sweep.** Find links pointing at moved, renamed or deleted files and fix them to the live path.
-- **T1-2 index regeneration.** Regenerate Pending Plans Index and any other generated index from its source files.
-- **T1-3 anti-AI sweep on draft articles.** If your ecosystem ships the Anti-AI Writing Patterns Codex, run its sweep over unpublished drafts.
-- **T1-4 memory slug variant normalization.** Normalize inconsistent slugs and filename variants across memory files.
-- **T1-5 Codices Index completeness sweep.** Find codices missing from the index and add them.
-- **T1-6 superseded-artifact and dead-section sweep.** Find sections referencing retired artifacts and reconcile them to the live replacement.
+**Tier 1 (autonomous, edits land directly):** T1-1 wikilink integrity re-sweep, T1-2 index regeneration, T1-3 anti-AI sweep on draft articles, T1-4 memory file slug variant normalization, T1-5 Codices Index completeness sweep, T1-6 superseded-artifact and dead-section sweep, T1-7 runtime log rotation, T1-8 skill mandatory-sections completeness sweep.
 
-**Tier 2 (read-only scans, findings to the decision board):**
-- **T2-1 Inbox triage.** Route inbound notes to their containers. Condition-based: eligible whenever the Inbox holds unrouted items.
-- **T2-2 stale draft surfaces.** Surface drafts that have sat untouched past a reasonable window.
-- **T2-3 memory cross-reference health.** Find `[[links]]` between memory files that point at nothing.
-- **T2-4 external link rot.** HEAD-check outbound URLs across the vault and report dead ones.
-- **T2-5 skill cross-reference health.** Find skill-to-skill references that point at nothing.
-- **T2-6 status vocabulary conformance.** Report Pending Plans using a status outside the canonical vocabulary.
-- **T2-7 tag vocabulary drift.** Report tag variants that have drifted from the canonical set.
-- **T2-8 breadcrumb propagation and stale-reference sweep.** Read governance artifacts changed recently, find parallel docs that reference them and report stale claims. Git-history check built in so intentional history is not mis-flagged.
-- **T2-9 implemented-plan archival candidate sweep.** Detect Pending Plans marked `implemented` that linger in the active directory. Archive them (see the Permanent Floor note on lifecycle closure).
+**Tier 2 (read-only scans, findings to the decision board):** T2-1 Inbox triage, T2-2 stale draft surface, T2-3 external link rot, T2-4 memory cross-reference health, T2-5 codex inbound density, T2-6 skill cross-reference health, T2-7 MEMORY.md compression candidates, T2-8 breadcrumb propagation and stale-reference sweep, T2-9 implemented-plan archival candidate sweep, T2-10 status vocabulary conformance, T2-11 tag consistency hygiene, T2-12 hook coverage audit, T2-13 scripts-package dependency and CVE audit, T2-14 orphaned and superseded image sweep, T2-15 skill frontmatter conformance sweep, T2-16 skill status-to-usage drift audit, T2-17 contraction enforcement sweep, T2-18 project-memory lifecycle staleness sweep, T2-19 Term Registry placeholder-resolution scan, T2-20 security audit staleness sentinel, T2-21 MCP server load-vs-use gap audit, T2-22 explicit model-set compliance audit, T2-23 review-date staleness sentinel, T2-24 index-file dead-link audit, T2-25 settings file allow-list integrity audit, T2-26 undocumented required-env-key audit, T2-27 skill disambiguation and trigger-collision scan, T2-28 SKILL.md progressive-disclosure overgrowth scan.
 
 **Optional extension: external-surface triage.** If your ecosystem maintains external repositories with issue tracking, add a Step 0 that queries open routine or health issues, clusters by type and priority, routes each into safe-now, fix-via-PR and judgment lanes, and closes consumed issues with a consumption comment. The triage reads and routes. It never pushes to an external main branch. This extension stays off until you run external repos.
 
@@ -107,14 +92,16 @@ Read `Council Chamber/Logs/Autonomous Improvement Log.md`. Parse the frontmatter
 
 ### Step 2: Compute eligibility
 
-For each menu item, apply its eligibility rule against the state. Build an eligible-items list. If the Sovereign passed an item name, narrow to that item only.
+Load [[Council Chamber/Skills/Autonomous Improvement Session/references/menu-catalog]] now. For each menu item (T1-* and T2-*), apply its eligibility rule against the state. Build an eligible-items list. If the Sovereign passed an item name, narrow to that item only.
 
 **Three-tier eligibility (resolves the cooldown problem):**
-- **Condition-based, no window.** Cheap hygiene and routing that runs whenever there is something to do: T2-1 Inbox triage, T2-9 plan archival, T1-2 index regeneration, T1-5 Codices Index completeness, T1-6 superseded sweep. Eligible when the target is non-empty, regardless of last-run date.
+- **Condition-based, no window.** Cheap hygiene and routing that runs whenever there is something to do: T2-1 Inbox triage, T2-9 plan archival, T1-2 index regeneration, T1-5 Codices Index completeness, T1-6 superseded sweep, T2-20 security sentinel. Eligible when the target is non-empty or the condition fires, regardless of last-run date.
 - **Short window, 7 to 14 days.** Cheap scans with moderate drift: T1-1 wikilink, T1-3 anti-AI, T1-4 memory slug, T2-8 breadcrumb.
-- **Long window, 30 to 90 days.** Expensive scans with slow drift: T2-4 link rot, T2-2, T2-3, T2-5, T2-6, T2-7. The window matches the cost and the drift speed.
+- **Long window, 30 to 90 days.** Expensive scans with slow drift: T2-3 link rot, T2-2, T2-4, T2-5, T2-6, T2-7, T2-13. The window matches the cost and the drift speed.
 
 A fixed day-window is the wrong throttle for cheap hygiene. Condition-based items run every session that has something to do.
+
+Any item listed in the log frontmatter `priority_flags` is eligible this run regardless of its day-window or last-run date. Consume the flag when the item runs and delivers. A flag the Sovereign wants standing is restored manually.
 
 ### Step 3: Select items by priority
 
@@ -145,9 +132,11 @@ Dispatch all Tier 2 items in parallel as Sonnet subagents (read-only scans are s
 
 ### Step 8: Research rotation (every run)
 
-The research rotation is the engine of menu growth. It rotates through research categories registered in the log and keys how many it runs to how many categories exist: six or fewer categories, research one per session; more than six, research two per session. Read `research_state`, pick the least-recently-researched categories, dispatch one Sonnet worker per selected category. Each returns a self-ranked top-5 candidate list with a one-line "why this beat the rest." Candidates flow into Step 9 and surface on the decision board's bucket 3. Update `research_state` with today's date for each researched category.
+The research rotation is the engine of menu growth. It rotates through the research categories registered in the menu catalog (see the Research Rotation Categories section there). Keys how many it runs to how many categories exist: six or fewer categories, research one per session; more than six, research two per session. Read `research_state`, pick the least-recently-researched categories, dispatch one Sonnet worker per selected category. Each returns a self-ranked top-5 candidate list with a one-line "why this beat the rest." Candidates flow into Step 9 and surface on the decision board's bucket 3. Update `research_state` with today's date for each researched category.
 
-The starter category set: hygiene mechanisms, discoverability checks, cross-reference integrity, governance-staleness detection, memory health, content-drift detection, structural-legibility, security posture and skill-architecture refinement.
+The starting registry holds nine categories (R1 through R9; see the menu catalog Research Rotation Categories section), so the rule lands on two per session.
+
+**Ground-truth gate on state-claims.** Any candidate that asserts a claim about the current state of an existing artifact gets verified against live state before it reaches the board. Run the cheapest live check (an `ls`, a Grep, a scoped Read) at the moment of surfacing. A candidate whose premise fails verification never reaches the Sovereign. A forward proposal to build something absent needs no artifact check. A claim that a present artifact is absent or stale is a factual assertion and must be ground-truthed. The check belongs to the orchestrator, since a Sonnet research worker cannot be trusted to ground-truth its own assertion.
 
 ### Step 8b: Post-run skill self-refinement
 
@@ -156,6 +145,8 @@ After execution completes, ask: "Did running this skill surface any defects, fri
 ### Step 9: Synthesize the decision board
 
 Aggregate the opportunistic capture, the research rotation, the self-refinement findings and every fork parked during execution into the four-bucket board. Three Solutions throughout follows [[Council Chamber/Protocols/Governance/Three Solutions Rule]]. Apply the recommendation bar: if you would not recommend a candidate, route it to Patterns Noticed as a one-liner rather than a decision. Every recommended candidate carries a proposed tier and a proposed autonomy level.
+
+**Ground-truth gate on Pending Plan cliff-notes.** The Sovereign approves plan creation from the premise stated in the cliff-note. If the cliff-note's load-bearing claim is a state-claim about an existing artifact, verify it against live state before writing it to the board. A false premise spends a real approval and an entire later session on work that did not need doing. One `ls` or Grep at this gate can kill the candidate cleanly.
 
 ### Step 10: Write log entry and decision board, then close
 
@@ -178,6 +169,8 @@ The Sovereign's board answers encode forward. This is the learning loop. The ski
 **Accepted skill self-refinement.** Edit this SKILL.md to apply it. Document it in the Refinements section with date and source-run reference.
 
 **Bucket 4: Approved Pending Plan (drafted and scheduled).** On a "approve plan creation?", draft the full Pending Plan per [[Council Chamber/Protocols/Planning/Pending Plan Implementation Protocol]], using the board cliff-note as the seed. The plan starts at `status: proposed`. Plan creation is authorized; execution of the drafted plan is not, and runs in its own dedicated session later.
+
+Ground-truth the premise before writing it as fact. The plan's Context premise is its load-bearing claim. The Sovereign approved on the cliff-note, but the full plan re-states the premise as established fact that a later execution session trusts without re-checking. If the premise is a state-claim about an existing artifact, verify it against live state at drafting time. A premise that fails here means the candidate is dead. Report that to the Sovereign rather than drafting a plan around a false claim.
 
 ### Autonomy-Level Move (the climb)
 
@@ -298,3 +291,4 @@ Date-stamped entries of calibration notes and rules to prevent recurrence.
 %%
 
 - Skill ported from the source ecosystem in template form. The starter menu is generic vault-internal hygiene (wikilink integrity, index regeneration, anti-AI sweep, slug normalization, codices-index completeness, superseded-artifact sweep, plus read-only scans). The three-site routine-report triage from the source became an optional external-surface extension that stays off until you run external repos. The architecture is preserved intact: the do-not-ask Operating Principle for safe hygiene, the Permanent Floor, the threshold model, the four-bucket decision board, the two speeds, the research rotation and the climb. Adapt the starter menu and research categories to what your ecosystem actually holds during onboarding.
+- 2026-06-10: Menu expanded from 15 inline items to 36 items (T1: 8, T2: 28) in a `references/menu-catalog.md` file, mirroring the source ecosystem structure. Ported all ecosystem-universal items from source T2-1 through T2-42. Items that stayed home: T2-2 (workshop emails), T2-4/T2-5/T2-20/T2-39/T2-40 (site repos), T2-8/T2-18/T2-34 (external-worker infrastructure), T2-12 (three-repo routine triage, now optional extension), T2-21 (email merge tickets), T2-25 (testimonial intake), T2-27 (source-brand capitalization). Items ported with path tokens replacing source-specific paths: T1-7, T1-8, T2-14, T2-17, T2-19, T2-20, T2-25 through T2-28. SKILL.md updated to load the catalog at Step 2, reference nine research rotation categories (R1-R9), add the priority-flag eligibility override, the ground-truth gate on research state-claims and the drafting-time ground-truth gate on Pending Plan premises. SE T2-9 spec enriched with the full source T2-14 execution detail (concurrent-session guard, strongest-evidence confirmation, post-mv re-read note).

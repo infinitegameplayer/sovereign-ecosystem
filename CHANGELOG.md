@@ -6,6 +6,40 @@ Each entry corresponds to one publish cycle. For full implementation details, se
 
 ---
 
+## v2.11.0, 2026-06-10
+
+Harvest Sync. A doctrine pass on the trust anchor, a status-ladder migration across every planning surface, a seeded Humor Codex, a deeper Autonomous Improvement menu and two new write-time hooks. This release folds matured operating patterns back into the template.
+
+### Added (CLAUDE.md trust anchor)
+- **Claim Integrity.** The parent verification rule: a claim is verified at the moment it is made, not assumed from a visible surface. It carries three faces. Relocation (a move is verified by a link sweep), fact (a fact change is verified against the canonical artifact) and delivery (a publish is verified end to end to the human). Drift on one surface that holds on another is named as one class.
+- **Flywheel Check.** A Session Calibration discipline. When an action sets or changes a pattern, standard or surface that later work could overwrite, ask how it connects to the larger system and whether it warrants a durability upgrade. Most fire and pass. The discipline is the asking.
+- **Breadcrumb as you work.** An Operational Efficiency rule. Drop breadcrumbs where each change settles, in the artifact's own location, throughout the session. The session close becomes a reconcile, not a first pass.
+- **Pre-publish sweep gate.** An Expression Standards rule. Run the pre-publish sweep before presenting any outward-facing draft. The highest-stakes surfaces are the most common drift point.
+- **Fact Ratified sweep.** A canonical-fact change discipline. When a product fact changes (a name, a price, an availability), the change is not complete until a full grep for the old string has run and every downstream reference is reconciled. Ratification and the sweep are one unit of work.
+
+### Changed (planning vocabulary and status ladder)
+- **Pending Plan status vocabulary** is now `proposed`, `approved`, `ready-for-execution`, `implemented`. Status advances one direction only.
+- **Status-ladder migration** across every live planning surface: the Pending Plan Implementation Protocol, Reconciliation Protocol, Progress Update Protocol, Batch Archival Protocol and skill, Capture Classify Route Protocol and the PendingPlan object template. Archival is now a lifecycle event after `implemented`, not a status value.
+
+### Changed (Humor Codex)
+- **The Humor Codex graduates from placeholder to seeded starter.** It ships the Jacket Layer (thirteen named trigger-and-move jackets in three families: Wit, Wonder and Meta), a density dial, rotation discipline, seed-and-detonate and a Make This Yours section. The ecosystem arrives a little bit funny out of the box. Personalizing it stays a named onboarding step.
+
+### Changed (Autonomous Improvement Session)
+- **The menu expands from 15 inline items to 36 in a new `references/menu-catalog.md`** (Tier 1: 8 items that land edits, Tier 2: 28 read-only scans) with research rotation categories. The SKILL.md now loads the catalog at the eligibility step. Progressive disclosure keeps the parent skill lean.
+
+### Added (hooks)
+- **`post-write-em-dash-check.sh`:** PostToolUse hook. Fires after every Write or Edit to a `.md` file. Scans for em dash characters and warns with line numbers. Non-blocking. Enforces the CLAUDE.md expression standard (no exceptions) at write time rather than review time.
+- **`post-write-index-regen.sh`:** PostToolUse hook. Fires after Write or Edit matching `Council Chamber/Skills/*/SKILL.md` or `Council Chamber/Pending Plans/*.md`. Ships with a configuration block: set `SKILLS_REGEN_CMD` and `PENDING_REGEN_CMD` to your own regen scripts. Logs trigger events even when commands are unconfigured. Non-blocking.
+
+Both hooks are POSIX sh compatible and path-parameterized via a `VAULT_ROOT` variable (no hardcoded paths). Registration wiring in `.claude/settings.json` is documented in the UPDATES file.
+
+### Posture
+The template observes its own matured patterns. Each item here started as a pattern lived in a working vault, proved itself and earned a home in the shipped Foundation. Claim Integrity is the spine: verify the thing where it is asserted, not where it is convenient to assume.
+
+For full details, see `UPDATES/2026-06-10-v2.11.0-harvest-sync.md`.
+
+---
+
 ## v2.10.0, 2026-06-03
 
 ### Added

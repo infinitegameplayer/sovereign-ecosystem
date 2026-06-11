@@ -18,7 +18,7 @@ Scope: All Inbox sources (desktop, mobile, future email).
 ## Stage 2: Classify
 {{AI_INTERFACE_NAME}} classifies by:
 - Object type (Spark, Consult, Quest update, Experiment, Insight, Brief, Artifact, Transcript, Coaching Session, Governance draft, Strategy draft)
-- Status (proposed/draft/active/complete)
+- Status (proposed/draft/approved/ready-for-execution/implemented)
 - Domain (if known)
 - Quick capture type (To-Do vs Spark vs InboxItem):
   - Route to `To-Do Dock` when the item is a short-lived action prompt that is likely actionable within minutes, later today or within the next few days and does not need archival retention.

@@ -21,7 +21,7 @@ Scope: All Active Chambers.
 3. Generate approval list by domain/object (Sovereign Ecosystem-wide; include all active domains, including Expression when relevant).
 4. Run a lightweight readiness audit on proposed items (metadata completeness, links, routing path and object-specific checks).
 5. Obtain explicit approval for pilot selection and execution order.
-6. Normalize statuses for approved items (e.g., `active` -> `complete`) immediately before descent.
+6. Confirm eligible items carry `status: implemented` (or the object-specific terminal status). No normalization step is needed for Pending Plans; archival is a location change and the status stays `implemented`.
 7. Upon approval, move artifacts to Vault.
 8. Trigger Universal Vault Flywheel for each artifact.
 
@@ -31,9 +31,9 @@ Scope: All Active Chambers.
 - Optional tool: `Council Chamber/Tools/Library Vault Eligibility Audit.ps1`.
 
 ## Status Rules
-- Eligible for scan: `status: complete` in Active Chambers.
+- Eligible for scan: `status: implemented` for Pending Plans in Active Chambers. Other object types use their own terminal status (e.g., `complete` for non-plan artifacts, `retired` for Quests).
 - Also eligible for scan: `status: retired` for Quest notes in Active Chambers when archival is intended.
-- Exclude: `status: archived`, `status: draft`, `status: proposed` unless explicitly approved.
+- Exclude: `status: draft`, `status: proposed`, `status: approved` and `status: ready-for-execution` unless explicitly approved.
 - Consults (`type: consult`) remain planning-only unless explicitly marked `status: complete`.
 - `status: proposed` and `status: draft` indicate planning-only mode by default.
 - Quest notes may use `completed` or `retired` to indicate archival readiness; metadata preserves the distinction even when the Vault folder is shared.

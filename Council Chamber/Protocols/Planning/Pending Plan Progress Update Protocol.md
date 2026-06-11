@@ -21,8 +21,8 @@ Scope: One Pending Plan note per update session, especially when work happens el
 - Reconciliation remains proposal-only until explicit approval.
 - One Pending Plan per update conversation preserves clarity.
 - Preserve traceability across naming changes, refactors and partial implementations.
-- If approved execution has started, the plan should generally move from `proposed` to `active` rather than lingering in a proposal state.
-- If a plan's approved scope is finished but it has not been moved yet, it should generally move to `complete` rather than directly to `archived`.
+- If direction is approved, the plan should advance from `proposed` to `approved` or `ready-for-execution` rather than lingering in a proposal state.
+- If a plan's approved scope is finished but it has not been moved yet, it should advance to `implemented`. Archival follows as a separate lifecycle step.
 
 ## Triggers
 - A session produced changes that partially satisfy or supersede a Pending Plan.
@@ -91,10 +91,10 @@ Keep it to one line so the plan note stays the source of truth and `Sovereign Co
 - `## Reconciliation Notes (Proposal-Only)`
 - Frontmatter (as needed): `timing`, `decision_gate`, `risk_level`, `affected_areas`, `implementation_state`, `last_reviewed`
 - When applicable, also refresh `status`:
-  - `proposed` before execution
-  - `active` during approved implementation
-  - `complete` after approved scope is done but before Vault move
-  - `archived` only after approved closure and actual Vault move
+  - `proposed` before any approval
+  - `approved` after direction is approved, before the implementation plan is written
+  - `ready-for-execution` once the implementation plan is written and execution is authorized
+  - `implemented` after approved scope is fully shipped; archival to the Vault follows as a lifecycle event
 
 ## Dataview-Friendly Tag Convention (Optional, Recommended)
 - `#field` for in-world changes affecting the plan

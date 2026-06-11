@@ -32,7 +32,7 @@ Constraints:
 - No moves without explicit approval.
 - No status changes without explicit approval.
 - Library audit is proposal-only and requires Sovereign approval.
-- Default status scan should include `complete` and may include object-specific terminal statuses (e.g., `retired` for Quest notes) when approved.
+- Default status scan should include `complete` for non-plan artifacts and `implemented` for Pending Plans. May also include object-specific terminal statuses (e.g., `retired` for Quest notes) when approved.
 
 ## Contrast Layer Integration (Mandatory)
 Tier: 1 (foundational).

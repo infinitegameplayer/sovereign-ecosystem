@@ -28,9 +28,9 @@ ring:
 ## Support Files
 - `support_files_path`: optional plan-specific temporary working folder under `Council Chamber/Pending Plans/Support Files/`
 - `support_files_policy`: default `transient`
-- `support_files_path` may be used while a plan is `proposed` or `active`.
+- `support_files_path` may be used while a plan is `proposed`, `approved` or `ready-for-execution`.
 - Rule: no permanent notes should live there; durable artifacts should be created in their canonical Sovereign Ecosystem home.
-- Rule: clear or relocate the plan-specific support subtree before archival; `complete` may be a short-lived pre-archive state while that disposition is finalized.
+- Rule: clear or relocate the plan-specific support subtree before the Vault move; `implemented` plans waiting on support-file disposition should be cleared before archival is approved.
 
 ## Progress Entry Format (Quick Use)
 - `YYYY-MM-DD [Field]` Real-world action or outcome that affects this plan `#field`

@@ -33,13 +33,13 @@ Scope: All Active Chambers and governance/system changes.
    - Partially Implemented: core intent delivered, but gaps remain.
    - Not Implemented: still pending or blocked.
 4. Propose resolution (no automatic changes):
-   - Implemented: propose `status: complete` if the plan will remain in place briefly, or propose move to Vault with archive metadata if archival is being approved now.
+   - Implemented: propose `status: implemented`. Propose a Vault move if archival is being approved now; otherwise the plan stays in `Council Chamber/Pending Plans/` at `implemented` until the next Batch Archival pass.
    - Partially Implemented: propose updates to remaining scope and decision gate.
    - Not Implemented: propose no change; update decision gate if needed.
    - Write breadcrumb context into each materially affected PendingPlan (activity/applicability/partial implementation/evidence/reconciliation notes), using [[Council Chamber/Protocols/Planning/Pending Plan Progress Update Protocol]] as the writeback subroutine when helpful.
    - For Pending Plans with `support_files_path`, include a support-files readiness check:
-     - live support files are valid while the plan is `proposed` or `active`, as long as they remain temporary
-     - if the plan-specific support folder still contains temporary materials, the plan may remain `complete` but is not archive-ready
+     - live support files are valid while the plan is `proposed`, `approved` or `ready-for-execution`, as long as they remain temporary
+     - if the plan-specific support folder still contains temporary materials, the plan may remain `implemented` but is not archive-ready
      - if the folder has been cleared or moved to Vault provenance, the plan is archive-ready
 5. Obtain Sovereign approval before any moves or status changes.
 6. Apply approved changes and sync `Council Chamber/Pending Plans/Index.md`.
@@ -51,37 +51,37 @@ Scope: All Active Chambers and governance/system changes.
 - Breadcrumb writebacks that preserve traceability (without status/archive changes) are allowed during reconciliation and session closeout.
 
 ## Resolution Metadata
-For complete (not-yet-archived) Pending Plans, add:
-- `status: complete`
+For implemented (not-yet-archived) Pending Plans, add:
+- `status: implemented`
 - `implemented_on: YYYY-MM-DD`
 - `implementation_refs: [[...]]`
-- Keep the plan in `Council Chamber/Pending Plans/` only until the next approved archival pass
-- Batch Archival may use `status: complete` as a default scan criterion
-- If `support_files_path` exists, clear or relocate that plan-specific support subtree before archiving
+- Keep the plan in `Council Chamber/Pending Plans/` until the next approved archival pass
+- Batch Archival scans for `status: implemented` as the eligibility criterion
+- If `support_files_path` exists, clear or relocate that plan-specific support subtree before the Vault move
 
-For archived Pending Plans, add:
-- `status: archived`
+For archived Pending Plans (those already moved to the Vault), add:
+- `status: implemented` (unchanged at archival; archival is a location change, not a status change)
 - `archived: YYYY-MM-DD`
 - `implemented_on: YYYY-MM-DD`
 - `implementation_refs: [[...]]`
 - `tags: [archive]`
 
 For partially implemented Pending Plans, add:
-- `status: proposed` (or `status: active` if execution has started)
+- `status: proposed` (or `status: approved` or `status: ready-for-execution` depending on where in the ladder execution stands)
 - `implementation_refs: [[...]]`
 - `remaining_scope:` summary
 - Updated `decision_gate`
 - Optional breadcrumb sections updated (Activity Log, Applicability Updates, Partial Implementation Notes, Reconciliation Notes)
 
-For actively implemented Pending Plans, prefer:
-- `status: active`
+For Pending Plans actively in execution, prefer:
+- `status: ready-for-execution`
 - `implementation_state: in_progress` or `partially_implemented`
 - Keep the plan in `Council Chamber/Pending Plans/` until its approved scope is actually complete
 
 For fully implemented Pending Plans whose remaining ideas were split into other plans:
 - Treat the original plan as implemented for its approved scope
-- Move it to `complete`, then archive it when the Vault move is approved or when a later Batch Archival pass executes
-- Ensure any associated support-files subtree is cleared from `Council Chamber/Pending Plans/Support Files/` before `status: archived`
+- Advance it to `implemented`, then archive it when the Vault move is approved or when a later Batch Archival pass executes
+- Ensure any associated support-files subtree is cleared from `Council Chamber/Pending Plans/Support Files/` before the Vault move
 
 ## Breadcrumb Writeback Rule (Default)
 - Reconciliation should update PendingPlan breadcrumb sections when meaningful overlap is found, even if no status change is approved.
