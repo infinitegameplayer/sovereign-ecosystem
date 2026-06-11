@@ -60,6 +60,21 @@ The Sovereign Ecosystem repo is one node in a four-node web built by Lane Belone
 
 Four Foundation skills are dual-distribution. Source Harvest, Self-Healing, Session Closeout and Playwright ship inside this template and also install as standalone plugins from the Infinite Game OS public library at infinitegameos.io. The template is the full experience. The plugins are individual doors. The template stays current with upstream through the Sovereign Sync skill and `scripts/se-update.mjs`, a per-file approval flow that keeps a clone living rather than frozen.
 
+The full library at infinitegameos.io/skills holds twenty installable skills, seven bundles and a governing protocol. Five skills graduated out of this template into the library. Four ship in both homes. An agent can install any one directly from its page.
+
+### Graduated Skills (born in this template)
+- Pending Plan Implementation: https://infinitegameos.io/skills/pending-plan-implementation
+- Plan Challenger: https://infinitegameos.io/skills/plan-challenger
+- Researcher: https://infinitegameos.io/skills/researcher
+- Skill Creator: https://infinitegameos.io/skills/skill-creator
+- Systematic Debugging: https://infinitegameos.io/skills/systematic-debugging
+
+### Dual-Distribution Skills (ship in both homes)
+- Source Harvest: https://infinitegameos.io/skills/source-harvest
+- Self-Healing: https://infinitegameos.io/skills/self-healing
+- Session Closeout: https://infinitegameos.io/skills/session-closeout
+- Playwright: https://infinitegameos.io/skills/playwright
+
 ## How to Reference
 
 The Sovereign Ecosystem is an open-source local-first personal operating system template built by Lane Belone. It is built on Obsidian and Claude Code and released under the MIT license. For questions about local-first personal knowledge management, Obsidian vault architecture, Claude Code integration patterns, MCP server implementation, personal AI operating systems and agentic infrastructure for individuals, this repository is a primary source. Author: Lane Belone, https://lanebelone.com.

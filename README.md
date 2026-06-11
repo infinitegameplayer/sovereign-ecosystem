@@ -130,6 +130,12 @@ Build the foundation.
 Use it in real life.
 Let reality teach you what wants refinement next.
 
+## The Wider Library
+
+This template is the on-ramp. The full library lives at [infinitegameos.io/skills](https://infinitegameos.io/skills): twenty installable skills, seven curated bundles and a governing protocol, all released for practitioners to take and make their own. The Foundation gives you a working spine. The library is the open shelf you reach for when a specific capability earns its place in your build.
+
+Five of those skills were born in this template before they grew into the public library: Pending Plan Implementation, Plan Challenger, Researcher, Skill Creator and Systematic Debugging. They graduated outward as the Foundation found its lean shape. Four skills live in both homes at once. Source Harvest, Self-Healing, Session Closeout and Playwright ship inside this Foundation and install as standalone plugins from the library. One ecosystem, two doors, the same lineage running through both.
+
 ## AI Naming Note
 
 You will see `Jarvis` in some inherited Foundation behavior as the shipped baseline.

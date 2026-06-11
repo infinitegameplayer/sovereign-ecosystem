@@ -6,6 +6,21 @@ Each entry corresponds to one publish cycle. For full implementation details, se
 
 ---
 
+## v3.0.1, 2026-06-10
+
+The Constellation Seam. A documentation pass that lets the template and the public library read as one connected ecosystem.
+
+### Added
+- **README library paragraph.** A new "The Wider Library" section after Foundation First. It names the full library at infinitegameos.io/skills (twenty skills, seven bundles, one protocol), names the five skills that graduated out of this template, and notes the four that ship in both homes.
+- **llms.txt graduated-skills enumeration.** The Ecosystem section now carries an enumerated block of the five graduated skills and the four dual-distribution skills, each with its direct page URL, so an agent at the repo can discover the installable set programmatically.
+
+### Posture
+No new behavior, no new skills. The seam itself is the work. A reader or an agent arriving at either node can now find the other and see the shared lineage running through both.
+
+For full details, see `UPDATES/2026-06-10-v3.0.1-constellation-seam.md`.
+
+---
+
 ## v3.0.0, 2026-06-10
 
 The Plugin Era. A guided bootstrap wizard, a versioned upgrade path, a cross-platform skill pass and a public library wave. The major version. This release grows three new ways to begin, to stay current and to travel, and it does so additively. The template stays the spine. The plugin path is a second door, never the identity.
