@@ -1,6 +1,6 @@
 ---
-name: Security Check
-description: Run a lightweight security audit using the Sovereign Ecosystem Security note and Security Flywheel; include online update checks.
+name: security-check
+description: Use when running a lightweight monthly or on-demand security audit across the ecosystem with online update checks and approval-gated remediation proposals.
 status: active
 tier: foundational
 contrast_not:

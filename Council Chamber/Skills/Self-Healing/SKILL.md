@@ -1,3 +1,10 @@
+---
+name: self-healing
+description: Use when an AI interface hits an error mid-task and should diagnose, fix and continue autonomously without stopping for every recoverable mistake.
+status: active
+tier: foundational
+---
+
 # Self-Healing
 
 **Purpose:** Autonomous error recovery during implementation sessions. When your AI interface hits an error mid-task, diagnose the root cause, apply a fix, and continue — without stopping to surface every error to the Sovereign. Sessions no longer stall on recoverable mistakes.

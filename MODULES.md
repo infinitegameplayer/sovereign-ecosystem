@@ -19,7 +19,9 @@ It explains what belongs together, what depends on what, and when each layer sho
 
 ## Foundation
 
-As of v2.4.0, five skills graduated from this Foundation to the Infinite Game OS public library at infinitegameos.io: Pending Plan Implementation, Plan Challenger, Researcher, Skill Creator, Systematic Debugging. The Foundation now ships lean. Practitioners install graduated skills from the IGOS library on demand. Source Harvest stays in the Foundation as a dual-distribution surface.
+As of v2.4.0, five skills graduated from this Foundation to the Infinite Game OS public library at infinitegameos.io: Pending Plan Implementation, Plan Challenger, Researcher, Skill Creator, Systematic Debugging. The Foundation now ships lean. Practitioners install graduated skills from the IGOS library on demand.
+
+As of v3.0.0, four Foundation skills are dual-distribution: they stay in the Foundation as part of the full experience and also ship as standalone installable plugins in the Infinite Game OS public library. Source Harvest (since v2.4.0) plus Self-Healing, Session Closeout and Playwright (v3.0.0). The template stays the complete system. The plugins are individual doors.
 
 The Foundation is the smallest complete system that can:
 - activate the AI interface
@@ -69,8 +71,11 @@ The Foundation is the smallest complete system that can:
   - Pending Plan Progress Update
   - Quest Progress Update
   - Security Check
-  - Session Closeout
+  - Self-Healing (dual-distribution with IGOS public library)
+  - Session Closeout (dual-distribution with IGOS public library)
+  - Sovereign Sync
   - Source Harvest (dual-distribution with IGOS public library)
+  - Playwright (dual-distribution with IGOS public library)
   - Weekly Backup
   - Skills Index
   - Skills Governance Protocol
@@ -316,6 +321,7 @@ They belong to ecosystem evolution, not ordinary day-to-day operation.
 
 ## What This Means In Practice
 
+- The fastest first install runs `BOOTSTRAP.md`, the guided onboarding wizard at the repo root. It personalizes the vault from a six-question interview, points the Sovereign at the first Getting Started session, then deletes itself. The Getting Started sessions stay the deep path. The wizard is the quick on-ramp, not a replacement for it.
 - A clean first install is `Foundation` plus onboarding-generated identity and naming setup.
 - Most users should add modules only after living in the Foundation for a bit.
 - The first likely optional module depends on actual behavior:

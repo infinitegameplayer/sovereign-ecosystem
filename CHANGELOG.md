@@ -6,6 +6,31 @@ Each entry corresponds to one publish cycle. For full implementation details, se
 
 ---
 
+## v3.0.0, 2026-06-10
+
+The Plugin Era. A guided bootstrap wizard, a versioned upgrade path, a cross-platform skill pass and a public library wave. The major version. This release grows three new ways to begin, to stay current and to travel, and it does so additively. The template stays the spine. The plugin path is a second door, never the identity.
+
+### Added (guided onboarding)
+- **BOOTSTRAP.md.** A self-deleting setup wizard at the repo root. Open your AI interface and say "read BOOTSTRAP.md and run it." It runs a six-question interview (name, AI interface name, timezone, vault path, platform, governance depth), substitutes identity tokens via `scripts/replace-tokens.mjs`, wires platform-specific setup, routes the governance depth into Getting Started sessions, writes a completion note into `Primer.md`, then deletes itself. A safety rail detects an already-personalized vault and stops cleanly. The Getting Started sessions remain the deep path. README gained a Fast Start subsection.
+
+### Added (versioned upgrade path)
+- **`scripts/se-update.mjs`.** The upgrade tool. Confirms an upstream remote, fetches upstream, diffs every file against local HEAD and prints a categorized change list. Four modes: `--check`, `--diff "<path>"`, `--apply "<path>"`, `--force-seeded "<path>"`.
+- **`scripts/framework-manifest.json`.** Path-classification authority. Three classes: framework (upstream-maintained, offered for review), seeded (shipped once then yours, overwrite needs `--force-seeded`), user (yours, never touched).
+- **Sovereign Sync skill** at `Council Chamber/Skills/Sovereign Sync/`. The conversational layer over the tool. Presents the framework change list, mediates per-file approval (apply, skip or defer), and bookends the sync with one git commit. Converts the template from a one-time clone into a living relationship with upstream.
+
+### Changed (cross-platform skills)
+- **All 15 skills plus the Skill Template** now carry agentskills.io-standard frontmatter (kebab-case `name`, agent-routable `description`) and platform-portable instructions. The skills run in Claude Code, Cursor, Gemini CLI, Codex and peer interfaces without a fork.
+
+### Added (public library wave)
+- **Three Foundation skills now also ship as standalone installable plugins** in the Infinite Game OS public library at infinitegameos.io: Self-Healing, Session Closeout and Playwright. This is dual-distribution alongside Source Harvest. Each skill stays in the Foundation as part of the full experience and installs as an individual plugin for anyone who wants that one door.
+
+### Posture
+The major version grows the template outward without diluting it. The full experience still lives in the vault you own. The bootstrap is a faster front door, the upgrade path keeps the clone alive, and the plugins are individual entrances for the curious. v2.11.0 Harvest Sync shipped earlier the same day; v3.0.0 is the structural milestone that lands on top of it.
+
+For full details, see `UPDATES/2026-06-10-v3.0.0-plugin-era.md`.
+
+---
+
 ## v2.11.0, 2026-06-10
 
 Harvest Sync. A doctrine pass on the trust anchor, a status-ladder migration across every planning surface, a seeded Humor Codex, a deeper Autonomous Improvement menu and two new write-time hooks. This release folds matured operating patterns back into the template.

@@ -1,6 +1,6 @@
 ---
-name: Weekly Story
-description: Generate a weekly narrative that captures the week's real movement across life, work and creation in story form.
+name: weekly-story
+description: Use when generating a weekly narrative that captures the week's real movement across life, work and creation in story form rather than as a report.
 status: active
 tier: operational
 cadence: weekly (Fridays primary, Saturdays backup)

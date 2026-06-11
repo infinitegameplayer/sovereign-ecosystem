@@ -1,6 +1,6 @@
 ---
-name: AI Interface Activation
-description: Operationalize the AI Interface Activation Protocol with approval-gated session initialization and continuity checks.
+name: ai-interface-activation
+description: Use when starting a session to initialize the AI interface with continuity checks, a live ecosystem orientation and approval-gated support sweep before any session work begins.
 status: draft
 version: 0.1
 tier: foundational

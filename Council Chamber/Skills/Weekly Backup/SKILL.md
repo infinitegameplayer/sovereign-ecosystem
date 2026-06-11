@@ -1,6 +1,6 @@
 ---
-name: Weekly Backup
-description: Execute the end-of-week vault backup ritual - verify setup, run the backup script, confirm the log entry, and report results.
+name: weekly-backup
+description: Use when running the end-of-week vault backup ritual to verify setup, run the backup script, confirm the log entry and report results.
 status: active
 tier: foundational
 contrast_not:

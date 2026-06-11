@@ -1,5 +1,5 @@
 ---
-name: Autonomous Improvement Session
+name: autonomous-improvement-session
 description: Use when you have extra session capacity and want to set your ecosystem improving without active attention. Sovereign-invoked only, never scheduled. For low-stakes, additive, vault-internal improvement work where no per-item approval is needed.
 status: active
 tier: foundational

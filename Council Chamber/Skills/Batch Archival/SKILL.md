@@ -1,6 +1,6 @@
 ---
-name: Batch Archival
-description: Execute Batch Archival Protocol with explicit approval gates.
+name: batch-archival
+description: Use when archiving several ecosystem artifacts at once with per-artifact approval gates before any vault move executes.
 status: draft
 version: 0.1
 tier: foundational

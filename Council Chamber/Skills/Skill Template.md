@@ -1,6 +1,6 @@
 ---
-name:
-description:
+name: kebab-case-skill-name
+description: Use when [one sentence stating the trigger condition and what the skill does, written so an agent can route on it].
 status: draft
 tier: foundational
 contrast_not:

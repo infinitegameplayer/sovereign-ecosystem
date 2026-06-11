@@ -1,8 +1,8 @@
 ---
-name: End-of-Week
+name: end-of-week
 aliases:
   - Steward Review
-description: Weekly intel-led sovereignty review - {{AI_INTERFACE_NAME}} briefs each engagement from live ecosystem data, Sovereign speaks freely. 3 this-week engagements (Inner State + Creation, Operations + Collaborations, Resource + Trajectory), 2 next-week engagements (Calendar Sweep, Priority + Forward Flow), then Sovereign Command update.
+description: Use when running the weekly intelligence review. The AI briefs each engagement from live ecosystem data, the Sovereign speaks freely across 3 this-week and 2 next-week engagements, and the session closes with a Sovereign Command update.
 status: active
 tier: operational
 cadence: weekly (Fridays primary, Saturdays backup, pre-trip as needed)

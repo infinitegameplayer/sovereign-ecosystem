@@ -1,6 +1,6 @@
 ---
 name: source-harvest
-description: Systematic pattern extraction from any external repo or tool at source level — not description level. Classify, extract, and integrate what serves the ecosystem.
+description: Use when extracting patterns from any external repo or tool. Read source level, not description level. Classify, extract and integrate what serves the ecosystem.
 status: active
 version: 1.0
 ---
@@ -109,19 +109,12 @@ Ecosystem governance applies to all adoptions:
 
 For every new skill or protocol created in Step 7, run this housekeeping block before proceeding to Step 9:
 
-**a. Create symlinks.** New skills are only discoverable by Claude Code after symlinks exist. Create a symlink from `.claude/skills/[Skill Name]` to `Council Chamber/Skills/[Skill Name]`.
+**a. Register the skill.** New skills are only discoverable by your runtime after registration. The exact mechanism depends on your environment:
+- If your runtime uses a skills discovery directory (e.g. `.claude/skills/`), create a link or copy from that directory to `Council Chamber/Skills/[Skill Name]`. On Mac/Linux: `ln -s`; on Windows: `mklink /J` (run as administrator).
+- Plugin-based runtimes: ensure the skill appears in the plugin manifest's discovery path.
+- Settings-based runtimes: update the relevant settings file.
 
-**Windows (run as Administrator):**
-```
-mklink /J ".claude\skills\[Skill Name]" "Council Chamber\Skills\[Skill Name]"
-```
-
-**Mac / Linux:**
-```
-ln -s "Council Chamber/Skills/[Skill Name]" ".claude/skills/[Skill Name]"
-```
-
-Confirm both paths resolve correctly after creation.
+Confirm the path resolves correctly after creation.
 
 **b. Update the Skills Index.** Edit `Council Chamber/Skills/Skills Index.md`:
 - Add the new skill name to the alphabetically-sorted active skills list

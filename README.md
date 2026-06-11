@@ -57,6 +57,12 @@ You need four things before you begin.
 
 Once these are in place, continue below.
 
+## Fast Start
+
+If you want a guided fifteen-minute setup, open your AI interface with this folder loaded and say "read BOOTSTRAP.md and run it." It interviews you, personalizes the vault and points you at your first session.
+
+This is the quick on-ramp. The Getting Started sessions below stay the deep path, and the wizard hands you off to them when it finishes.
+
 ## Start Here
 
 1. Read [Getting Started/Index.md](Getting%20Started/Index.md).

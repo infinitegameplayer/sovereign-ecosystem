@@ -1,5 +1,5 @@
 ---
-name: Session Closeout
+name: session-closeout
 description: Use when wrapping up a session that made commits or governance changes. A fast three-action close: breadcrumb what you touched, refresh the Primer, commit with a readable body.
 status: active
 tier: foundational

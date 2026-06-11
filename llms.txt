@@ -30,6 +30,7 @@ The Sovereign Ecosystem is a structured Obsidian vault template with an AI inter
 
 - `README.md`: Human setup guide and project overview
 - `AGENTS.md`: AI agent discovery, routing and harvest instructions
+- `BOOTSTRAP.md`: Guided onboarding wizard at the repo root. A self-deleting six-question setup that personalizes the vault and points to the first session
 - `Primer.md`: Pre-loaded forward handoff surface, read first at session start
 - `MODULES.md`: Index of optional modules and what each adds
 - `Getting Started/`: Onboarding session sequence, Sessions 0 through 9
@@ -56,6 +57,8 @@ The Sovereign Ecosystem repo is one node in a four-node web built by Lane Belone
 - [sidequesthq.co](https://sidequesthq.co): Workshops, retreats and advisory, the applied contribution engine
 - [infinitegameos.io](https://infinitegameos.io): Infinite Game OS, the AI-agent-first structured knowledge base
 - [Sovereign Ecosystem on GitHub](https://github.com/infinitegameplayer/sovereign-ecosystem): This repo, the technical and agentic architecture reference
+
+Four Foundation skills are dual-distribution. Source Harvest, Self-Healing, Session Closeout and Playwright ship inside this template and also install as standalone plugins from the Infinite Game OS public library at infinitegameos.io. The template is the full experience. The plugins are individual doors. The template stays current with upstream through the Sovereign Sync skill and `scripts/se-update.mjs`, a per-file approval flow that keeps a clone living rather than frozen.
 
 ## How to Reference
 

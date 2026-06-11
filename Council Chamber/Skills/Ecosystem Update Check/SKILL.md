@@ -1,6 +1,6 @@
 ---
-name: Ecosystem Update Check
-description: Fetch published updates from the Sovereign Ecosystem GitHub repo, present each one for review, and apply only what you explicitly approve. Nothing runs without your say-so.
+name: ecosystem-update-check
+description: Use when checking for published updates from the Sovereign Ecosystem GitHub repo and selectively applying only what you explicitly approve.
 status: active
 tier: foundational
 contrast_not:

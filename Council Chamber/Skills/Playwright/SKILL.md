@@ -1,3 +1,10 @@
+---
+name: playwright
+description: Use when you need to scrape pages, extract structured data or interact with web interfaces via headless browser automation without using screenshots.
+status: active
+tier: operational
+---
+
 # Playwright Skill
 
 **Purpose:** Browser automation via headless Chromium. Scrape pages, extract structured data, and interact with web interfaces. Returns clean JSON — not screenshots.
@@ -13,7 +20,7 @@
 
 ## How to Use
 
-The run.js script accepts a URL argument and returns JSON.
+The run.js script accepts a URL argument and returns JSON. Run it from your vault root using the vault-relative path to this skill's scripts directory.
 
 ```bash
 node "Council Chamber/Skills/Playwright/scripts/run.js" https://example.com
@@ -33,22 +40,22 @@ Output format:
 
 ## Requirements
 
-Playwright must be installed before first use. Run these once with explicit approval:
+Playwright must be installed before first use. Run these once with explicit approval from your vault root:
 
 ```bash
-cd "Council Chamber/scripts" && npm install playwright
+npm install playwright --prefix "Council Chamber/scripts"
 npx playwright install chromium
 ```
 
-Chromium binary installs to `Council Chamber/scripts/node_modules/`. Covered by `.claudeignore` — will not appear in Claude context reads.
+Chromium binary installs to `Council Chamber/scripts/node_modules/`. Add this path to your AI interface's ignore configuration so it does not appear in context reads.
 
 ## Troubleshooting
 
 - **Empty text:** If a page returns empty text, switch `waitUntil` to `networkidle` and retry.
-- **Browser binary not found:** Run `npx playwright install chromium` from `Council Chamber/scripts/`.
+- **Browser binary not found:** Run `npx playwright install chromium` from the scripts directory.
 - **Cloudflare blocking:** Add `playwright-extra` and `puppeteer-extra-plugin-stealth` if a site blocks the script.
 - **Timeout:** Increase all timeouts to 15 seconds and switch to `networkidle` for slow pages.
-- Always close the browser in a `finally` block — already handled in run.js.
+- Always close the browser in a `finally` block. This is already handled in run.js.
 
 ## Invocation
 

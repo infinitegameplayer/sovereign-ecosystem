@@ -1,6 +1,6 @@
 ---
-name: Quest Progress Update
-description: Guide a short conversation that updates one Quest note with in-world progress, Sovereign Ecosystem/AI progress, learnings, evidence and the next step.
+name: quest-progress-update
+description: Use when updating a Quest note with real-world progress, ecosystem changes, learnings, evidence and the next step.
 status: draft
 version: 0.1
 ---

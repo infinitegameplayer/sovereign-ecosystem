@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Playwright scraper — browser automation tool.
+ * Playwright scraper, a browser automation tool.
  * Usage: node run.js <url>
  * Returns: JSON with title, text, and links.
  *

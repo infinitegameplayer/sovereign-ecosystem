@@ -6,6 +6,7 @@ Run the Ecosystem Update Check Skill to discover which updates apply to your bui
 
 | Date | Type | Optional | Slug | Title |
 |---|---|---|---|---|
+| 2026-06-10 | core | no | v3.0.0-plugin-era | v3.0.0 The Plugin Era. Guided Bootstrap, a Versioned Upgrade Path, Cross-Platform Skills and a Public Library Wave |
 | 2026-06-10 | core | no | v2.11.0-harvest-sync | v2.11.0 Harvest Sync. Doctrine Pass, Status Ladder, Seeded Humor, Deeper Autonomous Menu and Two Write-Time Hooks |
 | 2026-06-03 | core | no | v2.10.0-llms-discoverability-manifest | v2.10.0 llms.txt Discoverability Manifest. Repo-Root Navigation Surface for AI Agents |
 | 2026-05-31 | module | yes | v2.9.1-autonomous-improvement-session | v2.9.1 Autonomous Improvement Session. Set Your Ecosystem Improving Without Active Attention |
