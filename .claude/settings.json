@@ -1,5 +1,25 @@
 {
   "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "SOVEREIGN_VAULT_ROOT=\"$CLAUDE_PROJECT_DIR\" bash \"$CLAUDE_PROJECT_DIR/Council Chamber/scripts/hooks/pre-write-floor-guard.sh\""
+          }
+        ]
+      },
+      {
+        "matcher": "Bash|PowerShell",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "SOVEREIGN_VAULT_ROOT=\"$CLAUDE_PROJECT_DIR\" bash \"$CLAUDE_PROJECT_DIR/Council Chamber/scripts/hooks/pre-tool-approval-gate.sh\""
+          }
+        ]
+      }
+    ],
     "PreCompact": [
       {
         "hooks": [

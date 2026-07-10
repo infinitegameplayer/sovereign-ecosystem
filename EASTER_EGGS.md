@@ -4,6 +4,7 @@ Hidden notes in update packages. Enough to remember, not enough to spoil.
 
 | Date | Slug | Description |
 |---|---|---|
+| 2026-07-10 | v3.3.0-governance-and-security-hardening | the instrument's first catch: the orphan detector found its own logbook |
 | 2026-07-10 | v3.2.0-connectivity-seam-and-repo-hygiene | the scar that described itself: the wound was living in the sentence about the wound |
 | 2026-06-10 | v3.1.0-sovereignty-modules | four shut doors: sovereignty measured by what you choose to leave closed |
 | 2026-06-10 | v3.0.0-plugin-era | the door that removes itself: what onboarding owes you once you are inside |

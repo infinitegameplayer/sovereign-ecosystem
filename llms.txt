@@ -38,6 +38,8 @@ The Sovereign Ecosystem is a structured Obsidian vault template with an AI inter
 - `Council Chamber/`: Governance, codices, protocols, skills, templates, scripts. Includes the External Model Routing Codex (external worker dispatch) and the Manuscript Anti-AI Edit Pass skill
 - `.mcp.json.example`: Template MCP config for the optional Obsidian vault bridge, read-only by default
 - `scripts/external-worker.mjs`: Dispatch entry point for secondary external model providers
+- `scripts/doctrine-mass.mjs` and `scripts/doctrine-references.mjs`: Read-only doctrine lifecycle instruments (layer mass counts, inbound-link and orphan detection)
+- `scripts/session-coordination.mjs`: Advisory concurrent-session signal. `scripts/encrypt-stream.mjs`: Optional AES-256-GCM backup encryption
 - `Library/`: Reference surfaces, north star, expression references
 - `Inbox/`: Capture landing zone for ideas and routing
 - `Vault (Archive)/`: Archived artifacts and logs

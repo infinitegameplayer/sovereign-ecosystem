@@ -45,9 +45,13 @@
         "Getting Started/**",
         "scripts/backup-vault.mjs",
         "scripts/backup.config.example.json",
+        "scripts/doctrine-mass.mjs",
+        "scripts/doctrine-references.mjs",
+        "scripts/encrypt-stream.mjs",
         "scripts/external-worker.mjs",
         "scripts/replace-tokens.mjs",
         "scripts/se-update.mjs",
+        "scripts/session-coordination.mjs",
         "scripts/framework-manifest.json",
         ".mcp.json.example",
         ".claude/CLAUDE.md",
@@ -74,6 +78,9 @@
       "note": "MODULES.md calls these 'onboarding-generated' or 'runtime-created' surfaces. They arrive from upstream as starting points and are immediately owned by the Sovereign.",
       "paths": [
         "Council Chamber/Codices/Humor Codex.md",
+        "Council Chamber/Governance/Governance Principles.md",
+        "Council Chamber/Governance/Watch Register.md",
+        "Council Chamber/Governance/Doctrine Mass Baseline.md",
         "Council Chamber/Codices/Ṣāḍguṇya - Six Strategies of External Engagement.md",
         "Primer.md",
         "Sovereign Command.md",
@@ -91,7 +98,9 @@
         "Council Chamber/scripts/hooks/session-start-primer.sh",
         "Council Chamber/scripts/hooks/post-write-em-dash-check.sh",
         "Council Chamber/scripts/hooks/post-write-index-regen.sh",
-        "Council Chamber/scripts/hooks/pre-compact-state-capture.sh"
+        "Council Chamber/scripts/hooks/pre-compact-state-capture.sh",
+        "Council Chamber/scripts/hooks/pre-write-floor-guard.sh",
+        "Council Chamber/scripts/hooks/pre-tool-approval-gate.sh"
       ],
       "explanation": {
         "Humor Codex.md": "Ships as a seeded starter per v2.11.0. Personalization is a named onboarding step. Upstream changes are reference material only.",
@@ -100,6 +109,7 @@
         "To-Do Dock.md": "Runtime-created surface per MODULES.md.",
         ".claude/settings.json": "Ships pre-wired with the four Foundation hooks via $CLAUDE_PROJECT_DIR, so it works without personalization. Sovereigns add their own permissions and hooks after install, so upstream changes are advisory, not applied directly.",
         "Library/North Star.md": "Onboarding-generated per MODULES.md. Sovereign-authored content.",
+        "Governance Principles.md, Watch Register.md, Doctrine Mass Baseline.md": "Governance instruments that accumulate the Sovereign's own entries (principles, watches, baseline rows). Shipped as lightly-seeded shapes, owned by the Sovereign from first use.",
         "hooks/*.sh": "Hook scripts ship from upstream but are configured per-installation (vault path, regen commands). Applying an upstream update blindly would overwrite local configuration. The Sovereign applies hook updates manually after reviewing the diff."
       }
     },

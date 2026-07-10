@@ -45,6 +45,8 @@ If this errors or the script is not available, note it and proceed - collaborati
 
 Check `Council Chamber/Skills/Ecosystem Update Check/sync-state.json`. If `last_check_date` is null or more than 30 days ago, surface it once before the review begins: "Ecosystem update check is overdue. Want to run it before we start or after?" Do not block the review. One mention only.
 
+Read `Council Chamber/Governance/Watch Register.md`. For each active watch, check its wake condition against this week's data pull. Fire any watch whose condition has been met: take or route the action, log it in the register's own Change Log, and remove the row. Retire any watch that is no longer relevant, with the same log entry. Carry forward anything still open, and still alive, into Engagement B (Priority + Forward Flow) if it belongs there.
+
 State the session: "Beginning End-of-Week Review - 3 this-week engagements, 2 next-week engagements, then Sovereign Command update."
 
 **Parallel data pull:** Fire all 7 workers simultaneously. Hold results. Do not present yet. Workers feed the engagement briefings in Steps 1-5.
