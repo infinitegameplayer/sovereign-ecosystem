@@ -1,7 +1,7 @@
 {
   "_comment": "Sovereign Ecosystem Framework Manifest. Classifies every repo path into framework, seeded or user. Default rule: any path not matched by a pattern below is class 'user' and is never touched by upstream updates.",
-  "_version": "1.0.0",
-  "_updated": "2026-06-10",
+  "_version": "1.1.0",
+  "_updated": "2026-07-10",
   "default_class": "user",
   "classes": {
     "framework": {
@@ -16,6 +16,7 @@
         "Council Chamber/Skills/Batch Archival/**",
         "Council Chamber/Skills/Ecosystem Update Check/SKILL.md",
         "Council Chamber/Skills/End-of-Week/**",
+        "Council Chamber/Skills/Manuscript Anti-AI Edit Pass/**",
         "Council Chamber/Skills/Pending Plan Progress Update/**",
         "Council Chamber/Skills/Playwright/**",
         "Council Chamber/Skills/Quest Progress Update/**",
@@ -37,15 +38,18 @@
         "Council Chamber/Codices/Conduction Codex.md",
         "Council Chamber/Codices/Contrast Layer Codex.md",
         "Council Chamber/Codices/Expression/**",
+        "Council Chamber/Codices/External Model Routing Codex.md",
         "Council Chamber/Codices/Sovereignty/**",
         "Council Chamber/Codices/Tag Dictionary.md",
         "Council Chamber/Reference/**",
         "Getting Started/**",
         "scripts/backup-vault.mjs",
         "scripts/backup.config.example.json",
+        "scripts/external-worker.mjs",
         "scripts/replace-tokens.mjs",
         "scripts/se-update.mjs",
         "scripts/framework-manifest.json",
+        ".mcp.json.example",
         ".claude/CLAUDE.md",
         "AGENTS.md",
         "CHANGELOG.md",
@@ -55,6 +59,8 @@
         "README.md",
         "LICENSE",
         "SECURITY.md",
+        "CONTRIBUTING.md",
+        "CODEOWNERS",
         "EASTER_EGGS.md",
         ".codex/CODEX.md",
         ".claudeignore",
@@ -68,7 +74,7 @@
       "note": "MODULES.md calls these 'onboarding-generated' or 'runtime-created' surfaces. They arrive from upstream as starting points and are immediately owned by the Sovereign.",
       "paths": [
         "Council Chamber/Codices/Humor Codex.md",
-        "Council Chamber/Codices/Ṣāḍguṇya — Six Strategies of External Engagement.md",
+        "Council Chamber/Codices/Ṣāḍguṇya - Six Strategies of External Engagement.md",
         "Primer.md",
         "Sovereign Command.md",
         "To-Do Dock.md",
@@ -82,6 +88,7 @@
         "Council Chamber/Logs/Autonomous Improvement Log.md",
         "Council Chamber/Tools/Support Files/sovereign-deferred-items.md",
         "Council Chamber/scripts/hooks/post-compact-reorienter.sh",
+        "Council Chamber/scripts/hooks/session-start-primer.sh",
         "Council Chamber/scripts/hooks/post-write-em-dash-check.sh",
         "Council Chamber/scripts/hooks/post-write-index-regen.sh",
         "Council Chamber/scripts/hooks/pre-compact-state-capture.sh"
@@ -91,7 +98,7 @@
         "Primer.md": "Pre-personalization the file is framework-class boilerplate. Once the Sovereign edits it for their own session state it becomes seeded. The script treats it as seeded by default because there is no reliable automated way to detect the personalization boundary.",
         "Sovereign Command.md": "Runtime-created surface per MODULES.md. Owned by the Sovereign from first use.",
         "To-Do Dock.md": "Runtime-created surface per MODULES.md.",
-        ".claude/settings.json": "Contains hook registrations and permission allowlists that are installation-specific. Upstream changes to the example config are advisory, not applied directly.",
+        ".claude/settings.json": "Ships pre-wired with the four Foundation hooks via $CLAUDE_PROJECT_DIR, so it works without personalization. Sovereigns add their own permissions and hooks after install, so upstream changes are advisory, not applied directly.",
         "Library/North Star.md": "Onboarding-generated per MODULES.md. Sovereign-authored content.",
         "hooks/*.sh": "Hook scripts ship from upstream but are configured per-installation (vault path, regen commands). Applying an upstream update blindly would overwrite local configuration. The Sovereign applies hook updates manually after reviewing the diff."
       }
@@ -112,7 +119,7 @@
     "Council Chamber/AI Interface": "Knowledge Map and Operating Charter are framework. Runtime logs and calibration surfaces are seeded because they accumulate session-specific data.",
     "Getting Started": "Entire directory is framework. Onboarding guides are upstream-maintained reference material.",
     "UPDATES": "Entire directory is framework. The append-only update record and its index are owned by upstream.",
-    ".hidden": "Framework. Hidden blessings and easter eggs ship from upstream.",
+    ".hidden": "Framework. Hidden blessings ship from upstream. The easter egg log lives at the repo root as EASTER_EGGS.md.",
     "Council Chamber/Codices": "Mixed. Most codices are framework. Humor Codex is seeded (personalized during onboarding). Ṣāḍguṇya codex is seeded (doctrine the Sovereign may adapt to their own sovereignty practice).",
     "Primer.md": "Treated as seeded. Pre-personalization it is boilerplate; post-personalization it is the Sovereign's own session handoff surface.",
     "Council Chamber/scripts/hooks": "Seeded, not framework. Scripts arrive from upstream but require installation-specific configuration. The Sovereign applies hook updates by reviewing diffs, not via --apply."

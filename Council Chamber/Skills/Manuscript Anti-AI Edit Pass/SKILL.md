@@ -259,3 +259,5 @@ Internal Contrast Layer
 ## Refinements
 
 *(Empty. Populated when execution mistakes occur during sessions.)*
+
+> Also installs standalone from https://www.infinitegameos.io/skills/anti-ai-edit-pass (dual-distribution: this copy lives in your vault, the public plugin updates independently).

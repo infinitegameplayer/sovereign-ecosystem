@@ -6,6 +6,33 @@ Each entry corresponds to one publish cycle. For full implementation details, se
 
 ---
 
+## v3.2.0, 2026-07-10
+
+Connectivity Seam and Repo Hygiene. Every surface that names a public-library skill now links straight to its page at infinitegameos.io. Session start arrives preloaded. The stale surfaces caught up to reality and the active-file em dash count reached zero.
+
+### Added
+- **`.claude/settings.json` ships in the repo**, pre-wired with all Foundation hooks via `$CLAUDE_PROJECT_DIR`. A clone that never runs BOOTSTRAP still gets hook coverage. Seeded class: existing installs merge by hand.
+- **`session-start-primer.sh` hook.** Injects `Primer.md` at session start and clear, so orientation arrives before the first exchange. On a fresh clone it also surfaces that BOOTSTRAP.md is waiting.
+- **Memory seed at bootstrap.** BOOTSTRAP Step 5 now writes a user identity memory and an ecosystem setup memory from the interview answers, so the next session opens already knowing who it works for.
+- **CONTRIBUTING.md and CODEOWNERS.** How to contribute upstream, and review ownership.
+- **Per-skill library links.** README, Skills Index, the five dual-distribution SKILL.md footers, Sovereign Sync, BOOTSTRAP's completion note, the Getting Started Index and llms.txt all link the exact infinitegameos.io/skills pages they name, with the two-line marketplace install flow stated where it serves.
+
+### Changed
+- **AGENTS.md fully refreshed** from its stale v2.1.0 state: real version, real scripts, real structure, live library counts.
+- **Library count corrected to twenty-four skills** (was twenty) in README and llms.txt, matching the live library.
+- **Ṣāḍguṇya codex renamed**: the filename separator changed from an em dash to a hyphen, with every active reference updated. Dated release records keep their original text as history.
+- **EASTER_EGGS.md reconciled** from two divergent logs into one, with v2.11.0 through v3.1.0 entries backfilled.
+- **`scripts/framework-manifest.json`** now classifies the v3.1.0 additions and this release's new files. Version 1.1.0.
+- **Em dash sweep to zero across every active file in the repo**: codices, protocols, skills, Getting Started, root surfaces and scripts. Two deliberate holdouts: the write-time check hook, where the character is the grep target, and dated release records (UPDATES packages, older CHANGELOG entries, archives), which keep their original text as history.
+
+### Repo settings (not files)
+- **GitHub template flag on.** The "Use this template" button now works.
+- **GitHub Releases live**, starting with a backfilled v3.1.0. Every future version ships as a tagged Release, so the README's "Watch, Releases only" guidance now actually notifies.
+
+For full details, see `UPDATES/2026-07-10-v3.2.0-connectivity-seam-and-repo-hygiene.md`.
+
+---
+
 ## v3.1.0, 2026-06-10
 
 Sovereignty Modules. Four optional pieces that extend reach without changing the spine. External model routing, a manuscript anti-AI edit pass, an Obsidian MCP bridge and a local-inference path. Each is a door, not a default. The template runs complete without any of them.

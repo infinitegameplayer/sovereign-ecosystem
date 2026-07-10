@@ -140,20 +140,20 @@ Recommended `implementation_state` values:
 **Gate format:**
 
 ```
-### Gate N — [Name]
+### Gate N: [Name]
 
 **Scope:** What this gate covers. What is explicitly out of scope.
 **Entry condition:** What must be true before this gate begins.
 **Exit condition:** What must be true for this gate to close.
 **Status:** pending | in_progress | complete
-**Handoff note:** (Written at gate completion) One short paragraph orienting the next session — what was decided, what the next gate opens with, any live constraints.
+**Handoff note:** (Written at gate completion) One short paragraph orienting the next session: what was decided, what the next gate opens with, any live constraints.
 ```
 
 **Session Boundary Close Block (required for multi-session gates):**
 At the end of each execution run within a gate, append to the plan note immediately after the most recent `Implementation Actions` entry:
 
 ```
-### Session Boundary — YYYY-MM-DD
+### Session Boundary: YYYY-MM-DD
 **Completed this run:** [one sentence]
 **Decision point:** [any approval or gate holding next session]
 **Next move:** [first action next session picks up]

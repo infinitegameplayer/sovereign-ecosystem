@@ -32,7 +32,7 @@ Outputs:
    - **Pass C (Adversarial):** Misuse scenarios, trust boundary stress-tests, escalation paths
    - **Pass D (Resilience):** Backup state, recovery paths, single points of failure
    - **Pass E (Continuity):** Protocol coverage, skill coverage, gap detection
-3. Reconvene: synthesize into a single audit summary — findings by severity, cross-pass patterns elevated one tier if appearing in multiple passes, top 3 proposed remediations.
+3. Reconvene: synthesize into a single audit summary, findings by severity, cross-pass patterns elevated one tier if appearing in multiple passes, top 3 proposed remediations.
 4. Check for security updates online (NIST CSF, CIS Controls, MITRE ATT&CK). Summarize relevant deltas only.
 5. Propose any adjustments as approval-gated deltas; do not execute changes.
 6. Record findings in a summary note or session log as approved.
@@ -46,4 +46,4 @@ Outputs:
 
 ## Refinements
 
-*(Empty — populated when execution mistakes occur during sessions.)*
+*(Empty, populated when execution mistakes occur during sessions.)*

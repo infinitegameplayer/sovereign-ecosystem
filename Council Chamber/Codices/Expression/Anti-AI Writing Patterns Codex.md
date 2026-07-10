@@ -444,8 +444,8 @@ Naming the mechanism is half the discipline. The other half is the replacement.
 
 ## Cross-Codex References
 
-- [[Council Chamber/Codices/Expression/Writing Style Codex]] — affirmative voice the Sovereign aims for
-- [[Council Chamber/Codices/Contrast Layer Codex]] — internal contrast processing; output defaults to affirmative framing
+- [[Council Chamber/Codices/Expression/Writing Style Codex]]: affirmative voice the Sovereign aims for
+- [[Council Chamber/Codices/Contrast Layer Codex]]: internal contrast processing; output defaults to affirmative framing
 - [[Council Chamber/Codices/Codices Index]]
 
 ## Personalization Note

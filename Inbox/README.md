@@ -7,7 +7,7 @@ status: active
 Purpose: landing zone for all incoming material before classification and routing.
 
 All new captures land here first.
-Nothing is analyzed here — only held until the AI interface processes it.
+Nothing is analyzed here, only held until the AI interface processes it.
 
 ## How This Works
 

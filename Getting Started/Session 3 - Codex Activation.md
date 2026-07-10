@@ -19,7 +19,7 @@ You definitely do not need to become a prompt engineer in ceremonial robes.
 You do want to understand what this layer is doing for you.
 
 If you completed Session 0.5, your AI already placed first-pass starters into the codex files.
-Open `Council Chamber/Codices/Expression/Writing Style Codex.md` and `Council Chamber/Codices/Humor Codex.md` — if content is there, this session refines it.
+Open `Council Chamber/Codices/Expression/Writing Style Codex.md` and `Council Chamber/Codices/Humor Codex.md`. If content is there, this session refines it.
 If not, the calibration prompts inside will help you build from scratch.
 Either way, you are in the right place.
 

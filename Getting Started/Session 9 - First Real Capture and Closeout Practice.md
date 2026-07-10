@@ -225,8 +225,8 @@ After this, continue practicing the loop in ordinary life and expand the ecosyst
 The real power comes from repetition. The first time shows you the loop works. The tenth time shows you it is trustworthy. Give it two or three weeks of consistent use before forming a final opinion.
 
 When you are ready to expand beyond the Foundation, open:
-- `Getting Started/Optional Paths Selection and Conversion.md` — a lightweight post-Foundation selector
-- `Getting Started/Index.md` — the full Getting Started map including optional continuation paths
+- `Getting Started/Optional Paths Selection and Conversion.md`: a lightweight post-Foundation selector
+- `Getting Started/Index.md`: the full Getting Started map including optional continuation paths
 
 There is no pressure to add anything immediately.
 Living inside the Foundation first is the right move.

@@ -32,7 +32,7 @@ Never conflate the two tiers. A list with no separation creates false urgency an
 
 ### 3. Allowed-Public-Identity Rule
 
-Legal attribution and intentional template examples are allowed in public exports. All other personal or collaborative references — real names, private org names, personal paths, private URLs, internal identifiers — are audit targets and must be removed or anonymized before publish.
+Legal attribution and intentional template examples are allowed in public exports. All other personal or collaborative references, real names, private org names, personal paths, private URLs, internal identifiers, are audit targets and must be removed or anonymized before publish.
 
 When in doubt: if it identifies a real person or private system, it does not ship.
 
@@ -50,7 +50,7 @@ Checklist before any script or config ships:
 
 `SECURITY.md` ships by default with any public repo. No exception.
 
-Decide separately — per project, per release — whether to include:
+Decide separately, per project, per release, whether to include:
 - `CODEOWNERS` (if contributors will merge)
 - `CITATION.cff` (if academic or research citation is relevant)
 - Contributor guidance (if external contributions are intended)

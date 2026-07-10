@@ -6,6 +6,7 @@ Run the Ecosystem Update Check Skill to discover which updates apply to your bui
 
 | Date | Type | Optional | Slug | Title |
 |---|---|---|---|---|
+| 2026-07-10 | core | no | v3.2.0-connectivity-seam-and-repo-hygiene | v3.2.0 Connectivity Seam and Repo Hygiene. Per-Skill Library Links, Preloaded Session Start, Memory Seed and a Zero Em Dash Sweep |
 | 2026-06-10 | core | no | v3.1.0-sovereignty-modules | v3.1.0 Sovereignty Modules. External Model Routing, a Manuscript Anti-AI Edit Pass, an Obsidian MCP Bridge and a Local-Inference Path |
 | 2026-06-10 | refinement | no | v3.0.1-constellation-seam | v3.0.1 Constellation Seam. README Library Paragraph and llms.txt Graduated-Skills Enumeration |
 | 2026-06-10 | core | no | v3.0.0-plugin-era | v3.0.0 The Plugin Era. Guided Bootstrap, a Versioned Upgrade Path, Cross-Platform Skills and a Public Library Wave |
@@ -21,16 +22,16 @@ Run the Ecosystem Update Check Skill to discover which updates apply to your bui
 | 2026-05-06 | core | no | v2.7.0-lean-closeout | v2.7.0 Lean Closeout. Retire Change Log + Continuity Log, Lightweight Default |
 | 2026-05-06 | core | no | v2.6.0-accord-and-install-refinements | v2.6.0 Foundational Covenant + Install Guide Refinements |
 | 2026-05-05 | instruction | no | v2.5.0-orientation-guides-and-north-star-refresh | v2.5.0 Orientation Guides and North Star Refresh |
-| 2026-04-30 | core | no | v2.4.0-igos-graduation | v2.4.0 IGOS Graduation — Foundation Trim and Public Library Distribution |
-| 2026-04-19 | core | no | v2.3.0-operational-maturity | v2.3.0 Operational Maturity — Skills, Protocols and Trust Anchor Hardening |
-| 2026-04-11 | refinement | no | v2.2.1-governance-refinements | v2.2.1 Governance Refinements — Release Hygiene Rule 8 and PPI Audit Gate |
+| 2026-04-30 | core | no | v2.4.0-igos-graduation | v2.4.0 IGOS Graduation: Foundation Trim and Public Library Distribution |
+| 2026-04-19 | core | no | v2.3.0-operational-maturity | v2.3.0 Operational Maturity: Skills, Protocols and Trust Anchor Hardening |
+| 2026-04-11 | refinement | no | v2.2.1-governance-refinements | v2.2.1 Governance Refinements: Release Hygiene Rule 8 and PPI Audit Gate |
 | 2026-04-11 | core | no | v2.2.0-phase-audit-protocol | v2.2.0 Phase Audit Protocol |
 | 2026-04-11 | core | no | v2.1.0-agents-and-repo-context | v2.1.0 AGENTS.md and Repo Context Architecture |
-| 2026-03-27 | instruction | no | v2.0.0-getting-started-improvements | v2.0.0 Getting Started Improvements — Cheat Sheets and Session Refinements |
-| 2026-03-25 | core | no | v1.9.0-auto-memory-architecture | v1.9.0 Auto-Memory Architecture — Modular Memory Configuration for Claude Code |
-| 2026-03-25 | core | no | v1.8.0-living-axis-doctrine | v1.8.0 Living Axis Doctrine — Inner Mastery, Structural Sovereignty, Propagation Pattern |
-| 2026-03-25 | core | no | v1.7.0-ambassador-doctrine | v1.7.0 Ambassador Doctrine — External Engagement Framework |
-| 2026-03-24 | core | no | v1.6.0-governance-protocols | v1.6.0 Governance Protocols — Release Hygiene, Tech Watch, Continuity Capture |
+| 2026-03-27 | instruction | no | v2.0.0-getting-started-improvements | v2.0.0 Getting Started Improvements: Cheat Sheets and Session Refinements |
+| 2026-03-25 | core | no | v1.9.0-auto-memory-architecture | v1.9.0 Auto-Memory Architecture: Modular Memory Configuration for Claude Code |
+| 2026-03-25 | core | no | v1.8.0-living-axis-doctrine | v1.8.0 Living Axis Doctrine: Inner Mastery, Structural Sovereignty, Propagation Pattern |
+| 2026-03-25 | core | no | v1.7.0-ambassador-doctrine | v1.7.0 Ambassador Doctrine: External Engagement Framework |
+| 2026-03-24 | core | no | v1.6.0-governance-protocols | v1.6.0 Governance Protocols: Release Hygiene, Tech Watch, Continuity Capture |
 | 2026-03-24 | core | no | v1.5.0-hook-infrastructure | v1.5.0 Hook Infrastructure + Vault Hygiene |
 | 2026-03-24 | module | no | v1.4.0-skills-expansion | v1.4.0 Skills Expansion + Refinements Standard |
 | 2026-03-11 | core | no | v1.3.0-agent-sdk-integration | v1.3.0 Agent SDK Integration |

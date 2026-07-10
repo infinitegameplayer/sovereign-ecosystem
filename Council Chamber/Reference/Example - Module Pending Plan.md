@@ -30,7 +30,7 @@ How a module Pending Plan looks when it is:
 
 ### Why This Module
 
-The Sovereign has active creative or publishing output — articles, notes, structured writing — and the Foundation capture flow is working but does not yet have a real drafting lane. The Expression Module adds structured drafting and output pathways without disrupting the existing Foundation.
+The Sovereign has active creative or publishing output, articles, notes, structured writing, and the Foundation capture flow is working but does not yet have a real drafting lane. The Expression Module adds structured drafting and output pathways without disrupting the existing Foundation.
 
 ### What This Adds
 
@@ -46,7 +46,7 @@ The Sovereign has active creative or publishing output — articles, notes, stru
 - Foundation capture and archival rules active (complete by Session 4)
 - Writing Style Codex placeholder exists (ships in Foundation)
 
-### Scope — Gate 1 (First Session)
+### Scope: Gate 1 (First Session)
 
 **In scope:**
 - Create `Scriptorium/` container if it does not exist
@@ -59,13 +59,13 @@ The Sovereign has active creative or publishing output — articles, notes, stru
 - Full Writing Style Codex refinement pass
 - Any domain-specific template packs
 
-### Scope — Gate 2 (Second Session, if needed)
+### Scope: Gate 2 (Second Session, if needed)
 
 - Complete Writing Style Codex personalization
 - Read Article Drafting Protocol for publishing-specific output
 - Confirm Article Archival Protocol connects cleanly to Batch Archival
 
-### Scope — Gate 3 (Optional, if applicable)
+### Scope: Gate 3 (Optional, if applicable)
 
 - Add Expression domain templates if publishing workflow is active
 - Refine Scriptorium container structure based on real use
@@ -75,8 +75,8 @@ The Sovereign has active creative or publishing output — articles, notes, stru
 *Append entries as gates are completed.*
 
 ```
-[date] — Gate 1 complete. Scriptorium/ created. Expression Drafting Protocol read. Writing Style Codex calibration begun.
-[date] — Gate 2 complete. Writing Style Codex personalized. Article Drafting Protocol read. Archival connection confirmed.
+[date]: Gate 1 complete. Scriptorium/ created. Expression Drafting Protocol read. Writing Style Codex calibration begun.
+[date]: Gate 2 complete. Writing Style Codex personalized. Article Drafting Protocol read. Archival connection confirmed.
 ```
 
 ### Continuity Notes
@@ -100,7 +100,7 @@ This plan is complete when:
 
 When helping a Sovereign implement their first module Pending Plan:
 
-1. **Read the Pending Plan together first.** Do not assume scope — re-anchor with the Sovereign before taking action.
+1. **Read the Pending Plan together first.** Do not assume scope. Re-anchor with the Sovereign before taking action.
 2. **Define the first gate together.** What is realistic this session? What gets deferred?
 3. **Execute one gate at a time.** Avoid scope creep even when enthusiasm is high.
 4. **Log as you go.** Every completed step gets noted in the Implementation Log immediately, not at the end.

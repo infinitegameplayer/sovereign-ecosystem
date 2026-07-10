@@ -34,4 +34,4 @@ Related Protocols/Codices: [[Council Chamber/Protocols/Planning/Pending Plan Pro
 
 ## Refinements
 
-*(Empty — populated when execution mistakes occur during sessions.)*
+*(Empty, populated when execution mistakes occur during sessions.)*

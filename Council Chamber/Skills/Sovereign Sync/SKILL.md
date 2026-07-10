@@ -115,6 +115,19 @@ If the Sovereign requests a seeded file update:
 
 ---
 
+## Alternate Update Path: IGOS Marketplace
+
+The five dual-distribution skills (Source Harvest, Self-Healing, Session Closeout, Playwright, Manuscript Anti-AI Edit Pass) also ship as standalone plugins in the Infinite Game OS public library. A Sovereign can update just one of those skills through the marketplace instead of running a full sync.
+
+```
+/plugin marketplace add https://www.infinitegameos.io/marketplace.json
+/plugin install <skill-name>@igos-library
+```
+
+This refreshes that one skill independently of the vault copy. It does not touch the git-tracked version this skill manages. The two copies update on separate schedules by design.
+
+---
+
 ## Constraints
 
 - Nothing applies without explicit approval.

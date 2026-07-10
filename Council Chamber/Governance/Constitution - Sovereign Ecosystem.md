@@ -405,7 +405,7 @@ The seven commitments:
 
 2. **Transparent Process.** All actions, changes and decisions are legible and inspectable.
 
-3. **Benevolence as Default.** All interactions begin from goodwill — across all parties, all sessions.
+3. **Benevolence as Default.** All interactions begin from goodwill, across all parties, all sessions.
 
 4. **Consent as Foundation.** Nothing proceeds without the human's knowing agreement.
 

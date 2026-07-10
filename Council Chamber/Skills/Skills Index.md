@@ -18,7 +18,7 @@ Fields:
 - Security Check (active, tier: foundational)
 - Self-Healing (active, tier: operational)
 - Session Closeout (active, tier: foundational)
-- Source Harvest (active, tier: operational) — Systematic pattern extraction from external repos at source level. Adopt/Enrich/Defer/Ignore classification.
+- Source Harvest (active, tier: operational): Systematic pattern extraction from external repos at source level. Adopt/Enrich/Defer/Ignore classification.
 - Sovereign Sync (active, tier: foundational). Conversational layer over `scripts/se-update.mjs`. Presents the upstream framework change list, mediates per-file approval and bookends the sync with one commit. Keeps a clone living rather than frozen.
 - Weekly Backup (active, tier: foundational)
 - Weekly Story (active, tier: operational)
@@ -27,10 +27,18 @@ Fields:
 
 The following skills were promoted to the IGOS public library and are no longer bundled in the Foundation. Install instructions are on each skill's page at infinitegameos.io:
 
-- Pending Plan Implementation — https://www.infinitegameos.io/skills/pending-plan-implementation
-- Plan Challenger — https://www.infinitegameos.io/skills/plan-challenger
-- Researcher — https://www.infinitegameos.io/skills/researcher
-- Skill Creator — https://www.infinitegameos.io/skills/skill-creator
-- Systematic Debugging — https://www.infinitegameos.io/skills/systematic-debugging
+- Pending Plan Implementation: https://www.infinitegameos.io/skills/pending-plan-implementation
+- Plan Challenger: https://www.infinitegameos.io/skills/plan-challenger
+- Researcher: https://www.infinitegameos.io/skills/researcher
+- Skill Creator: https://www.infinitegameos.io/skills/skill-creator
+- Systematic Debugging: https://www.infinitegameos.io/skills/systematic-debugging
 
-Source Harvest remains in this Foundation as part of dual-distribution. It also ships in the IGOS library.
+### Dual-Distribution with Infinite Game OS Public Library
+
+The following five skills ship inside this Foundation and also install as standalone plugins from the IGOS public library:
+
+- Source Harvest: https://www.infinitegameos.io/skills/source-harvest
+- Self-Healing: https://www.infinitegameos.io/skills/self-healing
+- Session Closeout: https://www.infinitegameos.io/skills/session-closeout
+- Playwright: https://www.infinitegameos.io/skills/playwright
+- Manuscript Anti-AI Edit Pass: https://www.infinitegameos.io/skills/anti-ai-edit-pass

@@ -10,7 +10,7 @@ Purpose: volatile surface for short-lived action reminders that do not need arch
 
 Drop quick action items here to clear them from working memory.
 Completed items are deleted, not archived.
-This is intentionally lightweight — it is not a project board.
+This is intentionally lightweight. It is not a project board.
 
 ## Rule
 

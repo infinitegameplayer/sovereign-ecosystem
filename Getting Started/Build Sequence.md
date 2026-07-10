@@ -36,7 +36,7 @@ This guide gives you the orientation layer. It tells you what each session is tr
 
 ---
 
-## Session 0 — Prerequisites
+## Session 0: Prerequisites
 
 **What This Session Does**
 
@@ -58,7 +58,7 @@ Before you build, get honest about where you are actually starting. Not where yo
 
 ---
 
-## Session 0.5 — Mining Your AI History
+## Session 0.5: Mining Your AI History
 
 **What This Session Does**
 
@@ -80,7 +80,7 @@ Your AI history captures patterns you forgot you had. Recurring words, recurring
 
 ---
 
-## Session 1 — Vault Initialization and Adapter Setup
+## Session 1: Vault Initialization and Adapter Setup
 
 **What This Session Does**
 
@@ -102,7 +102,7 @@ Think about what becomes possible when structural organization is no longer some
 
 ---
 
-## Session 2 — Governance Initialization
+## Session 2: Governance Initialization
 
 **What This Session Does**
 
@@ -124,7 +124,7 @@ This is a game with editable rules. You wrote them. You can rewrite them. The ru
 
 ---
 
-## Session 3 — Codex Activation
+## Session 3: Codex Activation
 
 **What This Session Does**
 
@@ -146,7 +146,7 @@ Codices hold both who you are now and who you are becoming. The system should no
 
 ---
 
-## Session 4 — Protocol Activation
+## Session 4: Protocol Activation
 
 **What This Session Does**
 
@@ -168,7 +168,7 @@ Think of the intake lane like ordering things for the house. You do not want eve
 
 ---
 
-## Session 5 — Module Selection
+## Session 5: Module Selection
 
 **What This Session Does**
 
@@ -190,7 +190,7 @@ Let the expansion feeling happen without letting it choose for you. At this poin
 
 ---
 
-## Session 6 — Guided First Pending Plan Implementation
+## Session 6: Guided First Pending Plan Implementation
 
 **What This Session Does**
 
@@ -212,7 +212,7 @@ By the end of this session, the important shift is not only "I installed a modul
 
 ---
 
-## Session 7 — Sovereign Command and First Live Rhythm
+## Session 7: Sovereign Command and First Live Rhythm
 
 **What This Session Does**
 
@@ -234,7 +234,7 @@ Think of Sovereign Command more like a throne room than a dashboard. The AI is c
 
 ---
 
-## Session 8 — North Star Alignment
+## Session 8: North Star Alignment
 
 **What This Session Does**
 
@@ -274,7 +274,7 @@ For the operationalized check-in practice, see: Council Chamber/Protocols/Flywhe
 
 ---
 
-## Session 9 — First Real Capture and Closeout Practice
+## Session 9: First Real Capture and Closeout Practice
 
 **What This Session Does**
 

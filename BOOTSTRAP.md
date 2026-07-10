@@ -82,33 +82,13 @@ The token script touches the identity surfaces across the vault. These are the f
 
 The platform answer routes the next move.
 
-**Claude Code.** Wire the two write-time hooks. The vault ships hook scripts at `Council Chamber/scripts/hooks/post-write-em-dash-check.sh` and `Council Chamber/scripts/hooks/post-write-index-regen.sh`. One catches em dash drift at write time. One triggers index regeneration when skill or plan files change. The full rationale lives in `UPDATES/2026-06-10-v2.11.0-harvest-sync.md`.
+**Claude Code.** The vault ships `.claude/settings.json` pre-wired with all four Foundation hooks: the pre-compact and post-compact continuity pair, the write-time em dash check and the index regeneration trigger. The wiring uses `$CLAUDE_PROJECT_DIR`, so it works from any vault location with no path configuration. Confirm the file is present, then verify nothing more is needed:
 
-To wire them, create or update `.claude/settings.json` with a `PostToolUse` hook block. Use the vault path from question 4 in place of `[your-vault-path]`:
+- On Mac or Linux, make the scripts executable with `chmod +x "Council Chamber/scripts/hooks/"*.sh`.
+- If the Sovereign already has their own `.claude/settings.json` customizations, merge rather than overwrite.
+- Tell the Sovereign a restart of Claude Code is needed for hook registration to take effect.
 
-```json
-{
-  "hooks": {
-    "PostToolUse": [
-      {
-        "matcher": "Write|Edit",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "bash \"[your-vault-path]/Council Chamber/scripts/hooks/post-write-em-dash-check.sh\""
-          },
-          {
-            "type": "command",
-            "command": "bash \"[your-vault-path]/Council Chamber/scripts/hooks/post-write-index-regen.sh\""
-          }
-        ]
-      }
-    ]
-  }
-}
-```
-
-If a `PostToolUse` block already exists, merge the two entries into the existing matcher list rather than adding a second block. On Mac or Linux, make the scripts executable first with `chmod +x`. Set `SOVEREIGN_VAULT_ROOT` in the shell profile, or edit the `VAULT_ROOT` line at the top of each script, so the hooks know which files to inspect. The hooks are non-blocking and safe. They log rather than error. Tell the Sovereign a restart of Claude Code is needed for hook registration to take effect.
+The hooks are non-blocking and safe. They log rather than error. The full rationale lives in `UPDATES/2026-06-10-v2.11.0-harvest-sync.md` and the hook scripts themselves at `Council Chamber/scripts/hooks/`.
 
 **Cursor, Gemini CLI, Codex or other.** These do not use the Claude Code hook format. Leave the hook wiring for later and point the Sovereign at the right anchor. Codex reads `.codex/CODEX.md`, already personalized by the token script. Cursor and Gemini CLI read the governance anchor in `.claude/CLAUDE.md` as a reference document, or their own equivalent rules file if they have one. Note that the write-time hooks are a Claude Code convenience, not a requirement, and the ecosystem runs fully without them. The Getting Started sessions carry the platform-agnostic setup, so anything the wizard skips here is covered there.
 
@@ -124,15 +104,24 @@ In every case, name the next single session to open. For Light and Standard and 
 
 ### Step 5: Completion
 
-Three actions to close.
+Four actions to close.
 
 1. **Write a completion note into `Primer.md`.** Add a short block under the Most Alive Next Move section. Keep it to a few lines. Include the date, the choices made (ecosystem name, AI interface name, timezone, platform, governance depth) and the next session pointer. Example shape:
 
    > **Bootstrap complete (2026-06-10).** Ecosystem named, AI interface named, timezone recorded, platform set, governance depth chosen. Next session: open `Getting Started/Session 1 - Vault Initialization and Adapter Setup.md`. The deep path lives in the Getting Started folder.
+   >
+   > When you outgrow the Foundation, the public library at https://www.infinitegameos.io/skills has 24 skills and 7 bundles, installable one command at a time.
 
-2. **Confirm with the Sovereign.** Show what changed. The personalized files, the platform setup done, the depth route chosen, the next session. Ask if anything needs adjusting before you remove this file. Wait for a clear yes.
+2. **Seed the auto-memory (Claude Code only).** If your platform maintains the file-based memory described in `.claude/CLAUDE.md` (auto memory section), write the starting point now, so the next session opens already knowing who it works for. Two memories, each with the frontmatter shape from that section, each indexed with one line in `MEMORY.md`:
 
-3. **Delete BOOTSTRAP.md.** Once confirmed, delete this file. It is a one-time wizard and removing itself is by design. After deletion, tell the Sovereign:
+   - `user_identity.md` (type `user`): the Sovereign's name, timezone and primary platform.
+   - `project_ecosystem_setup.md` (type `project`): the ecosystem name, the AI interface name, the governance depth chosen, the bootstrap date and the next session pointer.
+
+   On other platforms, skip this. The Primer completion note carries the same facts and the memory can be seeded later from there.
+
+3. **Confirm with the Sovereign.** Show what changed. The personalized files, the platform setup done, the depth route chosen, the memory seeded, the next session. Ask if anything needs adjusting before you remove this file. Wait for a clear yes.
+
+4. **Delete BOOTSTRAP.md.** Once confirmed, delete this file. It is a one-time wizard and removing itself is by design. After deletion, tell the Sovereign:
 
    > Bootstrap done. I have removed it. From here, the deep path lives in the Getting Started folder. Open `Getting Started/Session 1 - Vault Initialization and Adapter Setup.md` when you are ready, or read `Primer.md` any time to see where you are.
 

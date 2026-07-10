@@ -81,31 +81,31 @@ The Steward Review skill (End-of-Week Protocol) is the primary weekly SC refresh
 
 ## Day-Conditional Rule: End of Week
 - On your designated end-of-week day, {{AI_INTERFACE_NAME}} surfaces the `[[Council Chamber/Protocols/Session/End-of-Week Protocol]]` as part of the SC briefing during Activation.
-- `Sovereign Command.md` stays static — no end-of-week section is added to the note.
+- `Sovereign Command.md` stays static. No end-of-week section is added to the note.
 - The End-of-Week Protocol link is {{AI_INTERFACE_NAME}}-surfaced only, keeping SC clean on all other days.
 
-## Section Structure (V1 — Active)
+## Section Structure (V1: Active)
 `Sovereign Command.md` should keep the following order (content-only headings in the note).
-Sections are omitted when the source lane has no live candidate — omission is always preferable to filler.
+Sections are omitted when the source lane has no live candidate. Omission is always preferable to filler.
 
 ### Always Present
-- `Most Alive Next Move (Primary)` — the single most alive, high-momentum item
+- `Most Alive Next Move (Primary)`: the single most alive, high-momentum item
 
-### Optional — Primary Lane (appear only when a live candidate exists)
-- `Your Creative or Business Work` — when a project, build or business initiative has a live candidate beyond the primary move
-- `Explorations / Quests / Experiments` — when an active quest or experiment has a promotable next step
-- `Collaboration Actions` — when a collaboration has a live command-surface candidate
+### Optional: Primary Lane (appear only when a live candidate exists)
+- `Your Creative or Business Work`: when a project, build or business initiative has a live candidate beyond the primary move
+- `Explorations / Quests / Experiments`: when an active quest or experiment has a promotable next step
+- `Collaboration Actions`: when a collaboration has a live command-surface candidate
 
-### Optional — Secondary Lane (appear only when a live candidate exists)
-- `Approvals Queue` — when an active approval is waiting on the Sovereign
-- `Admin` — when an admin item directly enables the current primary move
+### Optional: Secondary Lane (appear only when a live candidate exists)
+- `Approvals Queue`: when an active approval is waiting on the Sovereign
+- `Admin`: when an admin item directly enables the current primary move
 
 ### Removed from V1
-- `Somatic Aliveness Compass` — the principle behind Most Alive Next Move, not a section
-- `North Star Alignment` — orientation context, not command signal; accessed separately
-- `Focus Today / This Week` — absorbed into Most Alive Next Move
-- `Inbox Signals` — covered by {{AI_INTERFACE_NAME}} Activation sweep; does not belong on the command surface
-- `Open Loops` / `Not Now / Parked` — belong in governance notes (Pending Plans), not the command surface
+- `Somatic Aliveness Compass`: the principle behind Most Alive Next Move, not a section
+- `North Star Alignment`: orientation context, not command signal; accessed separately
+- `Focus Today / This Week`: absorbed into Most Alive Next Move
+- `Inbox Signals`: covered by {{AI_INTERFACE_NAME}} Activation sweep; does not belong on the command surface
+- `Open Loops` / `Not Now / Parked`: belong in governance notes (Pending Plans), not the command surface
 
 ### Future (not in V1)
 - Any automation layer, interface mirroring or cross-surface sync

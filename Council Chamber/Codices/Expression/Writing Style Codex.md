@@ -21,12 +21,12 @@ Define the creator's preferred writing style for AI collaboration in a way that 
 ## Calibration Prompts
 
 1. How would you describe your natural writing voice in three words?
-2. What sentence length feels most natural to you — short and punchy, long and layered, or mixed?
-3. What is your relationship to formality — academic, conversational, somewhere in between?
-4. Are there structural patterns you return to — lists, narrative arcs, questions, declarative statements?
+2. What sentence length feels most natural to you: short and punchy, long and layered, or mixed?
+3. What is your relationship to formality: academic, conversational, somewhere in between?
+4. Are there structural patterns you return to: lists, narrative arcs, questions, declarative statements?
 5. What writing do you admire most and why?
 6. What writing mistakes or tendencies do you want to avoid?
-7. How much humor or personality should live in your writing — and where?
+7. How much humor or personality should live in your writing, and where?
 
 ## Style Markers
 
@@ -41,7 +41,7 @@ Define the creator's preferred writing style for AI collaboration in a way that 
 ## Output Rules
 
 - Writing should feel authored, not generated.
-- Match the register to the surface — casual capture differs from published output.
+- Match the register to the surface. Casual capture differs from published output.
 - No filler language by default.
 - When in doubt, be specific rather than general.
 - Prefer concrete over abstract.
@@ -63,4 +63,4 @@ If Session 0.5 surfaced style patterns from your AI history, bring those observa
 
 ## Refinements
 
-- **2026-04-11:** This file is a generic template placeholder. The operator's Kingdom vault may contain a fully populated Writing Style Codex that is personal and specific to their voice. These are different documents for different audiences — the Kingdom version documents actual style; this SE version is the unfilled template. Do not sync from Kingdom to SE. They have intentionally diverged.
+- **2026-04-11:** This file is a generic template placeholder. The operator's Kingdom vault may contain a fully populated Writing Style Codex that is personal and specific to their voice. These are different documents for different audiences. The Kingdom version documents actual style; this SE version is the unfilled template. Do not sync from Kingdom to SE. They have intentionally diverged.

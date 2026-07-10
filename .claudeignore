@@ -1,4 +1,4 @@
-# Claude context ignore — vault root
+# Claude context ignore: vault root
 # Works like .gitignore but controls what Claude loads into context.
 # Customize this list to exclude large or irrelevant folders from Claude's view.
 

@@ -1,6 +1,6 @@
-# Cheat Sheet — Common Setup Issues
+# Cheat Sheet: Common Setup Issues
 
-Six friction points that come up during setup — and how to handle each one.
+Six friction points that come up during setup, and how to handle each one.
 
 ---
 
@@ -24,7 +24,7 @@ This is a minor inconvenience to catch early. Much harder to fix after the vault
 
 **Why it happens:** The vault password encrypts your synced vault. It is completely separate from your Obsidian account login.
 
-**Fix:** When the vault password prompt appears, create a new password just for this vault. Write it down somewhere safe — it cannot be recovered if lost.
+**Fix:** When the vault password prompt appears, create a new password just for this vault. Write it down somewhere safe. It cannot be recovered if lost.
 
 This only applies if you are setting up Obsidian Sync for phone access. It is optional.
 
@@ -42,7 +42,7 @@ This only applies if you are setting up Obsidian Sync for phone access. It is op
 git config --global --add safe.directory "C:/Users/YourName/Documents/Frank's Reality"
 ```
 
-Then run `git status` again — it should respond normally.
+Then run `git status` again. It should respond normally.
 
 **Mac:** This issue does not occur on Mac.
 
@@ -58,13 +58,13 @@ Then run `git status` again — it should respond normally.
 
 ---
 
-## 5. ChatGPT export takes hours — not minutes
+## 5. ChatGPT export takes hours: not minutes
 
 **What happens:** You initiate the ChatGPT data export expecting a download, but nothing arrives.
 
 **Why it happens:** ChatGPT's data export is asynchronous. It queues the archive and emails you a download link when it is ready. This can take 3–12 hours or longer.
 
-**Fix:** Start the export as early as possible — ideally at the beginning of your setup session.
+**Fix:** Start the export as early as possible, ideally at the beginning of your setup session.
 Go to ChatGPT > Settings > Data Controls > Export Data.
 Continue setup while you wait. When the email arrives, download the ZIP file and drop it into your ecosystem folder.
 
@@ -72,7 +72,7 @@ This is only needed if you plan to use Session 0.5 to mine your old AI history.
 
 ---
 
-## 6. Git prompts you to commit during setup — ignore it
+## 6. Git prompts you to commit during setup: ignore it
 
 **What happens:** While working through setup, a prompt or notification suggests you commit your changes.
 

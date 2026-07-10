@@ -7,13 +7,13 @@ tier: operational
 
 # Playwright Skill
 
-**Purpose:** Browser automation via headless Chromium. Scrape pages, extract structured data, and interact with web interfaces. Returns clean JSON — not screenshots.
+**Purpose:** Browser automation via headless Chromium. Scrape pages, extract structured data, and interact with web interfaces. Returns clean JSON, not screenshots.
 
 **Token efficiency:** ~200-500 tokens per page vs 20,000-30,000 for screenshot-based approaches.
 
 ## When to Use
 
-- Tech Watch repo checks — retrieve changelogs, release notes, README updates from GitHub
+- Tech Watch repo checks: retrieve changelogs, release notes, README updates from GitHub
 - Scraping any page for structured data (pricing tables, product lists, article text)
 - Checking if a URL loads and what it contains
 - Extracting links, headings or specific content from a page
@@ -75,10 +75,12 @@ Your AI reads this SKILL.md, runs the script, and returns the data.
 
 > [!info] Ambassador Doctrine Active
 > This skill operates under the [[Council Chamber/Protocols/Governance/Ambassador Doctrine]].
-> Primary strategy: Āsana — browser automation is an intelligence retrieval tool; extract, clean, and return before acting.
+> Primary strategy: Āsana: browser automation is an intelligence retrieval tool; extract, clean, and return before acting.
 > Secondary: Vigraha (assert data quality; surface failed or blocked scrapes rather than returning corrupted output), Saṃśraya (the browser always closes in a finally block; no persistent external state).
 > Playwright does not write to external surfaces. It reads. The read-before-act posture is the doctrine embodied.
 
 ## Refinements
 
-*(Empty — populated when execution mistakes occur during sessions.)*
+*(Empty, populated when execution mistakes occur during sessions.)*
+
+> Also installs standalone from https://www.infinitegameos.io/skills/playwright (dual-distribution: this copy lives in your vault, the public plugin updates independently).

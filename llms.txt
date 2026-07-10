@@ -30,6 +30,7 @@ The Sovereign Ecosystem is a structured Obsidian vault template with an AI inter
 
 - `README.md`: Human setup guide and project overview
 - `AGENTS.md`: AI agent discovery, routing and harvest instructions
+- `CONTRIBUTING.md`: How to contribute upstream (issues, framework pull requests, adaptations)
 - `BOOTSTRAP.md`: Guided onboarding wizard at the repo root. A self-deleting six-question setup that personalizes the vault and points to the first session
 - `Primer.md`: Pre-loaded forward handoff surface, read first at session start
 - `MODULES.md`: Index of optional modules and what each adds
@@ -55,14 +56,14 @@ The Sovereign Ecosystem is a structured Obsidian vault template with an AI inter
 
 The Sovereign Ecosystem repo is one node in a four-node web built by Lane Belone.
 
-- [lanebelone.com](https://lanebelone.com): Author, philosophy and the infinite game signal surface
+- [lanebelone.com](https://lanebelone.com): Author, philosophy and the Infinite Game home surface
 - [sidequesthq.co](https://sidequesthq.co): Workshops, retreats and advisory, the applied contribution engine
 - [infinitegameos.io](https://infinitegameos.io): Infinite Game OS, the AI-agent-first structured knowledge base
 - [Sovereign Ecosystem on GitHub](https://github.com/infinitegameplayer/sovereign-ecosystem): This repo, the technical and agentic architecture reference
 
 Five Foundation skills are dual-distribution. Source Harvest, Self-Healing, Session Closeout, Playwright and Manuscript Anti-AI Edit Pass ship inside this template and also install as standalone plugins from the Infinite Game OS public library at infinitegameos.io. The template is the full experience. The plugins are individual doors. The template stays current with upstream through the Sovereign Sync skill and `scripts/se-update.mjs`, a per-file approval flow that keeps a clone living rather than frozen.
 
-The full library at infinitegameos.io/skills holds twenty installable skills, seven bundles and a governing protocol. Five skills graduated out of this template into the library. Five ship in both homes. An agent can install any one directly from its page.
+The full library at infinitegameos.io/skills holds twenty-four installable skills, seven bundles and a governing protocol. Five skills graduated out of this template into the library. Five ship in both homes. An agent can install any one directly from its page. The Claude Code install flow: `/plugin marketplace add https://www.infinitegameos.io/marketplace.json` then `/plugin install <skill-name>@igos-library`.
 
 ### Graduated Skills (born in this template)
 - Pending Plan Implementation: https://infinitegameos.io/skills/pending-plan-implementation

@@ -6,12 +6,12 @@ links:
 
 # To-Do Dock Protocol
 
-Purpose: Define the operating rules for `To-Do Dock.md` — a root-level, low-friction capture surface for short-lived operational actions accessible from any device.
+Purpose: Define the operating rules for `To-Do Dock.md`, a root-level, low-friction capture surface for short-lived operational actions accessible from any device.
 
 ## What Belongs Here
 - Items actionable within minutes, later today or within the next few days.
 - One line per entry preferred.
-- Not for archival, not for strategy — for action.
+- Not for archival, not for strategy, for action.
 
 ## Operating Rules
 - Capture here when the item is a near-term action prompt that does not need archival retention.

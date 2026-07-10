@@ -132,9 +132,16 @@ Let reality teach you what wants refinement next.
 
 ## The Wider Library
 
-This template is the on-ramp. The full library lives at [infinitegameos.io/skills](https://infinitegameos.io/skills): twenty installable skills, seven curated bundles and a governing protocol, all released for practitioners to take and make their own. The Foundation gives you a working spine. The library is the open shelf you reach for when a specific capability earns its place in your build.
+This template is the on-ramp. The full library lives at [infinitegameos.io/skills](https://infinitegameos.io/skills): twenty-four installable skills, seven curated bundles and a governing protocol, all released for practitioners to take and make their own. The Foundation gives you a working spine. The library is the open shelf you reach for when a specific capability earns its place in your build.
 
-Five of those skills were born in this template before they grew into the public library: Pending Plan Implementation, Plan Challenger, Researcher, Skill Creator and Systematic Debugging. They graduated outward as the Foundation found its lean shape. Five skills live in both homes at once. Source Harvest, Self-Healing, Session Closeout, Playwright and Manuscript Anti-AI Edit Pass ship inside this Foundation and install as standalone plugins from the library. One ecosystem, two doors, the same lineage running through both.
+Five of those skills were born in this template before they grew into the public library: [Pending Plan Implementation](https://www.infinitegameos.io/skills/pending-plan-implementation), [Plan Challenger](https://www.infinitegameos.io/skills/plan-challenger), [Researcher](https://www.infinitegameos.io/skills/researcher), [Skill Creator](https://www.infinitegameos.io/skills/skill-creator) and [Systematic Debugging](https://www.infinitegameos.io/skills/systematic-debugging). They graduated outward as the Foundation found its lean shape. Five skills live in both homes at once. [Source Harvest](https://www.infinitegameos.io/skills/source-harvest), [Self-Healing](https://www.infinitegameos.io/skills/self-healing), [Session Closeout](https://www.infinitegameos.io/skills/session-closeout), [Playwright](https://www.infinitegameos.io/skills/playwright) and [Manuscript Anti-AI Edit Pass](https://www.infinitegameos.io/skills/anti-ai-edit-pass) ship inside this Foundation and install as standalone plugins from the library. One ecosystem, two doors, the same lineage running through both.
+
+Any skill in the library also installs standalone through the Claude Code plugin marketplace.
+
+```
+/plugin marketplace add https://www.infinitegameos.io/marketplace.json
+/plugin install <skill-name>@igos-library
+```
 
 ## AI Naming Note
 

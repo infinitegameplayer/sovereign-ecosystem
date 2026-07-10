@@ -14,14 +14,14 @@ Purpose: Map the codices currently shipped in the Sovereign Ecosystem Foundation
 - [[Council Chamber/Codices/Humor Codex]]
 
 ## Expression
-- [[Council Chamber/Codices/Expression/Writing Style Codex]] — placeholder, complete during onboarding
+- [[Council Chamber/Codices/Expression/Writing Style Codex]]. Placeholder, complete during onboarding.
 - [[Council Chamber/Codices/Expression/Anti-AI Writing Patterns Codex]], shipped pattern catalog, paired with the Manuscript Anti-AI Edit Pass skill
 
 ## Governance
-- [[Council Chamber/Codices/Ṣāḍguṇya — Six Strategies of External Engagement]] — Vedic statecraft framework governing all external engagement; philosophical foundation for the Ambassador Doctrine
+- [[Council Chamber/Codices/Ṣāḍguṇya - Six Strategies of External Engagement]]. Vedic statecraft framework governing all external engagement, philosophical foundation for the Ambassador Doctrine.
 
 ## Sovereignty
-- [[Council Chamber/Codices/Sovereignty/Living Axis of Sovereignty]] — Three-layer framework for principled, durable sovereign operating systems: Ṣaṭsthala (inner mastery), Svarāja (structural sovereignty), Ṣāḍguṇya (strategic engagement). Philosophical anchor for the three Living Axis doctrine protocols.
+- [[Council Chamber/Codices/Sovereignty/Living Axis of Sovereignty]]. Three-layer framework for principled, durable sovereign operating systems: Ṣaṭsthala (inner mastery), Svarāja (structural sovereignty), Ṣāḍguṇya (strategic engagement). Philosophical anchor for the three Living Axis doctrine protocols.
 
 ## Technology
 - [[Council Chamber/Codices/External Model Routing Codex]]. Single source of truth for external model provider dispatch. Provider table, env-var slots, Worker-Eligible Task Taxonomy and Model Era Notes. Governs `scripts/external-worker.mjs`.

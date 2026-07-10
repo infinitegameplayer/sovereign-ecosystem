@@ -1,4 +1,4 @@
-# CODEX.md — Sovereign Ecosystem Trust Anchor (OpenAI Codex)
+# CODEX.md: Sovereign Ecosystem Trust Anchor (OpenAI Codex)
 
 Purpose: anchor Codex to the Sovereign Ecosystem governance, trust tiers, and canonical sources of truth.
 
@@ -37,4 +37,4 @@ Skills are in: `Council Chamber/Skills/[Name]/SKILL.md`
 ## Approval Gate
 
 - Do not move, rename, or delete canonical files without explicit Sovereign approval.
-- Pending Plans with `status: proposed` are planning-only — execution requires Sovereign approval.
+- Pending Plans with `status: proposed` are planning-only. Execution requires Sovereign approval.

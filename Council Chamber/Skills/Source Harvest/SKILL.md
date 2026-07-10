@@ -7,8 +7,8 @@ version: 1.0
 
 # Source Harvest Skill
 
-Purpose: Extract actionable patterns from any external repo, plugin, or resource by reading the actual source — skills, hooks, commands, protocols, configs. Not the README. The nuance is in the implementation. Classify each component against ecosystem equivalents and execute approved integrations with governance applied.
-Trigger: Sovereign identifies a new repo, plugin, or tool of interest. Also used as the first-pass when adding any new repo to the Sovereign Tech Watch Protocol Watched Repos table — the first review should always be a Source Harvest, not a description scan.
+Purpose: Extract actionable patterns from any external repo, plugin, or resource by reading the actual source, skills, hooks, commands, protocols, configs. Not the README. The nuance is in the implementation. Classify each component against ecosystem equivalents and execute approved integrations with governance applied.
+Trigger: Sovereign identifies a new repo, plugin, or tool of interest. Also used as the first-pass when adding any new repo to the Sovereign Tech Watch Protocol Watched Repos table, the first review should always be a Source Harvest, not a description scan.
 Inputs: Repo URL, tool reference, or inbox item.
 Outputs: Structured harvest report (classified component by component) + approved ecosystem file edits + deferred items filed + optional Pending Plans for larger scope + optional Sovereign Tech Watch entry.
 Status: active
@@ -29,7 +29,7 @@ Every component is classified as one of four dispositions:
 
 ## Steps
 
-### Step 1 — Confirm Access
+### Step 1: Confirm Access
 
 Identify the source and confirm it is publicly accessible. Common paths:
 - GitHub repo: use `gh api repos/[owner]/[repo]/contents/` to list top-level structure
@@ -41,7 +41,7 @@ If authentication is required or the source is private, halt: "Source requires a
 
 Do not proceed using only the README or description as primary evidence. For non-repo sources where no code exists, capability documentation and API references serve as the evidence base.
 
-### Step 2 — Inventory the Source
+### Step 2: Inventory the Source
 
 Fetch and list all components. Typical targets:
 - Skill files (any `.md` or scripted skill definitions)
@@ -53,29 +53,29 @@ Fetch and list all components. Typical targets:
 
 Present the inventory to the Sovereign: "Found [N] components: [brief list by category]." Confirm before proceeding to classification.
 
-### Step 3 — Read Every Component
+### Step 3: Read Every Component
 
 Read each component file. Do not classify from filenames or descriptions alone. The content is the evidence.
 
 For large repos (20+ components), group by category and read the most relevant ones first. Flag anything skipped and why.
 
-### Step 4 — Classify Each Component
+### Step 4: Classify Each Component
 
 For each component, assign a disposition (Adopt / Enrich / Defer / Ignore) and write one to three lines of rationale:
 - What does this component actually do at the source level?
 - Which ecosystem skill or protocol is the comparison point?
 - What specifically is novel, and what is already covered?
 
-### Step 5 — Draft Harvest Report
+### Step 5: Draft Harvest Report
 
 Compile the full classification into a harvest report:
 
 ```
-SOURCE HARVEST — [repo name] — [date]
+SOURCE HARVEST: [repo name], [date]
 --------------------------------------
-Adopt:   [count] — [names]
-Enrich:  [count] — [names + target ecosystem file]
-Defer:   [count] — [names]
+Adopt:   [count], [names]
+Enrich:  [count], [names + target ecosystem file]
+Defer:   [count], [names]
 Ignore:  [count]
 
 [Per-component breakdown]
@@ -84,7 +84,7 @@ Ignore:  [count]
 For each Enrich: specify the exact change to the target file (what to add, where, why).
 For each Adopt: draft the ecosystem-adapted version in outline or propose a Pending Plan if scope requires more than one session.
 
-### Step 6 — Approval Gate
+### Step 6: Approval Gate
 
 Present the harvest report to the Sovereign. No changes execute without approval.
 
@@ -92,7 +92,7 @@ Ask: "Approve all, approve subset, or revise?" Wait for explicit response.
 
 If the Sovereign approves a subset, note which items are deferred for a future run.
 
-### Step 7 — Execute Approved Changes
+### Step 7: Execute Approved Changes
 
 For each approved Enrich: edit the target ecosystem file.
 For each approved Adopt: create the new SKILL.md or protocol file at the canonical path.
@@ -105,7 +105,7 @@ Ecosystem governance applies to all adoptions:
 - Ambassador Doctrine callout for any skill that operates externally
 - Approval gates for structural changes
 
-### Step 8 — Skill Registry Housekeeping (runs immediately after Step 7 for any Adopt)
+### Step 8: Skill Registry Housekeeping (runs immediately after Step 7 for any Adopt)
 
 For every new skill or protocol created in Step 7, run this housekeeping block before proceeding to Step 9:
 
@@ -124,7 +124,7 @@ Confirm the path resolves correctly after creation.
 
 This housekeeping block is not optional for Adopt items. A skill that exists in the canonical path but has no symlink and no index entry is a ghost. Discoverable only by accident.
 
-### Step 9 — File Deferred Items
+### Step 9: File Deferred Items
 
 For each Defer and any unapproved Adopt: add an entry to `Council Chamber/Tools/Support Files/sovereign-deferred-items.md`.
 
@@ -136,22 +136,22 @@ Each entry must include:
 
 Update `entry_count` in the frontmatter.
 
-### Step 10 — Sovereign Tech Watch Entry
+### Step 10: Sovereign Tech Watch Entry
 
 If ongoing monitoring of this source is warranted (active development, high relevance, good signal-to-noise), add a row to the Watched Repos table in `Council Chamber/Protocols/Governance/Sovereign Tech Watch Protocol.md`.
 
 Note what was adopted or enriched from this first harvest so future changelog reviews have context.
 
-### Step 11 — Inbox Disposition
+### Step 11: Inbox Disposition
 
 If the source arrived via the ecosystem Inbox (`Inbox/`), note the disposition in the file or confirm with the Sovereign whether to archive it.
 
-### Step 12 — Summary Report
+### Step 12: Summary Report
 
 Output a final summary:
 
 ```
-Source Harvest complete — [repo name] — [date]
+Source Harvest complete: [repo name], [date]
 Adopted:  [N skills/protocols created]
 Enriched: [N existing files updated]
 Deferred: [N items filed]
@@ -195,12 +195,14 @@ Status is active. Execution authorized. Steps 1-5 are research only. Step 6 is t
 
 > [!info] Ambassador Doctrine Active
 > This skill operates under the [[Council Chamber/Protocols/Governance/Ambassador Doctrine]].
-> Primary strategy: Āsana — observe and classify before acting. The harvest is intelligence gathering first, integration second.
-> Secondary: Vigraha — ecosystem governance standards are a boundary assertion, not a formality. External patterns are adopted on ecosystem terms.
+> Primary strategy: Āsana: observe and classify before acting. The harvest is intelligence gathering first, integration second.
+> Secondary: Vigraha: ecosystem governance standards are a boundary assertion, not a formality. External patterns are adopted on ecosystem terms.
 > The approval gate at Step 6 is the Āsana-to-Yāna transition: information collected, decision made, action authorized.
 
 ## Refinements
 
 _Date-stamped entries for harvest decisions and calibration findings that emerge in practice._
 
-**Template note:** As you run Source Harvests, log your decisions here. The refinements section becomes a precedent record — what you adopted and why, what you rejected, what surprised you. Future harvests reference this section to avoid re-evaluating patterns that have already been classified.
+**Template note:** As you run Source Harvests, log your decisions here. The refinements section becomes a precedent record, what you adopted and why, what you rejected, what surprised you. Future harvests reference this section to avoid re-evaluating patterns that have already been classified.
+
+> Also installs standalone from https://www.infinitegameos.io/skills/source-harvest (dual-distribution: this copy lives in your vault, the public plugin updates independently).

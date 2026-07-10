@@ -10,7 +10,7 @@ Purpose: Guide the Sovereign through selecting and configuring a transcription s
 
 ## What This Module Does
 
-The Transcription Module enables voice-first capture. Rather than typing notes, you speak — on a walk, in a car, during a hike — and your transcription service converts that audio into text. That text flows into the Sovereign Ecosystem inbox, where it is classified, analyzed for Expression potential and routed according to the Transcript Inbox Protocol or Solo Voice Note Protocol.
+The Transcription Module enables voice-first capture. Rather than typing notes, you speak, on a walk, in a car, during a hike, and your transcription service converts that audio into text. That text flows into the Sovereign Ecosystem inbox, where it is classified, analyzed for Expression potential and routed according to the Transcript Inbox Protocol or Solo Voice Note Protocol.
 
 This is a capture-speed upgrade, not a requirement. The foundation works without it. Add this when you are ready to build the habit.
 
@@ -36,26 +36,26 @@ Choose based on what fits your workflow and sovereignty preferences.
 | Apple Dictation / Google Recorder | Built-in. Low friction. Manual copy-paste to inbox. |
 | Notion AI / other embedded tools | Platform-dependent. Works if already in your stack. |
 
-Sovereignty preference: Open-source and local options (Whisper) align best with the Sovereign Ecosystem's progressive sovereignty direction. Cloud services are acceptable starting points — they reduce setup friction while you build the habit. Migrate toward local when it makes sense for your infrastructure.
+Sovereignty preference: Open-source and local options (Whisper) align best with the Sovereign Ecosystem's progressive sovereignty direction. Cloud services are acceptable starting points. They reduce setup friction while you build the habit. Migrate toward local when it makes sense for your infrastructure.
 
 ## General Setup Pattern
 
 Regardless of service, the integration follows this pattern:
 
-### Step 1 — Choose Your Service
+### Step 1: Choose Your Service
 Select based on your device, workflow and sovereignty preference. You do not need the most sophisticated option to start. Start with what you will actually use.
 
-### Step 2 — Record and Transcribe
+### Step 2: Record and Transcribe
 Test a solo voice note. Walk outside, speak for 3-5 minutes on any topic. Let the service transcribe it.
 
-### Step 3 — Get the Transcript into Inbox
+### Step 3: Get the Transcript into Inbox
 - **Manual:** Copy the transcript text and paste into a new note in `Inbox/`. Follow the filename standard: `Transcript - Solo - {Short Topic} - YYYY-MM-DD.md`.
 - **Automated:** If your service supports webhooks, API polling or direct file export, configure it to deposit transcripts into `Inbox/` automatically. Document the configuration in a support file under `Inbox/`.
 
-### Step 4 — Run the Protocol
+### Step 4: Run the Protocol
 With a transcript in `Inbox/`, run the Solo Voice Note Protocol or Transcript Inbox Protocol depending on the transcript type.
 
-### Step 5 — Create a PendingPlan (If Automating)
+### Step 5: Create a PendingPlan (If Automating)
 If you want automated ingestion (transcript lands in Inbox without manual copy-paste), create a PendingPlan for it. Use the support files folder to store:
 - service credentials / API key references (never store tokens in vault files)
 - any helper scripts
@@ -95,6 +95,6 @@ This keeps the capture layer clean and the governance layer in control.
 
 ## Related Protocols
 
-- `[[Council Chamber/Protocols/Transcription Module/Solo Voice Note Protocol]]` — for single-speaker, exploratory voice notes
-- `[[Council Chamber/Protocols/Transcription Module/Transcript Inbox Protocol]]` — for all transcript types including collaboration
-- `[[Council Chamber/Protocols/Inbox/Capture Classify Route Protocol]]` — the parent routing protocol for all inbox intake
+- `[[Council Chamber/Protocols/Transcription Module/Solo Voice Note Protocol]]`: for single-speaker, exploratory voice notes
+- `[[Council Chamber/Protocols/Transcription Module/Transcript Inbox Protocol]]`: for all transcript types including collaboration
+- `[[Council Chamber/Protocols/Inbox/Capture Classify Route Protocol]]`: the parent routing protocol for all inbox intake

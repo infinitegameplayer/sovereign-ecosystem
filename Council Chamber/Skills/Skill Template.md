@@ -21,14 +21,14 @@ Related Protocols/Codices:
 
 ## Steps
 
-1. [Step 1 — if config or prerequisite validation is required, this is a hard gate: halt if missing, do not proceed to Step 2]
+1. [Step 1: if config or prerequisite validation is required, this is a hard gate: halt if missing, do not proceed to Step 2]
 2.
 3.
 4.
 
 ## Constraints
 
-- [What this skill does NOT do — public-facing boundaries, legible without reading the contrast layer]
+- [What this skill does NOT do: public-facing boundaries, legible without reading the contrast layer]
 -
 
 ## Planning Mode Rule
@@ -50,4 +50,4 @@ Internal Contrast Layer
 
 ## Refinements
 
-*(Empty — populated when execution mistakes occur during sessions.)*
+*(Empty, populated when execution mistakes occur during sessions.)*

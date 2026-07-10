@@ -9,27 +9,27 @@ trigger_phrase: "Propagation Triad"
 
 ## Purpose
 
-Any governance standard embedded in the Sovereign Ecosystem at a point in time will drift out of alignment as the system grows — new skills, new protocols, new agents — unless the standard carries its own propagation mechanism. The Propagation Triad is a reusable three-layer pattern that ensures any ecosystem-wide governing principle extends automatically to new elements at creation, and to runtime agents at execution.
+Any governance standard embedded in the Sovereign Ecosystem at a point in time will drift out of alignment as the system grows, new skills, new protocols, new agents, unless the standard carries its own propagation mechanism. The Propagation Triad is a reusable three-layer pattern that ensures any ecosystem-wide governing principle extends automatically to new elements at creation, and to runtime agents at execution.
 
 Apply this pattern whenever a governance standard needs to travel forward.
 
 ## The Three Layers
 
-### Layer 1 — Self-Describing Protocol
+### Layer 1: Self-Describing Protocol
 
 The canonical document for the standard includes a `## Propagation Rules` section. This section defines:
 - Which creation surfaces require the standard (skills, protocols, sub-agent prompts, etc.)
 - The exact pattern to apply at each surface (section name, callout format, wikilink target)
 
-The protocol carries its own expansion instructions. Any future creator — human or agent — reads the document and knows exactly what to add.
+The protocol carries its own expansion instructions. Any future creator, human or agent, reads the document and knows exactly what to add.
 
-### Layer 2 — Creation Gate
+### Layer 2: Creation Gate
 
 The relevant creation skill (typically Skill Creator, or an equivalent build skill) contains an explicit gate in its Constraints section. Before finalizing any new artifact, the agent asks: does this artifact fall within the scope of the standard? If yes, the required section or reference is applied before the artifact is considered complete.
 
 This enforces the standard at creation time, not retroactively.
 
-### Layer 3 — CLAUDE.md Standing Rule
+### Layer 3: CLAUDE.md Standing Rule
 
 `.claude/CLAUDE.md` contains a standing instruction covering the standard's scope. This rule:
 - Applies to manually-created artifacts not routed through the creation skill
@@ -55,6 +55,6 @@ The Ambassador Doctrine ([[Council Chamber/Protocols/Governance/Ambassador Doctr
 <!--
 Internal Contrast Layer
 - The Propagation Triad is not a process to run each time. It is a design pattern to apply at creation. Once all three layers are in place, propagation is automatic.
-- Layer 2 (creation gate) is the most likely to be missed — creation skills are not always invoked for governance protocols created manually. Layer 3 (CLAUDE.md) is the backstop for that gap.
+- Layer 2 (creation gate) is the most likely to be missed. Creation skills are not always invoked for governance protocols created manually. Layer 3 (CLAUDE.md) is the backstop for that gap.
 - A standard with only Layer 3 is enforced at session load but not at creation time. A standard with only Layer 2 is enforced at creation but not for runtime agents. All three together close the loop.
 -->

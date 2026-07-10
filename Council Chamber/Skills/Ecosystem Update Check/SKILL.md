@@ -13,7 +13,7 @@ clarity_triggers:
 # Ecosystem Update Check Skill
 
 Purpose: Check for new updates published to the Sovereign Ecosystem and apply the ones that are relevant to your build. You review each update before anything changes. Your AI executes only what you approve.
-Trigger: Run whenever you want to check for updates. No fixed schedule required — monthly is a reasonable default, or whenever something feels stale.
+Trigger: Run whenever you want to check for updates. No fixed schedule required: monthly is a reasonable default, or whenever something feels stale.
 Inputs: `UPDATES/INDEX.md` from the public Sovereign Ecosystem GitHub repo. Local sync state at `Council Chamber/Skills/Ecosystem Update Check/sync-state.json`.
 Outputs: A curated review of new updates, applied changes for approved items, updated sync state.
 Status: active
@@ -22,7 +22,7 @@ Status: active
 
 ## Steps
 
-### Step 1 — Fetch the Update Index
+### Step 1: Fetch the Update Index
 
 Fetch the current update index from the public repo:
 
@@ -45,13 +45,13 @@ If the sync state file does not exist yet, create it now with this content:
 }
 ```
 
-Compare the fetched index against `applied_updates` in sync state. Identify entries that are new — not previously applied, skipped or deferred.
+Compare the fetched index against `applied_updates` in sync state. Identify entries that are new, not previously applied, skipped or deferred.
 
 If no new updates are found: report "No new updates since your last check ([last_check_date])." and stop.
 
 ---
 
-### Step 2 — Present New Updates
+### Step 2: Present New Updates
 
 For each new update, fetch the full update file:
 
@@ -86,22 +86,22 @@ Present all updates before asking for any decisions.
 
 ---
 
-### Step 3 — User Selection
+### Step 3: User Selection
 
 After presenting all updates, ask once:
 
 "Which of these would you like to apply? You can approve all, approve specific ones by title or slug, skip any, or defer them to review later."
 
 For each update, record the decision:
-- **Approve** — will be implemented in Step 4
-- **Skip** — will not be applied now or tracked for future prompting
-- **Defer** — noted for next session; will surface again next time you run this skill
+- **Approve**: will be implemented in Step 4
+- **Skip**: will not be applied now or tracked for future prompting
+- **Defer**: noted for next session; will surface again next time you run this skill
 
 If no updates are approved: confirm the decisions, update sync state with skips and deferrals, and stop.
 
 ---
 
-### Step 4 — Implementation
+### Step 4: Implementation
 
 For each approved update, execute the `How to Implement` steps from the update file one at a time.
 
@@ -117,7 +117,7 @@ If a step fails or is unclear, pause and surface the issue before continuing. Do
 
 ---
 
-### Step 5 — State Update
+### Step 5: State Update
 
 After all approved updates are implemented, write the updated sync state to `Council Chamber/Skills/Ecosystem Update Check/sync-state.json`:
 
@@ -163,4 +163,4 @@ Internal Contrast Layer
 
 ## Refinements
 
-*(Empty — populated when execution mistakes occur during sessions.)*
+*(Empty, populated when execution mistakes occur during sessions.)*

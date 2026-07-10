@@ -66,7 +66,7 @@ Each session should leave you more able to actually use the ecosystem, not just 
 
 ## Post-Foundation Optional Paths
 
-These are not required to complete the initial installation.
+These are not required to complete the initial installation. Beyond the Foundation set, the public library at [infinitegameos.io/skills](https://www.infinitegameos.io/skills) holds more skills and bundles to install one at a time when a specific capability earns its place.
 
 Use the selector note first:
 
@@ -106,9 +106,9 @@ Add a simple operating surface for business or life management.
 
 Quick reference cards for common questions and friction points. Read before or during setup.
 
-- [Cheat Sheet - Tool Roles.md](Cheat%20Sheet%20-%20Tool%20Roles.md) — why you need each tool
-- [Cheat Sheet - Claude Code Quick Reference.md](Cheat%20Sheet%20-%20Claude%20Code%20Quick%20Reference.md) — session start, permissions, closeout, commit strategy
-- [Cheat Sheet - Common Setup Issues.md](Cheat%20Sheet%20-%20Common%20Setup%20Issues.md) — six friction points as preventive guidance
+- [Cheat Sheet - Tool Roles.md](Cheat%20Sheet%20-%20Tool%20Roles.md): why you need each tool
+- [Cheat Sheet - Claude Code Quick Reference.md](Cheat%20Sheet%20-%20Claude%20Code%20Quick%20Reference.md): session start, permissions, closeout, commit strategy
+- [Cheat Sheet - Common Setup Issues.md](Cheat%20Sheet%20-%20Common%20Setup%20Issues.md): six friction points as preventive guidance
 
 ## Companion File
 

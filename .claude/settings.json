@@ -1,0 +1,49 @@
+{
+  "hooks": {
+    "PreCompact": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"$CLAUDE_PROJECT_DIR/Council Chamber/scripts/hooks/pre-compact-state-capture.sh\""
+          }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "matcher": "startup|clear",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"$CLAUDE_PROJECT_DIR/Council Chamber/scripts/hooks/session-start-primer.sh\""
+          }
+        ]
+      },
+      {
+        "matcher": "compact",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"$CLAUDE_PROJECT_DIR/Council Chamber/scripts/hooks/post-compact-reorienter.sh\""
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "SOVEREIGN_VAULT_ROOT=\"$CLAUDE_PROJECT_DIR\" bash \"$CLAUDE_PROJECT_DIR/Council Chamber/scripts/hooks/post-write-em-dash-check.sh\""
+          },
+          {
+            "type": "command",
+            "command": "SOVEREIGN_VAULT_ROOT=\"$CLAUDE_PROJECT_DIR\" bash \"$CLAUDE_PROJECT_DIR/Council Chamber/scripts/hooks/post-write-index-regen.sh\""
+          }
+        ]
+      }
+    ]
+  }
+}

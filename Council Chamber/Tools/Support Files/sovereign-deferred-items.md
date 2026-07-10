@@ -14,10 +14,10 @@ Purpose: Track patterns, tools, and infrastructure ideas that are not ready to i
 
 ## Statuses
 
-- `deferred` — watching; not ready to implement
-- `proposed` — ready to promote to a Pending Plan
-- `permanent-hold` — acknowledged; not adopting; reason logged
-- `retired` — no longer relevant
+- `deferred`: watching; not ready to implement
+- `proposed`: ready to promote to a Pending Plan
+- `permanent-hold`: acknowledged; not adopting; reason logged
+- `retired`: no longer relevant
 
 ## Archive
 

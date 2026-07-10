@@ -1,4 +1,4 @@
-# Cheat Sheet — Claude Code Quick Reference
+# Cheat Sheet: Claude Code Quick Reference
 
 Day-one reference for working with your AI inside VS Code.
 
@@ -7,7 +7,7 @@ Day-one reference for working with your AI inside VS Code.
 ## Starting a Session
 
 1. Open VS Code
-2. **File > Open Folder** — select your ecosystem folder
+2. **File > Open Folder**: select your ecosystem folder
 3. Click the Claude Code icon in the left sidebar
 4. Start talking
 

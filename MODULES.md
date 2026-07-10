@@ -358,12 +358,12 @@ When a Sovereign reviews this file during module selection, your role is to tran
 
 For each module the Sovereign shows interest in, offer a one-sentence translation:
 
-- **Expression:** "This adds a real drafting lane — if you are writing, publishing, or creating structured output, this is likely your first module."
+- **Expression:** "This adds a real drafting lane. If you are writing, publishing, or creating structured output, this is likely your first module."
 - **Transcription:** "If you capture ideas by voice more naturally than by typing, this routes your voice notes into the system automatically."
-- **Weekly Review:** "This gives you a structured weekly intelligence briefing — useful once you have a few weeks of real system use to reflect on."
-- **Stewardship:** "This adds deeper reflective loops — governance sensing, taste refinement, drift detection. Best after the system has real history."
-- **Collaboration and Consult:** "This adds structured handling for consulting work or collaboration records — install only when those workflows are genuinely part of your life."
-- **Builder:** "This is for extending the ecosystem itself — creating new skills, domain packs, or exportable layers. Maintainer-level, not first-run."
+- **Weekly Review:** "This gives you a structured weekly intelligence briefing, useful once you have a few weeks of real system use to reflect on."
+- **Stewardship:** "This adds deeper reflective loops: governance sensing, taste refinement, drift detection. Best after the system has real history."
+- **Collaboration and Consult:** "This adds structured handling for consulting work or collaboration records. Install only when those workflows are genuinely part of your life."
+- **Builder:** "This is for extending the ecosystem itself: creating new skills, domain packs, or exportable layers. Maintainer-level, not first-run."
 
 Let the Sovereign's actual rhythm, expressed over the past sessions, guide the recommendation. If they have been voice-heavy, lean toward Transcription. If they have been writing-focused, lean toward Expression. If the daily loop is still new, suggest they live in the Foundation first before adding anything.
 

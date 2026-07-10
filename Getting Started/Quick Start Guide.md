@@ -16,7 +16,7 @@ Cloud sync and local vaults do not mix well. Catch this early.
 
 ---
 
-## Step 1 — Install the Software
+## Step 1: Install the Software
 
 ### Node.js
 
@@ -32,7 +32,7 @@ Cloud sync and local vaults do not mix well. Catch this early.
 2. **Mac:** Open Terminal and run `git --version`. If Git is not installed, macOS will prompt you to install Xcode Command Line Tools. Accept it
 3. Confirm `git --version` returns a version number
 
-### Your AI Interface — Choose One
+### Your AI Interface: Choose One
 
 You need one tool to talk to Claude. Two options. Pick whichever fits.
 
@@ -64,7 +64,7 @@ Either option reads and writes files in your workspace. VS Code gives you more t
 
 ---
 
-## Step 2 — Accounts and Download
+## Step 2: Accounts and Download
 
 ### GitHub
 
@@ -91,7 +91,7 @@ Either option reads and writes files in your workspace. VS Code gives you more t
 
 ---
 
-## Step 3 — Open Your Workspace
+## Step 3: Open Your Workspace
 
 ### Obsidian
 
@@ -130,7 +130,7 @@ Either option reads and writes files in your workspace. VS Code gives you more t
 
 ---
 
-## Step 4 — First Activation
+## Step 4: First Activation
 
 1. With the ecosystem folder open, open the Claude Code panel (VS Code sidebar or Claude Code app)
 2. Type: `What files are in the Getting Started folder?`

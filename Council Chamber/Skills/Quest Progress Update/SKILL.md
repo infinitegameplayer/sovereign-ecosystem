@@ -40,4 +40,4 @@ Related Protocols/Codices: [[Council Chamber/Protocols/Planning/Quest Progress U
 
 ## Refinements
 
-*(Empty — populated when execution mistakes occur during sessions.)*
+*(Empty, populated when execution mistakes occur during sessions.)*

@@ -52,10 +52,10 @@ If that structure is missing, stop and fix the workspace before continuing.
 The Foundation ships with a template anchor file for your AI interface.
 
 **If using Claude Code:**
-Open `.claude/CLAUDE.md` — this file already exists in the vault with the governance anchor structure ready. Confirm it is present and that the tokens (`{{ECOSYSTEM_NAME}}`, `{{AI_INTERFACE_NAME}}`) are visible. You will replace these in Step 5 or during the Session 4 naming checkpoint.
+Open `.claude/CLAUDE.md`. This file already exists in the vault with the governance anchor structure ready. Confirm it is present and that the tokens (`{{ECOSYSTEM_NAME}}`, `{{AI_INTERFACE_NAME}}`) are visible. You will replace these in Step 5 or during the Session 4 naming checkpoint.
 
 **If using Codex (OpenAI):**
-Open `.codex/CODEX.md` — the equivalent anchor for Codex is pre-configured with the same governance structure.
+Open `.codex/CODEX.md`. The equivalent anchor for Codex is pre-configured with the same governance structure.
 
 **If using another interface:**
 Create the equivalent anchor file for your tool. The minimum it should do:
@@ -80,7 +80,7 @@ mklink /J ".claude\skills\Session Closeout" "Council Chamber\Skills\Session Clos
 ln -s "Council Chamber/Skills/Session Closeout" ".claude/skills/Session Closeout"
 ```
 
-Repeat for each skill you want available as a command. Start with just Session Closeout for now — you can add others in Session 4 once you know which skills you will use regularly.
+Repeat for each skill you want available as a command. Start with just Session Closeout for now. You can add others in Session 4 once you know which skills you will use regularly.
 
 If you are not yet sure which skills matter, skip the symlinks for now and come back after Session 4.
 
@@ -99,12 +99,12 @@ The goal is a trustworthy first bridge between:
 - your AI interface
 
 **Permission approvals:** as you work, Claude Code will ask for permission to take certain actions. Two options appear each time:
-- "Yes" — approves this action once
-- "Yes, allow for this project" — approves permanently for this folder
+- "Yes": approves this action once
+- "Yes, allow for this project": approves permanently for this folder
 
 Choose "Yes, allow for this project" when working inside your ecosystem folder. Choosing "yes once" means the same prompt will appear again next session.
 
-**Commit strategy:** do not commit changes during Session 1. Git will occasionally surface commit suggestions — ignore them until you run session closeout at the end. Session closeout creates commits organized by theme automatically. Mid-session commits fragment history and make rollback harder.
+**Commit strategy:** do not commit changes during Session 1. Git will occasionally surface commit suggestions. Ignore them until you run session closeout at the end. Session closeout creates commits organized by theme automatically. Mid-session commits fragment history and make rollback harder.
 
 ## Step 5 - Handle AI Naming
 
@@ -168,7 +168,7 @@ If you want your vault accessible on your phone, Obsidian Sync ($5/month) is the
 To set it up:
 1. Install the Obsidian mobile app on your phone
 2. In Obsidian desktop, go to Settings > Sync and create an account
-3. You will be asked to create a **vault password** — this is separate from your Obsidian account login. It encrypts the synced vault. Write it down somewhere safe. It cannot be recovered if lost.
+3. You will be asked to create a **vault password**. This is separate from your Obsidian account login. It encrypts the synced vault. Write it down somewhere safe. It cannot be recovered if lost.
 4. On mobile, log in to your Obsidian account and connect to the same vault
 
 Once synced, your governance documents, notes, and templates are readable on your phone in real time.

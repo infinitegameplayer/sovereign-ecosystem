@@ -123,3 +123,5 @@ Internal Contrast Layer
 - The per-session log was a habit serving a lookup that almost never fired. The commit body carries the summary the lookup wanted.
 - No non-git fallback. Git is the log. Bending Sovereign Command into a session capsule would betray what it is for.
 -->
+
+> Also installs standalone from https://www.infinitegameos.io/skills/session-closeout (dual-distribution: this copy lives in your vault, the public plugin updates independently).

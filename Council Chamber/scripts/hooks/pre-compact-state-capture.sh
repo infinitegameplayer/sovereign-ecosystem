@@ -7,7 +7,7 @@
 # from a different terminal or a later date.
 #
 # Output: .runtime/pre-compact-state.md (overwritten each time compression fires)
-# Runs from vault root — .runtime/ is relative to the vault.
+# Runs from vault root. .runtime/ is relative to the vault.
 
 RUNTIME_DIR=".runtime"
 STATE_FILE="$RUNTIME_DIR/pre-compact-state.md"

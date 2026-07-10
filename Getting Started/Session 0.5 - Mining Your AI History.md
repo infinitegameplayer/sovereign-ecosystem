@@ -103,8 +103,8 @@ Look for:
 1. Start the export request from your prior AI platform as early as possible.
 2. Once the file arrives, place it in the intake location your AI interface tells you to use.
 3. Let the AI run the first-pass mining process with the pattern criteria already baked in.
-4. The AI will place the strongest patterns as draft starters directly into the relevant codex files — Writing Style Codex, Humor Codex, and any others that have clear signal.
-5. Before closing this session, your AI will tell you what was placed and where. Review the summary. Nothing placed is final — it is a first-pass mirror waiting to be shaped.
+4. The AI will place the strongest patterns as draft starters directly into the relevant codex files: Writing Style Codex, Humor Codex, and any others that have clear signal.
+5. Before closing this session, your AI will tell you what was placed and where. Review the summary. Nothing placed is final. It is a first-pass mirror waiting to be shaped.
 
 The point is not to ask the AI to invent a task from scratch.
 The point is to let it run a useful first-pass extraction process on material you already generated over time.

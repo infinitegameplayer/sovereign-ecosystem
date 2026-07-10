@@ -47,15 +47,15 @@ Check `Council Chamber/Skills/Ecosystem Update Check/sync-state.json`. If `last_
 
 State the session: "Beginning End-of-Week Review - 3 this-week engagements, 2 next-week engagements, then Sovereign Command update."
 
-**Parallel data pull:** Fire all 7 workers simultaneously. Hold results — do not present yet. Workers feed the engagement briefings in Steps 1-5.
+**Parallel data pull:** Fire all 7 workers simultaneously. Hold results. Do not present yet. Workers feed the engagement briefings in Steps 1-5.
 
-- **Worker 1 — Session logs:** Scan `Vault (Archive)/Session Logs/` for files created in the past 7 days — note build/creation activity and structural changes
-- **Worker 2 — AI Interface Change Log:** Read `Council Chamber/AI Interface/AI Interface Change Log.md` filtered to the past 7 days — flag execution-density pattern if consecutive heavy sessions appear
-- **Worker 3 — Transcripts:** Check transcription service for any new transcripts in the past 7 days (if using Transcription Module) — coaching sessions, recorded calls, notable conversations
-- **Worker 4 — Operations + Collaborations:** Read primary business/projects dashboard and active collaboration dashboards in `Collaborations/` filtered for recent movement
-- **Worker 5 — To-Do Dock + Pending Plans:** Scan `To-Do Dock.md` for completed/stale/new items; scan `Pending Plans/` for plans that moved, resolved, activated or need attention; read `Council Chamber/AI Interface/Field Decisions.md` filtered to this week
-- **Worker 6 — North Star + Operations finances:** Read `Library/North Star.md` for active 0-3 month horizons and Drift Check prompts; scan `Operations/` for financial notes updated this week
-- **Worker 7 — Ecosystem SDK intelligence:** Check for Agent SDK changelog updates or ecosystem updates since last review; surface relevant deltas only
+- **Worker 1: Session logs:** Scan `Vault (Archive)/Session Logs/` for files created in the past 7 days, note build/creation activity and structural changes
+- **Worker 2: AI Interface Change Log:** Read `Council Chamber/AI Interface/AI Interface Change Log.md` filtered to the past 7 days, flag execution-density pattern if consecutive heavy sessions appear
+- **Worker 3: Transcripts:** Check transcription service for any new transcripts in the past 7 days (if using Transcription Module), coaching sessions, recorded calls, notable conversations
+- **Worker 4: Operations + Collaborations:** Read primary business/projects dashboard and active collaboration dashboards in `Collaborations/` filtered for recent movement
+- **Worker 5: To-Do Dock + Pending Plans:** Scan `To-Do Dock.md` for completed/stale/new items; scan `Pending Plans/` for plans that moved, resolved, activated or need attention; read `Council Chamber/AI Interface/Field Decisions.md` filtered to this week
+- **Worker 6: North Star + Operations finances:** Read `Library/North Star.md` for active 0-3 month horizons and Drift Check prompts; scan `Operations/` for financial notes updated this week
+- **Worker 7: Ecosystem SDK intelligence:** Check for Agent SDK changelog updates or ecosystem updates since last review; surface relevant deltas only
 
 All workers complete before any briefing begins.
 
@@ -213,4 +213,4 @@ Internal Contrast Layer
 
 ## Refinements
 
-*(Empty — populated when execution mistakes occur during sessions.)*
+*(Empty, populated when execution mistakes occur during sessions.)*

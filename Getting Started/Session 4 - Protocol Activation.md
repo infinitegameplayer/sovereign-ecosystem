@@ -177,11 +177,11 @@ The goal is a capture habit that the system can support.
 ## Step 5 - Complete The Foundation Naming Checkpoint
 
 If any of these are still unresolved, decide now before moving to Session 5:
-- `{{ECOSYSTEM_NAME}}` — your ecosystem name
-- `{{AI_INTERFACE_NAME}}` — your AI interface name
-- `{{SOVEREIGN_DISPLAY_NAME}}` — what you want to be called day-to-day
-- `{{SOVEREIGN_FORMAL_NAME}}` — your full name for non-legal documents and correspondence
-- `{{SOVEREIGN_LEGAL_NAME}}` — your name for legal documents (optional)
+- `{{ECOSYSTEM_NAME}}`: your ecosystem name
+- `{{AI_INTERFACE_NAME}}`: your AI interface name
+- `{{SOVEREIGN_DISPLAY_NAME}}`: what you want to be called day-to-day
+- `{{SOVEREIGN_FORMAL_NAME}}`: your full name for non-legal documents and correspondence
+- `{{SOVEREIGN_LEGAL_NAME}}`: your name for legal documents (optional)
 
 By this point the system has enough shape that names matter more.
 
@@ -212,7 +212,7 @@ After the script completes, move it to `.archive/` or delete it.
 It is a one-time tool. Once run, it has served its purpose.
 
 If you already renamed the AI interface in Session 1, that token is already handled.
-Verify your files look correct — you do not need to run the script again for that field.
+Verify your files look correct. You do not need to run the script again for that field.
 
 Remember:
 - naming substitution is enough for now
@@ -231,7 +231,7 @@ It is already working in the background.
 Worth knowing for later: once the Foundation feels familiar, you can invoke the activation skill intentionally at the start of any session to give the AI a more formal context briefing before you begin.
 
 That is optional, not required.
-The benefit is more consistent session orientation — particularly useful for longer or more complex sessions.
+The benefit is more consistent session orientation, particularly useful for longer or more complex sessions.
 For shorter everyday sessions, the automatic behavior is usually enough.
 
 ## Step 6 - Notice What The System Can Now Do

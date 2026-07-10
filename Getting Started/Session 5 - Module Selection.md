@@ -160,7 +160,7 @@ Your highest-priority module Pending Plan is not just a note.
 It is the bridge to the next kind of learning.
 
 Session 6 will use the specific Pending Plan you just identified here.
-Make sure it is easy to find — it is the context for the whole next session.
+Make sure it is easy to find. It is the context for the whole next session.
 
 The next implementation session should guide you through that first Pending Plan in a more hand-held way than a mature user would need.
 

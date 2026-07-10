@@ -8,7 +8,7 @@ session: 0
 
 Purpose: get the minimum environment ready before Foundation setup begins.
 
-> **If you are reading this:** you have already downloaded the Sovereign Ecosystem from GitHub and opened it as an Obsidian vault — or you are previewing from the GitHub repo before downloading. Either way: this session confirms that the rest of your environment is ready before setup begins.
+> **If you are reading this:** you have already downloaded the Sovereign Ecosystem from GitHub and opened it as an Obsidian vault, or you are previewing from the GitHub repo before downloading. Either way: this session confirms that the rest of your environment is ready before setup begins.
 
 This session is intentionally practical.
 No deep architecture work yet.
@@ -27,14 +27,14 @@ Before you build, get honest about where you are actually starting.
 
 ## Session 0 Checklist
 
-- [ ] **Pre-flight:** check whether your Desktop or Documents folder syncs to OneDrive (Windows) or iCloud Drive (Mac). If it does, note a plain local path to use for the ecosystem folder instead — something outside the sync boundary. Minor to catch early, harder to fix later.
+- [ ] **Pre-flight:** check whether your Desktop or Documents folder syncs to OneDrive (Windows) or iCloud Drive (Mac). If it does, note a plain local path to use for the ecosystem folder instead, something outside the sync boundary. Minor to catch early, harder to fix later.
 - [ ] Install Obsidian.
 - [ ] Confirm you can open a local vault.
 - [ ] Decide whether you want mobile access and quick mobile capture.
 - [ ] Install or confirm your primary AI coding interface.
 - [ ] Confirm you have a GitHub account.
-- [ ] Confirm the Sovereign Ecosystem exists locally on your machine — not inside a cloud-synced folder.
-- [ ] If you may want to mine previous AI history, start exporting it now. Exports from platforms like ChatGPT are processed asynchronously — the download link arrives by email and can take 3–12 hours. Start early and continue setup while you wait.
+- [ ] Confirm the Sovereign Ecosystem exists locally on your machine, not inside a cloud-synced folder.
+- [ ] If you may want to mine previous AI history, start exporting it now. Exports from platforms like ChatGPT are processed asynchronously. The download link arrives by email and can take 3–12 hours. Start early and continue setup while you wait.
 - [ ] Choose an ecosystem name or keep the placecard for now.
 - [ ] Choose an AI interface name or keep the placecard for now.
 
@@ -98,7 +98,7 @@ Session 0.5 can use that material later for pattern analysis, but the export may
 If speaking is more natural for you than typing, consider adding a voice dictation layer early.
 
 One current option is `Wispr Flow`.
-Wispr Flow typically offers a free trial period before a paid tier — check their site for current pricing, as this changes over time.
+Wispr Flow typically offers a free trial period before a paid tier, check their site for current pricing, as this changes over time.
 
 This is optional.
 The ecosystem still works perfectly well with typing.
@@ -149,11 +149,11 @@ Rename help:
 ### Your Name
 
 Your ecosystem will reference you by name in governance documents and certain protocols.
-Three levels are available — only the display name is required:
+Three levels are available, only the display name is required:
 
-- **Display name** — what you want to be called day-to-day. This is `{{SOVEREIGN_DISPLAY_NAME}}`.
-- **Formal name** — your full name for non-legal documents, emails, and formal correspondence. This is `{{SOVEREIGN_FORMAL_NAME}}`.
-- **Legal name** — your name as it appears on legal documents and contracts. This is `{{SOVEREIGN_LEGAL_NAME}}`. Optional.
+- **Display name**: what you want to be called day-to-day. This is `{{SOVEREIGN_DISPLAY_NAME}}`.
+- **Formal name**: your full name for non-legal documents, emails, and formal correspondence. This is `{{SOVEREIGN_FORMAL_NAME}}`.
+- **Legal name**: your name as it appears on legal documents and contracts. This is `{{SOVEREIGN_LEGAL_NAME}}`. Optional.
 
 Record your display name now if you have one.
 Formal and legal names can be filled in at the Foundation naming checkpoint.

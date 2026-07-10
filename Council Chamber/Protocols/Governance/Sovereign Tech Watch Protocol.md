@@ -9,7 +9,7 @@ trigger_phrase: "Sovereign Tech Watch"
 
 ## Purpose
 
-Your ecosystem has no standing mechanism to track GitHub repos, tools or long-horizon infrastructure ideas over time. Patterns get surveyed once and then drift out of awareness as the vault evolves. This protocol creates a lightweight, repo-agnostic watch loop: a Sovereign-triggered review cadence and a general-purpose deferred items tracker. The architecture holds any number of repos — add your first when you activate it.
+Your ecosystem has no standing mechanism to track GitHub repos, tools or long-horizon infrastructure ideas over time. Patterns get surveyed once and then drift out of awareness as the vault evolves. This protocol creates a lightweight, repo-agnostic watch loop: a Sovereign-triggered review cadence and a general-purpose deferred items tracker. The architecture holds any number of repos. Add your first when you activate it.
 
 When a deferred item eventually gets promoted to a Pending Plan, all the context needed to act is already in the tracker. No reconstruction.
 
@@ -55,14 +55,14 @@ This protocol operates under the [[Council Chamber/Protocols/Governance/Ambassad
 
 ## Watched Repos
 
-Starter list — add, remove, or replace as your ecosystem evolves.
+Starter list: add, remove, or replace as your ecosystem evolves.
 
 | Repo | What it covers | Last reviewed |
 |------|----------------|---------------|
 | github.com/affaan-m/everything-claude-code | Claude Code hooks, skills, commands, MCP patterns, cost optimization, agentic engineering | [not yet reviewed] |
 | github.com/Crosstalk-Solutions/project-nomad | Offline-first local knowledge server: Ollama (local LLM), Qdrant (vector search), Kiwix (reference library), offline maps, document OCR/RAG | [not yet reviewed] |
 | github.com/kepano/obsidian-skills | Obsidian-native agent skills by vault creator (Steph Ango). Candidates worth watching: obsidian-bases, json-canvas, defuddle. MIT license. | [not yet reviewed] |
-| github.com/hesreallyhim/awesome-claude-code | Curated Claude Code catalog (skills, hooks, slash commands, MCP servers, clients). CC BY-NC-ND 4.0 — reference use only, no commercial derivatives. | [not yet reviewed] |
+| github.com/hesreallyhim/awesome-claude-code | Curated Claude Code catalog (skills, hooks, slash commands, MCP servers, clients). CC BY-NC-ND 4.0, reference use only, no commercial derivatives. | [not yet reviewed] |
 | github.com/czlonkowski/n8n-mcp | MCP server bridging Claude and n8n workflow automation. 1,084 indexed nodes, 2,709 templates. Relevant if you adopt n8n as an automation layer. MIT license. | [not yet reviewed] |
 | github.com/shanraisshan/claude-code-best-practice | Comprehensive Claude Code feature examples: commands, subagents, skills, hooks. 18,000+ stars. Updated in real time as Claude Code ships new versions. | [not yet reviewed] |
 | github.com/ruvnet/ruflo | Enterprise multi-agent orchestration platform (formerly Claude Flow). Watch narrowly for extractable micro-patterns: 3-tier model cost routing, ADR-before-coding, hierarchical memory tiers (working/episodic/semantic). MIT license. | [not yet reviewed] |

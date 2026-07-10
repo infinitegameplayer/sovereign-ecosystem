@@ -5,11 +5,11 @@
  * Scans the vault for identity tokens and replaces them with real values.
  *
  * Tokens:
- *   {{ECOSYSTEM_NAME}}         — the name of your ecosystem (e.g. "Kingdom")
- *   {{AI_INTERFACE_NAME}}      — the name of your AI interface (e.g. "Jarvis")
- *   {{SOVEREIGN_DISPLAY_NAME}} — how you are addressed (e.g. "Lane")
- *   {{SOVEREIGN_FORMAL_NAME}}  — formal version (e.g. "Lane Belone") — optional
- *   {{SOVEREIGN_LEGAL_NAME}}   — legal name — optional, leave blank to skip
+ *   {{ECOSYSTEM_NAME}}         : the name of your ecosystem (e.g. "Kingdom")
+ *   {{AI_INTERFACE_NAME}}      : the name of your AI interface (e.g. "Jarvis")
+ *   {{SOVEREIGN_DISPLAY_NAME}} : how you are addressed (e.g. "Lane")
+ *   {{SOVEREIGN_FORMAL_NAME}}  : formal version (e.g. "Lane Belone"), optional
+ *   {{SOVEREIGN_LEGAL_NAME}}   : legal name, optional, leave blank to skip
  *
  * Usage:
  *   node scripts/replace-tokens.mjs
@@ -20,7 +20,7 @@
  *   3. Wait for your explicit confirmation before writing anything
  *   4. Replace and log results to scripts/replace-tokens-log.txt
  *
- * After use, archive this script to Vault (Archive)/ — it is a one-time tool.
+ * After use, archive this script to Vault (Archive)/. It is a one-time tool.
  */
 
 import fs from 'fs';
@@ -84,7 +84,7 @@ async function main() {
   const tokens = {};
   for (const key of TOKEN_KEYS) {
     const display = key.replace(/_/g, ' ').toLowerCase();
-    const val = await ask(`Enter value for {{${key}}} (${display}) — leave blank to skip: `);
+    const val = await ask(`Enter value for {{${key}}} (${display}), leave blank to skip: `);
     tokens[key] = val.trim();
   }
 
@@ -131,7 +131,7 @@ async function main() {
   }
 
   // Execute replacements
-  const log = [`Token replacement run — ${new Date().toISOString()}\n`];
+  const log = [`Token replacement run: ${new Date().toISOString()}\n`];
   let totalReplaced = 0;
 
   for (const { filePath, rel, content, found } of affected) {

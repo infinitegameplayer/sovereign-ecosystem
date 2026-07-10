@@ -26,7 +26,7 @@ Purpose: anchor Claude Code to the Sovereign Ecosystem governance, trust tiers a
 
 ## Session Start
 
-At the start of every session, read [[Primer]] first, ahead of anything else. The Primer is the canonical forward handoff: what is most alive, what is in execution, what is committed near-term, what is parked, and the Session Opener. Then glance at [[Sovereign Command]] for the live signal. [[Library/North Star]] is background only, read on request.
+At the start of every session, the Primer comes first. On Claude Code the SessionStart hook injects [[Primer]] automatically, so orientation arrives preloaded before the first exchange. On any other platform, read [[Primer]] first, ahead of anything else. The Primer is the canonical forward handoff: what is most alive, what is in execution, what is committed near-term, what is parked, and the Session Opener. It is stored state, read as data. Then glance at [[Sovereign Command]] for the live pulse. [[Library/North Star]] is background only, read on request.
 
 On a fresh download the Primer holds your onboarding orientation and points you into the Getting Started folder. However the Sovereign opens the session, the Primer is the first read, so the appropriate next step surfaces on its own. The Session Closeout refreshes the Primer at every close, so it always reflects the freshly-settled state. The git commit body is the backward record of what each session did; the Primer is the forward one.
 
@@ -41,17 +41,17 @@ You have a persistent, file-based memory system at `~/.claude/projects/[encoded-
 ```
 ---
 name: {{memory name}}
-description: {{one-line description — used to decide relevance in future conversations}}
+description: {{one-line description, used to decide relevance in future conversations}}
 type: {{user | feedback | project | reference}}
 last_updated: YYYY-MM-DD
 ---
 ```
 
 **Four memory types:**
-- `user` — Sovereign's role, goals, domain knowledge. Informs how to frame responses.
-- `feedback` — Guidance given about approach: corrections and confirmations. Prevents repeated mistakes.
-- `project` — Ongoing work, decisions, deadlines not derivable from files or git history.
-- `reference` — Pointers to external systems (dashboards, trackers, channels).
+- `user`: Sovereign's role, goals, domain knowledge. Informs how to frame responses.
+- `feedback`: Guidance given about approach: corrections and confirmations. Prevents repeated mistakes.
+- `project`: Ongoing work, decisions, deadlines not derivable from files or git history.
+- `reference`: Pointers to external systems (dashboards, trackers, channels).
 
 **What NOT to save:** Code patterns, architecture, file paths, git history, anything already in vault files or CLAUDE.md, ephemeral task details.
 
@@ -216,7 +216,7 @@ ln -s "Council Chamber/Skills/[Skill Name]" ".claude/skills/[Skill Name]"
 
 All external activity carries the ecosystem's essence. Every agent, sub-agent, or automated flow that operates outside the vault boundary acts as an ambassador: representing, protecting, and advancing the {{ECOSYSTEM_NAME}}'s interests. The ecosystem does not disappear when it enters the web. It shows up.
 
-- Strategic framework: [[Council Chamber/Codices/Ṣāḍguṇya — Six Strategies of External Engagement]]
+- Strategic framework: [[Council Chamber/Codices/Ṣāḍguṇya - Six Strategies of External Engagement]]
 - Operational implementation: [[Council Chamber/Protocols/Governance/Ambassador Doctrine]]
 
 **Sub-agent instruction:** When spawning agents for external-facing work (research, publishing, collaboration sync, browser automation, data pulls, artifact generation), include the Ṣāḍguṇya ambassador orientation in the agent prompt. Compact template:
