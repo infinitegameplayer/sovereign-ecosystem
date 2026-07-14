@@ -136,12 +136,18 @@ jobs:
       #
       # The attribution lines in README and llms.txt name the origin on purpose
       # and are the only allowed mentions of the author.
+      #
+      # This file is exempt from its own check, for the same reason the em dash
+      # gate exempts the hook that greps for em dashes: a detector has to contain
+      # the pattern it detects. It flagged itself on its first run, which is the
+      # correct behavior from a check that is working and the wrong answer.
       - name: No path leaks back to the author
         run: |
           hits=$(git ls-files -z \
             | xargs -0 grep -ln "Desktop/Kingdom\|Desktop\\\\Kingdom\|C:/Users/User/\|C:\\\\Users\\\\User\\\\" 2>/dev/null \
             | grep -v "^UPDATES/" \
             | grep -v "^CHANGELOG.md$" \
+            | grep -v "^.github/workflows/verify.yml$" \
             || true)
           if [ -n "$hits" ]; then
             echo "Absolute paths to the author's machine found in:"
