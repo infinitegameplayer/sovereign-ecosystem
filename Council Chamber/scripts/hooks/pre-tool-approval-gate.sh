@@ -54,6 +54,7 @@ TOOL_NAME=$(printf '%s' "$INPUT" | node -e "
 
 # Returns success when $1 contains a vault-boundary marker (forward or
 # backslash form), i.e. the text points inside the resolved vault root.
+# Only ever called on a single resolved PATH, never on a whole command string.
 in_vault() {
   if printf '%s' "$1" | grep -qF "$VAULT_FWD"; then
     return 0
@@ -61,6 +62,60 @@ in_vault() {
   if printf '%s' "$1" | grep -qF "$VAULT_BACK"; then
     return 0
   fi
+  return 1
+}
+
+# Pull every protected-extension path token out of a command string. Quoted
+# tokens are captured whole so a path containing spaces survives intact.
+extract_targets() {
+  printf '%s' "$1" | grep -oE "\"[^\"]*\.($EXT_RE)\"|'[^']*\.($EXT_RE)'|[^[:space:];&|]+\.($EXT_RE)"
+}
+
+# Classify ONE target path. Success (0) means the target lands inside the vault
+# and the operation must be blocked.
+#
+# The polarity here is the whole point of this gate, so it is written out.
+# A RELATIVE path is CWD-bound, and these hooks run with the vault as the
+# working directory, so relative means internal and blocks. An ABSOLUTE path
+# blocks only when it resolves inside the vault, which leaves scratch files,
+# memory files and adapter paths outside the boundary freely deletable.
+#
+# The inverted form of this test (asking whether the vault root string appears
+# anywhere in the COMMAND) is a silent hole: every ordinary relative-path
+# deletion sails through, because an agent deleting a file almost never spells
+# out the absolute path. A guard is verified by firing, never by reading.
+# See floor-gate-selftest.mjs, which is the positive control on this file.
+target_in_vault() {
+  t=$(printf '%s' "$1" | tr -d "\"'")
+  [ -z "$t" ] && return 1
+  case "$t" in
+    /*|[A-Za-z]:*|~/*)
+      # Absolute. Inside the vault, or not.
+      in_vault "$t" && return 0
+      return 1
+      ;;
+    *)
+      # Relative. CWD-bound, therefore inside the vault.
+      return 0
+      ;;
+  esac
+}
+
+# Success (0) when ANY protected target named in the command lands in the vault.
+any_target_in_vault() {
+  _targets=$(extract_targets "$1")
+  _old_ifs=$IFS
+  IFS='
+'
+  for _tgt in $_targets; do
+    IFS=$_old_ifs
+    if target_in_vault "$_tgt"; then
+      return 0
+    fi
+    IFS='
+'
+  done
+  IFS=$_old_ifs
   return 1
 }
 
@@ -80,7 +135,7 @@ if [ "$TOOL_NAME" = "Bash" ]; then
 
   # rm of protected files -- block only inside the vault
   if printf '%s' "$COMMAND" | grep -qE "(^|[;&|]|[[:space:]])(rm[[:space:]]).*\.($EXT_RE)"; then
-    if in_vault "$COMMAND"; then
+    if any_target_in_vault "$COMMAND"; then
       echo "BLOCKED: Deletion of a protected content file (.$EXT_RE type) requires approval." >&2
       echo "Command: $COMMAND" >&2
       exit 2
@@ -137,7 +192,7 @@ if [ "$TOOL_NAME" = "Bash" ]; then
 
   # PowerShell Remove-Item on protected files: block bypass via pwsh/powershell invoked from Bash
   if printf '%s' "$COMMAND" | grep -qiE "(powershell|pwsh).*Remove-Item.*\.($EXT_RE)"; then
-    if in_vault "$COMMAND"; then
+    if any_target_in_vault "$COMMAND"; then
       echo "BLOCKED: PowerShell Remove-Item of a protected file bypasses the deletion gate. Requires approval." >&2
       echo "Command: $COMMAND" >&2
       exit 2
@@ -157,7 +212,7 @@ if [ "$TOOL_NAME" = "Bash" ]; then
 
   # Windows cmd /c del of protected files: block bypass via cmd shell
   if printf '%s' "$COMMAND" | grep -qiE "cmd(\.exe)?[[:space:]]+/[cC].*(del|erase).*\.($EXT_RE)"; then
-    if in_vault "$COMMAND"; then
+    if any_target_in_vault "$COMMAND"; then
       echo "BLOCKED: cmd del of a protected file bypasses the deletion gate. Requires approval." >&2
       echo "Command: $COMMAND" >&2
       exit 2
@@ -185,7 +240,7 @@ if [ "$TOOL_NAME" = "PowerShell" ]; then
 
   # Remove-Item and aliases on protected files
   if printf '%s' "$COMMAND" | grep -qiE "(^|[;&|({[:space:]])(Remove-Item|rm|ri|del|erase)[[:space:]].*\.($EXT_RE)"; then
-    if in_vault "$COMMAND"; then
+    if any_target_in_vault "$COMMAND"; then
       echo "BLOCKED: PowerShell deletion of a protected content file requires approval." >&2
       echo "Command: $COMMAND" >&2
       exit 2
@@ -194,7 +249,7 @@ if [ "$TOOL_NAME" = "PowerShell" ]; then
 
   # .NET IO delete/move bypass
   if printf '%s' "$COMMAND" | grep -qiE '\[(System\.)?IO\.(File|Directory)\]::(Delete|Move)' && printf '%s' "$COMMAND" | grep -qiE "\.($EXT_RE)"; then
-    if in_vault "$COMMAND"; then
+    if any_target_in_vault "$COMMAND"; then
       echo "BLOCKED: .NET IO delete/move of a protected file bypasses the gate. Requires approval." >&2
       echo "Command: $COMMAND" >&2
       exit 2

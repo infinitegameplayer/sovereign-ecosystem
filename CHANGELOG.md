@@ -6,6 +6,26 @@ Each entry corresponds to one publish cycle. For full implementation details, se
 
 ---
 
+## v3.3.1, 2026-07-14
+
+The Floor Gate, Proven. A security fix on the v3.3.0 deletion gate, and the positive control that should have shipped alongside it.
+
+**If you installed v3.3.0, apply this update.** The Permanent Floor deletion gate does not refuse an ordinary relative-path deletion of your content files. It was read, reviewed and shipped. It was never fired.
+
+### Fixed
+- **`pre-tool-approval-gate.sh` deletion hole.** The gate classified on the command string, testing whether the vault root path appeared in the text of the command. An agent working inside the vault deletes with a relative path, which contains no vault root, so the gate allowed it. Eight paths through the gate were affected: `rm` relative (quoted, bare, force-flagged), `powershell Remove-Item` and `cmd del` invoked from Bash, and `Remove-Item`, the `del` alias and `[System.IO.File]::Delete` on the PowerShell tool. The gate now classifies on the resolved **target path**: a relative target is working-directory bound and therefore internal and blocks, and an absolute target blocks only when it resolves inside the vault. Scratch, memory and adapter paths outside the boundary stay freely deletable.
+
+### Added
+- **`Council Chamber/scripts/hooks/floor-gate-selftest.mjs`.** A positive control on the Floor gate: twenty-one crafted inputs, sixteen that must be refused and five that must be allowed. The must-allow cases carry equal weight, because a gate that blocks everything has traded a hole for a wall. Against the v3.3.0 gate it reports `pass=13 fail=8`. Against the fixed gate, `pass=21 fail=0`. It has been watched failing, which is what makes a pass from it mean something. Payloads are built with `JSON.stringify`, because a hand-quoted shell string can carry an escaping bug indistinguishable from a guard failure.
+
+### Named
+- **The liveness control.** Before trusting any negative result, prove the channel it depends on was live. A guard that has never refused anything is not known to work. Absence is not a guard: a ceiling that holds because a file is missing or a flag is unset is a coincidence with good manners, and it holds until the day someone adds the file. Ask of every ceiling: does this refuse, or does it merely not-happen?
+
+### Changed
+- `scripts/framework-manifest.json` classifies the self-test as framework infrastructure.
+
+---
+
 ## v3.3.0, 2026-07-10
 
 Governance and Security Hardening. Nine refinements proven in a lived ecosystem, harvested into the template: named law, standing watches, a measurable doctrine layer, an agentic threat model and guard infrastructure covering both shell tools.
