@@ -26,11 +26,11 @@ jobs:
     name: Fire the guards
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v5
         with:
-          node-version: '20'
+          node-version: '22'
 
       # The recipient's real starting state. SOVEREIGN_VAULT_ROOT is unset, and
       # the guards must resolve the vault root on their own.
@@ -84,7 +84,7 @@ jobs:
     name: The floors hold
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       # The em dash floor.
       #
