@@ -93,11 +93,20 @@ jobs:
       # recipient receives, and scanning the raw directory lets a stray local
       # file manufacture a failure that has nothing to do with what shipped.
       #
-      # Four exemptions, each a rule rather than a convenience:
-      #   UPDATES/ and CHANGELOG.md   history, preserved verbatim
-      #   Vault (Archive)/            archived history, same reason
-      #   post-write-em-dash-check.sh the hook that greps for them
-      #   Phase Audit Protocol.md     the line that states the rule
+      # The exemptions are rules, never conveniences. Two kinds.
+      #
+      # HISTORY, preserved verbatim:
+      #   UPDATES/, CHANGELOG.md, Vault (Archive)/
+      #   Phase Audit Protocol.md, the line that states the rule
+      #
+      # THE MACHINERY OF THE RULE ITSELF. These files must contain an em dash in
+      # order to do their job, and exempting them is not a loophole:
+      #   post-write-em-dash-check.sh  the hook that greps for one
+      #   verify.yml                   this file, which greps for one
+      #   hooks-selftest.mjs           writes one, to prove the hook catches it
+      #
+      # That last one is the point. A test for a guard has to produce the thing
+      # the guard forbids, or it is testing nothing.
       - name: Zero em dashes in active files
         run: |
           hits=$(git ls-files -z \
@@ -107,6 +116,8 @@ jobs:
             | grep -v "^Vault (Archive)/" \
             | grep -v "post-write-em-dash-check.sh$" \
             | grep -v "Phase Audit Protocol.md$" \
+            | grep -v "^.github/workflows/verify.yml$" \
+            | grep -v "hooks-selftest.mjs$" \
             || true)
           if [ -n "$hits" ]; then
             echo "Em dashes found in active files:"
