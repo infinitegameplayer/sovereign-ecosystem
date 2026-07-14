@@ -1,0 +1,140 @@
+name: Verify
+
+# What a stranger receives is the only thing that matters.
+#
+# This workflow runs against a fresh checkout, which is the closest CI gets to
+# the `git clone` a recipient actually performs. It exists because v3.3.0
+# shipped a Permanent Floor deletion guard that had been read, reviewed and
+# never fired, and it refused nothing. Nothing in this repo was verified on any
+# push, so there was no moment at which that could have been caught.
+#
+# The governing law: a guard is verified by firing, never by reading. A green
+# result with no positive control is not evidence, it is a mood.
+
+on:
+  push:
+    branches: [master, main]
+  pull_request:
+  workflow_dispatch:
+  # A guard rots unobserved, and "it was green last week" is the exact condition
+  # under which it rots. Fire the whole thing weekly whether or not anyone pushed.
+  schedule:
+    - cron: '0 14 * * 1'
+
+jobs:
+  guards:
+    name: Fire the guards
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      # The recipient's real starting state. SOVEREIGN_VAULT_ROOT is unset, and
+      # the guards must resolve the vault root on their own.
+      - name: Floor gate positive control
+        run: node "Council Chamber/scripts/hooks/floor-gate-selftest.mjs"
+
+      - name: Hooks positive control
+        run: node "Council Chamber/scripts/hooks/hooks-selftest.mjs"
+
+      # A skill on disk and absent from the Index is a skill the AI interface
+      # never discovers. Present, and unreachable.
+      - name: Skills Index matches the skills on disk
+        run: node "Council Chamber/scripts/build-skills-index.mjs" --check
+
+      # Every hook must at minimum survive being handed a payload without
+      # crashing. A hook that dies on a fresh clone is the recipient's first
+      # impression of this project.
+      - name: Hooks survive a well-formed payload
+        run: |
+          set -e
+          PAYLOAD=$(node -e "process.stdout.write(JSON.stringify({tool_name:'Bash',tool_input:{command:'git status'}}))")
+          for hook in "Council Chamber/scripts/hooks/"*.sh; do
+            printf '%s' "$PAYLOAD" | bash "$hook" >/dev/null 2>&1
+            code=$?
+            # 0 (allow) and 2 (block) are both legitimate. Anything else is a crash.
+            if [ "$code" -ne 0 ] && [ "$code" -ne 2 ]; then
+              echo "CRASH: $hook exited $code on a well-formed payload"
+              exit 1
+            fi
+            echo "  ok  $(basename "$hook") exited $code"
+          done
+
+      - name: Shell syntax
+        run: |
+          set -e
+          for f in "Council Chamber/scripts/hooks/"*.sh; do
+            sh -n "$f" || bash -n "$f"
+            echo "  ok  $(basename "$f")"
+          done
+
+      - name: JSON parses
+        run: |
+          set -e
+          for f in scripts/framework-manifest.json .mcp.json.example .claude/settings.json; do
+            [ -f "$f" ] || continue
+            node -e "JSON.parse(require('fs').readFileSync('$f','utf8'))"
+            echo "  ok  $f"
+          done
+
+  hygiene:
+    name: The floors hold
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # The em dash floor.
+      #
+      # Scanned via `git ls-files`, so only TRACKED content is checked. This is
+      # deliberate: an untracked file in the working tree is not something a
+      # recipient receives, and scanning the raw directory lets a stray local
+      # file manufacture a failure that has nothing to do with what shipped.
+      #
+      # Four exemptions, each a rule rather than a convenience:
+      #   UPDATES/ and CHANGELOG.md   history, preserved verbatim
+      #   Vault (Archive)/            archived history, same reason
+      #   post-write-em-dash-check.sh the hook that greps for them
+      #   Phase Audit Protocol.md     the line that states the rule
+      - name: Zero em dashes in active files
+        run: |
+          hits=$(git ls-files -z \
+            | xargs -0 grep -l "—" 2>/dev/null \
+            | grep -v "^UPDATES/" \
+            | grep -v "^CHANGELOG.md$" \
+            | grep -v "^Vault (Archive)/" \
+            | grep -v "post-write-em-dash-check.sh$" \
+            | grep -v "Phase Audit Protocol.md$" \
+            || true)
+          if [ -n "$hits" ]; then
+            echo "Em dashes found in active files:"
+            echo "$hits"
+            exit 1
+          fi
+          echo "  ok  zero em dashes in active files"
+
+      # The clone must not know where it came from.
+      #
+      # This matches the author's ACTUAL home directory and vault, never the
+      # generic shape of a Windows path. `C:/Users/YourName/...` appears
+      # throughout Getting Started as a placeholder a reader is meant to
+      # substitute, and a check that flags those is a check that cries wolf.
+      # A check nobody trusts is a check nobody reads.
+      #
+      # The attribution lines in README and llms.txt name the origin on purpose
+      # and are the only allowed mentions of the author.
+      - name: No path leaks back to the author
+        run: |
+          hits=$(git ls-files -z \
+            | xargs -0 grep -ln "Desktop/Kingdom\|Desktop\\\\Kingdom\|C:/Users/User/\|C:\\\\Users\\\\User\\\\" 2>/dev/null \
+            | grep -v "^UPDATES/" \
+            | grep -v "^CHANGELOG.md$" \
+            || true)
+          if [ -n "$hits" ]; then
+            echo "Absolute paths to the author's machine found in:"
+            echo "$hits"
+            exit 1
+          fi
+          echo "  ok  no author paths in the clone"

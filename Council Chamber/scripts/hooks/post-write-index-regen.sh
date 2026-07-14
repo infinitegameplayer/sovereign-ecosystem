@@ -37,10 +37,23 @@
 #   ]
 
 # ── CONFIGURE THIS ──────────────────────────────────────────────────────────
-VAULT_ROOT="${SOVEREIGN_VAULT_ROOT:-}"
+VAULT_ROOT="${SOVEREIGN_VAULT_ROOT:-$PWD}"
 
-# Set these to your regen script invocations, or leave empty to skip.
-SKILLS_REGEN_CMD=""
+# The Skills Index regen ships wired to a real script and works out of the box.
+#
+# It did not, for a long time. This hook shipped with both commands set to empty
+# strings and no regen script anywhere in the repo to point them at, so it logged
+# "trigger detected (no regen cmd configured)" on every write and regenerated
+# nothing, forever. It read as protective and could not act. In that time a real
+# skill (Ecosystem Update Check) went missing from the Index and stayed missing:
+# present on disk, invisible to the AI interface, which is the exact drift this
+# hook was named for.
+#
+# A hook that reports it noticed is not a hook that acted.
+SKILLS_REGEN_CMD="node \"$VAULT_ROOT/Council Chamber/scripts/build-skills-index.mjs\""
+
+# No Pending Plans index builder ships yet. This one is honestly empty, and the
+# hook says so in the log rather than implying it did something.
 PENDING_REGEN_CMD=""
 # ────────────────────────────────────────────────────────────────────────────
 

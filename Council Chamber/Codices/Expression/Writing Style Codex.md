@@ -63,4 +63,4 @@ If Session 0.5 surfaced style patterns from your AI history, bring those observa
 
 ## Refinements
 
-- **2026-04-11:** This file is a generic template placeholder. The operator's Kingdom vault may contain a fully populated Writing Style Codex that is personal and specific to their voice. These are different documents for different audiences. The Kingdom version documents actual style; this SE version is the unfilled template. Do not sync from Kingdom to SE. They have intentionally diverged.
+- **2026-04-11:** This file ships as an unfilled template, on purpose. A Writing Style Codex documents one person's actual voice, so a populated one is personal by definition and there is no useful generic version of it. Fill it in with how you already write when you are at your best. Once you do, this file is yours. It stays out of upstream sync, and no update will overwrite it.

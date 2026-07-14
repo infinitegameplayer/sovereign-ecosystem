@@ -25,7 +25,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "bash \"$CLAUDE_PROJECT_DIR/Council Chamber/scripts/hooks/pre-compact-state-capture.sh\""
+            "command": "SOVEREIGN_VAULT_ROOT=\"$CLAUDE_PROJECT_DIR\" bash \"$CLAUDE_PROJECT_DIR/Council Chamber/scripts/hooks/pre-compact-state-capture.sh\""
           }
         ]
       }
@@ -45,7 +45,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "bash \"$CLAUDE_PROJECT_DIR/Council Chamber/scripts/hooks/post-compact-reorienter.sh\""
+            "command": "SOVEREIGN_VAULT_ROOT=\"$CLAUDE_PROJECT_DIR\" bash \"$CLAUDE_PROJECT_DIR/Council Chamber/scripts/hooks/post-compact-reorienter.sh\""
           }
         ]
       }

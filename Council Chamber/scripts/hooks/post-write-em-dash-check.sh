@@ -49,21 +49,37 @@ case "$FILE_PATH" in
   *) exit 0 ;;
 esac
 
-# Only check files inside the configured vault root (or plan files)
-if [ -n "$VAULT_ROOT" ]; then
-  case "$FILE_PATH" in
-    *"/.claude/plans/"*) ;;
-    *)
-      # Normalize separators for comparison
-      NORM_FILE=$(printf '%s' "$FILE_PATH" | tr '\\' '/')
-      NORM_VAULT=$(printf '%s' "$VAULT_ROOT" | tr '\\' '/')
-      case "$NORM_FILE" in
-        "$NORM_VAULT"*) ;;
-        *) exit 0 ;;
-      esac
-      ;;
-  esac
-fi
+# Only check files inside the vault root (or plan files).
+#
+# Two failure modes lived here, one in each direction, and both are closed.
+#
+# 1. The prefix match was case-sensitive. On Windows the same file is reachable
+#    as both `C:/vault/x.md` and `c:/vault/x.md`, and nothing guarantees which
+#    casing a tool hands the hook. A drive-letter mismatch made the comparison
+#    fail, and the hook exited 0 before ever reading the file: no warning, no
+#    log, no trace. The em dash gate went dark and looked healthy doing it.
+#    Both sides are now lowercased before comparison.
+#
+# 2. With VAULT_ROOT unset the scope check was skipped entirely, so the hook
+#    warned on any .md file anywhere on disk. It now falls back to the working
+#    directory, which is the vault root when hooks run under the AI interface.
+#    A guard with no configuration should narrow, never widen.
+SCOPE_ROOT="${VAULT_ROOT:-$PWD}"
+
+case "$FILE_PATH" in
+  *"/.claude/plans/"*) ;;
+  *)
+    NORM_FILE=$(printf '%s' "$FILE_PATH" | tr '\\' '/' | tr '[:upper:]' '[:lower:]')
+    NORM_VAULT=$(printf '%s' "$SCOPE_ROOT" | tr '\\' '/' | tr '[:upper:]' '[:lower:]')
+    case "$NORM_FILE" in
+      "$NORM_VAULT"*) ;;
+      # A relative path is working-directory bound, and the working directory
+      # is the vault. Relative means internal, so it stays in scope.
+      /*|[A-Za-z]:*|~/*) exit 0 ;;
+      *) ;;
+    esac
+    ;;
+esac
 
 # File must exist
 if [ ! -f "$FILE_PATH" ]; then

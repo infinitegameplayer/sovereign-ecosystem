@@ -6,6 +6,34 @@ Each entry corresponds to one publish cycle. For full implementation details, se
 
 ---
 
+## v3.4.0, 2026-07-14
+
+The Guards Get Proven. v3.3.1 fixed one guard that had never been fired. This release fired all of them and found three more were broken.
+
+**Apply this if you installed any version of this template.** None of these is a hole an attacker walks through. Each is an instrument you have been trusting that reported success while doing nothing.
+
+### Fixed
+- **`post-write-index-regen.sh` could never regenerate anything.** It shipped with empty regen commands and no regen script in the repo to point them at, so it logged "trigger detected (no regen cmd configured)" on every write and acted never. The cost was already on the shelf: the Ecosystem Update Check skill was missing from the Skills Index, present on disk and invisible to the AI interface that reads the catalog. The hook watched the exact drift it was named for and logged that it noticed. It is now wired to a real script that ships with it.
+- **`post-write-em-dash-check.sh` failed in both directions.** Its vault-scope check was a case-sensitive prefix match, so a Windows drive letter arriving as `c:` instead of `C:` made the comparison fail and the hook exit before reading the file. No warning, no log, no trace: the gate went dark and looked healthy. Separately, with `SOVEREIGN_VAULT_ROOT` unset it dropped the scope check entirely and warned on every Markdown file on the disk. Both closed. It now lowercases before comparing and falls back to the working directory rather than the whole filesystem. A guard with no configuration should narrow, never widen.
+- **The two compact hooks wrote and read different paths.** `pre-compact-state-capture.sh` resolved `.runtime` against the working directory, so firing from a subdirectory planted an orphan there and the snapshot the reorienter looked for at the vault root was never written. The capture reported success and the state was gone. Both are now anchored to `SOVEREIGN_VAULT_ROOT`, and `.claude/settings.json` passes it to them. They were the only two hooks that never received it.
+- **`SECURITY.md` named `main` as the supported branch.** This repo is `master`.
+
+### Added
+- **`Council Chamber/scripts/hooks/hooks-selftest.mjs`.** The positive control on every hook except the Floor gate, which has its own. Twelve cases, each hook required to react to what it must react to and stay quiet otherwise, with a regression test per defect above. Against the pre-fix hooks it reports `pass=7 fail=5`. Against the fixed hooks, `pass=12 fail=0`. It has been watched failing.
+- **`.github/workflows/verify.yml`.** This repo had no CI at all, which is why a guard that refused nothing could ship and sit there. Every push and pull request now fires both self-tests against a fresh checkout with `SOVEREIGN_VAULT_ROOT` unset, which is the state a recipient is actually in. It also runs weekly on a schedule, because a guard rots unobserved and "green last week" is the condition under which it rots.
+- **`Council Chamber/scripts/build-skills-index.mjs`.** The regen script the index hook was always meant to call. Rebuilds the roster from SKILL.md frontmatter, preserves curated descriptions and manual sections, and `--check` names any skill on disk and missing from the Index. Its own first bug is the lesson of this release in miniature: it defaulted a silent `tier:` field to `operational` and quietly demoted two skills a human had curated as foundational. A generator that invents a value where its source said nothing is overwriting knowledge with a guess. Absence of data is not data.
+- **`SECURITY.md` gains a "How You Learn That A Fix Shipped" section.** The plain admission that nothing reaches a templated clone automatically: no dependency graph, no Dependabot, no notification. What this repo does about it, and the one click (Watch, Releases only) that closes the gap.
+
+### Named
+- **Nothing that guards may ship without its positive control.** A guard travels with the test that proves it refuses what it claims to refuse and permits what it claims to permit. **A guard with no positive control is not a feature, it is a liability with good intentions**, because the recipient trusts it more than they would trust nothing at all. Ask of every ceiling: does this refuse, or does it merely not-happen?
+
+### Changed
+- The Skills Index lists all sixteen skills, and Self-Healing's tier matches its own frontmatter.
+- A maintainer's private note left the Writing Style Codex. It named the maintainer's own vault and gave instructions about an internal sync boundary no recipient has a part in.
+- `scripts/framework-manifest.json` classifies the self-tests, the index builder and the CI workflow as framework.
+
+---
+
 ## v3.3.1, 2026-07-14
 
 The Floor Gate, Proven. A security fix on the v3.3.0 deletion gate, and the positive control that should have shipped alongside it.

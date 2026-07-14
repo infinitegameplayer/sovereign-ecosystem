@@ -44,6 +44,9 @@
         "Council Chamber/Reference/**",
         "Getting Started/**",
         "Council Chamber/scripts/hooks/floor-gate-selftest.mjs",
+        "Council Chamber/scripts/hooks/hooks-selftest.mjs",
+        "Council Chamber/scripts/build-skills-index.mjs",
+        ".github/workflows/verify.yml",
         "scripts/backup-vault.mjs",
         "scripts/backup.config.example.json",
         "scripts/doctrine-mass.mjs",
@@ -133,6 +136,7 @@
     ".hidden": "Framework. Hidden blessings ship from upstream. The easter egg log lives at the repo root as EASTER_EGGS.md.",
     "Council Chamber/Codices": "Mixed. Most codices are framework. Humor Codex is seeded (personalized during onboarding). Ṣāḍguṇya codex is seeded (doctrine the Sovereign may adapt to their own sovereignty practice).",
     "Primer.md": "Treated as seeded. Pre-personalization it is boilerplate; post-personalization it is the Sovereign's own session handoff surface.",
-    "Council Chamber/scripts/hooks": "Seeded, not framework. Scripts arrive from upstream but require installation-specific configuration. The Sovereign applies hook updates by reviewing diffs, not via --apply. One exception, listed explicitly in the framework file list: floor-gate-selftest.mjs. It is the positive control on the approval gate, it takes no installation-specific configuration (it resolves the vault root exactly as the gate does), and it is the one file in this directory that must arrive from upstream unmodified. A test the Sovereign has quietly weakened is worse than no test."
+    "Council Chamber/scripts/hooks": "Seeded, not framework. Scripts arrive from upstream but require installation-specific configuration. The Sovereign applies hook updates by reviewing diffs, not via --apply. Two exceptions, both listed explicitly in the framework file list: floor-gate-selftest.mjs and hooks-selftest.mjs. They are the positive controls on the guards, they take no installation-specific configuration (each resolves the vault root exactly as the guard it tests does), and they are the files in this directory that must arrive from upstream unmodified. A test the Sovereign has quietly weakened is worse than no test.",
+    ".github/workflows": "Framework. The clean-clone verification that fires every guard on every push and weekly on a schedule. It exists because v3.3.0 shipped a deletion guard that had been read and never fired, and nothing in this repo was verified on any push, so there was no moment at which that could have been caught. A Sovereign may add jobs. Removing the guard jobs removes the only thing standing between a broken guard and a silent ship."
   }
 }
