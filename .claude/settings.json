@@ -63,6 +63,19 @@
             "command": "SOVEREIGN_VAULT_ROOT=\"$CLAUDE_PROJECT_DIR\" bash \"$CLAUDE_PROJECT_DIR/Council Chamber/scripts/hooks/post-write-index-regen.sh\""
           }
         ]
+      },
+      {
+        "matcher": "Bash|PowerShell",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "SOVEREIGN_VAULT_ROOT=\"$CLAUDE_PROJECT_DIR\" bash \"$CLAUDE_PROJECT_DIR/Council Chamber/scripts/hooks/post-bash-encoding-check.sh\""
+          },
+          {
+            "type": "command",
+            "command": "SOVEREIGN_VAULT_ROOT=\"$CLAUDE_PROJECT_DIR\" bash \"$CLAUDE_PROJECT_DIR/Council Chamber/scripts/hooks/post-bash-move-audit.sh\""
+          }
+        ]
       }
     ]
   }

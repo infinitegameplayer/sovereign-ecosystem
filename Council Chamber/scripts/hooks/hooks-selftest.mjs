@@ -67,6 +67,7 @@ function fire(hookFile, payload, { vaultRoot = VAULT, cwd = VAULT } = {}) {
 }
 
 const write = (file_path) => ({ tool_name: 'Write', tool_input: { file_path } });
+const bash = (command) => ({ tool_name: 'Bash', tool_input: { command } });
 
 // ── post-write-em-dash-check.sh ─────────────────────────────────────────────
 // It must WARN on an em dash in the vault, stay SILENT on a clean file, and
@@ -169,6 +170,59 @@ const write = (file_path) => ({ tool_name: 'Write', tool_input: { file_path } })
     !inert,
     inert ? 'INERT. It only logs that it noticed.' : 'a regen command is configured'
   );
+}
+
+// ── post-bash-encoding-check.sh ─────────────────────────────────────────────
+// A mojibake detector. It must WARN when a recently modified vault file carries
+// the byte signature of UTF-8 read as Windows-1252, stay SILENT when the recent
+// files are clean, and it must watch the PowerShell tool, which is the tool that
+// causes the corruption. A detector registered on Bash alone is blind to the one
+// door it exists for.
+{
+  const H = hook('post-bash-encoding-check.sh');
+  const MOJI = `${VAULT}/Scriptorium/mojibake.md`;
+
+  // The bytes UTF-8 leaves behind when an em dash makes the round trip through
+  // Windows-1252. This is the damage, written on purpose.
+  writeFileSync(MOJI, 'A corrupted em dash lives here: â€" and it should be caught.\n');
+  let r = fire(H, bash('echo touched'));
+  record('encoding: warns on a corrupted file in the vault', /mojibake|corruption/i.test(r.out), `out=${r.out.trim().slice(0, 40)}`);
+
+  // Same damage, delivered by the PowerShell tool. It must still be seen.
+  r = fire(H, { tool_name: 'PowerShell', tool_input: { command: `Set-Content "${MOJI}" "x"` } });
+  record('encoding: watches the PowerShell tool, which causes it', /mojibake|corruption/i.test(r.out), `out=${r.out.trim().slice(0, 40)}`);
+
+  rmSync(MOJI, { force: true });
+  r = fire(H, bash('echo touched'));
+  record('encoding: silent when the recent files are clean', !/mojibake|corruption/i.test(r.out), `out=${r.out.trim().slice(0, 40)}`);
+}
+
+// ── post-bash-move-audit.sh ─────────────────────────────────────────────────
+// It must WARN when a moved .md still has wikilinks pointing at the old name,
+// stay SILENT on a move nothing references, and it must NOT hang. A move of a
+// short-named file outside the vault once made it grep the whole vault for a
+// single letter, which is a stall dressed as a scan.
+{
+  const H = hook('post-bash-move-audit.sh');
+
+  // A referenced file: something in the vault wikilinks to it. Moving it must warn.
+  mkdirSync(path.join(VAULT, 'Library'), { recursive: true });
+  writeFileSync(`${VAULT}/Council Chamber/Skills/Demo/Note.md`, '# Note\n');
+  writeFileSync(`${VAULT}/Library/refers.md`, 'See [[Council Chamber/Skills/Demo/Note]] for detail.\n');
+  let r = fire(H, bash('mv "Council Chamber/Skills/Demo/Note.md" "Library/Note.md"'));
+  record('move-audit: warns when a moved file still has references', /move audit|wikilink|reference/i.test(r.out), `out=${r.out.trim().slice(0, 40)}`);
+
+  // A move of a file nothing links to: correctly silent, not a false alarm.
+  writeFileSync(`${VAULT}/Scriptorium/lonely.md`, '# Lonely\n');
+  r = fire(H, bash('mv "Scriptorium/lonely.md" "Library/lonely.md"'));
+  record('move-audit: silent on a move nothing references', !/move audit|wikilink/i.test(r.out), `out=${r.out.trim().slice(0, 40)}`);
+
+  // THE HANG REGRESSION. A short-named .md moved OUTSIDE the vault must not send
+  // the hook grepping the whole vault for its stem. Timed: a stall is a failure.
+  const t0 = Date.now();
+  r = fire(H, bash('mv /tmp/a.md /tmp/b.md'));
+  const elapsed = Date.now() - t0;
+  record('move-audit: does not stall on a short-named external move', elapsed < 10000 && !/move audit/i.test(r.out), `elapsed=${elapsed}ms`);
 }
 
 // ── report ──────────────────────────────────────────────────────────────────

@@ -10,17 +10,20 @@ Fields:
 - AI Interface Activation (draft, tier: foundational)
 - Autonomous Improvement Session (active, tier: foundational). Set-and-forget hygiene and improvement run. Recursive flywheel with a threshold model, a four-bucket decision board and a research rotation that grows its own menu. Sovereign-invoked, never scheduled.
 - Batch Archival (draft, tier: foundational)
+- Brainstorm (active, tier: foundational)
 - Ecosystem Update Check (active, tier: foundational)
 - End-of-Week (active, tier: operational)
 - Manuscript Anti-AI Edit Pass (active, tier: foundational). Expression-aligned. Runs the canonical anti-AI editing pass over a long-form manuscript against the Anti-AI Writing Patterns Codex. Surface-then-approve, no auto-apply on the judgment passes. Dual-distribution with the Infinite Game OS public library.
 - Pending Plan Progress Update (draft, tier: foundational)
 - Playwright (active, tier: operational)
+- PR Code Review (active, tier: operational)
 - Quest Progress Update (draft, tier: foundational)
 - Security Check (active, tier: foundational)
 - Self-Healing (active, tier: foundational)
 - Session Closeout (active, tier: foundational)
 - Source Harvest (active, tier: operational): Systematic pattern extraction from external repos at source level. Adopt/Enrich/Defer/Ignore classification.
 - Sovereign Sync (active, tier: foundational). Conversational layer over `scripts/se-update.mjs`. Presents the upstream framework change list, mediates per-file approval and bookends the sync with one commit. Keeps a clone living rather than frozen.
+- Systematic Debugging (active, tier: foundational)
 - Weekly Backup (active, tier: foundational)
 - Weekly Story (active, tier: operational)
 

@@ -6,6 +6,7 @@ Run the Ecosystem Update Check Skill to discover which updates apply to your bui
 
 | Date | Type | Optional | Slug | Title |
 |---|---|---|---|---|
+| 2026-07-14 | core | no | v3.5.0-the-harvest | v3.5.0 The Harvest. Two Proven Guards, the Software Doctrine, and the Universal Skills the Descendants Never Had |
 | 2026-07-14 | core | no | v3.4.0-the-guards-get-proven | v3.4.0 The Guards Get Proven. Three Broken Hooks, a Positive Control For Every One, and CI That Fires Them |
 | 2026-07-14 | core | no | v3.3.1-floor-gate-proven | v3.3.1 The Floor Gate, Proven. A Deletion Hole Closed and a Positive Control That Ships With It |
 | 2026-07-10 | core | no | v3.3.0-governance-and-security-hardening | v3.3.0 Governance and Security Hardening. Named Law, Standing Watches, Doctrine Lifecycle, an Agentic Threat Model and Guard Hooks |

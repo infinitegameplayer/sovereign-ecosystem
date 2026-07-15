@@ -6,6 +6,44 @@ Each entry corresponds to one publish cycle. For full implementation details, se
 
 ---
 
+## v3.5.0, 2026-07-14
+
+The Harvest. What the ecosystem fixed in itself, it had not fixed in the world. This release ports out two proven guards, the software doctrine that would have caught them, the verification tooling, and three skills that any operator running agents on code should have.
+
+**Apply this if you installed any version of this template.** The two hooks are new guards, not fixes to guards you already run. The codices and skills are additive. Nothing here is a hole an attacker walks through. Each is coverage the template should have shipped and did not.
+
+### The governing idea
+
+The template is a fork of a working vault that stopped receiving updates the day it was published. The vault heals itself and its descendants inherit nothing. Two of the hooks below were found broken in the source vault and fixed there in the same week. The people running this template had neither the guard nor the fix, which is to say they had nothing. This release is the nothing, filled.
+
+### Added, the guards
+
+- **`Council Chamber/scripts/hooks/post-bash-encoding-check.sh`.** A mojibake detector. After a Bash or PowerShell operation it scans recently modified vault files for the byte signature left when a tool reads a UTF-8 file as Windows-1252 and writes it back. An em dash becomes `â€"`, a curly quote becomes `â€™`, and the damage spreads silently. **It watches the PowerShell tool, which is the tool that causes the corruption.** A detector registered on Bash alone is structurally blind to the one door it exists for, which is exactly how the source vault's copy shipped before this week.
+- **`Council Chamber/scripts/hooks/post-bash-move-audit.sh`.** After a plain `mv` of a Markdown file it runs a full-vault wikilink grep for the old path and surfaces any reference left dangling. The move and the sweep are one unit of work. It carries three fixes from the week it was proven: it will not sweep a file moved outside the vault, it ignores stems too short to be a real reference, and every grep runs under a fifteen-second ceiling. Before those fixes, a move of a short-named file outside the vault sent it grepping the entire vault for a single letter and stalled the session.
+- **Both are registered on `Bash|PowerShell` in `.claude/settings.json`, and both ship with their positive control.** `hooks-selftest.mjs` gains six cases: the mojibake signature caught, the PowerShell tool watched, the referenced move warned, the unreferenced move stayed quiet, and the stall regression timed rather than trusted. A guard travels with the test that proves it, always.
+
+### Added, the doctrine
+
+- **`Council Chamber/Codices/Technology/Sovereign Software Codex.md`.** The posture on software you may one day hand to someone else. Positive control travels with the guard. The clean clone is the only witness. Ship the spec plus the test, never a diff. This is the doctrine that would have caught the deletion hole of v3.3.1 in your own forks before it shipped.
+- **`Council Chamber/Codices/Technology/Engineering Codex.md`.** Standards for all code work in the ecosystem. Plan, build, verify, upgrade, and the return arrow that turns a solved bug into a durable `docs/solutions/` note. The template shipped code and had no doctrine on stewarding it. Now it has both.
+
+### Added, the verification tooling
+
+- **`Council Chamber/scripts/check-skill-mirrors.mjs`.** Confirms every canonical skill has its interface mirror and names any that drift. Resolves the vault root from `SOVEREIGN_VAULT_ROOT`.
+- **`Council Chamber/scripts/validate-doc-claims.mjs`.** Checks that a document's citations resolve against git at the moment of the check, never trusted on sight. The mechanical face of the Move audit rule.
+
+### Added, the skills
+
+- **`Systematic Debugging`.** The Iron Law: no fix before the root cause. The single most useful discipline here for anyone running agents on code.
+- **`Brainstorm`.** The design-before-you-build gate. One question at a time, a three-solution fork, a written plan the operator approves before any code.
+- **`PR Code Review`.** A multi-dimension parallel review of a pull request before merge, with confidence scoring and a compliance pass against your own standards.
+
+### Note
+
+The `Skills Index` and `Codices Index` were regenerated to enroll the new skills and codices.
+
+---
+
 ## v3.4.0, 2026-07-14
 
 The Guards Get Proven. v3.3.1 fixed one guard that had never been fired. This release fired all of them and found three more were broken.
