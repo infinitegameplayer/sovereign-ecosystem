@@ -110,7 +110,7 @@ Four actions to close.
 
    > **Bootstrap complete (2026-06-10).** Ecosystem named, AI interface named, timezone recorded, platform set, governance depth chosen. Next session: open `Getting Started/Session 1 - Vault Initialization and Adapter Setup.md`. The deep path lives in the Getting Started folder.
    >
-   > When you outgrow the Foundation, the public library at https://www.infinitegameos.io/skills has 24 skills and 7 bundles, installable one command at a time.
+   > When you outgrow the Foundation, the public library at https://www.infinitegameos.io/skills has 28 skills and 7 bundles, installable one command at a time.
 
 2. **Seed the auto-memory (Claude Code only).** If your platform maintains the file-based memory described in `.claude/CLAUDE.md` (auto memory section), write the starting point now, so the next session opens already knowing who it works for. Two memories, each with the frontmatter shape from that section, each indexed with one line in `MEMORY.md`:
 

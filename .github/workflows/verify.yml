@@ -40,6 +40,25 @@ jobs:
       - name: Hooks positive control
         run: node "Council Chamber/scripts/hooks/hooks-selftest.mjs"
 
+      # The second instrument, pointed at the first. A test suite fails by
+      # reporting clean, which is the same shape as success, so the suite above
+      # is re-run with every hook replaced by a do-nothing stub. Any case that
+      # still passes proves nothing and fails this step. Without it, a green
+      # suite is a mood.
+      - name: Hooks negative control, the suite must be able to fail
+        run: node "Council Chamber/scripts/hooks/hooks-selftest.mjs" --negative-control
+
+      # A guard ships with the test that proves it refuses. The journal's guard
+      # protects a generated file from being overwritten by a broken scan, and a
+      # guard that has never been fired is not known to work.
+      - name: Decision Journal guard positive control
+        run: node "Council Chamber/scripts/decision-journal.mjs" --positive-control
+
+      # The generated lens must match its sources. A drifted journal is a lens
+      # describing a vault that no longer exists.
+      - name: Decision Journal matches its sources
+        run: node "Council Chamber/scripts/decision-journal.mjs" --check
+
       # A skill on disk and absent from the Index is a skill the AI interface
       # never discovers. Present, and unreachable.
       - name: Skills Index matches the skills on disk

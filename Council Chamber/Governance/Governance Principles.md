@@ -6,7 +6,7 @@ created: 2026-07-10
 owner: the Sovereign, ratified with the Sovereign present (each principle is a Sovereign-ratified change)
 source: Sovereign Ecosystem template seed
 links: "[[Council Chamber/Governance/Constitution - Sovereign Ecosystem]], [[Council Chamber/Governance/Watch Register]], [[.claude/CLAUDE.md]]"
-last_reviewed: 2026-07-10
+last_reviewed: 2026-07-22
 ---
 
 # Governance Principles
@@ -53,8 +53,21 @@ This note ships lightly seeded, with two starting principles. The Sovereign adds
 
 **How it is applied.** When a new container opens, reach for the light kit first. Let the container run. Watch the load. Add the next instrument when the volume it would serve is real and measured, one instrument at a time, each earned.
 
+## Principle 3: Name the grade on the act
+
+**Statement.** Delegated authority carries one of two grades, named at the moment it is exercised. An **executory** act implements an instruction as given, with no independent discretion. A **discretionary** act applies judgment inside a bounded domain under standing authority. The grade is marked on the act's record, not held in the agent's head.
+
+**Origin.** The Abbasid vizier system formally named these two grades (wazir al-tanfidh, wazir al-tafwid) rather than letting delegation drift undifferentiated. English regency marked every delegated act "per regentem" so the delegated nature stayed visible on the record itself. The seal system broke exactly when the fast inner channel bypassed the graded chain.
+
+**Precedent.** This ecosystem already grades authority structurally (the Trust Tiers, Article IV Section 4; the Permanent Floor) and already marks agent work in the ledger (the Co-Authored-By line on every commit). What was missing is the vocabulary naming which kind of act a record witnesses.
+
+**How it is applied.** Marking lands only where a record already exists: Pending Plan activity log entries, commit bodies for acts under standing authority, Watch Register rows and any standing-grant automation acting under delegated authority. An activity log entry tagged `[AI]` acting on its own initiative within bounds states `discretionary`; one implementing a Sovereign instruction states `executory` or simply cites the instruction, which is the same mark. Dispatches and tool calls carry no per-call ceremony; the vocabulary applies to them without ritual. Acts that leave no record remain governed by the Permanent Floor, which bounds what may act unrecorded at all.
+
+**Relationship to existing law.** This principle names grades; it does not widen authority. The Floor still bounds initiative. The Trust Tiers still govern how domains earn discretion. The grade on the act is what lets the Ledger of Change answer, years later, which kind of delegation a record witnesses.
+
 ---
 
 ## Change Log
 
 - **2026-07-10.** Note created as a lightly-seeded governance instrument. Principles 1 and 2 seeded with generic statements and how-to-apply guidance. The lived precedents behind them stay with the source ecosystem; yours accumulate here. Wired into the CLAUDE.md trust anchor as background law.
+- **2026-07-22.** Principle 3 (Name the grade on the act) added. Statement and historical grounding ported from lived precedent in the source ecosystem. Wired into the CLAUDE.md trust anchor as background law alongside Principles 1 and 2.

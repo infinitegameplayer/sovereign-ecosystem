@@ -35,14 +35,15 @@ The following skills were promoted to the IGOS public library and are no longer 
 - Plan Challenger: https://www.infinitegameos.io/skills/plan-challenger
 - Researcher: https://www.infinitegameos.io/skills/researcher
 - Skill Creator: https://www.infinitegameos.io/skills/skill-creator
-- Systematic Debugging: https://www.infinitegameos.io/skills/systematic-debugging
 
 ### Dual-Distribution with Infinite Game OS Public Library
 
-The following five skills ship inside this Foundation and also install as standalone plugins from the IGOS public library:
+The following seven skills ship inside this Foundation and also install as standalone plugins from the IGOS public library:
 
 - Source Harvest: https://www.infinitegameos.io/skills/source-harvest
 - Self-Healing: https://www.infinitegameos.io/skills/self-healing
 - Session Closeout: https://www.infinitegameos.io/skills/session-closeout
 - Playwright: https://www.infinitegameos.io/skills/playwright
 - Manuscript Anti-AI Edit Pass: https://www.infinitegameos.io/skills/anti-ai-edit-pass
+- Systematic Debugging: https://www.infinitegameos.io/skills/systematic-debugging
+- PR Code Review: https://www.infinitegameos.io/skills/pr-code-review

@@ -6,6 +6,42 @@ Each entry corresponds to one publish cycle. For full implementation details, se
 
 ---
 
+## v3.6.0, 2026-07-22
+
+The Second Instrument. A guard you have read is not a guard you have fired. This release extends that law one level: a test you have run is not a test that could have failed.
+
+**Apply this if you installed any version of this template.** Everything here is additive. Nothing you already run changes behavior.
+
+### The headline
+
+`hooks-selftest.mjs` gains a `--negative-control` mode that re-runs every case with each hook replaced by a do-nothing stub. Any case that still passes is proving nothing and is reported as vacuous.
+
+Running it found a case that has been shipping since v3.4.0 and proving nothing. The `index-regen` check asserted the ABSENCE of a string, and a dead hook writes no log, so the absent string was duly absent and the case went green against nothing at all. If you have read that tick as evidence your index regeneration works, it was not. It now demands positive evidence.
+
+The same file gains a registration audit. Every case fires its hook directly, which proves the script works and says nothing about whether a session will ever call it. The suite now reads `.claude/settings.json` and reports any hook that no event would reach. An unregistered hook fails the run, because a guard that passes its own test while wired to nothing is the most dangerous kind. It looks covered.
+
+### Added
+
+- `Council Chamber/scripts/decision-journal.mjs`, compiling a read-only journal of every `#decision`-tagged line. Its guard is relative rather than a fixed floor, so a new vault with zero decisions succeeds while a collapsed scan is refused. Ships with `--positive-control`, 15 cases, which must be green before the journal is trusted.
+- Governance Principle 3, name the grade on the act. Executory acts implement an instruction as given. Discretionary acts apply judgment inside a bounded domain. The grade is marked when the act happens.
+- The Intake Routing Law in the Capture Classify Route Protocol. Four rules for any vault taking material in from more than one direction.
+- Four CI steps that fire the negative control and the journal guard on every push, so neither decays into a control nobody runs.
+
+### Changed
+
+- The Interface Adapter Registry rates adapters by **Exposure Tier (E0 to E4)** rather than Trust Tier. The Constitution rates AGENTS with a Trust Tier, and one name for two unrelated concepts was a real ambiguity every recipient inherited. Different letters now, so the two cannot be confused. Prioritize this one if you built an adapter registry from this template.
+- The Anti-AI Writing Patterns Codex reaches full parity, 60 entries to 114. The v1.0 subset stopped partway and omitted the entire back half: the voice tells and every structural tell. Entries are renumbered to the source catalog's own scheme, so numbers are stable from here.
+
+### Fixed
+
+- `AGENTS.md` and `BOOTSTRAP.md` claimed 24 installable skills in the public library. There are 28.
+- `AGENTS.md` said five skills are dual-distribution and five graduated out entirely. It is seven and four.
+- `Skills Index.md` listed Systematic Debugging both as bundled and as no longer bundled. Both could not be true.
+
+CI validated the Skills Index roster and never the sentences describing it, so the drift moved into the prose. A check that validates a list does not validate the paragraph about the list.
+
+---
+
 ## v3.5.0, 2026-07-14
 
 The Harvest. What the ecosystem fixed in itself, it had not fixed in the world. This release ports out two proven guards, the software doctrine that would have caught them, the verification tooling, and three skills that any operator running agents on code should have.
