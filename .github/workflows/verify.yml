@@ -64,6 +64,20 @@ jobs:
       - name: Skills Index matches the skills on disk
         run: node "Council Chamber/scripts/build-skills-index.mjs" --check
 
+      # The mirror checker learned when to stay quiet, and teaching a detector
+      # when to say nothing is exactly the change that can turn it into one that
+      # always says nothing. The silent case and the loud cases are both fired
+      # against fixture vaults built in a temp directory.
+      - name: Skill mirror checker positive control
+        run: node "Council Chamber/scripts/check-skill-mirrors-selftest.mjs"
+
+      # The checker itself, on this checkout. A fresh clone has no interface
+      # skill directory, so the expected result is a quiet informational report
+      # and exit 0. This proves the day-one path on a real clone rather than
+      # only on a fixture, which is the state every recipient starts in.
+      - name: Skill mirrors on a fresh checkout
+        run: node "Council Chamber/scripts/check-skill-mirrors.mjs"
+
       # Every hook must at minimum survive being handed a payload without
       # crashing. A hook that dies on a fresh clone is the recipient's first
       # impression of this project.

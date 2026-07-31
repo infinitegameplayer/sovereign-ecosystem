@@ -181,8 +181,19 @@ if [ "$TOOL_NAME" = "Bash" ]; then
     esac
   fi
 
-  # fs.unlinkSync / fs.rmSync of protected files: block bypass via node -e embedded scripts
-  if printf '%s' "$COMMAND" | grep -qE '(fs\.unlinkSync|fs\.rmSync|fs\.promises\.unlink|fs\.promises\.rm)[[:space:]]*\('; then
+  # Node unlink/rm of protected files: block bypass via node -e embedded scripts.
+  #
+  # Match the METHOD, not the receiver. The earlier form required a literal
+  # "fs." prefix, so it caught `fs.unlinkSync(` and sailed straight past
+  # `require('fs').unlinkSync(`, `const f=require('fs'); f.unlinkSync(` and
+  # `const {unlinkSync}=require('fs')`. Five spellings of one deletion, one of
+  # them blocked. Found by firing the guard rather than by reading it.
+  #
+  # The leading class guard is what keeps lookalikes out. `rmSync` is a
+  # substring of `performSync` and `confirmSync`, so a bare alternation would
+  # block ordinary code. Requiring a non-identifier character before the method
+  # name means the guard fires on a call and stays quiet on a coincidence.
+  if printf '%s' "$COMMAND" | grep -qE '(^|[^A-Za-z0-9_$])(unlinkSync|rmSync)[[:space:]]*\(|\.promises[[:space:]]*\.[[:space:]]*(unlink|rm)[[:space:]]*\('; then
     if printf '%s' "$COMMAND" | grep -qE "\.($EXT_RE)['\"\`]"; then
       echo "BLOCKED: Node fs unlink/rm of a protected file bypasses the deletion gate. Requires approval." >&2
       echo "Command: $COMMAND" >&2

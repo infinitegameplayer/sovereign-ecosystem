@@ -6,6 +6,42 @@ Each entry corresponds to one publish cycle. For full implementation details, se
 
 ---
 
+## v3.7.0, 2026-07-31
+
+The Receiver Is Not the Deletion.
+
+**Security fix. If you installed any version from v3.3.0 through v3.6.0, apply this update.** Your Permanent Floor deletion gate blocks one spelling of a Node file deletion and allows five others. Renaming the variable that holds the module is enough to walk past it.
+
+### The headline
+
+The gate required the literal characters `fs.` before the method name, so `fs.unlinkSync(` was refused while `require('fs').unlinkSync(`, an aliased handle, a destructured import, `rmSync` and the promises API all passed. Six spellings of one act, one of them blocked.
+
+It now matches the method rather than the receiver, with a leading character class so `performSync(` and `confirmSync(` stay allowed. The target test is unchanged, so deleting a file the Floor does not protect works exactly as before.
+
+The positive control passed the entire time. It carried one case for this door, and that case spelled the receiver `fs.`, so it exercised the only form that worked. Two releases green over five open doors. A guard is verified by firing, and this release adds that it matters what you fire. The suite goes from 21 cases to 29, five new must-block and three new must-pass.
+
+### Also in this release
+
+`check-skill-mirrors.mjs` reported a fresh clone as 38 drift errors and exited 1, because a fresh clone has no interface skill directory and a link is not something git carries. The first thing this template told a new reader was that it was broken. It also demanded a mirror under both `.claude/skills` and `.codex/skills`, so a reader running one interface got a wall of errors for the one they had chosen not to use. An absent mirror root now reads as a runtime this vault does not use rather than as drift.
+
+That checker had never had a positive control. It ships with one now, four cases against fixture vaults, wired into CI alongside the checker running on the fresh checkout itself.
+
+### Changed
+
+- `Council Chamber/scripts/hooks/pre-tool-approval-gate.sh`, the Node deletion branch.
+- `Council Chamber/scripts/hooks/floor-gate-selftest.mjs`, 21 cases to 29.
+- `Council Chamber/scripts/check-skill-mirrors.mjs`, absent mirror roots skipped.
+- `Council Chamber/Skills/Skills Index.md`, dual-distribution list corrected to nine entries, and the sentence above it drops its numeral so the list is its own count.
+
+### Added
+
+- `Council Chamber/scripts/check-skill-mirrors-selftest.mjs`.
+- Two CI steps firing it and the checker it proves.
+
+Full detail and the apply-by-specification path: `UPDATES/2026-07-31-v3.7.0-the-receiver-is-not-the-deletion.md`.
+
+---
+
 ## v3.6.0, 2026-07-22
 
 The Second Instrument. A guard you have read is not a guard you have fired. This release extends that law one level: a test you have run is not a test that could have failed.

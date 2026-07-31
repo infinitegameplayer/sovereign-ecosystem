@@ -6,6 +6,7 @@ Run the Ecosystem Update Check Skill to discover which updates apply to your bui
 
 | Date | Type | Optional | Slug | Title |
 |---|---|---|---|---|
+| 2026-07-31 | core | no | v3.7.0-the-receiver-is-not-the-deletion | v3.7.0 The Receiver Is Not the Deletion. A Node Bypass Closed, and Two Checkers Taught About Day One |
 | 2026-07-22 | core | no | v3.6.0-the-second-instrument | v3.6.0 The Second Instrument. The Self-Test Learns to Catch Itself Lying, Plus Four Ports and a Journal |
 | 2026-07-14 | core | no | v3.5.0-the-harvest | v3.5.0 The Harvest. Two Proven Guards, the Software Doctrine, and the Universal Skills the Descendants Never Had |
 | 2026-07-14 | core | no | v3.4.0-the-guards-get-proven | v3.4.0 The Guards Get Proven. Three Broken Hooks, a Positive Control For Every One, and CI That Fires Them |

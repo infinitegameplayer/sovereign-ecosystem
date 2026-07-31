@@ -38,8 +38,10 @@ The following skills were promoted to the IGOS public library and are no longer 
 
 ### Dual-Distribution with Infinite Game OS Public Library
 
-The following seven skills ship inside this Foundation and also install as standalone plugins from the IGOS public library:
+The following skills ship inside this Foundation and also install as standalone plugins from the IGOS public library. The list is its own count, so adding a skill here leaves no second number to keep in step with it:
 
+- Autonomous Improvement Session: https://www.infinitegameos.io/skills/autonomous-improvement-session
+- Batch Archival: https://www.infinitegameos.io/skills/batch-archival
 - Source Harvest: https://www.infinitegameos.io/skills/source-harvest
 - Self-Healing: https://www.infinitegameos.io/skills/self-healing
 - Session Closeout: https://www.infinitegameos.io/skills/session-closeout

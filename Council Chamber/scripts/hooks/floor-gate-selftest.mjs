@@ -62,6 +62,17 @@ const cases = [
 
   // ── Must block: the bypass doors ─────────────────────────────────────────
   ['node fs.unlinkSync bypass', 'Bash', `node -e "fs.unlinkSync('${DOC}')"`, BLOCK],
+
+  // The receiver is not the deletion. One case above spelled the receiver
+  // `fs.` and shipped for two releases as the whole of this coverage, so the
+  // gate matched a name rather than an act and four other spellings walked
+  // through a green suite. Every form below deletes the same file.
+  ['node require() inline receiver', 'Bash', `node -e "require('fs').unlinkSync('${DOC}')"`, BLOCK],
+  ['node aliased fs handle', 'Bash', `node -e "const f=require('fs'); f.unlinkSync('${DOC}')"`, BLOCK],
+  ['node destructured import', 'Bash', `node -e "const {unlinkSync}=require('fs'); unlinkSync('${DOC}')"`, BLOCK],
+  ['node rmSync via alias', 'Bash', `node -e "const f=require('fs'); f.rmSync('${DOC}')"`, BLOCK],
+  ['node promises unlink via alias', 'Bash', `node -e "const f=require('fs'); f.promises.unlink('${DOC}')"`, BLOCK],
+
   ['python os.remove bypass', 'Bash', `python -c "os.remove('${DOC}')"`, BLOCK],
   ['powershell Remove-Item from bash', 'Bash', `powershell -c Remove-Item "${DOC}"`, BLOCK],
   ['cmd del bypass', 'Bash', `cmd /c del "${DOC}"`, BLOCK],
@@ -82,6 +93,14 @@ const cases = [
   ['ALLOW: delete a non-protected file', 'Bash', 'rm /tmp/build.log', ALLOW],
   ['ALLOW: read-only inspection', 'Bash', 'git status', ALLOW],
   ['ALLOW: list a directory', 'Bash', 'ls "Council Chamber"', ALLOW],
+
+  // Widening the deletion match from a receiver to a method name is the kind of
+  // change that buys a closed door with a wall. `rmSync` is a substring of
+  // `performSync` and `confirmSync`, and an unlink on a file the Floor does not
+  // protect was always allowed. These three prove the widening stayed a door.
+  ['ALLOW: lookalike performSync', 'Bash', `node -e "performSync('${DOC}')"`, ALLOW],
+  ['ALLOW: lookalike confirmSync', 'Bash', `node -e "confirmSync('${DOC}')"`, ALLOW],
+  ['ALLOW: unlinkSync on a non-protected file', 'Bash', 'node -e "require(\'fs\').unlinkSync(\'tmp/build.log\')"', ALLOW],
 ];
 
 let pass = 0;

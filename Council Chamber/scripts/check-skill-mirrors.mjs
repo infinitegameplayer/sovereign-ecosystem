@@ -146,11 +146,28 @@ async function readCanonicalSkillNames() {
   return names;
 }
 
-async function checkCanonicalCoverage() {
+// A mirror root that does not exist on disk is a runtime this vault does not
+// use, never drift. Linking skills into an AI interface is a step the reader
+// performs in Session 1, and a vault that has only ever run one interface will
+// never grow the other's directory.
+async function existingMirrorRoots() {
+  const found = [];
+  for (const root of MIRROR_ROOTS) {
+    try {
+      await lstat(root);
+      found.push(root);
+    } catch {
+      // absent, so nothing to compare against
+    }
+  }
+  return found;
+}
+
+async function checkCanonicalCoverage(roots) {
   const results = [];
   const skillNames = await readCanonicalSkillNames();
   for (const skillName of skillNames) {
-    for (const mirrorRoot of MIRROR_ROOTS) {
+    for (const mirrorRoot of roots) {
       const mirrorPath = join(mirrorRoot, skillName);
       let exists = true;
       try {
@@ -173,12 +190,29 @@ async function checkCanonicalCoverage() {
 }
 
 async function main() {
+  // Day one. A fresh clone carries the canonical skills and no mirrors at all,
+  // because a link is a local filesystem object that git does not deliver. The
+  // reader creates them in Session 1. Reporting that state as drift means the
+  // first thing this template tells a new reader is that it is broken, and a
+  // check nobody trusts is a check nobody reads.
+  const roots = await existingMirrorRoots();
+  if (roots.length === 0) {
+    console.log('Skill Mirror Drift Check');
+    console.log('------------------------');
+    const skillNames = await readCanonicalSkillNames();
+    console.log(`Canonical skills on disk: ${skillNames.length}`);
+    console.log('No AI interface skill directory exists yet, so there is');
+    console.log('nothing to compare against. This is the expected state of a');
+    console.log('fresh vault. Getting Started, Session 1 covers linking them.');
+    process.exit(0);
+  }
+
   const all = [];
-  for (const root of MIRROR_ROOTS) {
+  for (const root of roots) {
     const rootResults = await checkMirrorRoot(root);
     all.push(...rootResults);
   }
-  all.push(...(await checkCanonicalCoverage()));
+  all.push(...(await checkCanonicalCoverage(roots)));
 
   const drifted = all.filter(r => r.drift);
   const summary = {
