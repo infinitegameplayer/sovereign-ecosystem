@@ -6,6 +6,42 @@ Each entry corresponds to one publish cycle. For full implementation details, se
 
 ---
 
+## v3.8.0, 2026-07-31
+
+Four Classes the Author Abandoned.
+
+**No action required, and nothing breaks if you skip this.** No script, hook or guard reads the object classes. If you have been using any of the four retired classes, keep using it. Migration notes are in `UPDATES/2026-07-31-v3.8.0-four-classes-the-author-abandoned.md`.
+
+### The headline
+
+The Object Model declared nine object classes and now declares five. `Spark`, `Insight`, `Experiment` and `Rule` are retired. `Quest`, `Artifact`, `Brief`, `PendingPlan` and `InboxItem` stay.
+
+All four were declared in prose, described in prose and never mechanically used. A grep for them in frontmatter or wikilinks returns zero across the whole repo. The one long-running installation of this template produced zero notes of all four across months of daily use. A fresh clone has zero instances of everything, so that count alone proves nothing. What it does establish is that the author of these classes never used them, and shipping them anyway hands every recipient four concepts their designer abandoned.
+
+A reader who cannot tell which parts of a governance system are load-bearing treats all of it as load-bearing. Every unused class raises the price of the whole thing.
+
+### Why this is a minor
+
+Four declared classes were removed, which sounds like a break and is not one. Nothing executable reads the object classes. No script, hook, guard or CI step names them, so there is no code path that a missing class can fail. What changed is prose describing a model, and your own notes are untouched either way.
+
+### Changed
+
+- `Council Chamber/Governance/Sovereign Ecosystem Object Model.md`, nine classes to five, plus a closing section on when adding one is earned.
+- `Council Chamber/Governance/Constitution - Sovereign Ecosystem.md`, the class list, the raw-transmission clause and the L1-L2 automatic actions.
+- Twenty-seven further files carrying references, reconciled by reading rather than by pattern replacement.
+- `Council Chamber/Protocols/Inbox/Capture Classify Route Protocol.md`, the `spark:` quick-capture prefix folded into `inbox:`.
+
+### Removed
+
+- `Council Chamber/Templates/Object Templates/Spark.md`.
+- `Council Chamber/Templates/Object Templates/Experiment.md`.
+
+### Fixed in passing
+
+The Constitution listed eight object classes where the Object Model declared nine. `Brief` was missing, and had been since the class was introduced. Two documents describing one model, disagreeing, with nothing checking one against the other.
+
+---
+
 ## v3.7.0, 2026-07-31
 
 The Receiver Is Not the Deletion.

@@ -130,7 +130,6 @@ Requirements:
 
 Examples:
 - Draft strategies
-- Experiments
 - Iteration logs
 - Blueprints
 

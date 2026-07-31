@@ -20,7 +20,7 @@ Scope: All domains, including Intelligence, Governance, Explorations and artifac
 - Domain Index v0.1
 - Templates (Hard, Soft, Meta)
 - Codex Overlays (Default, Optional)
-- Pilot Run notes (stored as Experiments)
+- Pilot Run notes (stored in the relevant Quest log)
 
 ## Pilot Requirement
 Each domain requires a pilot run before full activation.

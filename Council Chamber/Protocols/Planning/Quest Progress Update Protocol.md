@@ -33,7 +33,7 @@ Scope: One Quest note per update session, including standalone Quest updates and
 - What happened in the physical world since the last update
 - What changed in the Sovereign Ecosystem/AI layer (if anything)
 - Learnings, failures, blockers or pivots
-- Evidence/artifacts (notes, files, experiments, links)
+- Evidence/artifacts (notes, files, links)
 - Next step and review timing
 
 ## Conversation Workflow ({{AI_INTERFACE_NAME}}-Led)
@@ -50,7 +50,7 @@ Scope: One Quest note per update session, including standalone Quest updates and
 6. Capture Archetypal / Stewardship Alignment (lightweight)
    - Confirm whether the quest's archetypal emphasis or stewardship domain has changed in a meaningful way.
 7. Capture Evidence / Artifacts
-   - Add links to supporting notes, experiments or artifacts.
+   - Add links to supporting notes or artifacts.
 8. Template Compliance Check
    - Confirm required sections exist (Trifecta Reflection + Archetypal ROI for completion).
 9. Refresh Quest Direction

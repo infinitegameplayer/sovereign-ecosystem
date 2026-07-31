@@ -58,7 +58,7 @@ Any session logs already in `Vault (Archive)/Session Logs/` are a frozen histori
 Reconciliation of what this session touched is action 1, inline, where freshness keeps it accurate. For a genuinely large session (6 or more plans touched) or when the Sovereign says "full reconciliation," escalate: dispatch parallel workers, each independent, holding proposals for one approval gate.
 
 - **Worker A: Pending Plan Reconciliation.** Read `Council Chamber/Pending Plans/Index.md` as the pre-filter. Read only plans named in this session or marked touched recently. Draft breadcrumb updates. No status changes. Proposal-only.
-- **Worker B: Inadvertent Completions Sweep.** Scan quests, experiments, intake for items this session completed or retired. Proposal-only.
+- **Worker B: Inadvertent Completions Sweep.** Scan quests and intake for items this session completed or retired. Proposal-only.
 - **Worker C: Inbox + Consult Closeout Sweep.** Process deferred activations, consults that produced downstream artifacts. Proposal-only.
 
 This is an escalation tool on the shelf, not a standing choice every close. The old lightweight-versus-full mode binary is retired.

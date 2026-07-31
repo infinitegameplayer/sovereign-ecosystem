@@ -45,6 +45,6 @@ Internal Contrast Layer
 -->
 
 ## Cross-Flywheel Connections
-- Upstream signals: North Star Recalibration inputs, recent North Star logs and active Quest/Experiment learnings.
-- Downstream handoff: Quest seeds and micro-actions flow into Quests/Experiments and generate artifacts that later enter the Universal Vault Flywheel.
+- Upstream signals: North Star Recalibration inputs, recent North Star logs and active Quest learnings.
+- Downstream handoff: Quest seeds and micro-actions flow into Quests and generate artifacts that later enter the Universal Vault Flywheel.
 - Governance feedback: Major deltas or drift signals may trigger governance reviews or protocol updates.

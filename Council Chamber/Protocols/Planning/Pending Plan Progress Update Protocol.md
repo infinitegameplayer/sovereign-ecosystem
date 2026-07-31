@@ -65,7 +65,7 @@ Keep it to one line so the plan note stays the source of truth and `Sovereign Co
 5. Record Partial Implementation (if applicable)
    - Separate implemented scope from remaining scope.
 6. Capture Evidence
-   - Add links to artifacts, protocols, quests, experiments or session logs.
+   - Add links to artifacts, protocols, quests or session logs.
 7. Refresh Reconciliation Notes
    - Propose a candidate resolution (Implemented / Partially Implemented / Not Implemented).
    - Do not change status or archive without approval.

@@ -119,7 +119,7 @@ Purpose: Define how transcripts enter `Inbox/`, are classified and routed (Libra
 ### Summit / Event Transcript (Future Profile)
 - Analyze differently from collaboration meetings:
   - prioritize key insights, frameworks, references and implementation opportunities
-  - emphasize Quest / Experiment seeds and evidence capture
+  - emphasize Quest seeds and evidence capture
 - Build this as a separate analysis profile/template after a first real summit transcript pass.
 
 ## {{AI_INTERFACE_NAME}} Activation Integration (Proposal-Only)

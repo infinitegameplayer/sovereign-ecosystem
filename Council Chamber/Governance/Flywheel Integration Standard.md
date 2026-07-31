@@ -45,15 +45,15 @@ Purpose: Define how all Sovereign Ecosystem flywheels align with the Flywheel Co
 6. Cross-flywheel connections must be explicit and named to reduce drift.
 
 ## Flywheel Connectivity Map (Current)
-- North Star Flywheel -> Quests/Experiments -> Artifacts -> Universal Vault Flywheel
-- Quests/Experiments -> Conduction Flywheel -> Universal Vault Flywheel
+- North Star Flywheel -> Quests -> Artifacts -> Universal Vault Flywheel
+- Quests -> Conduction Flywheel -> Universal Vault Flywheel
 - Universal Vault Flywheel -> Taste Delta + Protocol Delta signals -> North Star Recalibration and Governance refinement
 - Security Flywheel -> Meta-Governance Audit -> Governance refinement + risk hardening proposals
 - Embodied Contribution Flywheel (governance architecture) -> body-led aliveness -> `Sovereign Ecosystem Command` (first practical Intelligence report) -> Quests/Collaborations -> Expression/Speaking -> Business / Contribution Lanes -> Wealth byproduct -> periodic Archetypal + Areas of Life review
 - Non-protocol flywheels (e.g., Embodiment, Synergy, Creative Spark) should reference a protocol flywheel for operational handoff when formalized.
 
 ## Stewardship Threads (Optional)
-- Maintain lightweight links from stewardship guidance to relevant Quests/Experiments when they are created.
+- Maintain lightweight links from stewardship guidance to relevant Quests when they are created.
 - These links are directional (guidance -> practice) and do not impose governance constraints.
 
 ## Governance Alignment

@@ -35,7 +35,7 @@ Run the {{AI_INTERFACE_NAME}} Activation Protocol to orient the session.
 Read recent session history to surface what is alive in the Sovereign Ecosystem:
 - AI Interface Change Log (past 1-2 weeks of sessions)
 - Continuity Log
-- Active quests and experiments
+- Active quests
 - Recent coaching transcripts if directly relevant
 
 Goal: identify emergent themes, state shifts, insight patterns and alive energy worth writing about.

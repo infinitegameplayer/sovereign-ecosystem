@@ -42,7 +42,7 @@ Primary containers:
 ## Layer 5 - Output Ring (Artifacts + Decisions)
 Role: Tangible results, decisions and published artifacts.
 Primary containers:
-- `Explorations/` (quests, experiments, outcomes)
+- `Explorations/` (quests, outcomes)
 - `Scriptorium/Articles/` and other published artifacts
 - `Vault (Archive)/Session Logs/`
 

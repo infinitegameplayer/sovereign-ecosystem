@@ -35,7 +35,7 @@ An artifact is declared complete and moved from an Active Chamber to the Vault.
    - Enforce `[[Council Chamber/Protocols/Governance/Naming and Versioning Protocol]]` (no version markers in filenames; keep `version` in frontmatter when applicable).
 2. Domain Index Update (Draft)
    - Append structural constants, tonal signature, patterns, deviations, template alignment notes.
-   - Link lightweight associations (Quests, Experiments, Plans or related domains) when relevant.
+   - Link lightweight associations (Quests, Plans or related domains) when relevant.
 3. Taste Delta Analysis
    - Compare the artifact to the Universal Taste Profile baseline (your Universal Taste Profile Codex) and the relevant Domain Taste Profile.
    - Run a lightweight taste evaluation:

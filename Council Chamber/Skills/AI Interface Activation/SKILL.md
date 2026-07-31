@@ -47,7 +47,7 @@ Constraints:
 6. Run Quick Support Sweep (default): fire 4 workers simultaneously, hold results for unified review before presenting.
    - **Worker A: Inbox scan:** Detect blockers, approvals and routing opportunities in `Inbox/`
    - **Worker B: Transcript check:** Surface new transcripts not yet ingested (count, titles, dates, durations), proposal only; no auto-ingest; propose routing per Transcript Inbox Protocol
-   - **Worker C: Active focus scan:** Confirm current quest/experiment visibility that materially affects today's move
+   - **Worker C: Active focus scan:** Confirm current quest visibility that materially affects today's move
    - **Worker D: Index drift check:** Flag only if affecting active-item visibility, proposal only
    Reconvene: present unified {{AI_INTERFACE_NAME}} Status Report from all four workers.
 7. Present approval gates and capture the Sovereign's decisions:

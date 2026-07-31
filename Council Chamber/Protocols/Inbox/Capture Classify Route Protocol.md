@@ -28,14 +28,13 @@ Whatever intake engines this vault runs adopt this law at creation time and choo
 
 ## Stage 2: Classify
 {{AI_INTERFACE_NAME}} classifies by:
-- Object type (Spark, Consult, Quest update, Experiment, Insight, Brief, Artifact, Transcript, Coaching Session, Governance draft, Strategy draft)
+- Object type (Consult, Quest update, Brief, Artifact, Transcript, Coaching Session, Governance draft, Strategy draft)
 - Status (proposed/draft/approved/ready-for-execution/implemented)
 - Domain (if known)
-- Quick capture type (To-Do vs Spark vs InboxItem):
+- Quick capture type (To-Do vs InboxItem):
   - Route to `To-Do Dock` when the item is a short-lived action prompt that is likely actionable within minutes, later today or within the next few days and does not need archival retention.
   - For mobile quick capture, unprefixed short text now defaults to `To-Do Dock` unless explicitly marked otherwise.
-  - Route to `Spark` when the item contains expansion energy: it could become a Quest, Experiment, governance thread, strategic concept or a larger creative build.
-  - Route to `InboxItem` when the item is explicitly marked for Inbox retention or when a longer-form capture should stay in `Inbox/` for later review.
+  - Route to `InboxItem` when the item is explicitly marked for Inbox retention, when a longer-form capture should stay in `Inbox/` for later review, or when it carries expansion energy that could become a Quest, governance thread, strategic concept or a larger creative build.
 - Classification drift check (Quest vs PendingPlan):
   - If the item appears to be a Sovereign Ecosystem/{{AI_INTERFACE_NAME}} implementation proposal (protocol/skill/template/system/governance change), flag it as a likely PendingPlan.
   - If the item appears to be a Sovereign-facing challenge/practice/build with in-world execution, flag it as a likely Quest.
@@ -50,10 +49,8 @@ Whatever intake engines this vault runs adopt this law at creation time and choo
   - Do not create a dedicated note for each short-lived to-do by default.
   - Append the item to `[[To-Do Dock]]` in the Sovereign Ecosystem root container for fast mobile access.
   - Preserve only enough context to take action; completed entries are deleted, not archived.
-- Spark route:
-  - Create or append to a Spark note when the item has clear growth potential or belongs in ideation rather than immediate execution.
 - InboxItem route:
-  - Keep in `Inbox/` when routing is still uncertain or the capture needs tiered Inbox analysis before conversion.
+  - Keep in `Inbox/` when routing is still uncertain, when the capture needs tiered Inbox analysis before conversion, or when it has growth potential and belongs in ideation rather than immediate execution.
 - For Consults, enforce planning-only and include Inbox Analysis.
 - Strategy and Governance drafts remain in Inbox until explicitly approved.
 - Transcripts and Coaching Sessions route through [[Council Chamber/Protocols/Inbox/Transcript Inbox Protocol]]:
@@ -93,20 +90,19 @@ Types that almost always qualify for Tier C:
 - Recommended plain-language prefix: `to-do:`
 - Example:
   - `to-do: remind myself that Notion has been the operational workspace for years`
-- Prefix matching is case-insensitive. `TO-DO:`, `To-Do:`, `spark:`, `SPARK:`, `inbox:` and `INBOX:` all work.
+- Prefix matching is case-insensitive. `TO-DO:`, `To-Do:`, `inbox:` and `INBOX:` all work.
 - If the incoming message clearly begins with `to-do:` or is explicitly framed as a near-term action reminder, route to `[[To-Do Dock]]`.
-- If the incoming message begins with `spark:` or reads like a concept with expansion potential, route to `Inbox/Sparks/`.
-- If the incoming message begins with `inbox:`, keep it as an `InboxItem` in `Inbox/`.
+- If the incoming message begins with `inbox:`, or reads like a concept with expansion potential, keep it as an `InboxItem` in `Inbox/`.
 - If the incoming message has no prefix, default it to `[[To-Do Dock]]` as a lightweight action capture.
 - Voice note handling:
   - Transcribe first.
   - Preserve the raw transcript in `Inbox/`.
-  - Classify the transcript result using the same to-do / spark / inbox-item rules before routing.
+  - Classify the transcript result using the same to-do / inbox-item rules before routing.
 - Minimal fields to preserve from Telegram or another mobile capture source:
   - capture timestamp
   - source channel
   - raw message text or transcript
-  - inferred type (`to-do`, `spark` or `inbox`)
+  - inferred type (`to-do` or `inbox`)
 
 ## Contrast Layer Integration (Mandatory)
 Tier: 1 (foundational).

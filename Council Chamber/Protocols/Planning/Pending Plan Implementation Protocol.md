@@ -75,7 +75,7 @@ Keep it to one line so the plan note stays the source of truth and `Sovereign Co
      - move true provenance material to a Vault location if worth keeping
      - delete temporary working files by default
 8. Update Evidence / Implementation Refs
-   - Add links to changed artifacts, session logs, quests, experiments or related notes.
+   - Add links to changed artifacts, session logs, quests or related notes.
 9. Readback + Approval
    - Summarize implemented scope, remaining scope and proposed status changes.
 10. Apply Approved Status / Archival Changes

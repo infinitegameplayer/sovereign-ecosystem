@@ -13,7 +13,7 @@ clarity_triggers:
 
 Purpose: Refine archetypal conduction signals from Quest completion and feed governance updates before Vault archival.
 
-Scope: Completed Quests and Experiments that include Trifecta Reflection and Archetypal ROI.
+Scope: Completed Quests that include Trifecta Reflection and Archetypal ROI.
 
 Governed by: your Flywheel Codex of the Sovereign
 
@@ -34,7 +34,7 @@ Governed by: your Flywheel Codex of the Sovereign
 
 ## Triggers
 - Quest status changes to `completed`.
-- Session Closeout detects completed Quests or Experiments with Trifecta Reflection present.
+- Session Closeout detects completed Quests with Trifecta Reflection present.
 - Universal Vault Flywheel intake includes Quest artifacts.
 
 ## Enforcement (Light)

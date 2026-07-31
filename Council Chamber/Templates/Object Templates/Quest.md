@@ -32,7 +32,7 @@ ring:
 ## Next Step
 
 ## Source Material
-- Link imported source notes, sparks or other origin materials here.
+- Link imported source notes or other origin materials here.
 
 ## Quest Activity Log
 - YYYY-MM-DD - Activated Quest. Initial objective and first step defined.
@@ -66,7 +66,7 @@ ring:
 - What should be shared, reused or converted into a stable artifact from this Quest?
 
 ## Evidence / Artifacts
-- Links to artifacts, experiments, notes, screenshots or external outcomes.
+- Links to artifacts, notes, screenshots or external outcomes.
 
 ## Status Rules
 - active: in progress

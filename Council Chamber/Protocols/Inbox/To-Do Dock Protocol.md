@@ -20,8 +20,7 @@ Purpose: Define the operating rules for `To-Do Dock.md`, a root-level, low-frict
 - Mobile or voice captures routed to the To-Do Dock should be classified in `Inbox/` first, then routed here when they match the to-do criteria.
 
 ## Promotion Rules
-- Promote to Spark if the item shows expansion potential, connects to a Quest or wants deeper incubation.
-- Promote to InboxItem if the item is unclear, mixed, reference-heavy or needs analysis before action.
+- Promote to InboxItem if the item is unclear, mixed, reference-heavy, needs analysis before action, or shows expansion potential and wants deeper incubation.
 
 ## Review Prompt
 - What can be done now?
@@ -31,4 +30,4 @@ Purpose: Define the operating rules for `To-Do Dock.md`, a root-level, low-frict
 ## What To-Do Dock Is Not
 - Not an archive. Completed entries are deleted, not preserved.
 - Not a project tracker. If it needs a plan, it needs a PendingPlan.
-- Not a Spark incubator. Growth energy routes to `Inbox/Sparks/`.
+- Not an incubator. Growth energy routes to `Inbox/`.

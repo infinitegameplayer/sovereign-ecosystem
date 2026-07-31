@@ -152,7 +152,7 @@ After significant activation, capture the arc. Not for productivity. For pattern
 | Practice | Capture Surface |
 |---|---|
 | Quest work | Quest Activity Log entry |
-| Body or movement practice | Experiment log entry |
+| Body or movement practice | Quest Activity Log entry |
 | Coaching session | Coaching session log in `Library/` |
 | Solo voice-note | Transcript in `Library/Transcripts/Solo/` |
 | Major arc | Weekly Story |

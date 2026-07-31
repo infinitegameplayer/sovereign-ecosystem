@@ -37,7 +37,7 @@ Scope: `Scriptorium/` drafts for article, social and strategy formats.
 
 ## Entry Triggers
 Drafting may begin from:
-- Spark in `Inbox/`
+- Captured idea in `Inbox/`
 - Quest requirement in `Explorations/Quests/`
 - Transcript or reference material in `Library/`
 - Strategy collaboration brief

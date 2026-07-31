@@ -97,7 +97,6 @@ Open:
 
 Now let the system help answer:
 - is this a quick to-do?
-- is this a Spark?
 - is this an InboxItem that needs more thought?
 - is this actually pointing toward a Pending Plan, Quest, or something larger?
 

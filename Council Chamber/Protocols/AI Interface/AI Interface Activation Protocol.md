@@ -20,7 +20,7 @@ Purpose: Bring {{AI_INTERFACE_NAME}} online with governed context, explicit cons
    - `[[Sovereign Command]]`. The minimal live-signal glance of what is most alive.
    - The recent git commit bodies (`git log`). Backward callbacks for meta-awareness. Use gap-adaptive tier logic (see below).
    - `[[Library/North Star]]`. Background orientation only. Do not prompt unless explicitly requested.
-   - Active quests/experiments (if any)
+   - Active quests (if any)
 
    **Gap-Adaptive Tier Logic** (gap = today's date minus most recent commit date):
    | Tier | Gap | Depth | Sources |
@@ -60,7 +60,7 @@ Purpose: Bring {{AI_INTERFACE_NAME}} online with governed context, explicit cons
      - Propose routing per Transcript Inbox Protocol; no auto-ingest
      - Update sync state only after approved ingestion completes
    - Active focus visibility check:
-     - Surface active quests/experiments that materially affect today's move
+     - Surface active quests that materially affect today's move
    - Inbox index drift (only if it affects current visibility):
      - Compare `Inbox/Index.md` listings to current `Inbox/` contents
      - Propose index updates (no execution unless approved)

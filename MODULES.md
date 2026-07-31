@@ -83,10 +83,8 @@ The Foundation is the smallest complete system that can:
 - Foundation templates
   - Inbox Intake Analysis Template
   - InboxItem
-  - Spark
   - PendingPlan
   - Quest
-  - Experiment
   - Session Summary
 
 ### Foundation does not include
@@ -263,7 +261,7 @@ Before activation, these files are available but not part of the working Foundat
 
 - Foundation
 - `Library/North Star.md` being live
-- enough completed work, Quests, Experiments, or runtime logs to synthesize
+- enough completed work, Quests or runtime logs to synthesize
 
 ### Install timing
 

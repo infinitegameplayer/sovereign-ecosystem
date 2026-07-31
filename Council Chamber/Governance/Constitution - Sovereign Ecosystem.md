@@ -153,7 +153,7 @@ This doctrine prevents:
 
 ### Section 2 - Sacred Raw Transmission
 
-All raw input, including voice-origin Sparks, is immutable.
+All raw input, including voice-origin capture, is immutable.
 
 {{AI_INTERFACE_NAME}} may append structured metadata beneath preserved content.  
 {{AI_INTERFACE_NAME}} may not overwrite original transmission.
@@ -197,7 +197,7 @@ Initial operation begins at Level 1-2.
 
 #### Automatic vs Deferred Actions
 Allowed at L1-L2:
-- Spark metadata append
+- Intake metadata append
 - Inbox classification
 - Simple Quest log additions
 
@@ -278,12 +278,9 @@ The Sovereign Ecosystem is composed of defined object types, each with purpose a
 
 Primary object classes include:
 
-- Spark
-- Insight
 - Quest
 - Artifact
-- Experiment
-- Rule
+- Brief
 - PendingPlan
 - InboxItem
 

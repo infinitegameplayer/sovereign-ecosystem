@@ -42,7 +42,7 @@ Sovereign Command is a note-first operational surface for:
 - daily / weekly focus visibility
 - approval decisions waiting on the Sovereign
 - selected collaboration action visibility
-- selected Exploration / Quest / Experiment next-step visibility
+- selected Exploration / Quest next-step visibility
 - high-signal Inbox / routing reminders
 
 ## Out of Scope (V1)
@@ -93,7 +93,7 @@ Sections are omitted when the source lane has no live candidate. Omission is alw
 
 ### Optional: Primary Lane (appear only when a live candidate exists)
 - `Your Creative or Business Work`: when a project, build or business initiative has a live candidate beyond the primary move
-- `Explorations / Quests / Experiments`: when an active quest or experiment has a promotable next step
+- `Explorations / Quests`: when an active quest has a promotable next step
 - `Collaboration Actions`: when a collaboration has a live command-surface candidate
 
 ### Optional: Secondary Lane (appear only when a live candidate exists)

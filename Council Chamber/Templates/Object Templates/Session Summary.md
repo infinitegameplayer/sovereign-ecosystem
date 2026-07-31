@@ -29,5 +29,4 @@ Purpose: Lightweight summary structure for session closeouts.
 ## Reconciliation Summary
 - Pending Plans: 
 - Quests: 
-- Experiments: 
 - Intake items: 

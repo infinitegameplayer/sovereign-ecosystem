@@ -16,8 +16,8 @@ Purpose: Single source of truth for Quest activation, lifecycle and transition p
 - A review point defined.
 
 ## Not a Quest (redirect)
-- Purely exploratory ideas with no intended outcome (keep as Spark).
-- General topics with no action sequence (keep as Library or Insight).
+- Purely exploratory ideas with no intended outcome (keep in `Inbox/`).
+- General topics with no action sequence (keep in `Library/`).
 - Administrative governance changes without a plan (route to PendingPlan).
 - Sovereign Ecosystem/{{AI_INTERFACE_NAME}} implementation work (protocol/skill/template/system changes) that is primarily internal to the Sovereign Ecosystem (route to PendingPlan).
 
@@ -28,7 +28,7 @@ Purpose: Single source of truth for Quest activation, lifecycle and transition p
 - First action step.
 - Owner.
 - Next review date.
-- Source or links (if derived from Spark or other notes).
+- Source or links (if derived from intake or other notes).
 - Initial logging structure populated (Quest Activity Log + In-World Progress + Sovereign Ecosystem/AI Progress + Learnings/Evidence sections).
 - Trifecta Reflection (required):
   - Subconscious Field
@@ -115,7 +115,7 @@ Note: Status updates are sufficient for Obsidian filtering. For cleaner active v
     - `Practical Contribution / Wealth Potential`
 - Keep this section short and qualitative.
 - It is recommended in the current phase, not required for Quest activation.
-- Not every field action requires an Experiment note. Create an Experiment only when a hypothesis/method/result structure is useful.
+- Not every field action needs a hypothesis/method/result structure. Log one inside the Quest when it earns its place.
 
 ## Dataview-Friendly Progress Tags (Optional, Recommended)
 - Add lightweight tags to Quest progress entries for cross-Quest filtering:

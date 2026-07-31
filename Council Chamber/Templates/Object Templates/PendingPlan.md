@@ -51,7 +51,7 @@ ring:
 - What changed in risk, scope or timing?
 
 ## Evidence / Implementation Refs
-- Links to artifacts, protocols, codices, quests, experiments or session logs that affect this plan.
+- Links to artifacts, protocols, codices, quests or session logs that affect this plan.
 
 ## Reconciliation Notes (Proposal-Only)
 - Candidate resolution: Implemented / Partially Implemented / Not Implemented

@@ -4,27 +4,11 @@ Purpose: Define the core object types used in the Sovereign Ecosystem, their int
 
 Note: Tiered contrast metadata applies to foundational objects per [[Council Chamber/Codices/Contrast Layer Codex]].
 
-## Spark
-Purpose: Capture emergent ideas in raw form.
-Characteristics:
-- Raw content preserved
-- Timestamped
-- Source tagged
-- Metadata appended below raw content
-Lifecycle: Emerge -> Incubate -> Distill -> Activate (optional)
-
-## Insight
-Purpose: Distilled, non-transient conceptual realization.
-Characteristics:
-- Linked to domains or themes
-- May reference Sparks or Experiments
-Lifecycle: Capture -> Distill -> Integrate
-
 ## Quest
 Purpose: Structured Sovereign-facing action initiative with intent (field actions, practices, builds, experiments or embodied pursuits).
 Characteristics:
 - Clear objective
-- Linked Sparks and Artifacts
+- Linked Artifacts
 - Status field and review cadence
 - Tracks meaningful in-world execution, even when Sovereign Ecosystem/AI support work is also logged
 Lifecycle: Candidate -> Active -> Stalled -> Completed -> Retired
@@ -37,20 +21,10 @@ Characteristics:
 - May be exported to collaboration buildings
 Lifecycle: Produce -> Refine -> Distribute -> Archive (optional)
 
-## Experiment
-Purpose: Track structured experimentation.
-Fields: Hypothesis, Method, Result, Lessons, Next iteration.
-Lifecycle: Hypothesis -> Method -> Result -> Lesson -> Next Iteration
-
 ## Brief
 Purpose: Condensed summary of a larger body of work.
 Use: Quick review, external sharing, context handoff.
 Lifecycle: Draft -> Refine -> Share -> Archive (optional)
-
-## Rule
-Purpose: Encode governance constraints.
-Examples: Raw preservation, Plan -> Consent -> Execute, metadata standards, trust thresholds.
-Lifecycle: Draft -> Ratify -> Enforce -> Revise
 
 ## PendingPlan
 Purpose: Hold proposed Sovereign Ecosystem/{{AI_INTERFACE_NAME}} implementation actions requiring approval.
@@ -66,16 +40,8 @@ Lifecycle: Proposed -> Approved -> Executed -> Logged
 Purpose: Temporary holding structure for intake.
 Characteristics:
 - Short-lived
-- Routed into Spark, Quest update, Artifact, Experiment or PendingPlan
+- Routed into Quest update, Artifact, Brief or PendingPlan
 Lifecycle: Capture -> Classify -> Convert -> Clear
 
-
-
-
-
-
-
-
-
-
-
+## On adding your own classes
+Five classes is the floor this ecosystem runs on, not a ceiling. Add a class when you have notes that already behave like one and the existing five describe them badly. A class declared ahead of that becomes a concept nobody instantiates, which costs more than the gap it was meant to fill.

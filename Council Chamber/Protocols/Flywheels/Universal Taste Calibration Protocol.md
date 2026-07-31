@@ -13,11 +13,11 @@ clarity_triggers:
 
 Purpose: Define the Sovereign Ecosystem-wide protocol for establishing, evaluating, evolving and approving Universal and Domain Taste Profiles over time.
 
-Scope: Ongoing operation across quests, experiments, domains and archival review cycles. This protocol remains valid whether Taste work is executed through a dedicated Quest or embedded in other governance workflows (e.g., Flywheel review, domain pilots).
+Scope: Ongoing operation across quests, domains and archival review cycles. This protocol remains valid whether Taste work is executed through a dedicated Quest or embedded in other governance workflows (e.g., Flywheel review, domain pilots).
 
 ## Protocol Role (vs Quest Role)
 - This protocol defines stable taste governance logic, decision criteria and approval rules.
-- Execution tasks, sequencing and current pilot work belong in active Quests and related Experiments.
+- Execution tasks, sequencing and current pilot work belong in active Quests.
 
 ## Core Taste Layers
 1. Universal Taste Profile
@@ -60,7 +60,7 @@ Used during calibration runs (including Quest Mode) only. After completion, they
 ## Baseline Inputs (Recommended)
 - Universal Taste Profile baseline codex (your Universal Taste Profile Codex)
 - Domain-specific codices and taste notes (e.g., Expression codices and Golden Artifacts)
-- Pilot Experiments captured in `Explorations/Experiments/Index`
+- Pilot runs captured in the relevant Quest log
 
 ## Evaluation Signals (Recommended)
 - Structural coherence
