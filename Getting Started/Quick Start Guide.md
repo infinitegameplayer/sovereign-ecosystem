@@ -50,10 +50,10 @@ VS Code is a code editor with a file tree, built-in terminal and extensions. It 
 
 **Option B: Claude Code App**
 
-The Claude Code app is a standalone desktop app. Simpler interface, no code editor to learn. It opens folders as projects and reads your files directly. Good for someone who wants the AI conversation without the editor.
+Claude Code also lives inside the Claude desktop app as its **Code** tab. Simpler interface, no code editor to learn. It opens folders as projects and reads your files directly. Good for someone who wants the AI conversation without the editor.
 
-1. Go to [claude.ai/code](https://claude.ai/code) and download the desktop app
-2. Install and confirm it opens
+1. Go to [claude.com/download](https://claude.com/download) and download the Claude desktop app
+2. Install, sign in and click the **Code** tab. Confirm it opens
 
 Either option reads and writes files in your workspace. VS Code gives you more tools around the conversation. The Claude Code app gives you a cleaner, focused interface. Both work.
 
@@ -86,7 +86,7 @@ Either option reads and writes files in your workspace. VS Code gives you more t
 ### Anthropic Account
 
 1. Go to [claude.ai](https://claude.ai) and create an account
-2. The free tier works to start. Claude Pro ($20/month) removes usage limits
+2. Subscribe to Claude Pro ($20/month) or higher. Claude Code runs on a paid plan; the free account covers the claude.ai chat website only
 3. This is the account you will sign into from VS Code or the Claude Code app
 
 ---
@@ -113,10 +113,9 @@ Either option reads and writes files in your workspace. VS Code gives you more t
 
 **If you chose Claude Code App (Option B):**
 
-1. Open the Claude Code app
-2. Open your ecosystem folder as a project
-3. Log in with your Anthropic account
-4. Confirm Claude Code loads and can see your files
+1. Open the Claude desktop app and click the **Code** tab
+2. Choose **Local** and select your ecosystem folder
+3. Confirm Claude Code loads and can see your files
 
 ### Git Permissions (Windows only)
 
@@ -151,6 +150,8 @@ Either option reads and writes files in your workspace. VS Code gives you more t
 **VS Code opens wrong folder.** Click the folder once to select, then click Open. Do not double-click.
 
 **Claude Code app cannot find files.** Make sure you opened the ecosystem folder as a project, not a subfolder inside it.
+
+**Code tab asks you to upgrade.** Your account is on the free tier. Claude Code needs Pro or higher. Subscribe at claude.ai, then restart the app.
 
 ---
 

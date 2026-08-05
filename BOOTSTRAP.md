@@ -87,6 +87,7 @@ The platform answer routes the next move.
 - On Mac or Linux, make the scripts executable with `chmod +x "Council Chamber/scripts/hooks/"*.sh`.
 - If the Sovereign already has their own `.claude/settings.json` customizations, merge rather than overwrite.
 - Tell the Sovereign a restart of Claude Code is needed for hook registration to take effect.
+- **Link the shipped skills.** Run `node "Council Chamber/scripts/link-skills.mjs"` from the vault root. It links every skill in `Council Chamber/Skills/` into `.claude/skills/` so the interface can invoke them, it is safe to run again any time and it reports what it did. A download carries no links, so a fresh vault always needs this once. For a Codex setup, add `--codex`.
 
 The hooks are non-blocking and safe. They log rather than error. The full rationale lives in `UPDATES/2026-06-10-v2.11.0-harvest-sync.md` and the hook scripts themselves at `Council Chamber/scripts/hooks/`.
 
@@ -110,7 +111,7 @@ Four actions to close.
 
    > **Bootstrap complete (2026-06-10).** Ecosystem named, AI interface named, timezone recorded, platform set, governance depth chosen. Next session: open `Getting Started/Session 1 - Vault Initialization and Adapter Setup.md`. The deep path lives in the Getting Started folder.
    >
-   > When you outgrow the Foundation, the public library at https://www.infinitegameos.io/skills has 28 skills and 7 bundles, installable one command at a time.
+   > When you outgrow the Foundation, the public library at https://www.infinitegameos.io/skills has 27 skills and 7 bundles, installable one command at a time.
 
 2. **Seed the auto-memory (Claude Code only).** If your platform maintains the file-based memory described in `.claude/CLAUDE.md` (auto memory section), write the starting point now, so the next session opens already knowing who it works for. Two memories, each with the frontmatter shape from that section, each indexed with one line in `MEMORY.md`:
 

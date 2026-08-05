@@ -78,6 +78,22 @@ jobs:
       - name: Skill mirrors on a fresh checkout
         run: node "Council Chamber/scripts/check-skill-mirrors.mjs"
 
+      # The linker is the other half of the mirror checker: one creates what
+      # the other verifies. Its control proves creation, idempotence, repair
+      # and the loud failure on an empty vault, then hands its linked fixture
+      # to the real checker so the two instruments are proven against each
+      # other rather than each against its own opinion.
+      - name: Skill linker positive control
+        run: node "Council Chamber/scripts/link-skills-selftest.mjs"
+
+      # End to end on this checkout: link every canonical skill, then run the
+      # drift checker over the result. The linker must produce a state the
+      # checker calls clean, on the real skill set rather than a fixture.
+      - name: Linker output satisfies the checker on a real checkout
+        run: |
+          node "Council Chamber/scripts/link-skills.mjs"
+          node "Council Chamber/scripts/check-skill-mirrors.mjs"
+
       # Every hook must at minimum survive being handed a payload without
       # crashing. A hook that dies on a fresh clone is the recipient's first
       # impression of this project.

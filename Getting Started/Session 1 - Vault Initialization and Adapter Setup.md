@@ -63,26 +63,42 @@ Create the equivalent anchor file for your tool. The minimum it should do:
 - point the AI toward the governance files
 - make clear that vault files are the source of truth, not chat memory
 
-## Step 3 - Confirm `.claude/` Support Structure
+## Step 3 - Link the Shipped Skills
 
 The `.claude/` folder ships with the Foundation.
 Open it and confirm it contains `CLAUDE.md`.
 
-To make skills available as slash commands, you will link them using your operating system's symlink mechanism. Do this now or after Session 4 once the full skills list is clear.
+The Foundation also ships a full set of skills in `Council Chamber/Skills/`. Your AI interface discovers them through `.claude/skills/`, and those links are local objects that a download does not carry. One script creates all of them at once.
 
-**Windows (run Command Prompt as Administrator):**
+In your terminal (VS Code: **Terminal > New Terminal**, or the Claude Code app's built-in terminal), run:
+
 ```
+node "Council Chamber/scripts/link-skills.mjs"
+```
+
+You can also simply ask your AI interface to run it for you.
+
+The script is safe to run any number of times. When a new skill arrives later, run it again and only the new skill is linked. Using Codex? Add `--codex` to also link `.codex/skills/`.
+
+To verify the links at any time:
+
+```
+node "Council Chamber/scripts/check-skill-mirrors.mjs"
+```
+
+Prefer to link by hand, one skill at a time? Create the folder first, then link from the vault root:
+
+**Windows (Command Prompt):**
+```
+mkdir ".claude\skills"
 mklink /J ".claude\skills\Session Closeout" "Council Chamber\Skills\Session Closeout"
 ```
 
 **Mac or Linux:**
 ```
-ln -s "Council Chamber/Skills/Session Closeout" ".claude/skills/Session Closeout"
+mkdir -p ".claude/skills"
+ln -s "$(pwd)/Council Chamber/Skills/Session Closeout" ".claude/skills/Session Closeout"
 ```
-
-Repeat for each skill you want available as a command. Start with just Session Closeout for now. You can add others in Session 4 once you know which skills you will use regularly.
-
-If you are not yet sure which skills matter, skip the symlinks for now and come back after Session 4.
 
 ## Step 4 - Confirm Adapter Boundaries
 

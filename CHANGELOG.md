@@ -6,6 +6,25 @@ Each entry corresponds to one publish cycle. For full implementation details, se
 
 ---
 
+## v3.9.0, 2026-08-05
+
+Present and Unreachable.
+
+**One action if you installed any earlier version:** run `node "Council Chamber/scripts/link-skills.mjs"` once from your vault root. It links every shipped skill into `.claude/skills/` so your AI interface can invoke them. Nothing breaks if you skip it; your vault simply stays as it was, with the skills present and unreachable. Details in `UPDATES/2026-08-05-v3.9.0-present-and-unreachable.md`.
+
+### The headline
+
+The Foundation has always shipped its full skill set, and every fresh install has arrived with those skills undiscoverable, because links are local objects a download does not carry. A new proven script, `link-skills.mjs`, creates all of them in one pass: junctions on Windows with no administrator rights, symlinks on Mac and Linux, idempotent, self-repairing. It ships with a five-case positive control, and CI now links the real checkout and requires the existing drift checker to call the result clean, so the creating instrument and the verifying instrument are proven against each other.
+
+### Also in this release
+
+- Session 1 Step 3 runs the script instead of per-skill manual commands. The old manual instruction failed on a fresh install (missing parent folder, an administrator requirement that was never real and a Mac link that pointed at nothing). The corrected manual path stays as an alternative.
+- BOOTSTRAP links the skills during platform setup, so wizard users never meet the step.
+- The install guides catch up with the platforms they describe: Claude Code requires Pro or higher (the free-tier path no longer exists), the desktop app downloads at claude.com/download with Claude Code as its Code tab, and a new Common Issues entry covers the upgrade prompt.
+- README and BOOTSTRAP now agree with the live library registry: 27 skills, 7 bundles.
+- Both guide PDFs rebuilt from current sources. The shipped copies had been built before the July em dash sweep and carried the old headings on every surface, including the live downloads.
+- `framework-manifest.json` classifies the new script pair as framework and picks up the mirror-checker pair that had shipped unclassified.
+
 ## v3.8.0, 2026-07-31
 
 Four Classes the Author Abandoned.
