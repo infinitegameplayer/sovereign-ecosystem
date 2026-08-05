@@ -25,6 +25,8 @@ The Foundation has always shipped its full skill set, and every fresh install ha
 - Both guide PDFs rebuilt from current sources. The shipped copies had been built before the July em dash sweep and carried the old headings on every surface, including the live downloads.
 - `framework-manifest.json` classifies the new script pair as framework and picks up the mirror-checker pair that had shipped unclassified.
 
+**Corrected later the same day.** Both guide PDFs carried a document title naming a different product, which is the name a PDF reader shows in its tab rather than the filename. Fixed in the build pipeline, which now stamps the title, reads it back off disk and refuses to finish on a mismatch. Both guides rebuilt. Document text unchanged.
+
 ## v3.8.0, 2026-07-31
 
 Four Classes the Author Abandoned.
