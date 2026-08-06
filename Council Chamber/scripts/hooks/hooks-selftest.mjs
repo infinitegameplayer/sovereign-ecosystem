@@ -70,6 +70,13 @@ const NEGATIVE = process.argv.includes('--negative-control');
 const VAULT = mkdtempSync(path.join(os.tmpdir(), 'se-hooks-')).replace(/\\/g, '/');
 mkdirSync(path.join(VAULT, 'Council Chamber', 'Skills', 'Demo'), { recursive: true });
 mkdirSync(path.join(VAULT, 'Scriptorium'), { recursive: true });
+// The fixture builds .runtime itself rather than inheriting it from a hook.
+// Before the primer moved out of the root, writing it needed no directory at
+// all. Once it moved, the positive run still passed because the pre-compact
+// hook happened to create .runtime first, while the negative run crashed:
+// stubs create nothing. A fixture that depends on the code under test to
+// build itself is not a fixture.
+mkdirSync(path.join(VAULT, '.runtime'), { recursive: true });
 
 // The stub the negative control substitutes for a real hook. It consumes its
 // payload and exits 0 without acting, which is exactly what a dead hook does.
