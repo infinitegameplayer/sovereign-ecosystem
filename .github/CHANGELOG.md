@@ -6,6 +6,26 @@ Each entry corresponds to one publish cycle. For full implementation details, se
 
 ---
 
+## v3.10.0, 2026-08-06
+
+The Root Is Not the Repo.
+
+**Nothing breaks if you skip this, and new installs get it by cloning.** A fresh clone used to open in Obsidian showing 21 items at your vault root, four of which were yours. The rest was the project's paperwork. This release moves it out of the way.
+
+- **One scripts directory.** Root `scripts/` merged into `Council Chamber/scripts/`, which had been shipping beside it the whole time.
+- **Repository furniture moved to `.github/`.** `CONTRIBUTING.md`, `SECURITY.md`, `CODEOWNERS`, `CHANGELOG.md`, `EASTER_EGGS.md` and `UPDATES/`. GitHub reads them there and Obsidian hides dot-folders, so one move satisfies both. The changelog and the update packages moved together, because the changelog points at them about thirty times and they resolve as siblings.
+- **`Primer.md` became `.runtime/primer.md`**, with a `.gitignore` negation so the starter primer still ships while runtime state stays local.
+- **Obsidian config ships pre-enabled.** `.obsidian/snippets/clean-root.css` hides the four files that must stay at root and mean nothing to you. It is on the first time you open the vault, with nothing to activate.
+- **Session 9 gained Step 9**, which archives `Getting Started/` and `MODULES.md` once the sequence is finished and sweeps the references with them. Confirmed before it moves, and nothing is deleted.
+- **Two defects the move surfaced.** A CI shell loop would have split an unquoted path containing a space. And the hooks fixture had been borrowing `.runtime/` from a hook side effect rather than creating it, which the positive run could not see and `--negative-control` crashed on immediately.
+- `AGENTS.md` had claimed v3.2.0 since v3.2.0.
+
+**A finished install shows four containers, Sovereign Command and your To-Do Dock.** That is the whole root.
+
+Apply it whole or not at all, and prove it with the self-tests rather than trusting it worked. Full detail and the implementation spec: `.github/UPDATES/2026-08-06-v3.10.0-the-root-is-not-the-repo.md`.
+
+---
+
 ## v3.9.0, 2026-08-05
 
 Present and Unreachable.

@@ -6,6 +6,7 @@ Run the Ecosystem Update Check Skill to discover which updates apply to your bui
 
 | Date | Type | Optional | Slug | Title |
 |---|---|---|---|---|
+| 2026-08-06 | core | yes | v3.10.0-the-root-is-not-the-repo | v3.10.0 The Root Is Not the Repo. A Fresh Install Opens to Your Vault Instead of the Project's Paperwork |
 | 2026-08-05 | core | no | v3.9.0-present-and-unreachable | v3.9.0 Present and Unreachable. Every Shipped Skill Becomes Invocable, and the Manual Catches Up With the World |
 | 2026-07-31 | core | no | v3.8.0-four-classes-the-author-abandoned | v3.8.0 Four Classes the Author Abandoned. The Object Model Drops to Five |
 | 2026-07-31 | core | no | v3.7.0-the-receiver-is-not-the-deletion | v3.7.0 The Receiver Is Not the Deletion. A Node Bypass Closed, and Two Checkers Taught About Day One |

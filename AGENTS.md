@@ -4,7 +4,7 @@
 
 **Name:** Sovereign Ecosystem
 **Type:** Open-source personal operating system template
-**Version:** v3.2.0 (see .github/CHANGELOG.md and .github/UPDATES/ for the release log)
+**Version:** v3.10.0 (see .github/CHANGELOG.md and .github/UPDATES/ for the release log)
 **License:** MIT
 **Primary language:** Markdown (vault content), JavaScript/Node.js (scripts)
 **Repo:** https://github.com/infinitegameplayer/sovereign-ecosystem

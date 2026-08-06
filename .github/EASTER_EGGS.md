@@ -4,6 +4,7 @@ Hidden notes in update packages. Enough to remember, not enough to spoil.
 
 | Date | Slug | Description |
 |---|---|---|
+| 2026-08-06 | v3.10.0-the-root-is-not-the-repo | the difference between hiding a pile and moving it, admitted in one line |
 | 2026-08-05 | v3.9.0-present-and-unreachable | the full shelf with no door: every reader who typed a slash and saw nothing was standing in front of it |
 | 2026-07-10 | v3.3.0-governance-and-security-hardening | the instrument's first catch: the orphan detector found its own logbook |
 | 2026-07-10 | v3.2.0-connectivity-seam-and-repo-hygiene | the scar that described itself: the wound was living in the sentence about the wound |
