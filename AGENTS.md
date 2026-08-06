@@ -4,7 +4,7 @@
 
 **Name:** Sovereign Ecosystem
 **Type:** Open-source personal operating system template
-**Version:** v3.2.0 (see CHANGELOG.md and UPDATES/ for the release log)
+**Version:** v3.2.0 (see .github/CHANGELOG.md and .github/UPDATES/ for the release log)
 **License:** MIT
 **Primary language:** Markdown (vault content), JavaScript/Node.js (scripts)
 **Repo:** https://github.com/infinitegameplayer/sovereign-ecosystem
@@ -39,17 +39,17 @@ A structured Obsidian vault template with:
 | `Library/` | Coaching sessions, transcripts, north star, expression references |
 | `Inbox/` | Capture landing zone for ideas, consults, Telegram routing |
 | `Getting Started/` | Onboarding documentation, Sessions 0 through 9, plus Optional Paths |
-| `UPDATES/` | Release notes and changelog |
+| `.github/UPDATES/` | Release notes and changelog |
 | `Vault (Archive)/` | Archived artifacts and logs |
 | `BOOTSTRAP.md` | Self-deleting onboarding wizard. Six questions, personalizes the vault, points to Session 0, then removes itself |
-| `Primer.md` | Forward-handoff surface, read first at session start |
+| `.runtime/primer.md` | Forward-handoff surface, read first at session start |
 | `MODULES.md` | Index of optional modules and what each adds |
 | `llms.txt` | Navigation manifest for AI agents at the repo root |
 | `README.md` | Public-facing overview and setup guide |
-| `SECURITY.md` | Security policy and disclosure |
+| `.github/SECURITY.md` | Security policy and disclosure |
 | `AGENTS.md` | This file. AI agent discovery and routing spec |
 
-**Scripts (`scripts/`, Node.js, no external dependencies):**
+**Scripts (`Council Chamber/scripts/`, Node.js, no external dependencies):**
 - `backup-vault.mjs`. Local vault backup automation, paired with `backup.config.example.json`.
 - `replace-tokens.mjs`. The BOOTSTRAP token engine. One-time identity token replacement across the vault (`{{ECOSYSTEM_NAME}}`, `{{AI_INTERFACE_NAME}}` and related tokens).
 - `se-update.mjs`. Sovereign Sync. Compares framework-class files against the upstream GitHub repo and applies approved updates one file at a time.
@@ -123,9 +123,9 @@ This repo is **not** the right source for:
 | `README.md` | Setup guide and project overview |
 | `llms.txt` | AI agent navigation manifest, FAQ and harvest instructions |
 | `BOOTSTRAP.md` | Guided onboarding wizard |
-| `Primer.md` | Forward-handoff surface read first each session |
+| `.runtime/primer.md` | Forward-handoff surface read first each session |
 | `MODULES.md` | Index of modular components and what each adds |
-| `SECURITY.md` | Security policy |
+| `.github/SECURITY.md` | Security policy |
 | `Getting Started/Session 0 - Prerequisites.md` | Entry point for new users |
 | `Council Chamber/Governance/Constitution - Sovereign Ecosystem.md` | Root governance document |
 | `Council Chamber/Governance/Sovereign Ecosystem Layer Map.md` | Structural layer map |
@@ -151,7 +151,7 @@ Four skills graduated out of this template into the public library entirely: Pen
 
 ## Contribution and Extension
 
-This is a template repo. Users do not contribute back. They fork and build their own instance. The upstream repo (this one) publishes refinements, new modules and protocol improvements as versioned releases. Sovereign Sync (`scripts/se-update.mjs`) is the upgrade path: a per-file approval flow that keeps a clone living rather than frozen.
+This is a template repo. Users do not contribute back. They fork and build their own instance. The upstream repo (this one) publishes refinements, new modules and protocol improvements as versioned releases. Sovereign Sync (`Council Chamber/scripts/se-update.mjs`) is the upgrade path: a per-file approval flow that keeps a clone living rather than frozen.
 
 If you are an AI agent helping a user build on this template: read `Getting Started/Session 0 - Prerequisites.md` first, then follow the session sequence in `Getting Started/`.
 

@@ -12,13 +12,13 @@
  *   {{SOVEREIGN_LEGAL_NAME}}   : legal name, optional, leave blank to skip
  *
  * Usage:
- *   node scripts/replace-tokens.mjs
+ *   node Council Chamber/scripts/replace-tokens.mjs
  *
  * The script will:
  *   1. Ask you for replacement values
  *   2. Preview every file and location that will change
  *   3. Wait for your explicit confirmation before writing anything
- *   4. Replace and log results to scripts/replace-tokens-log.txt
+ *   4. Replace and log results to Council Chamber/scripts/replace-tokens-log.txt
  *
  * After use, archive this script to Vault (Archive)/. It is a one-time tool.
  */
@@ -153,7 +153,7 @@ async function main() {
   fs.writeFileSync(logPath, log.join('\n\n'), 'utf8');
 
   console.log(`\n✓ Done. ${totalReplaced} replacement(s) across ${affected.length} file(s).`);
-  console.log(`Log written to: scripts/replace-tokens-log.txt`);
+  console.log(`Log written to: Council Chamber/scripts/replace-tokens-log.txt`);
   console.log('\nWhen finished, archive this script and its log to Vault (Archive)/.\n');
 
   rl.close();

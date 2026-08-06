@@ -24,7 +24,7 @@ Purpose: Map the codices currently shipped in the Sovereign Ecosystem Foundation
 - [[Council Chamber/Codices/Sovereignty/Living Axis of Sovereignty]]. Three-layer framework for principled, durable sovereign operating systems: Ṣaṭsthala (inner mastery), Svarāja (structural sovereignty), Ṣāḍguṇya (strategic engagement). Philosophical anchor for the three Living Axis doctrine protocols.
 
 ## Technology
-- [[Council Chamber/Codices/External Model Routing Codex]]. Single source of truth for external model provider dispatch. Provider table, env-var slots, Worker-Eligible Task Taxonomy and Model Era Notes. Governs `scripts/external-worker.mjs`.
+- [[Council Chamber/Codices/External Model Routing Codex]]. Single source of truth for external model provider dispatch. Provider table, env-var slots, Worker-Eligible Task Taxonomy and Model Era Notes. Governs `Council Chamber/scripts/external-worker.mjs`.
 - [[Council Chamber/Codices/Technology/Sovereign Software Codex]]. The posture on software you may one day hand to someone else. Positive control travels with the guard, the clean clone is the only witness, ship spec plus test never a diff.
 - [[Council Chamber/Codices/Technology/Engineering Codex]]. Standards for all code work in the ecosystem. Plan, build, verify, upgrade, and the return arrow that turns a solved bug into a durable note.
 

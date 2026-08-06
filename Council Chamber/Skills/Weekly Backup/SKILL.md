@@ -14,16 +14,16 @@ clarity_triggers:
 
 Purpose: Execute the end-of-week vault backup ritual with connective visibility - run the backup, confirm the log entry was written, and report results to the Sovereign.
 Trigger: End of week (Friday preferred). Also invokable on demand.
-Inputs: None required. Local backup configuration lives in `scripts/backup.config.json`, created from `scripts/backup.config.example.json`.
+Inputs: None required. Local backup configuration lives in `Council Chamber/scripts/backup.config.json`, created from `Council Chamber/scripts/backup.config.example.json`.
 Outputs: Terminal output from backup script, confirmed log entry in `Vault (Archive)/Sovereign Ecosystem Backup Log.md`, summary report to user.
 Status: active
 Related Protocols/Codices: [[Council Chamber/Protocols/Archival/Backup Protocol]]
 
 ## Steps
 
-1. Verify that `scripts/backup.config.json` exists. If it does not, copy `scripts/backup.config.example.json` to `scripts/backup.config.json` and set `BACKUP_PATH` before proceeding.
+1. Verify that `Council Chamber/scripts/backup.config.json` exists. If it does not, copy `Council Chamber/scripts/backup.config.example.json` to `Council Chamber/scripts/backup.config.json` and set `BACKUP_PATH` before proceeding.
 2. Confirm that `BACKUP_PATH` is non-empty and no longer set to the example placeholder.
-3. Run `node scripts/backup-vault.mjs` from the vault root. Capture terminal output.
+3. Run `node Council Chamber/scripts/backup-vault.mjs` from the vault root. Capture terminal output.
 4. Confirm that a new entry was appended to `Vault (Archive)/Sovereign Ecosystem Backup Log.md` by reading the last log entry and verifying today's date is present.
 5. Report to the user: backup date, files copied, total size, destination path, duration. Use the log entry as the source of truth for these values.
 6. Optional: run `git status` in the vault root and surface any untracked or modified files as a brief note - not a gate, just ambient awareness.

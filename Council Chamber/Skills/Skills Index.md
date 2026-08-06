@@ -22,7 +22,7 @@ Fields:
 - Self-Healing (active, tier: foundational)
 - Session Closeout (active, tier: foundational)
 - Source Harvest (active, tier: operational): Systematic pattern extraction from external repos at source level. Adopt/Enrich/Defer/Ignore classification.
-- Sovereign Sync (active, tier: foundational). Conversational layer over `scripts/se-update.mjs`. Presents the upstream framework change list, mediates per-file approval and bookends the sync with one commit. Keeps a clone living rather than frozen.
+- Sovereign Sync (active, tier: foundational). Conversational layer over `Council Chamber/scripts/se-update.mjs`. Presents the upstream framework change list, mediates per-file approval and bookends the sync with one commit. Keeps a clone living rather than frozen.
 - Systematic Debugging (active, tier: foundational)
 - Weekly Backup (active, tier: foundational)
 - Weekly Story (active, tier: operational)

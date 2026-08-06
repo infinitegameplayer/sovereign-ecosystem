@@ -6,10 +6,10 @@
  * applies approved updates one file at a time.
  *
  * Usage:
- *   node scripts/se-update.mjs --check
- *   node scripts/se-update.mjs --diff "<path>"
- *   node scripts/se-update.mjs --apply "<path>"
- *   node scripts/se-update.mjs --force-seeded "<path>"
+ *   node Council Chamber/scripts/se-update.mjs --check
+ *   node Council Chamber/scripts/se-update.mjs --diff "<path>"
+ *   node Council Chamber/scripts/se-update.mjs --apply "<path>"
+ *   node Council Chamber/scripts/se-update.mjs --force-seeded "<path>"
  *
  * Exit codes:
  *   0  success
@@ -63,7 +63,7 @@ function gitSilent(args) {
 // Load and return the manifest.
 function loadManifest() {
   if (!existsSync(MANIFEST_PATH)) {
-    fail('scripts/framework-manifest.json not found. Run from the vault root or check your installation.');
+    fail('Council Chamber/scripts/framework-manifest.json not found. Run from the vault root or check your installation.');
   }
   return JSON.parse(readFileSync(MANIFEST_PATH, 'utf8'));
 }
@@ -249,8 +249,8 @@ function modeCheck() {
   console.log(`Summary: ${frameworkTotal} framework, ${seededTotal} seeded, ${userTotal} user path(s) differ from upstream.`);
   console.log('');
   console.log('Next steps:');
-  console.log('  Review a file:   node scripts/se-update.mjs --diff "<path>"');
-  console.log('  Apply a file:    node scripts/se-update.mjs --apply "<path>"');
+  console.log('  Review a file:   node Council Chamber/scripts/se-update.mjs --diff "<path>"');
+  console.log('  Apply a file:    node Council Chamber/scripts/se-update.mjs --apply "<path>"');
 }
 
 function printChangeList(classChanges) {
@@ -266,7 +266,7 @@ function printChangeList(classChanges) {
 }
 
 function modeDiff(targetPath) {
-  if (!targetPath) fail('--diff requires a file path. Example: node scripts/se-update.mjs --diff "Council Chamber/Protocols/Session/Session Closeout Protocol.md"');
+  if (!targetPath) fail('--diff requires a file path. Example: node Council Chamber/scripts/se-update.mjs --diff "Council Chamber/Protocols/Session/Session Closeout Protocol.md"');
 
   assertGitRepo();
 
@@ -304,7 +304,7 @@ function modeDiff(targetPath) {
 }
 
 function modeApply(targetPath) {
-  if (!targetPath) fail('--apply requires a file path. Example: node scripts/se-update.mjs --apply "Council Chamber/Protocols/Session/Session Closeout Protocol.md"');
+  if (!targetPath) fail('--apply requires a file path. Example: node Council Chamber/scripts/se-update.mjs --apply "Council Chamber/Protocols/Session/Session Closeout Protocol.md"');
 
   assertGitRepo();
 
@@ -352,7 +352,7 @@ function modeApply(targetPath) {
 }
 
 function modeForceSeeded(targetPath) {
-  if (!targetPath) fail('--force-seeded requires a file path. Example: node scripts/se-update.mjs --force-seeded "Council Chamber/Codices/Humor Codex.md"');
+  if (!targetPath) fail('--force-seeded requires a file path. Example: node Council Chamber/scripts/se-update.mjs --force-seeded "Council Chamber/Codices/Humor Codex.md"');
 
   assertGitRepo();
 
@@ -427,10 +427,10 @@ switch (mode) {
     console.log('Sovereign Ecosystem Upstream Sync');
     console.log('');
     console.log('Usage:');
-    console.log('  node scripts/se-update.mjs --check                       Check for upstream framework changes');
-    console.log('  node scripts/se-update.mjs --diff "<path>"               Show diff for one file');
-    console.log('  node scripts/se-update.mjs --apply "<path>"              Apply upstream version of a framework file');
-    console.log('  node scripts/se-update.mjs --force-seeded "<path>"       Apply upstream version of a seeded file (overwrites personalization)');
+    console.log('  node Council Chamber/scripts/se-update.mjs --check                       Check for upstream framework changes');
+    console.log('  node Council Chamber/scripts/se-update.mjs --diff "<path>"               Show diff for one file');
+    console.log('  node Council Chamber/scripts/se-update.mjs --apply "<path>"              Apply upstream version of a framework file');
+    console.log('  node Council Chamber/scripts/se-update.mjs --force-seeded "<path>"       Apply upstream version of a seeded file (overwrites personalization)');
     console.log('');
     console.log('Exit codes: 0 success, 1 error, 2 nothing to do.');
     process.exit(0);

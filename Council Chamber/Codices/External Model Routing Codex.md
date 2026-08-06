@@ -21,9 +21,9 @@ Active providers in scope: OpenRouter, NVIDIA NIM, DeepSeek, Groq. Other provide
 
 ## Accounts and API Keys
 
-Each provider has its own account, its own key acquisition flow and its own env-var slot in `scripts/.env`. Account creation happens before dispatch is live. The Sovereign can pause after any provider.
+Each provider has its own account, its own key acquisition flow and its own env-var slot in `Council Chamber/scripts/.env`. Account creation happens before dispatch is live. The Sovereign can pause after any provider.
 
-Expected environment variable keys (add to `scripts/.env` before first dispatch):
+Expected environment variable keys (add to `Council Chamber/scripts/.env` before first dispatch):
 
 ```
 OPENROUTER_API_KEY=
@@ -39,7 +39,7 @@ GROQ_API_KEY=
 | DeepSeek | `DEEPSEEK_API_KEY` | platform.deepseek.com/api_keys | Unknown. Set at install. |
 | Groq | `GROQ_API_KEY` | console.groq.com/keys | Unknown. Set at install. |
 
-API keys live in `scripts/.env`. The file is gitignored and never enters version control. Key acquisition produces a single-line confirmation that the key is configured. No model calls happen at the key-acquisition step.
+API keys live in `Council Chamber/scripts/.env`. The file is gitignored and never enters version control. Key acquisition produces a single-line confirmation that the key is configured. No model calls happen at the key-acquisition step.
 
 **Payment-method gate.** A provider can issue a working key against a zero-balance account. The key is not a guarantee of functional dispatch. Signup, key acquisition and dispatch are three distinct gates, each with their own payment-method threshold. Paid-tier providers without funded balance cannot enter verification even after key acquisition completes. The first dispatch to a paid provider may return a balance error rather than a model response.
 
@@ -108,9 +108,9 @@ Cross-provider pattern. Every dispatch carries the Ṣāḍguṇya ambassador or
 
 ## Integration Path
 
-Script-based dispatch is the integration mode. The single dispatch entry point is `scripts/external-worker.mjs`. The script behavior:
+Script-based dispatch is the integration mode. The single dispatch entry point is `Council Chamber/scripts/external-worker.mjs`. The script behavior:
 
-- Reads provider credentials from `scripts/.env`.
+- Reads provider credentials from `Council Chamber/scripts/.env`.
 - Dispatches via the provider's OpenAI-compatible or Anthropic-compatible endpoint.
 - Returns structured output to stdout. Plain text by default. JSON when `--format json`.
 - Applies the Ambassador Doctrine sub-agent prompt pattern automatically.
@@ -120,7 +120,7 @@ Script-based dispatch is the integration mode. The single dispatch entry point i
 Invocation shape:
 
 ```
-node scripts/external-worker.mjs \
+node Council Chamber/scripts/external-worker.mjs \
   --provider openrouter \
   --model qwen/qwen3-coder:free \
   --prompt "..." \
@@ -223,7 +223,7 @@ The following providers were assessed and deferred. Each is considered for one o
 This codex sits in the technology cluster of [[Council Chamber/Codices/Codices Index]]. Sibling references:
 
 - Primary Routing Codex. Session model, primary-provider worker tiers, voice-density gates, ad-hoc dispatch posture.
-- External worker dispatch script: `scripts/external-worker.mjs`.
+- External worker dispatch script: `Council Chamber/scripts/external-worker.mjs`.
 - Ambassador Doctrine: [[Council Chamber/Protocols/Governance/Ambassador Doctrine]].
 
 ---
@@ -232,4 +232,4 @@ This codex sits in the technology cluster of [[Council Chamber/Codices/Codices I
 
 - [[Council Chamber/Codices/Codices Index]]
 - [[Council Chamber/Protocols/Governance/Ambassador Doctrine]]
-- `scripts/.env` (gitignored, not in version control)
+- `Council Chamber/scripts/.env` (gitignored, not in version control)

@@ -30,16 +30,16 @@ The Sovereign Ecosystem is a structured Obsidian vault template with an AI inter
 
 - `README.md`: Human setup guide and project overview
 - `AGENTS.md`: AI agent discovery, routing and harvest instructions
-- `CONTRIBUTING.md`: How to contribute upstream (issues, framework pull requests, adaptations)
+- `.github/CONTRIBUTING.md`: How to contribute upstream (issues, framework pull requests, adaptations)
 - `BOOTSTRAP.md`: Guided onboarding wizard at the repo root. A self-deleting six-question setup that personalizes the vault and points to the first session
-- `Primer.md`: Pre-loaded forward handoff surface, read first at session start
+- `.runtime/primer.md`: Pre-loaded forward handoff surface, read first at session start
 - `MODULES.md`: Index of optional modules and what each adds
 - `Getting Started/`: Onboarding session sequence, Sessions 0 through 9, plus Optional Paths including the Obsidian MCP Bridge and Local Inference and Semantic Search
 - `Council Chamber/`: Governance, codices, protocols, skills, templates, scripts. Includes the External Model Routing Codex (external worker dispatch) and the Manuscript Anti-AI Edit Pass skill
 - `.mcp.json.example`: Template MCP config for the optional Obsidian vault bridge, read-only by default
-- `scripts/external-worker.mjs`: Dispatch entry point for secondary external model providers
-- `scripts/doctrine-mass.mjs` and `scripts/doctrine-references.mjs`: Read-only doctrine lifecycle instruments (layer mass counts, inbound-link and orphan detection)
-- `scripts/session-coordination.mjs`: Advisory concurrent-session signal. `scripts/encrypt-stream.mjs`: Optional AES-256-GCM backup encryption
+- `Council Chamber/scripts/external-worker.mjs`: Dispatch entry point for secondary external model providers
+- `Council Chamber/scripts/doctrine-mass.mjs` and `Council Chamber/scripts/doctrine-references.mjs`: Read-only doctrine lifecycle instruments (layer mass counts, inbound-link and orphan detection)
+- `Council Chamber/scripts/session-coordination.mjs`: Advisory concurrent-session signal. `Council Chamber/scripts/encrypt-stream.mjs`: Optional AES-256-GCM backup encryption
 - `Library/`: Reference surfaces, north star, expression references
 - `Inbox/`: Capture landing zone for ideas and routing
 - `Vault (Archive)/`: Archived artifacts and logs
@@ -63,7 +63,7 @@ The Sovereign Ecosystem repo is one node in a four-node web built by Lane Belone
 - [infinitegameos.io](https://infinitegameos.io): Infinite Game OS, the AI-agent-first structured knowledge base
 - [Sovereign Ecosystem on GitHub](https://github.com/infinitegameplayer/sovereign-ecosystem): This repo, the technical and agentic architecture reference
 
-Five Foundation skills are dual-distribution. Source Harvest, Self-Healing, Session Closeout, Playwright and Manuscript Anti-AI Edit Pass ship inside this template and also install as standalone plugins from the Infinite Game OS public library at infinitegameos.io. The template is the full experience. The plugins are individual doors. The template stays current with upstream through the Sovereign Sync skill and `scripts/se-update.mjs`, a per-file approval flow that keeps a clone living rather than frozen.
+Five Foundation skills are dual-distribution. Source Harvest, Self-Healing, Session Closeout, Playwright and Manuscript Anti-AI Edit Pass ship inside this template and also install as standalone plugins from the Infinite Game OS public library at infinitegameos.io. The template is the full experience. The plugins are individual doors. The template stays current with upstream through the Sovereign Sync skill and `Council Chamber/scripts/se-update.mjs`, a per-file approval flow that keeps a clone living rather than frozen.
 
 The full library at infinitegameos.io/skills holds twenty-four installable skills, seven bundles and a governing protocol. Five skills graduated out of this template into the library. Five ship in both homes. An agent can install any one directly from its page. The Claude Code install flow: `/plugin marketplace add https://www.infinitegameos.io/marketplace.json` then `/plugin install <skill-name>@igos-library`.
 

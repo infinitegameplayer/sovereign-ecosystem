@@ -1,12 +1,12 @@
 // encrypt-stream.mjs
 // Optional offsite-backup encryption for the Sovereign Ecosystem vault.
 //
-// This is a door, not a default. The shipped scripts/backup-vault.mjs is
+// This is a door, not a default. The shipped Council Chamber/scripts/backup-vault.mjs is
 // local-to-local (vault to a local backup path) and needs no encryption as
 // shipped. Wire this module in only once a Sovereign adds an offsite
 // destination (a cloud object store, a remote drive, any place outside the
 // controlled machine). At that point the outbound copy should leave the
-// machine as ciphertext, because it may carry scripts/.env, API keys and
+// machine as ciphertext, because it may carry Council Chamber/scripts/.env, API keys and
 // other credentials.
 //
 // If wired in: the vault archive is encrypted in-stream with AES-256-GCM
@@ -16,7 +16,7 @@
 // stay plaintext for a fast local restore.
 //
 // Key management (the one manual step): the passphrase lives in
-// BACKUP_ENCRYPTION_KEY in scripts/.env for the automated encrypt. Because
+// BACKUP_ENCRYPTION_KEY in Council Chamber/scripts/.env for the automated encrypt. Because
 // .env rides inside the encrypted archive, a real disaster restore (machine
 // gone, pulling from the offsite destination) needs the passphrase from an
 // independent place. Store a copy in a password manager. That is the only
@@ -120,7 +120,7 @@ export function decryptFile({ inPath, outPath, passphrase }) {
 
 export const ENCRYPTED_SUFFIX = '.enc'
 
-// CLI for restore: node scripts/encrypt-stream.mjs decrypt <in.zip.enc> <out.zip>
+// CLI for restore: node Council Chamber/scripts/encrypt-stream.mjs decrypt <in.zip.enc> <out.zip>
 // Reads the passphrase from BACKUP_ENCRYPTION_KEY (.env on a live machine) or
 // the BACKUP_ENCRYPTION_KEY the operator exports from the password manager when
 // restoring on a fresh machine.
@@ -133,13 +133,13 @@ if (import.meta.url === `file://${process.argv[1]}` || process.argv[1]?.endsWith
       process.exit(1)
     }
     if (!inPath || !outPath) {
-      console.error('Usage: node scripts/encrypt-stream.mjs decrypt <in.zip.enc> <out.zip>')
+      console.error('Usage: node Council Chamber/scripts/encrypt-stream.mjs decrypt <in.zip.enc> <out.zip>')
       process.exit(1)
     }
     const { bytes } = decryptFile({ inPath, outPath, passphrase })
     console.log(`Decrypted ${bytes} bytes -> ${outPath}`)
   } else {
-    console.error('Usage: node scripts/encrypt-stream.mjs decrypt <in.zip.enc> <out.zip>')
+    console.error('Usage: node Council Chamber/scripts/encrypt-stream.mjs decrypt <in.zip.enc> <out.zip>')
     process.exit(1)
   }
 }

@@ -123,7 +123,7 @@ jobs:
       - name: JSON parses
         run: |
           set -e
-          for f in scripts/framework-manifest.json .mcp.json.example .claude/settings.json; do
+          for f in "Council Chamber/scripts/framework-manifest.json" .mcp.json.example .claude/settings.json; do
             [ -f "$f" ] || continue
             node -e "JSON.parse(require('fs').readFileSync('$f','utf8'))"
             echo "  ok  $f"
@@ -145,7 +145,7 @@ jobs:
       # The exemptions are rules, never conveniences. Two kinds.
       #
       # HISTORY, preserved verbatim:
-      #   UPDATES/, CHANGELOG.md, Vault (Archive)/
+      #   .github/UPDATES/, .github/CHANGELOG.md, Vault (Archive)/
       #   Phase Audit Protocol.md, the line that states the rule
       #
       # THE MACHINERY OF THE RULE ITSELF. These files must contain an em dash in
@@ -160,12 +160,12 @@ jobs:
         run: |
           hits=$(git ls-files -z \
             | xargs -0 grep -l "—" 2>/dev/null \
-            | grep -v "^UPDATES/" \
-            | grep -v "^CHANGELOG.md$" \
+            | grep -v "^\.github/UPDATES/" \
+            | grep -v "^\.github/CHANGELOG.md$" \
             | grep -v "^Vault (Archive)/" \
             | grep -v "post-write-em-dash-check.sh$" \
             | grep -v "Phase Audit Protocol.md$" \
-            | grep -v "^.github/workflows/verify.yml$" \
+            | grep -v "^\.github/workflows/verify.yml$" \
             | grep -v "hooks-selftest.mjs$" \
             || true)
           if [ -n "$hits" ]; then
@@ -194,9 +194,9 @@ jobs:
         run: |
           hits=$(git ls-files -z \
             | xargs -0 grep -ln "Desktop/Kingdom\|Desktop\\\\Kingdom\|C:/Users/User/\|C:\\\\Users\\\\User\\\\" 2>/dev/null \
-            | grep -v "^UPDATES/" \
-            | grep -v "^CHANGELOG.md$" \
-            | grep -v "^.github/workflows/verify.yml$" \
+            | grep -v "^\.github/UPDATES/" \
+            | grep -v "^\.github/CHANGELOG.md$" \
+            | grep -v "^\.github/workflows/verify.yml$" \
             || true)
           if [ -n "$hits" ]; then
             echo "Absolute paths to the author's machine found in:"

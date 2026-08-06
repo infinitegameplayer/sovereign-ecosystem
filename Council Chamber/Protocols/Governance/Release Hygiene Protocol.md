@@ -48,10 +48,10 @@ Checklist before any script or config ships:
 
 ### 5. Repo-Health Baseline
 
-`SECURITY.md` ships by default with any public repo. No exception.
+`.github/SECURITY.md` ships by default with any public repo. No exception.
 
 Decide separately, per project, per release, whether to include:
-- `CODEOWNERS` (if contributors will merge)
+- `.github/CODEOWNERS` (if contributors will merge)
 - `CITATION.cff` (if academic or research citation is relevant)
 - Contributor guidance (if external contributions are intended)
 

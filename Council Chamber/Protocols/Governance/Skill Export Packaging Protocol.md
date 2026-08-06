@@ -19,7 +19,7 @@ Purpose: Standardize how Sovereign Ecosystem skills and related procedures are p
   - onboarding documentation
   - execution instructions
   - governance or approval rules
-  - helper scripts/assets/references
+  - helper Council Chamber/scripts/assets/references
 
 ## Core Distinction (Important)
 - Internal Codex skill folder design optimizes for agent context efficiency.
@@ -39,7 +39,7 @@ Use a layered package with clear file roles.
 - `PROTOCOL.md` -> approvals, boundaries, handoff rules, decision gates
 
 ### Optional Components
-- `scripts/` -> deterministic helpers
+- `Council Chamber/scripts/` -> deterministic helpers
 - `references/` -> deeper documentation or examples
 - `assets/` -> templates, images, starter files
 - `examples/` -> sample inputs/outputs
@@ -110,7 +110,7 @@ Use when:
 Package:
 - `README.md`
 - `SKILL.md`
-- optional `scripts/`, `references/`, `examples/`
+- optional `Council Chamber/scripts/`, `references/`, `examples/`
 
 ## Profile C: Governed Operational Share (Recommended default for Sovereign Ecosystem exports)
 Use when:
@@ -122,7 +122,7 @@ Package:
 - `README.md`
 - `SKILL.md`
 - `PROTOCOL.md`
-- optional `scripts/`, `references/`, `assets/`, `examples/`
+- optional `Council Chamber/scripts/`, `references/`, `assets/`, `examples/`
 
 ## Packaging Workflow (Plan -> Consent -> Export)
 

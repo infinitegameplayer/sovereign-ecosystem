@@ -14,7 +14,7 @@ clarity_triggers:
 
 Purpose: Check for new updates published to the Sovereign Ecosystem and apply the ones that are relevant to your build. You review each update before anything changes. Your AI executes only what you approve.
 Trigger: Run whenever you want to check for updates. No fixed schedule required: monthly is a reasonable default, or whenever something feels stale.
-Inputs: `UPDATES/INDEX.md` from the public Sovereign Ecosystem GitHub repo. Local sync state at `Council Chamber/Skills/Ecosystem Update Check/sync-state.json`.
+Inputs: `.github/UPDATES/INDEX.md` from the public Sovereign Ecosystem GitHub repo. Local sync state at `Council Chamber/Skills/Ecosystem Update Check/sync-state.json`.
 Outputs: A curated review of new updates, applied changes for approved items, updated sync state.
 Status: active
 

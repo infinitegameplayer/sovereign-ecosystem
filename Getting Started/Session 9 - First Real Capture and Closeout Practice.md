@@ -195,6 +195,41 @@ Useful prompts:
 Keep it light.
 This is about building trust through one real practice cycle.
 
+## Step 9 - Clear The On-Ramp
+
+The build sequence is finished. The scaffolding it needed can come down.
+
+Ask your AI interface to archive the on-ramp:
+
+> Archive the Getting Started folder and MODULES.md now that the build sequence is complete. Show me the moves before you make them.
+
+**What it does, and it confirms before touching anything:**
+
+1. Moves `Getting Started/` to `Vault (Archive)/Getting Started/`
+2. Moves `MODULES.md` to `Vault (Archive)/MODULES.md`
+3. Sweeps the vault for references to both and repoints the ones inside your living surfaces, so nothing you use every day points at a file that moved
+
+**Nothing is deleted.** Every session guide, every optional path and the module catalog stay exactly where you can reach them. They move from the front door to the shelf.
+
+**The optional paths travel with the folder.** When you are ready to expand past the Foundation, they are at `Vault (Archive)/Getting Started/Optional Paths Selection and Conversion.md`. Still readable, still linkable, no longer sitting in your way.
+
+**Leave the root-level `README.md`, `AGENTS.md` and `llms.txt` alone.** They describe the template as it ships rather than your vault as you run it, and their links should keep pointing at the shipped layout. You will not see them anyway: the clean-root snippet hides them from your file explorer on day one.
+
+**What your vault root looks like after this step:**
+
+```
+Council Chamber/
+Inbox/
+Library/
+Vault (Archive)/
+Sovereign Command.md
+To-Do Dock.md
+```
+
+Four containers and two surfaces. Everything else is either inside them or out of your way.
+
+**That is the whole point of the sequence.** You started with a template full of instructions about itself. You end with a system that only contains your life and the structure that holds it.
+
 ## Why This Session Matters
 
 Without a session like this, the ecosystem can still feel like:
@@ -218,14 +253,17 @@ Session 9 is complete when:
 - the system has shown you where that idea belongs
 - a simple closeout has been run with AI guidance
 - you trust the daily loop more than you did before the session
+- the on-ramp is archived, and your root holds only your containers and your two surfaces
 
 After this, continue practicing the loop in ordinary life and expand the ecosystem one slice at a time.
 
 The real power comes from repetition. The first time shows you the loop works. The tenth time shows you it is trustworthy. Give it two or three weeks of consistent use before forming a final opinion.
 
 When you are ready to expand beyond the Foundation, open:
-- `Getting Started/Optional Paths Selection and Conversion.md`: a lightweight post-Foundation selector
-- `Getting Started/Index.md`: the full Getting Started map including optional continuation paths
+- `Vault (Archive)/Getting Started/Optional Paths Selection and Conversion.md`: a lightweight post-Foundation selector
+- `Vault (Archive)/Getting Started/Index.md`: the full Getting Started map including optional continuation paths
+
+Those paths assume you ran Step 9. If you kept the on-ramp in place, drop the `Vault (Archive)/` prefix.
 
 There is no pressure to add anything immediately.
 Living inside the Foundation first is the right move.

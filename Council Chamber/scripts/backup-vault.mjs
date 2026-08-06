@@ -22,14 +22,14 @@ function fail(message) {
 }
 
 if (!existsSync(CONFIG_PATH)) {
-  fail('Missing scripts/backup.config.json. Copy scripts/backup.config.example.json and set BACKUP_PATH first.');
+  fail('Missing Council Chamber/scripts/backup.config.json. Copy Council Chamber/scripts/backup.config.example.json and set BACKUP_PATH first.');
 }
 
 const config = JSON.parse(readFileSync(CONFIG_PATH, 'utf8'));
 const BACKUP_PATH = typeof config.BACKUP_PATH === 'string' ? config.BACKUP_PATH.trim() : '';
 
 if (!BACKUP_PATH || BACKUP_PATH === 'CHANGE_ME') {
-  fail('BACKUP_PATH is not configured in scripts/backup.config.json.');
+  fail('BACKUP_PATH is not configured in Council Chamber/scripts/backup.config.json.');
 }
 
 function isoDate() {

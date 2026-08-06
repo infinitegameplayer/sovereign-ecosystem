@@ -1,0 +1,32 @@
+/* Clean root.
+ *
+ * Four files have to sit at the top of your vault for reasons that have
+ * nothing to do with you. GitHub wants a README and a LICENSE. Your AI
+ * interface reads AGENTS.md. Crawlers read llms.txt. None of them are
+ * yours to work in, and none of them should be the first thing you see
+ * when you open your own system.
+ *
+ * This hides them from the file explorer. They are still there, still in
+ * search, still readable from any link. Nothing is deleted and nothing is
+ * moved. Only the sidebar changes.
+ *
+ * To see them again: Settings, Appearance, CSS snippets, toggle
+ * "clean-root" off. To hide something else, add its filename to the list
+ * below in the same shape.
+ */
+
+.nav-file:has(> .nav-file-title[data-path="README.md"]),
+.nav-file:has(> .nav-file-title[data-path="AGENTS.md"]),
+.nav-file:has(> .nav-file-title[data-path="LICENSE"]),
+.nav-file:has(> .nav-file-title[data-path="llms.txt"]) {
+  display: none;
+}
+
+/* Fallback for older Obsidian builds without :has() support. Hiding the
+ * title collapses the row, since the title is the only child that draws. */
+.nav-file-title[data-path="README.md"],
+.nav-file-title[data-path="AGENTS.md"],
+.nav-file-title[data-path="LICENSE"],
+.nav-file-title[data-path="llms.txt"] {
+  display: none;
+}

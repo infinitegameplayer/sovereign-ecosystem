@@ -16,10 +16,10 @@ if [ -f "BOOTSTRAP.md" ]; then
   echo "--- End First Run Note ---"
 fi
 
-if [ -f "Primer.md" ]; then
+if [ -f ".runtime/primer.md" ]; then
   echo "--- Primer (forward handoff) ---"
-  cat "Primer.md"
+  cat ".runtime/primer.md"
   echo "--- End Primer ---"
 else
-  echo "--- No Primer.md found at vault root. Session opens fresh. ---"
+  echo "--- No .runtime/primer.md found at vault root. Session opens fresh. ---"
 fi

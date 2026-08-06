@@ -23,9 +23,9 @@
 // parent of this script's directory (scripts live in <vault>/scripts/).
 //
 // Usage:
-//   node scripts/doctrine-mass.mjs           Print report + paste-ready row.
-//   node scripts/doctrine-mass.mjs --json    Emit counts as JSON.
-//   node scripts/doctrine-mass.mjs --append  Append the dated row to the baseline note.
+//   node Council Chamber/scripts/doctrine-mass.mjs           Print report + paste-ready row.
+//   node Council Chamber/scripts/doctrine-mass.mjs --json    Emit counts as JSON.
+//   node Council Chamber/scripts/doctrine-mass.mjs --append  Append the dated row to the baseline note.
 //
 // Exit codes:
 //   0  Ran successfully.

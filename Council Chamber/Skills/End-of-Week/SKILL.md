@@ -33,13 +33,13 @@ Verify the day (soft gate). If not Friday, Saturday, or a declared pre-trip day,
 
 Run the deadline scan (if scripts are set up):
 ```
-node "scripts/scan-deadlines.mjs"
+node "Council Chamber/scripts/scan-deadlines.mjs"
 ```
 Surface any items overdue or due within 7 days as silent background context - do not read the full list aloud unless relevant to an engagement. If the script is not available, proceed without it.
 
 Run the collaboration dashboard sync (if scripts are set up):
 ```
-node "scripts/calendar-sync.mjs" --dashboards 7
+node "Council Chamber/scripts/calendar-sync.mjs" --dashboards 7
 ```
 If this errors or the script is not available, note it and proceed - collaboration dashboards will simply show their last-saved state.
 
@@ -130,7 +130,7 @@ Two layers:
 
 **Data pull (before prompting):**
 ```
-node "scripts/calendar-sync.mjs" --upcoming 7
+node "Council Chamber/scripts/calendar-sync.mjs" --upcoming 7
 ```
 If this script is not available, surface a note and offer to proceed with manual input from the Sovereign.
 

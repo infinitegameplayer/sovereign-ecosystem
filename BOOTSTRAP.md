@@ -31,7 +31,7 @@ Before asking anything, check whether this vault has already been personalized.
 
 If those tokens are gone, the vault has already been set up. Stop the wizard. Tell the Sovereign:
 
-> This vault looks already personalized, so the bootstrap does not need to run again. The deep path lives in the Getting Started folder. Start with `Getting Started/Quick Start Guide.md`, or jump back into wherever your last session left off via `Primer.md`.
+> This vault looks already personalized, so the bootstrap does not need to run again. The deep path lives in the Getting Started folder. Start with `Getting Started/Quick Start Guide.md`, or jump back into wherever your last session left off via `.runtime/primer.md`.
 
 Then do nothing further. Do not re-run. Do not delete this file in that case. Leave it for the Sovereign to remove if they choose.
 
@@ -59,7 +59,7 @@ Optionally, if it flows naturally, you may ask for a formal name (for example a 
 
 Personalize the vault from the answers. Two mechanisms.
 
-**Mechanism A: the token script.** The vault ships with `scripts/replace-tokens.mjs`, a one-time substitution tool. It replaces these tokens across every `.md`, `.txt` and `.json` file in the vault, skipping `.git`, `node_modules`, `.runtime`, `.trash` and `scripts`:
+**Mechanism A: the token script.** The vault ships with `Council Chamber/scripts/replace-tokens.mjs`, a one-time substitution tool. It replaces these tokens across every `.md`, `.txt` and `.json` file in the vault, skipping `.git`, `node_modules`, `.runtime`, `.trash` and `scripts`:
 
 | Token | Wizard answer |
 | --- | --- |
@@ -69,13 +69,13 @@ Personalize the vault from the answers. Two mechanisms.
 | `{{SOVEREIGN_FORMAL_NAME}}` | The formal name if offered, otherwise blank |
 | `{{SOVEREIGN_LEGAL_NAME}}` | The legal name if offered, otherwise blank |
 
-The script is interactive. It prompts for each value, previews every file and location it will change, then waits for a typed `YES` before writing. Run it and feed it the answers, or walk the Sovereign through running `node scripts/replace-tokens.mjs` themselves and confirming the preview. Either path is fine. The preview-then-confirm gate is a feature, so let it do its job.
+The script is interactive. It prompts for each value, previews every file and location it will change, then waits for a typed `YES` before writing. Run it and feed it the answers, or walk the Sovereign through running `node Council Chamber/scripts/replace-tokens.mjs` themselves and confirming the preview. Either path is fine. The preview-then-confirm gate is a feature, so let it do its job.
 
 The token script touches the identity surfaces across the vault. These are the files it personalizes: the adapter anchors `.claude/CLAUDE.md` and `.codex/CODEX.md`, the governance set under `Council Chamber/Governance/`, the codices under `Council Chamber/Codices/`, the protocols under `Council Chamber/Protocols/`, the skills under `Council Chamber/Skills/`, the Operating Charter, and a few Getting Started session files that reference the tokens directly. The script finds every occurrence on its own. You do not need to hand-edit those.
 
 **Mechanism B: direct edit for what the script does not cover.** Two answers live outside the token set.
 
-- **Timezone** has no token. Record it where it belongs for the Sovereign's setup. A light touch is a one-line note in `Primer.md` under the completion note in Step 4, so the value is captured for later rhythm work. Do not invent a config file for it.
+- **Timezone** has no token. Record it where it belongs for the Sovereign's setup. A light touch is a one-line note in `.runtime/primer.md` under the completion note in Step 4, so the value is captured for later rhythm work. Do not invent a config file for it.
 - **Vault path** has no token either. It is used to wire the platform setup in Step 3, not substituted into prose.
 
 ### Step 3: Platform setup
@@ -89,7 +89,7 @@ The platform answer routes the next move.
 - Tell the Sovereign a restart of Claude Code is needed for hook registration to take effect.
 - **Link the shipped skills.** Run `node "Council Chamber/scripts/link-skills.mjs"` from the vault root. It links every skill in `Council Chamber/Skills/` into `.claude/skills/` so the interface can invoke them, it is safe to run again any time and it reports what it did. A download carries no links, so a fresh vault always needs this once. For a Codex setup, add `--codex`.
 
-The hooks are non-blocking and safe. They log rather than error. The full rationale lives in `UPDATES/2026-06-10-v2.11.0-harvest-sync.md` and the hook scripts themselves at `Council Chamber/scripts/hooks/`.
+The hooks are non-blocking and safe. They log rather than error. The full rationale lives in `.github/UPDATES/2026-06-10-v2.11.0-harvest-sync.md` and the hook scripts themselves at `Council Chamber/scripts/hooks/`.
 
 **Cursor, Gemini CLI, Codex or other.** These do not use the Claude Code hook format. Leave the hook wiring for later and point the Sovereign at the right anchor. Codex reads `.codex/CODEX.md`, already personalized by the token script. Cursor and Gemini CLI read the governance anchor in `.claude/CLAUDE.md` as a reference document, or their own equivalent rules file if they have one. Note that the write-time hooks are a Claude Code convenience, not a requirement, and the ecosystem runs fully without them. The Getting Started sessions carry the platform-agnostic setup, so anything the wizard skips here is covered there.
 
@@ -107,7 +107,7 @@ In every case, name the next single session to open. For Light and Standard and 
 
 Four actions to close.
 
-1. **Write a completion note into `Primer.md`.** Add a short block under the Most Alive Next Move section. Keep it to a few lines. Include the date, the choices made (ecosystem name, AI interface name, timezone, platform, governance depth) and the next session pointer. Example shape:
+1. **Write a completion note into `.runtime/primer.md`.** Add a short block under the Most Alive Next Move section. Keep it to a few lines. Include the date, the choices made (ecosystem name, AI interface name, timezone, platform, governance depth) and the next session pointer. Example shape:
 
    > **Bootstrap complete (2026-06-10).** Ecosystem named, AI interface named, timezone recorded, platform set, governance depth chosen. Next session: open `Getting Started/Session 1 - Vault Initialization and Adapter Setup.md`. The deep path lives in the Getting Started folder.
    >
@@ -124,6 +124,6 @@ Four actions to close.
 
 4. **Delete BOOTSTRAP.md.** Once confirmed, delete this file. It is a one-time wizard and removing itself is by design. After deletion, tell the Sovereign:
 
-   > Bootstrap done. I have removed it. From here, the deep path lives in the Getting Started folder. Open `Getting Started/Session 1 - Vault Initialization and Adapter Setup.md` when you are ready, or read `Primer.md` any time to see where you are.
+   > Bootstrap done. I have removed it. From here, the deep path lives in the Getting Started folder. Open `Getting Started/Session 1 - Vault Initialization and Adapter Setup.md` when you are ready, or read `.runtime/primer.md` any time to see where you are.
 
 That is the whole wizard. Warm, fast, then out of the way.

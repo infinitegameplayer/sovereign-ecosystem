@@ -10,9 +10,9 @@ contrast_tier: 1
 
 Purpose: Keep your ecosystem current with upstream improvements while leaving your personalized surfaces untouched.
 Trigger: Run whenever you want to check for upstream changes. Monthly is a reasonable default, or whenever an update note surfaces.
-Inputs: Local git repo with an upstream remote configured. `scripts/framework-manifest.json` for path classification.
+Inputs: Local git repo with an upstream remote configured. `Council Chamber/scripts/framework-manifest.json` for path classification.
 Outputs: A reviewed change list, applied files for approved items, a git commit bookending the sync.
-Related: `scripts/se-update.mjs` (the underlying tool this skill orchestrates). `scripts/framework-manifest.json` (path classification authority).
+Related: `Council Chamber/scripts/se-update.mjs` (the underlying tool this skill orchestrates). `Council Chamber/scripts/framework-manifest.json` (path classification authority).
 
 ---
 
@@ -31,7 +31,7 @@ If anything is uncommitted, commit or stash it first.
 ## Step 1. Run the check
 
 ```bash
-node scripts/se-update.mjs --check
+node Council Chamber/scripts/se-update.mjs --check
 ```
 
 The script:
@@ -63,7 +63,7 @@ Present the framework change list to the Sovereign. Group by added, modified and
 For any file the Sovereign wants to see before deciding:
 
 ```bash
-node scripts/se-update.mjs --diff "<path>"
+node Council Chamber/scripts/se-update.mjs --diff "<path>"
 ```
 
 Read the diff together. Note what changed. Note whether the file has been locally modified (the diff shows both directions).
@@ -77,7 +77,7 @@ The Sovereign decides per file: apply, skip or defer to next session.
 For each approved framework file:
 
 ```bash
-node scripts/se-update.mjs --apply "<path>"
+node Council Chamber/scripts/se-update.mjs --apply "<path>"
 ```
 
 The script applies the upstream version and stages the file. Confirm each one before moving to the next.
@@ -108,9 +108,9 @@ If the Sovereign wants to bring in upstream changes to a seeded file (Humor Code
 
 If the Sovereign requests a seeded file update:
 
-1. Show the diff: `node scripts/se-update.mjs --diff "<path>"`
+1. Show the diff: `node Council Chamber/scripts/se-update.mjs --diff "<path>"`
 2. Confirm that the Sovereign understands their personalization will be overwritten.
-3. If confirmed: `node scripts/se-update.mjs --force-seeded "<path>"`
+3. If confirmed: `node Council Chamber/scripts/se-update.mjs --force-seeded "<path>"`
 4. Commit separately with a message that names the seeded file and the tradeoff.
 
 ---
@@ -142,7 +142,7 @@ This refreshes that one skill independently of the vault copy. It does not touch
 
 **"No upstream remote found"**: Run the command the script printed, then re-run `--check`.
 
-**Fetch fails**: Confirm internet access and that the upstream repo URL is reachable. The remote URL is in `scripts/se-update.mjs` (constant `UPSTREAM_REPO_URL`).
+**Fetch fails**: Confirm internet access and that the upstream repo URL is reachable. The remote URL is in `Council Chamber/scripts/se-update.mjs` (constant `UPSTREAM_REPO_URL`).
 
 **Apply fails with a git error**: Surface the error. Do not retry without understanding the cause. A common reason is a locally locked file or a path that does not exist in upstream (was removed upstream). The removal is informational; the file stays local.
 

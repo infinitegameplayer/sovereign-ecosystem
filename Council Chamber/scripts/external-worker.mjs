@@ -15,14 +15,14 @@
  *  - Handles stop_reason "refusal" explicitly. An HTTP 200 with stop_reason "refusal" is
  *    not a successful completion. It exits with code 2 and logs the refusal.
  *
- * Required Env Vars (set in scripts/.env before first dispatch):
+ * Required Env Vars (set in Council Chamber/scripts/.env before first dispatch):
  *   OPENROUTER_API_KEY   - openrouter.ai/keys
  *   NVIDIA_NIM_API_KEY   - build.nvidia.com
  *   DEEPSEEK_API_KEY     - platform.deepseek.com/api_keys
  *   GROQ_API_KEY         - console.groq.com/keys
  *
  * Usage:
- *   node scripts/external-worker.mjs \
+ *   node Council Chamber/scripts/external-worker.mjs \
  *     --provider openrouter \
  *     --model qwen/qwen3-coder:free \
  *     --prompt "..." \
@@ -61,7 +61,7 @@ try {
     if (!(k in process.env)) process.env[k] = v;
   }
 } catch {
-  fail(`Could not read .env at ${envPath}. External worker dispatch requires scripts/.env with provider API keys.`);
+  fail(`Could not read .env at ${envPath}. External worker dispatch requires Council Chamber/scripts/.env with provider API keys.`);
 }
 
 // Provider registry.
@@ -137,7 +137,7 @@ function parseArgs(argv) {
 
 function usage() {
   return `Usage:
-  node scripts/external-worker.mjs \\
+  node Council Chamber/scripts/external-worker.mjs \\
     --provider <openrouter|nvidia-nim|deepseek|groq> \\
     --model <provider-specific-model-id> \\
     --prompt "<text>" \\
@@ -305,7 +305,7 @@ async function main() {
 
   const key = process.env[provider.envVar];
   if (!key) {
-    fail(`Missing ${provider.envVar} in scripts/.env. Add the key before dispatching to ${provider.label}.`);
+    fail(`Missing ${provider.envVar} in Council Chamber/scripts/.env. Add the key before dispatching to ${provider.label}.`);
   }
 
   const maxTokens = Number(args['max-tokens'] || 4096);

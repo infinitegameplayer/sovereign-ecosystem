@@ -17,8 +17,8 @@ So the burden is shared, and here is each half of it.
 
 **What this repo does:** every security fix ships through all four of these at once. A fix that lands quietly has been published and never delivered.
 
-1. A `CHANGELOG.md` entry that leads with who must act.
-2. An `UPDATES/` package written as **spec plus test**, so a fix still lands in a copy your agent has customized beyond recognition.
+1. A `.github/CHANGELOG.md` entry that leads with who must act.
+2. An `.github/UPDATES/` package written as **spec plus test**, so a fix still lands in a copy your agent has customized beyond recognition.
 3. A GitHub Release, since the Releases page is what a returning visitor checks.
 4. Plain language at the top: "If you installed vX, apply this update."
 
@@ -31,7 +31,7 @@ So the burden is shared, and here is each half of it.
   node "Council Chamber/scripts/hooks/hooks-selftest.mjs"
   ```
   These fire the guards rather than reading them. A guard that has never refused anything is not known to work.
-- **Check `CHANGELOG.md`** against the version you installed, whenever you next open the vault.
+- **Check `.github/CHANGELOG.md`** against the version you installed, whenever you next open the vault.
 
 ## Reporting a Vulnerability
 

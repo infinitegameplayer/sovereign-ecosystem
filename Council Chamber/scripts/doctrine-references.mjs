@@ -23,10 +23,10 @@
 // parent of this script's directory (scripts live in <vault>/scripts/).
 //
 // Usage:
-//   node scripts/doctrine-references.mjs            Human report: orphans, index-only, low-inbound.
-//   node scripts/doctrine-references.mjs --all      Also list every artifact with its count.
-//   node scripts/doctrine-references.mjs --json     Emit the full dataset as JSON.
-//   node scripts/doctrine-references.mjs --layer codices|protocols|skills|governance
+//   node Council Chamber/scripts/doctrine-references.mjs            Human report: orphans, index-only, low-inbound.
+//   node Council Chamber/scripts/doctrine-references.mjs --all      Also list every artifact with its count.
+//   node Council Chamber/scripts/doctrine-references.mjs --json     Emit the full dataset as JSON.
+//   node Council Chamber/scripts/doctrine-references.mjs --layer codices|protocols|skills|governance
 //
 // Exit codes:
 //   0  Ran successfully.

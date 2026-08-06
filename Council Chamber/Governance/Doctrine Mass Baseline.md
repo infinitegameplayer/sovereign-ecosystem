@@ -4,7 +4,7 @@ type: doctrine-tracking
 status: active
 container: Council Chamber
 cadence: appended at each doctrine review pass, plus inflection points
-data_source: doctrine-mass.mjs (scripts/), all-markdown-recursive count per layer
+data_source: doctrine-mass.mjs (Council Chamber/scripts/), all-markdown-recursive count per layer
 related:
   - "[[Council Chamber/Skills/Skills Index]]"
   - "[[Council Chamber/Codices/Codices Index]]"
@@ -18,7 +18,7 @@ Append new rows in chronological order. Do not overwrite prior rows. The trend i
 
 ## Counting definition
 
-Each cell is `artifacts / lines`. Produced by `node scripts/doctrine-mass.mjs`.
+Each cell is `artifacts / lines`. Produced by `node Council Chamber/scripts/doctrine-mass.mjs`.
 
 - **Codices:** every `.md` under `Council Chamber/Codices`, recursive.
 - **Protocols:** every `.md` under `Council Chamber/Protocols`, recursive.
@@ -35,7 +35,7 @@ Keep the definition stable once a baseline is running. Changing what counts as a
 
 ## How to append
 
-Run `node scripts/doctrine-mass.mjs --append`. The script measures every layer and inserts one dated row on the line above the `doctrine-mass-rows-end` sentinel. The bare run (no flag) prints the report and a paste-ready row without writing. Run it at each doctrine review pass, or whenever a consolidation or expansion effort makes the before-and-after count worth capturing.
+Run `node Council Chamber/scripts/doctrine-mass.mjs --append`. The script measures every layer and inserts one dated row on the line above the `doctrine-mass-rows-end` sentinel. The bare run (no flag) prints the report and a paste-ready row without writing. Run it at each doctrine review pass, or whenever a consolidation or expansion effort makes the before-and-after count worth capturing.
 
 ---
 

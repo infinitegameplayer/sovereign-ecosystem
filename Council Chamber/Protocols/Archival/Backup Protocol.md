@@ -14,9 +14,9 @@ clarity_triggers:
 Purpose: Define the scope, cadence, exclusions, setup, and logging standard for Sovereign Ecosystem vault backups.
 
 Skill: [[Council Chamber/Skills/Weekly Backup/SKILL]]
-Script: `scripts/backup-vault.mjs`
-Config template: `scripts/backup.config.example.json`
-Local config: `scripts/backup.config.json`
+Script: `Council Chamber/scripts/backup-vault.mjs`
+Config template: `Council Chamber/scripts/backup.config.example.json`
+Local config: `Council Chamber/scripts/backup.config.json`
 Log: [[Vault (Archive)/Sovereign Ecosystem Backup Log]]
 
 ## Scope
@@ -25,8 +25,8 @@ A full file-level snapshot of the entire Sovereign Ecosystem vault.
 
 ## Destination
 
-Defined by `BACKUP_PATH` in `scripts/backup.config.json`.
-Create `scripts/backup.config.json` by copying `scripts/backup.config.example.json`, then set `BACKUP_PATH` to your preferred backup location.
+Defined by `BACKUP_PATH` in `Council Chamber/scripts/backup.config.json`.
+Create `Council Chamber/scripts/backup.config.json` by copying `Council Chamber/scripts/backup.config.example.json`, then set `BACKUP_PATH` to your preferred backup location.
 Each run creates a dated subdirectory: `BACKUP_PATH\YYYY-MM-DD\`
 
 ## Cadence
@@ -66,7 +66,7 @@ The backup log in the vault is not deleted - it is a permanent record.
 ## Trigger Options
 
 1. Run the Weekly Backup skill in Claude Code or Codex.
-2. Run `node scripts/backup-vault.mjs` from the vault root in any terminal.
+2. Run `node Council Chamber/scripts/backup-vault.mjs` from the vault root in any terminal.
 3. Wrap the same command in a local launcher or scheduled task if you want one-click execution.
 
 ## Error Handling

@@ -200,7 +200,7 @@ node --version
 
 Then run:
 ```
-node scripts/replace-tokens.mjs
+node Council Chamber/scripts/replace-tokens.mjs
 ```
 
 This script will:

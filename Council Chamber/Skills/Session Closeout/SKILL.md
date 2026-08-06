@@ -33,13 +33,13 @@ Write a one-line breadcrumb straight into every artifact this session directly t
 
 ### 2. Refresh the Primer
 
-Update `Primer.md`. This is the canonical forward handoff, the first thing your AI reads at session start. Refresh it after the breadcrumbs land, so it reflects the freshly-updated state of what you touched.
+Update `.runtime/primer.md`. This is the canonical forward handoff, the first thing your AI reads at session start. Refresh it after the breadcrumbs land, so it reflects the freshly-updated state of what you touched.
 
 - **Stale-blocker purge first.** For each Parked item, check whether it references a plan now in `Vault (Archive)/Pending Plans/`. If yes, the plan is implemented. Drop the item. Resolved blockers left in place resurface as false signals every session until caught.
 - Rewrite to the rolling horizon: **Most Alive Next Move**, **In Execution** (Pending Plans and work in motion, high signal), **Active Commitments** (dated actions within the near horizon), **Parked** (waiting on an external trigger or a Sovereign decision), **Session Opener**.
 - Do not carry forward Current-State narrative or Completed-This-Session history. Those live in the commit body and the git history. Remove items that completed this session. Add new time-bound items that emerged.
 - End with a **Session Opener** line: `Invoke AI Interface Activation. [one-line intent for next session, or "intent to be determined at session start."]` This carries the energy forward, not just the state.
-- **Under a concurrent sibling, read before write.** If another session is active, re-read `Primer.md` immediately before editing so you build on the sibling's latest write rather than overwriting it.
+- **Under a concurrent sibling, read before write.** If another session is active, re-read `.runtime/primer.md` immediately before editing so you build on the sibling's latest write rather than overwriting it.
 
 **Then give Sovereign Command its light touch.** Sovereign Command is the minimal live-signal glance, not the handoff. The Primer carries the detail. Sovereign Command stays short. Two touches only: drop anything this session resolved, and shift the headline (Most Alive Next Move) if the lead moved. If neither changed, leave it. The weekly review re-scans all source lanes as the safety net.
 

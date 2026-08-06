@@ -14,7 +14,7 @@ Purpose: Provide a reusable export-ready structure for sharing a skill or skill-
   README.md
   SKILL.md
   PROTOCOL.md
-  scripts/        (optional)
+  Council Chamber/scripts/        (optional)
   references/     (optional)
   assets/         (optional)
   examples/       (optional)
@@ -56,7 +56,7 @@ Purpose: Provide a reusable export-ready structure for sharing a skill or skill-
 - `README.md` -> onboarding and setup
 - `SKILL.md` -> execution guidance and patterns
 - `PROTOCOL.md` -> approval gates and boundaries (if included)
-- `scripts/` -> helpers (optional)
+- `Council Chamber/scripts/` -> helpers (optional)
 - `references/` -> detailed docs (optional)
 
 ## Constraints / Boundaries

@@ -187,13 +187,13 @@ const bash = (command) => ({ tool_name: 'Bash', tool_input: { command } });
 // ── session-start-primer.sh ─────────────────────────────────────────────────
 {
   const H = hook('session-start-primer.sh');
-  writeFileSync(path.join(VAULT, 'Primer.md'), '# Primer\nThe session state lives here.\n');
+  writeFileSync(path.join(VAULT, '.runtime/primer.md'), '# Primer\nThe session state lives here.\n');
   const r = fire(H, {}, { cwd: VAULT });
-  record('primer: injects Primer.md when present', /session state lives here/i.test(r.out), `out=${r.out.trim().slice(0, 40)}`, 'reacts');
+  record('primer: injects .runtime/primer.md when present', /session state lives here/i.test(r.out), `out=${r.out.trim().slice(0, 40)}`, 'reacts');
 
   const empty = mkdtempSync(path.join(os.tmpdir(), 'se-empty-'));
   const r2 = fire(H, {}, { cwd: empty });
-  record('primer: degrades cleanly with no Primer.md', r2.code === 0, `code=${r2.code}`, 'quiet');
+  record('primer: degrades cleanly with no .runtime/primer.md', r2.code === 0, `code=${r2.code}`, 'quiet');
   rmSync(empty, { recursive: true, force: true });
 }
 

@@ -27,8 +27,8 @@ The write-time hook at `Council Chamber/scripts/hooks/post-write-em-dash-check.s
 
 ## Releases
 
-Versions follow the CHANGELOG.md convention: one entry per publish cycle, with a matching detail file in `UPDATES/` and a tagged GitHub Release. Maintainers cut releases; contributors never need to touch version files.
+Versions follow the .github/CHANGELOG.md convention: one entry per publish cycle, with a matching detail file in `.github/UPDATES/` and a tagged GitHub Release. Maintainers cut releases; contributors never need to touch version files.
 
 ## Security
 
-Vulnerabilities and anything touching credentials, hooks or script execution: see `SECURITY.md` for how to report privately.
+Vulnerabilities and anything touching credentials, hooks or script execution: see `.github/SECURITY.md` for how to report privately.
