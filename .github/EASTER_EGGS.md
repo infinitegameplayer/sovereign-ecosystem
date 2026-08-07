@@ -4,6 +4,7 @@ Hidden notes in update packages. Enough to remember, not enough to spoil.
 
 | Date | Slug | Description |
 |---|---|---|
+| 2026-08-07 | v3.11.0-the-instructions-were-in-the-room | the rule fixed its own reachability using the shape it exists to enforce, and it is the second time it has done that |
 | 2026-08-06 | v3.10.0-the-root-is-not-the-repo | the difference between hiding a pile and moving it, admitted in one line |
 | 2026-08-05 | v3.9.0-present-and-unreachable | the full shelf with no door: every reader who typed a slash and saw nothing was standing in front of it |
 | 2026-07-10 | v3.3.0-governance-and-security-hardening | the instrument's first catch: the orphan detector found its own logbook |

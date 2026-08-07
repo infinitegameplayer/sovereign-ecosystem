@@ -4,7 +4,7 @@
 
 **Name:** Sovereign Ecosystem
 **Type:** Open-source personal operating system template
-**Version:** v3.10.0 (see .github/CHANGELOG.md and .github/UPDATES/ for the release log)
+**Version:** v3.11.0 (see .github/CHANGELOG.md and .github/UPDATES/ for the release log)
 **License:** MIT
 **Primary language:** Markdown (vault content), JavaScript/Node.js (scripts)
 **Repo:** https://github.com/infinitegameplayer/sovereign-ecosystem
@@ -74,7 +74,7 @@ A structured Obsidian vault template with:
 
 **Codices**: living reference documents that govern behavior, vocabulary and judgment. Codices are read, not executed. Examples: Writing Style Codex, Contrast Layer Codex, Challenge and Illumination Codex.
 
-**Protocols**: execution procedures. Protocols are run, not referenced. Examples: Session Closeout Protocol, Batch Archival Protocol, Pending Plan Implementation Protocol.
+**Protocols**: execution procedures. Protocols are run, not referenced. Examples: Session Closeout Protocol, Batch Archival Protocol, Pending Plan Implementation Protocol, Three Solutions Rule.
 
 **Skills**: named, structured prompt templates that activate specific capabilities. Skills are invoked by name. Examples: Sovereign Sync, Weekly Backup, Batch Archival.
 

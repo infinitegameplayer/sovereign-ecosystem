@@ -117,17 +117,32 @@ Read:
 - `Council Chamber/Protocols/Planning/Pending Plan Implementation Protocol.md`
 - `Council Chamber/Skills/Pending Plan Implementation/SKILL.md`
 - `Council Chamber/Protocols/Session/Session Closeout Protocol.md`
+- `Council Chamber/Protocols/Governance/Three Solutions Rule.md`
 
 These cover a lot of the first real operating behavior:
 - how things come in
 - how work gets scoped and implemented
 - how sessions get closed without losing learnings
+- how decisions get put in front of you
+
+That last one is the shortest read and the one you will feel most often.
+
+The Three Solutions Rule governs how your AI interface hands you a choice. Three options it actually believes in, a recommendation, and the trade-off named so you can see why it picked the one it picked. You decide.
+
+It fires on its own. You never have to ask for it.
+
+Two things worth knowing before it starts happening to you:
+
+**The recommendation is usually right, and the times it is wrong are why you read the options.** Somewhere around eight in ten, taking the recommendation is the correct move. The other two are the reason this is a choice rather than an announcement.
+
+**When the options do not make sense to you, you have a third answer.** Some decisions are genuinely technical and all three options read as equally opaque. You do not have to pretend otherwise and you do not have to pick blind. Restate what you are going for and hand back the mechanics: *"As long as it stays aligned with my goal of X, use your discernment."* That is a legitimate answer. It keeps you holding the intent while the AI holds the detail.
 
 You do not need every module protocol right now.
 You do need enough to see how the Foundation handles:
 - intake
 - execution
 - reflection
+- decisions
 
 That is the core loop.
 Once that loop becomes familiar, the system starts saving you real energy.

@@ -14,25 +14,133 @@ The sessions ahead are not a curriculum to finish. They are a paced build sequen
 
 Do not force the whole thing into one afternoon. Move through the sessions across multiple sittings. Let each one land before starting the next. The build itself can be organizing. It can organize the mind. It can organize the subconscious. It can create more room than you expected.
 
-This guide gives you the orientation layer. It tells you what each session is trying to do, what principle it is built around, what to expect from the experience and one idea worth playing with before you begin. The actual step-by-step instructions live inside the session files themselves.
+One thing worth holding while you build: the system you are making is yours and it travels. The files are plain text on your own machine. A different AI interface or a different model later means reconnecting the front door, not rebuilding the house. You are not putting your life inside somebody's product.
+
+This guide has two layers. The first is how to run a session, which is the same every time and worth reading once before you start. The second is what each session is trying to do, the principle underneath it, what to expect and one idea worth playing with before you begin. The actual step-by-step instructions live inside the session files themselves.
+
+---
+
+## How to Run a Session
+
+The mechanics are the same for all of them. Learn the loop once and the rest is content.
+
+These instructions assume **VS Code with the Claude Code extension**, which is the recommended setup in the Quick Start Guide. If you chose the Claude Code app instead, everything below still applies. Only the buttons move.
+
+### The Loop
+
+1. **Open a new tab.** One session per chat.
+2. **Read the explainer.** The entry for that session in this guide, then the session file itself.
+3. **Start the session.** Tell your AI which session you are running. Plain language works.
+4. **Do the work.** Read what it proposes rather than accepting on sight.
+5. **Run session closeout.** Type `session closeout` in the chat.
+6. **Cross it off.**
+
+That is the whole rhythm. It does not get more complicated later.
+
+### One Session, One Tab
+
+Start each session in a fresh chat. In VS Code, the Claude Code icon sits in the left sidebar, and a new chat opens in its own tab. Old tabs stay where they are, like browser tabs.
+
+You can run two sessions in one chat and nothing will break. The reason to keep them separate is the context window, covered below.
+
+### Watch the Context Window
+
+This is the single most useful habit in the whole build.
+
+Your AI reads the entire conversation again every time you hit enter. A long chat gets slower, more expensive and less accurate, because eventually it can no longer hold the whole thing at once. There is an indicator showing how full the current window is.
+
+**When it reaches about halfway, wrap up.** Three moves:
+
+1. Say: *"Let's pause here. Run session closeout, then draft me a short prompt I can paste into a fresh window."*
+2. Copy that prompt.
+3. Open a new tab and paste it in.
+
+You are now continuing with a clean window and none of the context lost.
+
+A session that runs too long starts giving you worse answers, and the failure is quiet. It does not announce itself. It just gets a little wrong.
+
+### You Will Not Need Old Sessions
+
+Everything real lands in your vault as you work. The strategy note, the codex, the plan: those are files, and the file is always the current version. There is no digging back through chat history for the good one.
+
+The chats are still there if you want them. In practice you will almost never open one.
+
+### How Decisions Get Put to You
+
+Your AI works under the Three Solutions Rule. When a real fork appears it gives you three options it believes in, a recommendation and the trade-off. You decide.
+
+Roughly eight times in ten the recommendation holds. The other two are why you read the options.
+
+When the options do not make sense to you, and some of them will not, you have a third answer. Restate what you are going for and hand back the mechanics: *"As long as it stays aligned with my goal of X, use your discernment."* That is legitimate. You keep the intent. It handles the detail.
+
+### Read What It Proposes
+
+These sessions write to your files. The AI will propose updates to your codices, your governance notes and your profile.
+
+The proposals are usually solid. The nuances are yours. Skim what changed before you approve it, especially anything describing your voice, your humor or your direction. You are the only one who can tell when it has you slightly wrong.
+
+### Permission Approvals
+
+When Claude Code asks permission to do something, you get two useful answers:
+
+| Option | What it means |
+|---|---|
+| **Yes** | Approve this one time |
+| **Yes, allow for this project** | Approve permanently for this folder |
+
+**Choose "Yes, allow for this project"** while working inside your ecosystem folder. Choosing the one-time option means the same prompt returns next session, and the next, and the next.
+
+### Session Closeout
+
+Run it at the end of every session. Type `session closeout` or `/session-closeout` in the chat.
+
+What it does:
+
+- Summarizes what you did
+- Writes a note forward to the next session, so continuity survives the gap
+- Commits your changes, grouped by theme
+
+Think of each chat as having a lifespan. Closeout is what carries anything worth keeping across to the next one.
+
+### Leave the Committing to Closeout
+
+Git watches your vault, which is what makes every change recoverable. Nothing you do inside the system is permanent in the frightening sense of the word.
+
+Do not commit mid-session. Closeout groups commits by theme, and scattered mid-session commits fragment the history and make rolling back harder. If Git prompts you, ignore it until closeout runs.
+
+### What It Costs
+
+Claude Code runs on your Claude subscription. There is no per-session billing and no meter to watch.
+
+Your plan carries usage limits that reset on a rolling window. If you hit one mid-build, your work is already saved in the vault. Come back when it resets and pick up where you stopped.
+
+Shorter, focused sessions stretch a plan further than long sprawling ones, which is the same habit the context window rule is already asking for.
+
+### How Long These Take
+
+Most sessions run five to thirty minutes. Two of them are reflective and take as long as they take.
+
+There is no prize for finishing them all in one night, and no penalty either. The **Typical Length** column below is an estimate, and yours will vary with how much you want to talk.
 
 ---
 
 ## The Sequence at a Glance
 
-| Session | Name | What It Does |
-|---------|------|--------------|
-| 0 | Prerequisites | Confirms your environment is ready and locates your actual starting point |
-| 0.5 | Mining Your AI History | (Optional) Extracts personal patterns from prior AI conversations to accelerate personalization |
-| 1 | Vault Initialization and Adapter Setup | Establishes the first working bridge between you, your files and your AI |
-| 2 | Governance Initialization | Introduces the structural layer that protects clarity, trust and long-term coherence |
-| 3 | Codex Activation | Activates the context layer that gives the ecosystem specificity, taste and continuity |
-| 4 | Protocol Activation | Turns on the operating loops that make the ecosystem actually behave |
-| 5 | Module Selection | Opens the expansion layer with discernment instead of impulse |
-| 6 | Guided First Pending Plan | Implements your first chosen expansion through the system's growth mechanism |
-| 7 | Sovereign Command and First Live Rhythm | Brings the command surface online and runs the first real work rhythm |
-| 8 | North Star Alignment | Clarifies the direction the ecosystem is built to support |
-| 9 | First Real Capture and Closeout | Proves the daily loop works with one real alive idea |
+| Session | Name | What It Does | Typical Length |
+|---------|------|--------------|----------------|
+| 0 | Prerequisites | Confirms your environment is ready and locates your actual starting point | Short |
+| 0.5 | Mining Your AI History | (Optional) Extracts personal patterns from prior AI conversations to accelerate personalization | Medium |
+| 1 | Vault Initialization and Adapter Setup | Establishes the first working bridge between you, your files and your AI | Medium |
+| 2 | Governance Initialization | Introduces the structural layer that protects clarity, trust and long-term coherence | Medium |
+| 3 | Codex Activation | Activates the context layer that gives the ecosystem specificity, taste and continuity | Medium |
+| 4 | Protocol Activation | Turns on the operating loops that make the ecosystem actually behave | Medium |
+| 5 | Module Selection | Opens the expansion layer with discernment instead of impulse | Medium |
+| 6 | Guided First Pending Plan | Implements your first chosen expansion through the system's growth mechanism | Take your time |
+| 7 | Sovereign Command and First Live Rhythm | Brings the command surface online and runs the first real work rhythm | Medium |
+| 8 | North Star Alignment | Clarifies the direction the ecosystem is built to support | Take your time |
+| 9 | First Real Capture and Closeout | Proves the daily loop works with one real alive idea | Short |
+
+*Short is five to fifteen minutes. Medium is fifteen to thirty. Take your time means the session is reflective and the clock is the wrong measure.*
 
 ---
 
@@ -62,13 +170,37 @@ Before you build, get honest about where you are actually starting. Not where yo
 
 **What This Session Does**
 
-Uses your existing AI conversation history to extract high-value patterns that help the ecosystem understand you more accurately before the Foundation gets deeper. Produces first-pass draft starters for your Writing Style Codex, Humor Codex, taste notes, North Star signal and other personal pattern surfaces.
+Uses your existing AI conversation history to extract high-value patterns that help the ecosystem understand you more accurately before the Foundation gets deeper. Produces first-pass draft starters for your Writing Style Codex, Humor Codex, taste notes, North Star direction and other personal pattern surfaces.
 
 **The Principle**
 
 This session is optional. It is also high leverage.
 
-If you skip it, the ecosystem still works. If you do it, later setup tends to feel more personal much earlier. The AI already knows what to look for and can mine the material for the most useful signals automatically.
+If you skip it, the ecosystem still works. If you do it, later setup tends to feel more personal much earlier. The AI already knows what to look for and can mine the material for the most useful patterns automatically.
+
+**Do This One Early**
+
+The natural instinct is to save this session for later, once the system knows you better. That instinct is backwards, and almost everyone has it.
+
+This session is what teaches the system who you are. It writes into your writing style, your humor, your goals and the way you actually operate. Every session after it works from what this one found. Run it late and you have done the rest of the build with a system that had to guess.
+
+Do it as close to the front as your exports allow.
+
+**Where Your Files Should Live**
+
+Your vault stays lightweight and close to text only. Somewhere between two and a few megabytes for a long time.
+
+Your assets live beside it rather than inside it. Images, video, audio and any PDF of real size belong in a separate project folder outside the vault, organized however makes sense to you. Import the documents there, have your AI harvest the text, and let the vault hold the understanding rather than the raw material.
+
+The reason is backups and speed. A vault carrying every PDF you ever read gets heavy, slow to search and awkward to move. A vault carrying what those PDFs meant stays small enough to live anywhere.
+
+**Go Chunk by Chunk**
+
+You will want to load everything in before you start using it. Resist that one.
+
+Bring in what you need as you need it. The system then shapes itself around how you actually work rather than around an archive you dumped in on day one. Waiting until the import feels complete is how a build stalls for a month.
+
+Do not wait to start just because it is not perfect.
 
 **What to Expect**
 
@@ -113,6 +245,14 @@ Helps you meet the governance layer as a thoughtfully built structure that can b
 Governance is there to protect clarity, trust and long-term coherence. It is not there to trap you in somebody else's wording forever.
 
 Receive the structure first. Live in it a little. Then change what wants changing from experience rather than from reflex.
+
+**How to Read This One**
+
+Peruse. Do not try to read everything.
+
+Pick three or four documents that look interesting and move through those. The session offers a reading list, and the list is a menu rather than an assignment. You are not going to be quizzed, and you can customize any of it later once you have lived in it.
+
+Start with the Constitution if you only read one. The frame is a small nation: you are sovereign, the Constitution is what governs the whole thing from a principled standpoint, and the codices further in are closer to the laws and the style. Read it for the philosophy rather than the clauses.
 
 **What to Expect**
 
@@ -230,7 +370,7 @@ This session is different from the ones before it. Less about adding structure, 
 
 **Something to Play With**
 
-Think of Sovereign Command more like a throne room than a dashboard. The AI is curating intelligence reports from across the ecosystem and bringing forward what most deserves your attention. The command surface should feel lean, alive, high-signal and worth checking. Not cluttered. Not heavy. Not full of things screaming for attention because they exist.
+Think of Sovereign Command more like a throne room than a dashboard. The AI is curating intelligence reports from across the ecosystem and bringing forward what most deserves your attention. The command surface should feel lean, alive, worth checking. Not cluttered. Not heavy. Not full of things screaming for attention because they exist.
 
 ---
 
@@ -304,7 +444,7 @@ That does not mean the ecosystem is finished. It means the operating core is liv
 
 The optional paths cover deeper customization. Creator or Venture HQ initialization. AI interface personalization. Expression surfaces. Business or life operating layers. These become Pending Plans when the timing feels right. Not tasks. Not obligations. Seeds that the system holds until you are ready.
 
-The cheat sheets are companions for daily use. Tool roles, session rhythm, the to-do dock, quest building, common setup issues. Keep them nearby as you settle into the system.
+The cheat sheets are companions for daily use. Two of them ship in the Getting Started folder: one on what each tool is for, and one on the setup issues that trip people up most. Keep them nearby as you settle into the system. The session rhythm itself lives at the front of this guide, so this is the document to come back to.
 
 The most important thing after the Foundation is not adding more. It is living inside what you built. Let the system meet real life for a few weeks before deciding what to expand. The Foundation earns trust through use, not through decoration.
 

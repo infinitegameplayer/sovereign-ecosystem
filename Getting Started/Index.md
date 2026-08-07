@@ -107,8 +107,9 @@ Add a simple operating surface for business or life management.
 Quick reference cards for common questions and friction points. Read before or during setup.
 
 - [Cheat Sheet - Tool Roles.md](Cheat%20Sheet%20-%20Tool%20Roles.md): why you need each tool
-- [Cheat Sheet - Claude Code Quick Reference.md](Cheat%20Sheet%20-%20Claude%20Code%20Quick%20Reference.md): session start, permissions, closeout, commit strategy
 - [Cheat Sheet - Common Setup Issues.md](Cheat%20Sheet%20-%20Common%20Setup%20Issues.md): six friction points as preventive guidance
+
+Session start, permissions, session closeout, commit strategy and the context window habit live in the **How to Run a Session** section at the front of [Build Sequence.md](Build%20Sequence.md).
 
 ## Companion File
 

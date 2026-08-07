@@ -27,6 +27,9 @@ Purpose: Provide a lightweight navigation surface for the core governance notes 
 - [[Council Chamber/AI Interface/AI Interface Knowledge Map]]
 - [[Council Chamber/AI Interface/Continuity Log]]
 
+## Decision Discipline
+- [[Council Chamber/Protocols/Governance/Three Solutions Rule]]
+
 ## Reading Order
 1. Constitution and object model
 2. Structural containers and layer map
@@ -34,6 +37,7 @@ Purpose: Provide a lightweight navigation surface for the core governance notes 
 4. Flywheel integration and translation to action
 5. Quest operating guidance
 6. AI interface governance surfaces
+7. Decision discipline
 
 ## Scope Boundary
 - This note is a navigation layer, not a dashboard.

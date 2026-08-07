@@ -6,6 +6,26 @@ Each entry corresponds to one publish cycle. For full implementation details, se
 
 ---
 
+## v3.11.0, 2026-08-07
+
+The Instructions Were in the Room.
+
+**If you installed any version, apply this.** Two capabilities the Foundation already had and never handed you.
+
+- **The Build Sequence gains a How to Run a Session section.** It explained what every session meant and never explained how to run one. The loop, one session per tab, the context window habit, closeout, permissions, commit strategy and reading what your AI proposes before approving it. All of it lived in live installs and none of it reached the page.
+- **The context window rule is written down for the first time.** At roughly half full, ask for a handoff prompt, run closeout, paste into a fresh window. A session that runs too long degrades quietly.
+- **The at-a-glance table gains a Typical Length column**, which is the first question every new user asks.
+- **The Three Solutions Rule starts firing.** It shipped as a protocol nothing invoked: absent from `CLAUDE.md`, the Operating Charter, the Governance Constellation and every Getting Started session. Its own text claimed it fires by default and pointed at Held-by-Structure in `CLAUDE.md`, which had never heard of it. **The rule that claimed to be held by structure was the one thing the structure did not hold.** Now wired into all four, plus `AGENTS.md`.
+- **The rule gained a fifth guardrail, a ceremony cost and a trust-ladder threshold.** Scale the form to the decision, never a bare open question. Ceremony is a cost paid by the AI Interface rather than the Sovereign. Routine is done, never proposed. Plus an escape hatch for forks that are genuinely opaque.
+- **`Cheat Sheet - Claude Code Quick Reference.md` is retired**, harvested into the Build Sequence. **It described Claude Code as metered API billing with a $10 to $25 onboarding cost.** Claude Code runs on a subscription, which the Quick Start Guide has said since v3.9.0. Two shipped guides disagreed about what you pay, and the v3.9.0 accuracy pass missed this one because it checked only the two guides that build to PDF.
+- Both guide PDFs rebuilt. The Quick Start Guide is a rebuild with no content change, proven text-identical against the committed copy.
+
+Same failure class as v3.9.0. A capability that is present and unreachable is a capability you do not have.
+
+Full detail and the implementation spec: `.github/UPDATES/2026-08-07-v3.11.0-the-instructions-were-in-the-room.md`.
+
+---
+
 ## v3.10.0, 2026-08-06
 
 The Root Is Not the Repo.
