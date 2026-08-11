@@ -48,7 +48,7 @@ An artifact is declared complete and moved from an Active Chamber to the Vault.
      - artifact-only variance
      - domain delta candidate
      - universal delta candidate
-   - Generate a Taste Delta Report (use `Council Chamber/Templates/Object Templates/Taste Delta Report.md` when helpful) and Protocol Delta notes only if structural governance changes are implicated.
+   - Generate a Taste Delta Report, shaped per [[Council Chamber/Protocols/Flywheels/Universal Taste Calibration Protocol]], and Protocol Delta notes only if structural governance changes are implicated.
 4. Protocol Delta Detection
    - Identify meaningful structural evolution.
 5. Sovereign Approval Gate

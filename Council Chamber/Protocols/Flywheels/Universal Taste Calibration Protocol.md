@@ -82,8 +82,7 @@ Used during calibration runs (including Quest Mode) only. After completion, they
 - Proposed updates list (exact files/sections)
 - Approval decision record (approved / deferred / rejected)
 
-Template (recommended):
-- `Council Chamber/Templates/Object Templates/Taste Delta Report.md`
+The Taste Delta Report has no shipped template. The four outputs above are its sections, and the shape it wants depends on what you make. Write it plainly the first few times. If a form settles, keep it as your own template in `Council Chamber/Templates/Object Templates/`.
 
 ## Contrast Layer Integration (Mandatory)
 Tier: 1 (foundational).

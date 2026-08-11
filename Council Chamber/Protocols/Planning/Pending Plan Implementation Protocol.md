@@ -84,7 +84,7 @@ Keep it to one line so the plan note stays the source of truth and `Sovereign Co
    - Support files policy review: at archival time, confirm `support_files_policy` in the plan frontmatter. Transient = clean up the support files folder. Durable = move the folder to `Vault (Archive)/Pending Plans/Support Files/`. Update the policy field in the archived plan if it was set incorrectly.
    - `status: implemented` is the terminal status. Archival is a lifecycle event that happens after `implemented`; the plan moves to the Vault with status unchanged at `implemented`. Clear the associated support-files subtree from `Council Chamber/Pending Plans/Support Files/` before the Vault move.
 11. Sync Pending Plans Index (when Pending Plans changed)
-   - Recommended after approved status/archive/move changes: run `Council Chamber/Tools/Pending Plans Index Sync.ps1`.
+   - Update `Council Chamber/Pending Plans/Index.md` in the same pass as the approved status, archive or move changes, so the Index never describes a state the container has left.
 
 ## Recommended Question Set (Implementation Conversation)
 - What part of this Pending Plan is approved to implement right now?

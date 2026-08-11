@@ -87,7 +87,7 @@ Formats may merge or skip steps when clarity is preserved.
 
 ## Template Use
 - Prefer Expression format templates in `Council Chamber/Templates/Object Templates/`.
-- Domain framing templates live in `Council Chamber/Templates/Domain Templates/Expression/`.
+- If you build domain framing templates of your own, `Council Chamber/Templates/Domain Templates/Expression/` is where they belong. The Foundation ships none, because framing is the part that is yours.
 - Generic `Artifact` template is allowed for unusual formats.
 
 ## Codex Application (Default)

@@ -25,7 +25,7 @@ Governed by: your Flywheel Codex of the Sovereign
    - Extract archetype + domain signals (provisional).
    - When visible, note strengthened archetypal energies, exercised stewardship domains and any emerging contribution or wealth signals.
 3. Governance Map Proposal
-   - Propose updates to `Council Chamber/Governance/Archetypal Governance Map.md`.
+   - Propose updates to your Archetypal Governance Map at `Council Chamber/Governance/Archetypal Governance Map.md`. The Foundation ships none, because the map is a record of your own archetypes and domains. The first run of this protocol creates it.
    - Flag new growth edges or integrations.
 4. North Star Bias Signal (optional)
    - If repeated patterns emerge, propose an Energetic Emphasis line.

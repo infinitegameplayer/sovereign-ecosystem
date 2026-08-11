@@ -26,7 +26,7 @@ Scope: All Active Chambers and governance/system changes.
    - Match on title keywords.
    - Match on `links`, `source` and related domains.
    - Scan `Council Chamber/Pending Plans/Index.md` and any unindexed Pending Plans.
-   - Optional: run `Council Chamber/Tools/Pending Plan Reconciliation Sweep.ps1` to generate candidate matches using keywords derived from artifacts changed this session (titles, links or domains).
+   - Derive candidate matches from keywords taken from the artifacts changed this session (titles, links or domains). If you run this often enough to want it scripted, write the sweep for your own platform and keep it in `Council Chamber/Tools/`.
    - When proposing a new PendingPlan (including reclassification from another object), first check for overlapping existing PendingPlans to avoid duplicate or competing scopes.
 3. For each candidate, classify outcome:
    - Implemented: fully delivered by the new/updated artifact(s).
@@ -43,7 +43,7 @@ Scope: All Active Chambers and governance/system changes.
      - if the folder has been cleared or moved to Vault provenance, the plan is archive-ready
 5. Obtain Sovereign approval before any moves or status changes.
 6. Apply approved changes and sync `Council Chamber/Pending Plans/Index.md`.
-   - Recommended: run `Council Chamber/Tools/Pending Plans Index Sync.ps1` after approved PendingPlan moves/status changes.
+   - Update the Index in the same pass as the approved moves and status changes, so the Index never describes a state the container has left.
 7. Log reconciliation summary in Session Closeout and AI Interface Change Log.
 
 ## Approval Gate

@@ -28,7 +28,7 @@ Scope: All Active Chambers.
 ## Library Eligibility Audit (Proposal-Only)
 - Include a proposal-only audit for Library items that are time-gated (e.g., Transcripts and Coaching Sessions after 7 days).
 - Audit proposes candidates; no moves or status changes without Sovereign approval.
-- Optional tool: `Council Chamber/Tools/Library Vault Eligibility Audit.ps1`.
+- The audit runs by reading the container and applying the time gate. If you run this often enough to want it scripted, write the script for your own platform and keep it in `Council Chamber/Tools/`.
 
 ## Status Rules
 - Eligible for scan: `status: implemented` for Pending Plans in Active Chambers. Other object types use their own terminal status (e.g., `complete` for non-plan artifacts, `retired` for Quests).
