@@ -137,15 +137,15 @@ This repo is **not** the right source for:
 
 ## Skills and Dual Distribution
 
-The Foundation ships skills directly in `Council Chamber/Skills/`, catalogued in the Skills Index. Seven of those skills are dual-distribution: Source Harvest, Self-Healing, Session Closeout, Playwright, Manuscript Anti-AI Edit Pass, Systematic Debugging and PR Code Review. Each stays in the Foundation as part of the full template experience and also installs as a standalone plugin.
+The Foundation ships skills directly in `Council Chamber/Skills/`, catalogued in the Skills Index. Many of them are dual-distribution: each stays in the Foundation as part of the full template experience and also installs as a standalone plugin. The Skills Index carries that list, and it carries the list rather than a count so that adding a skill leaves no second number to keep in step with it. Read it there rather than from a number restated here.
 
-The wider public library lives at the Infinite Game OS site, https://www.infinitegameos.io/skills, with 28 installable skills and 7 curated bundles. Install any skill or bundle directly with the Claude Code plugin marketplace command:
+The wider public library lives at the Infinite Game OS site, https://www.infinitegameos.io/skills, with 28 installable plugins (27 skills plus one protocol), 7 curated bundles and 2 governing protocols. Install any skill or bundle directly with the Claude Code plugin marketplace command:
 
 ```
 /plugin marketplace add https://www.infinitegameos.io/marketplace.json
 ```
 
-Four skills graduated out of this template into the public library entirely: Pending Plan Implementation, Plan Challenger, Researcher and Skill Creator.
+Two skills live in the public library rather than in this template: Plan Challenger and Skill Creator. Install either from the library when a build earns it.
 
 ---
 

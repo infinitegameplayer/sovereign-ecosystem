@@ -19,9 +19,9 @@ It explains what belongs together, what depends on what, and when each layer sho
 
 ## Foundation
 
-As of v2.4.0, five skills graduated from this Foundation to the Infinite Game OS public library at infinitegameos.io: Pending Plan Implementation, Plan Challenger, Researcher, Skill Creator, Systematic Debugging. The Foundation now ships lean. Practitioners install graduated skills from the IGOS library on demand.
+Two skills live in the Infinite Game OS public library at infinitegameos.io rather than in this Foundation: Plan Challenger and Skill Creator. Install either from the library when a build earns it. Everything else that makes sense for every build ships here, so the Foundation stands on its own without a trip to the library.
 
-As of v3.1.0, five Foundation skills are dual-distribution: they stay in the Foundation as part of the full experience and also ship as standalone installable plugins in the Infinite Game OS public library. Source Harvest (since v2.4.0), Self-Healing, Session Closeout and Playwright (v3.0.0) plus Manuscript Anti-AI Edit Pass (v3.1.0). The template stays the complete system. The plugins are individual doors.
+Many Foundation skills are dual-distribution: they ship here as part of the full experience and also install as standalone plugins from the public library, for practitioners who already run a system of their own. The canonical list lives in `Council Chamber/Skills/Skills Index.md`, kept as a list rather than a count so that adding a skill leaves no second number to keep in step with it. The template stays the complete system. The plugins are individual doors.
 
 The Foundation is the smallest complete system that can:
 - activate the AI interface

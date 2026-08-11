@@ -64,6 +64,18 @@ jobs:
       - name: Skills Index matches the skills on disk
         run: node "Council Chamber/scripts/build-skills-index.mjs" --check
 
+      # The inverse failure, and the one that shipped. A document telling the
+      # Sovereign to open a skill file that is not in the box. Two Getting
+      # Started sessions cited a skill that left at v2.4.0 and never came back,
+      # and it survived eleven releases because nothing checked citations
+      # against the skills directory. The control runs first: this checker is
+      # trusted when it passes only because it has been watched failing.
+      - name: Skill citation checker positive control
+        run: node "Council Chamber/scripts/check-skill-citations.mjs" --positive-control
+
+      - name: Every cited skill file is a skill this repo ships
+        run: node "Council Chamber/scripts/check-skill-citations.mjs"
+
       # The mirror checker learned when to stay quiet, and teaching a detector
       # when to say nothing is exactly the change that can turn it into one that
       # always says nothing. The silent case and the loud cases are both fired

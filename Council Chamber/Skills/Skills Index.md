@@ -14,10 +14,12 @@ Fields:
 - Ecosystem Update Check (active, tier: foundational)
 - End-of-Week (active, tier: operational)
 - Manuscript Anti-AI Edit Pass (active, tier: foundational). Expression-aligned. Runs the canonical anti-AI editing pass over a long-form manuscript against the Anti-AI Writing Patterns Codex. Surface-then-approve, no auto-apply on the judgment passes. Dual-distribution with the Infinite Game OS public library.
+- Pending Plan Implementation (active, tier: foundational). Executes an approved Pending Plan using the plan note as implementation context, breadcrumb record and outcome summary. The execution wrapper around the Pending Plan Implementation Protocol. Dual-distribution with the Infinite Game OS public library.
 - Pending Plan Progress Update (draft, tier: foundational)
 - Playwright (active, tier: operational)
 - PR Code Review (active, tier: operational)
 - Quest Progress Update (draft, tier: foundational)
+- Researcher (active, tier: foundational). Parallel sub-agent research on a topic, up to 4 independent workers on different angles, synthesized into one structured report. Research feeds decisions and never triggers execution. Dual-distribution with the Infinite Game OS public library.
 - Security Check (active, tier: foundational)
 - Self-Healing (active, tier: foundational)
 - Session Closeout (active, tier: foundational)
@@ -27,14 +29,14 @@ Fields:
 - Weekly Backup (active, tier: foundational)
 - Weekly Story (active, tier: operational)
 
-### Graduated to Infinite Game OS Public Library 2026-04-30 (v2.4.0)
+### Library-Only (install from the Infinite Game OS public library)
 
-The following skills were promoted to the IGOS public library and are no longer bundled in the Foundation. Install instructions are on each skill's page at infinitegameos.io:
+The following skills are not bundled in the Foundation. Install instructions are on each skill's page at infinitegameos.io:
 
-- Pending Plan Implementation: https://www.infinitegameos.io/skills/pending-plan-implementation
 - Plan Challenger: https://www.infinitegameos.io/skills/plan-challenger
-- Researcher: https://www.infinitegameos.io/skills/researcher
 - Skill Creator: https://www.infinitegameos.io/skills/skill-creator
+
+The Foundation ships every skill that makes sense for every build, so this list stays short by design. A skill sits here only while it serves a narrower need than every Sovereign has.
 
 ### Dual-Distribution with Infinite Game OS Public Library
 
@@ -49,3 +51,5 @@ The following skills ship inside this Foundation and also install as standalone 
 - Manuscript Anti-AI Edit Pass: https://www.infinitegameos.io/skills/anti-ai-edit-pass
 - Systematic Debugging: https://www.infinitegameos.io/skills/systematic-debugging
 - PR Code Review: https://www.infinitegameos.io/skills/pr-code-review
+- Pending Plan Implementation: https://www.infinitegameos.io/skills/pending-plan-implementation
+- Researcher: https://www.infinitegameos.io/skills/researcher

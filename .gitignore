@@ -6,6 +6,14 @@
 # Obsidian cache
 .obsidian/cache
 
+# Interface skill links, created locally by link-skills.mjs.
+# These are symlinks on Mac and Linux and directory junctions on Windows, so
+# they carry absolute machine-specific paths and are meaningless in anyone
+# else's clone. .claude/CLAUDE.md and .claude/settings.json still ship; only
+# the generated link directories stay local.
+.claude/skills/
+.codex/skills/
+
 # Runtime logs and working files.
 # The starter primer ships; everything else the runtime writes stays local.
 # Git will not descend into an ignored directory, so the wildcard plus a

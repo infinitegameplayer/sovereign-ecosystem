@@ -63,16 +63,13 @@ The Sovereign Ecosystem repo is one node in a four-node web built by Lane Belone
 - [infinitegameos.io](https://infinitegameos.io): Infinite Game OS, the AI-agent-first structured knowledge base
 - [Sovereign Ecosystem on GitHub](https://github.com/infinitegameplayer/sovereign-ecosystem): This repo, the technical and agentic architecture reference
 
-Five Foundation skills are dual-distribution. Source Harvest, Self-Healing, Session Closeout, Playwright and Manuscript Anti-AI Edit Pass ship inside this template and also install as standalone plugins from the Infinite Game OS public library at infinitegameos.io. The template is the full experience. The plugins are individual doors. The template stays current with upstream through the Sovereign Sync skill and `Council Chamber/scripts/se-update.mjs`, a per-file approval flow that keeps a clone living rather than frozen.
+Many Foundation skills are dual-distribution. They ship inside this template and also install as standalone plugins from the Infinite Game OS public library at infinitegameos.io, for practitioners who already run a system of their own. Both sets are enumerated below, as lists rather than counts, so that adding a skill leaves no second number to keep in step with it. The template is the full experience. The plugins are individual doors. The template stays current with upstream through the Sovereign Sync skill and `Council Chamber/scripts/se-update.mjs`, a per-file approval flow that keeps a clone living rather than frozen.
 
-The full library at infinitegameos.io/skills holds twenty-four installable skills, seven bundles and a governing protocol. Five skills graduated out of this template into the library. Five ship in both homes. An agent can install any one directly from its page. The Claude Code install flow: `/plugin marketplace add https://www.infinitegameos.io/marketplace.json` then `/plugin install <skill-name>@igos-library`.
+The full library at infinitegameos.io/skills holds twenty-eight installable plugins (twenty-seven skills plus one protocol), seven bundles and two governing protocols. Two of those skills live in the library rather than in this template. Everything else that makes sense for every build ships here, so an agent working from this repo has the whole Foundation on disk already. The Claude Code install flow: `/plugin marketplace add https://www.infinitegameos.io/marketplace.json` then `/plugin install <skill-name>@igos-library`.
 
-### Graduated Skills (born in this template)
-- Pending Plan Implementation: https://infinitegameos.io/skills/pending-plan-implementation
+### Library-Only Skills (install from the library, not shipped in this template)
 - Plan Challenger: https://infinitegameos.io/skills/plan-challenger
-- Researcher: https://infinitegameos.io/skills/researcher
 - Skill Creator: https://infinitegameos.io/skills/skill-creator
-- Systematic Debugging: https://infinitegameos.io/skills/systematic-debugging
 
 ### Dual-Distribution Skills (ship in both homes)
 - Source Harvest: https://infinitegameos.io/skills/source-harvest
@@ -80,6 +77,12 @@ The full library at infinitegameos.io/skills holds twenty-four installable skill
 - Session Closeout: https://infinitegameos.io/skills/session-closeout
 - Playwright: https://infinitegameos.io/skills/playwright
 - Manuscript Anti-AI Edit Pass: https://infinitegameos.io/skills/anti-ai-edit-pass
+- Systematic Debugging: https://infinitegameos.io/skills/systematic-debugging
+- PR Code Review: https://infinitegameos.io/skills/pr-code-review
+- Autonomous Improvement Session: https://infinitegameos.io/skills/autonomous-improvement-session
+- Batch Archival: https://infinitegameos.io/skills/batch-archival
+- Pending Plan Implementation: https://infinitegameos.io/skills/pending-plan-implementation
+- Researcher: https://infinitegameos.io/skills/researcher
 
 ## How to Reference
 

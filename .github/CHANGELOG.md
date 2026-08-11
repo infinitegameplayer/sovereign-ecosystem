@@ -6,6 +6,25 @@ Each entry corresponds to one publish cycle. For full implementation details, se
 
 ---
 
+## v3.12.0, 2026-08-11
+
+The Skill the Sessions Told You to Open.
+
+**If you installed any version, apply this.** The onboarding sequence pointed at a file that was not in the box.
+
+- **`Pending Plan Implementation` and `Researcher` return to the Foundation.** Both stay installable from the public library. Ships in both homes is the pattern set at v3.5.0.
+- **Session 6 is the session that teaches the Pending Plan mechanism**, and Step 1 told you to open `Council Chamber/Skills/Pending Plan Implementation/SKILL.md`. That file left at v2.4.0 and never came back. Session 4 cited it too. **The template shipped the protocol, the object template, the reconciliation checklist and a whole session about implementing plans, while withholding the skill that does the implementing.** Eleven releases.
+- **Four documents described the same graduation and gave four different answers.** `MODULES.md`, `README.md` and `llms.txt` each claimed five skills graduated and five were dual. Ground truth was four and nine. `AGENTS.md` was corrected at v3.6.0 and the other three were left behind by that fix.
+- **The two surfaces that stayed true are the two that refuse to restate a number.** The Skills Index carries a list rather than a count. The public page computes from a released fact. Every surface that hardcoded a count drifted. Neither surface that derived one did. So the four counts are now lists.
+- **New guard: `check-skill-citations.mjs`.** Every backticked citation of a `Council Chamber/Skills/<Name>/SKILL.md` path must name a file this repo ships. It ships with a positive control that requires it to flag a broken citation, ignore a good one and skip a placeholder. Both run in CI. **`validate-doc-claims.mjs` could already find this class, and flagged it the moment it was aimed at the file. Nothing ever aimed it.**
+- **`.claude/skills/` and `.codex/skills/` are git-ignored.** The documented install step used to leave them untracked forever, and `git add -A` committed junctions carrying absolute machine-specific paths.
+
+A capability present and unreachable is a capability you do not have. This is the citation-side face of that: an instruction pointing at a capability that was never there.
+
+Full detail and the implementation spec: `.github/UPDATES/2026-08-11-v3.12.0-the-skill-the-sessions-told-you-to-open.md`.
+
+---
+
 ## v3.11.0, 2026-08-07
 
 The Instructions Were in the Room.
