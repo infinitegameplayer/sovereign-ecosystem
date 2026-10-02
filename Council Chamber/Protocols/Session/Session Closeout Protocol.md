@@ -19,6 +19,10 @@ The closeout is a single lean close. There is no lightweight-versus-full mode bi
 
 3. **Record the session.** Auto-commit with a 2-3 sentence readable body (what shipped, key decision, what comes next). Git is the log: the commit body is the always-on searchable backward record. No separate per-session log, and no non-git fallback. The template assumes a git-tracked vault, which is why git is wired into the build. A Sovereign who opts out of git owns that tradeoff and adds their own record surface.
 
+## The Question Closeout Exists to Ask
+
+Beyond what this session did, closeout asks what this session **finished without noticing**. Work completes through indirect paths: another plan absorbed it, organic governance work covered it, a prior session already handled it. The question is "is this effectively done?", asked even when the work never ran through that artifact's own execution path. Classification drift belongs to the same question. An artifact may have become a different kind of thing than the one it was filed as. Answers are proposals and wait for the Sovereign's approval.
+
 ## Conditional Steps
 
 - **Plan exit-criteria verification.** If this session advanced a Pending Plan, read its exit-criteria block and verify each criterion against named evidence (file, commit, script output, live test). Do not accept a self-reported "all criteria met."

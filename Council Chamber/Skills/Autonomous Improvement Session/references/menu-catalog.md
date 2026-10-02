@@ -13,7 +13,7 @@ The full Tier 1 and Tier 2 menu. Load this file at Step 2 (compute eligibility) 
 **Tier 1 (autonomous, edits land directly)**
 - T1-1: Wikilink integrity re-sweep
 - T1-2: Index regeneration
-- T1-3: Anti-AI sweep on draft articles
+- T1-3: Anti-AI sweep on draft articles (retired)
 - T1-4: Memory file slug variant normalization
 - T1-5: Codices Index completeness sweep
 - T1-6: Superseded-artifact and dead-section sweep
@@ -49,6 +49,19 @@ The full Tier 1 and Tier 2 menu. Load this file at Step 2 (compute eligibility) 
 - T2-26: Undocumented required-env-key audit
 - T2-27: Skill disambiguation and trigger-collision scan
 - T2-28: SKILL.md progressive-disclosure overgrowth scan
+- T2-44: Skills-missing-External-Orientation audit
+- T2-46: Interface Adapter Registry deprecated-entry staleness check
+- T2-47: Cross-memory link integrity sweep
+- T2-50: Memory expiry-lapse scan
+- T2-51: Memory frontmatter schema-gap scan
+- T2-52: Empty and stub note detection
+- T2-53: Frontmatter date-format conformance audit
+- T2-54: Skill-referenced script existence sweep
+- T2-56: YAML frontmatter validity scan
+- T2-57: MCP tool-description integrity sweep
+- T2-60: Codex status-promotion propagation check
+
+IDs T2-44 onward keep the numbers the originating vault gave them, so the sequence has gaps. Nothing renumbers.
 
 **Research Rotation Categories (menu-growth engine, SKILL.md Step 8)**
 - R1 external practices, R2 vault hygiene, R3 infrastructure, R4 discoverability, R5 skill library, R6 governance, R7 expression, R8 memory architecture, R9 cost and routing
@@ -82,15 +95,11 @@ Each item is mechanical, additive, vault-internal and reversible via git. No app
 **Eligibility:** Condition-based. Eligible whenever a plan was added, archived or had its status change since the last index build. No day-window.
 **Output artifact:** Regenerated index files plus any frontmatter field corrections in Pending Plan files.
 
-### T1-3: Anti-AI sweep on draft articles
+### T1-3: Anti-AI sweep on draft articles (RETIRED)
 
-**Execution:**
-1. Glob all `.md` files in `Scriptorium/Articles/` (or your vault's equivalent drafts directory) with frontmatter `status: draft` or `status: ideas`.
-2. For each, run the Anti-AI Writing Patterns Codex sweep against the file body. Apply approved find-and-replace transforms in place. Leave any judgment-required findings (voice-tone calls, ambiguous patterns) as inline `<!-- ANTI-AI: [issue] -->` comments for Sovereign review.
-3. Skip files with frontmatter `anti_ai_swept: true` or with mtime within the last 24 hours.
+Retired, Sovereign-directed. Tombstone kept for history.
 
-**Eligibility:** Not run in 7+ days. Skip files already swept since the article was last edited. Skip entirely if your ecosystem does not ship the Anti-AI Writing Patterns Codex.
-**Output artifact:** Edited draft files. Run entry shows per-file counts: transforms applied, inline comments left for Sovereign.
+The premise was wrong for the workflow. The anti-AI edit pass belongs at drafting time, run by the drafting skills while a piece is being written, not as a background sweep over drafts that are sitting or already published. Re-sweeping a finished or shipped draft spends tokens to edit work that is already done, and it touches the Sovereign's in-progress drafts without the Sovereign's hand on them. Anti-AI quality is enforced where it belongs: at the moment of authoring and in the Sovereign's own editing pass. No autonomous anti-AI sweep remains, by design.
 
 ### T1-4: Memory file slug variant normalization
 
@@ -133,6 +142,7 @@ Each item is mechanical, additive, vault-internal and reversible via git. No app
 2. List stale `.runtime` files (30+ days old, not active state files) as Sovereign-approved removal candidates. Do not delete them. File deletion is the Permanent Floor, so the purge stays surfaced, not autonomous.
 3. Track already-surfaced purge candidates in the log frontmatter `runtime_purge_surfaced` list. Each run, surface only files not already on that list, and add a tail note counting how many previously-surfaced files still await an approved purge. When the Sovereign approves and the purge executes, clear `runtime_purge_surfaced`.
 4. Never touch a tracked governance or content file, only the named operational logs.
+4b. **Classifier-denial fallback.** When the auto-mode classifier denies the truncation, do not fight it. Put a paste-ready truncation command on decision board Section 1 and treat the item as complete. Explicit Sovereign permission in a return session clears the denial.
 
 **Eligibility:** Condition-based. Eligible whenever a named operational log exceeds its line cap.
 **Output artifact:** Truncated logs. Stale-file removal candidates in the run log Approvals bucket.
@@ -436,6 +446,152 @@ If your ecosystem does not maintain a Term Registry, skip this item.
 3. For each flagged skill, classify the bulk (routing tables, lookup references, session logs, examples) and propose what extracts to `references/` without breaking operational flow. The split itself is a structural change, Sovereign-gated.
 
 **Eligibility:** Not run in 60+ days.
+**Output artifact:** Findings on the decision board.
+
+### T2-44: Skills-missing-External-Orientation audit
+
+The [[Council Chamber/Protocols/Governance/Ambassador Doctrine]] mandates an `## External Orientation` section for every skill that operates outside the vault. A skill that touches an external system without it is drift that no other item catches.
+
+**Execution:**
+1. Glob `Council Chamber/Skills/*/SKILL.md`. Grep each for `## External Orientation`.
+2. For each lacking it, check whether the skill references external systems (an API, an MCP tool, `gh`, a web fetch, an outbound script, a site repo). A vault-internal-only skill needs no section. An externally-operating one does, per the Ambassador Doctrine Propagation Rules.
+3. Report each externally-operating skill missing the section. Authoring the section is Sovereign-gated content, since it carries the skill-specific orientation, so this surfaces and never auto-writes.
+
+**Autonomy:** Level 1, read-only report.
+**Eligibility:** Not run in 60+ days.
+**Output artifact:** Findings on the decision board.
+
+### T2-46: Interface Adapter Registry deprecated-entry staleness check
+
+The implemented-plan archival pattern (T2-9) applied to adapter entries. A long-deprecated entry is an archival-review candidate, and a missing status is unverifiable drift. Applies only when [[Council Chamber/Governance/Interface Adapter Registry]] carries a `Status` field and a `Deprecated Date` on deprecated entries. If the registry carries neither, the first run reports that and stops.
+
+**Execution:**
+1. Read the Interface Adapter Registry. For each entry, read `Status` and, where deprecated, `Deprecated Date`.
+2. Flag any `Status: deprecated` entry whose `Deprecated Date` is more than 90 days past (archival-review candidate), and any entry missing a `Status` field entirely.
+3. Report each flagged entry with its date and the recommendation. Editing or removing a registry entry is Sovereign-gated governance content, so this surfaces and never edits.
+
+**Autonomy:** Level 1, read-only report.
+**Eligibility:** Not run in 90+ days. Very slow drift that grows in value as the registry grows.
+**Output artifact:** Findings on the decision board.
+
+### T2-47: Cross-memory link integrity sweep
+
+Distinct from T2-4: T2-4 checks Obsidian `[[wikilinks]]` between memory files, while the memory index and several memory bodies cross-reference each other with markdown relative links `[Title](file.md)`, an integrity surface no other item validates.
+
+**Execution:**
+1. Read the memory index and walk each memory file in your AI Interface's project memory directory. Extract every markdown relative link `[text](target.md)` and every `[[wikilink]]` not already covered by T2-4.
+2. Check each target filename against the directory. Build a list of broken links (source file, link text, missing target) plus a candidate-target inventory of existing memory filenames and `name:` slugs for suggested fixes.
+3. Report broken links grouped by source, with a suggested correct target per broken link where the inventory makes one obvious.
+
+**Autonomy:** Level 1, read-only scan and report. The fix is Sovereign-run.
+**Eligibility:** Not run in 30+ days.
+**Output artifact:** Findings on the decision board.
+
+### T2-50: Memory expiry-lapse scan
+
+A memory that carries an expiry date and outlives it keeps steering sessions after its premise has lapsed.
+
+**Execution:**
+1. Walk the memory directory. For each file carrying an `expires:` frontmatter field or a body `**Expires:**` line with a parseable date, compare the date to today.
+2. Build a report of each file whose expiry is past and is not already marked expired: filename, expiry date, days past and the recommended Sovereign-run edit (add `status: expired`, mark the index line as expired).
+3. Surface on the decision board. Never edit the memory store.
+
+**Autonomy:** Level 1, read-only scan and report.
+**Eligibility:** Not run in 30+ days.
+**Output artifact:** Findings on the decision board.
+
+### T2-51: Memory frontmatter schema-gap scan
+
+Memory files drift into several frontmatter shapes (some dated, some nesting fields under `metadata:`, most undated), so no age-sort sweep can run reliably. This is the schema prerequisite that makes T2-50 and other memory sweeps queryable.
+
+**Execution:**
+1. Walk the memory directory. Read each file's frontmatter. Check for the fields a normalized memory carries, all at top level and none nested under `metadata:`: `name` (kebab-case slug), `type` (feedback, system, project, user or reference), `created` (ISO date) and a session identifier if your interface records one.
+2. Report per file: missing fields, nested-instead-of-top-level fields and any value-vocabulary drift (a `type` outside the set).
+3. Surface the proposed normalization on the decision board for Sovereign-run edits. Never edit the memory store.
+
+**Autonomy:** Level 1, read-only scan and report.
+**Eligibility:** Not run in 60+ days. Slow drift.
+**Output artifact:** Findings on the decision board.
+
+### T2-52: Empty and stub note detection
+
+The structural-note analog of T2-14 (orphaned-image sweep). A note that resolves as a wikilink target but holds no content passes every link-integrity check silently and surfaces only when a human opens it and finds nothing.
+
+**Execution:**
+1. Walk active-container `.md` files. Skip `Vault (Archive)/`, any `node_modules/` tree and the memory directory.
+2. Flag any note whose body (content after the frontmatter block) is empty or near-empty: zero non-whitespace body, or frontmatter plus a single heading with no body prose, under a small byte threshold (for example 50 body bytes).
+3. For each flagged note, count inbound `[[wikilink]]` references across the vault so the orchestrator can classify. A stub with inbound links is a placeholder with purpose (a planned note not yet written). A stub with zero inbounds is pure lint.
+4. Report each candidate with path, body byte count and inbound count. Read-only.
+
+**Autonomy:** Level 1, read-only report. Any archival or fill of a stub is Sovereign judgment, because a stub may be a deliberate placeholder.
+**Eligibility:** Not run in 30+ days.
+**Output artifact:** Findings on the decision board.
+
+### T2-53: Frontmatter date-format conformance audit
+
+A single non-ISO date silently breaks any script that sorts or filters by a frontmatter date, while staying invisible to a human reader.
+
+**Execution:**
+1. Walk active-container `.md` files. For each, read the frontmatter date-bearing fields (`created`, `updated`, `date`, `due`, `next_due`, `last_run`, `last_reviewed`, `next_review` and similar).
+2. Flag any value that does not match ISO `YYYY-MM-DD` (catch `YYYY/MM/DD`, `MM-DD-YYYY`, `DD-MM-YYYY`, month-name forms and partial dates). Skip a field whose value is intentionally blank and skip non-date fields.
+3. Report per finding: file, field, current value and the proposed ISO normalization. Read-only.
+
+**Autonomy:** Level 1, read-only report. The date is canonical data, so correcting it is a content edit the Sovereign ratifies, never an autonomous rewrite (an ambiguous `01-02-2026` could be Jan 2 or Feb 1). A future ratified climb could auto-fix only the unambiguous reformats (`YYYY/MM/DD` to `YYYY-MM-DD`).
+**Eligibility:** Not run in 30+ days.
+**Output artifact:** Findings on the decision board.
+
+### T2-54: Skill-referenced script existence sweep
+
+Skills cite scripts by exact path. A script named in a SKILL.md but absent at that path is a silent runtime failure that no other item catches: T2-6 checks inter-skill wikilinks, not script-path references.
+
+**Execution:**
+1. Grep all `Council Chamber/Skills/*/SKILL.md` for `scripts/` path references (including tool-script paths under other skill directories).
+2. Resolve each referenced path against the live filesystem.
+3. Report a broken-reference table: source skill, referenced path, exists or missing. Skip references inside code-fence examples, and flag conditional "if it exists" fallback references separately as intentional.
+
+**Autonomy:** Level 1, read-only scan and report. The fix (repoint or remove a dead script reference) is content the Sovereign ratifies, never auto-edited.
+**Eligibility:** Not run in 30+ days.
+**Output artifact:** Findings on the decision board.
+
+### T2-56: YAML frontmatter validity scan
+
+An unquoted colon in a frontmatter value (`title: Field Notes: The Complete Guide`) is invalid YAML, so Obsidian silently fails the whole properties block for that file. `type`, `status`, `date` and every other field stop registering, which defeats every frontmatter-based audit (T2-10, T2-53 and any date or deadline script) for exactly the files that are broken.
+
+**Execution (read-only):**
+1. Walk active-container `.md` files (same scope as T2-53). For each frontmatter block, parse it as YAML (or apply targeted lint checks: unquoted colon inside a value, tab indentation, duplicate keys, unclosed quotes, `[[...]]` inside a flow value where a quoted string is expected).
+2. Report per finding: file, offending line, the failure class and the quoted correction. Distinguish hard invalidity (the whole block fails) from soft misparse (a field parses to the wrong shape, like `links: [[X]]` becoming a nested array).
+3. Make no edits. The fix (quoting a value) is mechanical and a strong future climb candidate after one clean approved report cycle.
+
+**Autonomy:** Level 1, read-only report.
+**Eligibility:** Not run in 30+ days.
+**Output artifact:** Findings on the decision board.
+
+### T2-57: MCP tool-description integrity sweep
+
+A changed MCP tool description or schema without a corresponding version bump is the documented rug-pull tool-poisoning vector, and any MCP server that reaches a live account sits on a trust boundary. Distinct from T2-21, which watches load-versus-use efficiency, not integrity.
+
+**Execution (read-only):**
+1. For each active MCP server in the session config, capture the current tool inventory: tool names, descriptions and input schemas (tool search surfaces these on demand).
+2. Hash the per-server inventory (stable JSON serialization, sha256) and diff against the last recorded hash in the item's state file (`Council Chamber/Skills/Autonomous Improvement Session/references/mcp-integrity-state.json`, created on first run).
+3. On a hash change, produce the human-readable diff (which tool, which field, old and new text) and surface it on the decision board. A vendor-announced update reconciles and re-baselines on Sovereign acknowledgment. An unexplained change escalates before that server's tools are trusted again.
+4. Update the state file with current hashes and run date. The state write is the item's only edit.
+
+**Autonomy:** Level 1, read-only scan plus its own state file. No remediation is ever autonomous. A flagged server is a Sovereign-attention item.
+**Eligibility:** Not run in 14+ days (integrity drift deserves a shorter window than efficiency scans).
+**Output artifact:** Findings on the decision board plus the state file.
+
+### T2-60: Codex status-promotion propagation check
+
+When a codex's frontmatter `status` is promoted (trial to active, draft to trial), the prose status labels describing it in the navigation surfaces do not follow. The promotion is a single event with several downstream descriptions, and nothing propagates it.
+
+**Execution (read-only):**
+1. Parse [[Council Chamber/Codices/Codices Index]] and [[Council Chamber/AI Interface/AI Interface Knowledge Map]] for entries carrying an inline status word next to a wikilink ("Trial state", "Draft state", "Active state", "Retired").
+2. Resolve each wikilink and read the target's frontmatter `status`.
+3. Flag every mismatch. Report the navigation file, the line, the claimed state and the actual frontmatter value.
+4. Know the convention before flagging an absence. If your navigation surfaces label only non-active states, a missing label on an active codex is correct, and the fix for a promoted codex is to remove the stale label rather than replace it with "Active state." Grep the surfaces for the labels they actually use before flagging.
+
+**Autonomy:** Level 1, read-only report. The correction is mechanical and safe, but status is a governance fact, so the finding surfaces and the Sovereign's nod lands the edit.
+**Eligibility:** Not run in 30+ days, or condition-based whenever a codex `status` changed since the last scan.
 **Output artifact:** Findings on the decision board.
 
 ---

@@ -23,7 +23,7 @@ import { dirname, join } from 'path';
 import { fileURLToPath } from 'url';
 
 const SCRIPT_DIR = dirname(fileURLToPath(import.meta.url));
-const VAULT_ROOT = join(SCRIPT_DIR, '..');
+const VAULT_ROOT = join(SCRIPT_DIR, '..', '..');
 const MANIFEST_PATH = join(SCRIPT_DIR, 'framework-manifest.json');
 
 const UPSTREAM_REPO_URL = 'https://github.com/infinitegameplayer/sovereign-ecosystem.git';

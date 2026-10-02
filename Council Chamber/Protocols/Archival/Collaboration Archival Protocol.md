@@ -15,6 +15,8 @@ Purpose: Provide a lightweight archival flywheel for collaboration containers wh
 
 Scope: All collaboration containers under `Collaborations/`.
 
+Precedence: this protocol supersedes the Batch Archival Protocol (`Council Chamber/Protocols/Archival/Batch Archival Protocol.md`) for artifacts under `Collaborations/`. Batch Archival scans every active container, and collaboration artifacts stay inside their collaboration container unless you explicitly approve routing them to the Vault.
+
 ## Principles
 - Collaboration archives remain inside the collaboration container.
 - No bidirectional merging into the Vault (Archive) without explicit approval.

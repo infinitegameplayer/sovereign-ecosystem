@@ -22,6 +22,7 @@ Before you build, get honest about where you are actually starting.
 - Obsidian installed
 - Claude Code installed
 - or Codex available as your working AI interface
+- Node.js (LTS) installed, for the vault's scripts and guard hooks
 - a GitHub account
 - the Sovereign Ecosystem files available locally
 
@@ -32,6 +33,7 @@ Before you build, get honest about where you are actually starting.
 - [ ] Confirm you can open a local vault.
 - [ ] Decide whether you want mobile access and quick mobile capture.
 - [ ] Install or confirm your primary AI coding interface.
+- [ ] Install Node.js (LTS) from nodejs.org and confirm `node -v` prints a version in a new terminal.
 - [ ] Confirm you have a GitHub account.
 - [ ] Confirm the Sovereign Ecosystem exists locally on your machine, not inside a cloud-synced folder.
 - [ ] If you may want to mine previous AI history, start exporting it now. Exports from platforms like ChatGPT are processed asynchronously. The download link arrives by email and can take 3–12 hours. Start early and continue setup while you wait.

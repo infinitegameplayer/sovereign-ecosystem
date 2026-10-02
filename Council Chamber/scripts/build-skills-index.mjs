@@ -33,6 +33,13 @@ const SKILLS_DIR = path.join('Council Chamber', 'Skills');
 const INDEX_PATH = path.join(SKILLS_DIR, 'Skills Index.md');
 const CHECK = process.argv.includes('--check');
 
+// A mistyped --check must not fall through to the write.
+const unknown = process.argv.slice(2).filter((a) => a !== '--check');
+if (unknown.length) {
+  console.error(`build-skills-index: unknown argument ${unknown.join(' ')}. Use --check, or no argument to rebuild.`);
+  process.exit(2);
+}
+
 if (!existsSync(SKILLS_DIR)) {
   console.error(`build-skills-index: no ${SKILLS_DIR} here. Run from the vault root.`);
   process.exit(2);

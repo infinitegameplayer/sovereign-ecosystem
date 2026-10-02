@@ -271,6 +271,14 @@ async function positiveControl() {
 }
 
 async function main() {
+  // A mistyped --check must not fall through to the write.
+  const known = ['--check', '--force', '--positive-control'];
+  const unknown = process.argv.slice(2).filter((a) => !known.includes(a));
+  if (unknown.length) {
+    console.error(`decision-journal: unknown argument ${unknown.join(' ')}. Use --check, --force or --positive-control, or no argument to regenerate.`);
+    process.exit(2);
+  }
+
   if (process.argv.includes('--positive-control')) return positiveControl();
 
   const check = process.argv.includes('--check');

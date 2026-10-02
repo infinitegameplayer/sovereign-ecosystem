@@ -45,11 +45,13 @@ Use the tools that help you get moving now, while keeping the deeper sovereignty
 
 ## What You Will Need
 
-You need four things before you begin.
+You need five things before you begin.
 
 **Obsidian**: a free, local-first markdown app where this ecosystem lives. Download it at [obsidian.md](https://obsidian.md). Once installed, open the downloaded Sovereign Ecosystem folder as a vault using "Open folder as vault."
 
-**Claude Code**: Anthropic's AI coding assistant that acts as your AI interface inside the vault. The easiest path for most people is to install it as a VS Code extension: download [VS Code](https://code.visualstudio.com) first, then install the Claude Code extension from the VS Code Extensions marketplace. If you prefer the terminal, install it with `npm install -g @anthropic-ai/claude-code` (requires [Node.js](https://nodejs.org)). Claude Code uses the Anthropic API, which has a small per-session cost. Full onboarding typically runs in the range of $10–25 USD total at a comfortable pace. See Session 0 for more detail on cost and setup options.
+**Claude Code**: Anthropic's AI coding assistant that acts as your AI interface inside the vault. The easiest path for most people is the VS Code extension: download [VS Code](https://code.visualstudio.com) first, then install the Claude Code extension published by Anthropic. Claude Code also runs as the **Code** tab of the Claude desktop app at [claude.com/download](https://claude.com/download). It needs a paid Claude plan (Pro or higher) or Anthropic API credits. The [Quick Start Guide](Getting%20Started/Quick%20Start%20Guide.md) walks through both.
+
+**Node.js**: the runtime for this vault's scripts and the guard hooks that protect your files. Claude Code no longer installs it for you, so install the LTS version from [nodejs.org](https://nodejs.org) and confirm `node -v` prints a version. The guards refuse shell commands when they cannot reach Node, so a missing install shows up as a clear message rather than a silent gap.
 
 **Git**: version control tool used by the Ecosystem Update Check skill to fetch updates and by the scripts folder if you use the backup automation. Most Mac and Linux users already have it. Windows users can download it at [git-scm.com](https://git-scm.com) or install [GitHub Desktop](https://desktop.github.com) for a GUI version.
 

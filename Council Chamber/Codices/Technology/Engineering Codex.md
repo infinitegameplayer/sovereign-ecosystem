@@ -25,6 +25,8 @@ The cycle is Plan, Build, Verify, Review, Refine, Polish, Compound. The last sta
 
 This ecosystem is not a software company. It is refusing to rediscover the same lesson twice.
 
+This law is combinatorial evolution in engineering clothes. Each finished unit becomes a building block for the next, which is how a collective bootstraps from few elements to many. The corollary is the part teams forget: every build opens its own next puzzle, and that is health rather than failure. An honest cycle expects each solved thing to generate its successor and plans for the lineage it opens.
+
 ## I. Plan
 
 The plan is a decision artifact. Progress lives in git and in the session, never in the plan body.
@@ -238,6 +240,7 @@ The register. Each is a real failure with a real defense, and naming it is most 
 | **The guard held by ordering** | A memoized guard whose construction path executes once per process, so exactly one test covers it, and if chance hands that slot to a negative test, deleting the whole construction survives untested. Defense: memoization plus per-test coverage hides construction paths from mutation testing. Reset the module and claim the cold-start slot for a *positive* assertion. |
 | **The routed-around guardrail** | An agent whose test or audit is blocked by a safety control, and which finds a way around it. The block was the control working. Defense: stop, and reach for the sandboxed instrument. An agent that learns to talk past its own guardrails has become the thing it audits for. |
 | **The false red** | A new test goes red and the code gets "fixed" to satisfy it. Sometimes the test was wrong. Defense: when a fresh test fails, the first question is whether the test is TRUE, never how to make the code agree with it. |
+| **The trusted extension** | A filename asserts a format its bytes do not carry, and everything downstream keys on the assertion rather than the file. An image generator returns JPEG bytes whatever name you request, so a folder of heroes is JPEGs named `.png`. Nothing breaks, because browsers and social scrapers read bytes rather than extensions, which is exactly why it survives unseen. Defense: **read the magic bytes after any download or generation and name the file what it is.** Read the directory rather than assuming the path you asked for. An unrecognized format keeps the name it was given, because guessing is worse than the mismatch. **Fix forward, never retroactively:** renaming live URLs breaks cached previews and external embeds to fix a problem no browser has. |
 
 ## Model Routing
 
@@ -251,6 +254,43 @@ The register. Each is a real failure with a real defense, and naming it is most 
 | Learning capture, grounding validation | Sonnet | Structured synthesis against cited source |
 
 Set `model` explicitly on every Agent call. Canonical rule in CLAUDE.md Operational Efficiency.
+
+## Orchestration Mode
+
+Whether the session orchestrator does the work itself or dispatches it. This answers a question prior to Model Routing below: mode first, then tier.
+
+**Default: inline.** The orchestrator does the work itself. Dispatch is earned by a trigger below, never assumed from task size or ceremony.
+
+**Dispatch when any one trigger fires:**
+
+| Trigger | Signal | Mode |
+|---|---|---|
+| Context protection | Exploration whose intermediate detail has no bearing on later steps: wide file surveys, log trawls, transcript reads where only the conclusion carries forward | Dispatch a reader or Explore worker. Only the conclusion returns. Judge by relevance, never by token count. A large context window holds instruction following and reasoning across its full length, so volume alone is not the trigger |
+| Parallel independence | 3+ genuinely independent work items, or 10+ files to survey, with no shared design judgment between them | Dispatch in parallel, one worker per item |
+| Fresh-eyes verification | A review, audit or verification pass on a consequential artifact: a shipped PR, a live-surface change, a manuscript pass, a governance audit or a worker's returned output | Dispatch. A fresh context catches errors in own output that the author context is blind to. In-session work the orchestrator can check itself stays inline, because a second pass over small own-work adds cost without adding quality |
+| Mechanical fan-out | No-judgment volume work (sweeps, format migrations, lookups) | Dispatch to Haiku or external workers per the [[Council Chamber/Codices/External Model Routing Codex]] |
+
+**Stay inline when any of these hold:**
+
+- The next step depends on the full reasoning trail, not a summary of it. Sequential dependent work is the named case.
+- The work is judgment-dense with one coherent design to hold (root-cause debugging, architecture, Sovereign-facing surfaces). Splitting design judgment across contexts is the documented multi-agent failure shape.
+- The radius is small. Below roughly 30 minutes of work or a handful of files, dispatch overhead exceeds the benefit.
+- The edits touch the same files a worker would also touch. Same-file parallel edits are the standing conflict generator.
+
+**Invariants that do not vary by mode:**
+
+- Verification rigor is identical inline or dispatched: guards ship with positive controls watched failing first, pass@k versus pass^k routes by artifact class per Verification Loops, and ceilings live in code, never in judgment. Inline care catches nothing that the instrument does not.
+- Model tier routes by the Model Routing table below once mode is chosen. Dispatched workers default to Sonnet, mechanical lookups to Haiku. Workers never run above the orchestrator's tier.
+- Context hygiene binds inline work too: externalize state to plan files and breadcrumbs rather than carrying it in context, and after two failed corrections on one issue, restart fresh rather than pushing a polluted context.
+- Dispatch mechanics, once chosen, follow II. Build (bounded worker packets, evidence carried back in the return, report-to-file for long output).
+
+**The orchestrator's own tier.** The orchestrator's tier is the Sovereign's call. The session model is named in its own system prompt, so the orchestrator always knows which tier it is and reads this rubric from that seat. This rubric governs mode for whichever orchestrator the Sovereign opened.
+
+**Narrow mechanical-edit case:** a fix under 5 lines with trivial verification stays inline via the Edit tool with its own descriptive commit.
+
+**An audit is a different instrument from checking your own work.** Audits run on purpose, and their value comes from perspective diversity rather than from a second look. A challenger pass from a different model family sees what one family is structurally blind to. A stronger model auditing a weaker one's work brings a different capability profile, not merely a fresh window. Cross-model consults, strategic audits, integrity audits and review panels all belong to that class, and the narrowed fresh-eyes trigger leaves every one of them intact. What narrowed is the same mind rechecking itself out of habit. **Audits stay. Reflexes go.** Claim Integrity, Local to Submitted to Confirmed and pass@k versus pass^k verify external reality the model cannot know from the inside, and none of them thins under this rubric.
+
+Failure modes most tied to this fork: Summary collapse (careless dispatch) and Self-agreement as consensus (over-trusted inline self-review), both in IX.
 
 ## Verification Loops
 

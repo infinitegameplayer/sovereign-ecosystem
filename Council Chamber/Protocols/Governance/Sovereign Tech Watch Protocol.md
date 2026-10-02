@@ -38,10 +38,23 @@ A pattern is a candidate for ecosystem adoption only if it meets all three:
 - Non-bloating: does not add governance overhead beyond its direct value
 - Architecturally compatible: does not conflict with existing ecosystem protocols or the Constitution
 
+## The Two-Floor Grounding Gate
+
+Every verdict on an external tool, library or platform clears two independent floors before it stands.
+
+**Project floor.** A named incumbent plus a concrete touchpoint: a file, a dependency, a real usage. Or the verified absence of an incumbent plus a concrete fit point: where in the ecosystem this would actually land.
+
+**External floor.** At least one verified source whose text actually supports the claim it backs.
+
+The two floors are independent. Strong external evidence never compensates for a thin project leg, and the reverse holds too. This is a pass/fail checklist, not a comparison of leg sizes.
+
+Failing either floor returns a Hold, never a softened weak Adopt. A Hold is a complete outcome, not a failure to decide.
+
 ## Output Format
 
 A proposed update to `sovereign-deferred-items.md` with:
 - Updated `last_reviewed` dates on all items reviewed
+- **A partial sweep leaves the rows it did not sweep unchanged.** Stamp a last-reviewed date only on rows actually checked this cycle. Stamping every row on a partial sweep is how a tracker starts lying. Name which rows were swept and which were not.
 - Status changes (deferred to proposed, deferred to retired, deferred to permanent-hold) with rationale
 - New items surfaced from repo changelogs or Sovereign-identified ideas since the last review
 

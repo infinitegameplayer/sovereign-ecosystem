@@ -59,7 +59,7 @@ Optionally, if it flows naturally, you may ask for a formal name (for example a 
 
 Personalize the vault from the answers. Two mechanisms.
 
-**Mechanism A: the token script.** The vault ships with `Council Chamber/scripts/replace-tokens.mjs`, a one-time substitution tool. It replaces these tokens across every `.md`, `.txt` and `.json` file in the vault, skipping `.git`, `node_modules`, `.runtime`, `.trash` and `scripts`:
+**Mechanism A: the token script.** The vault ships with `Council Chamber/scripts/replace-tokens.mjs`, a one-time substitution tool. It replaces these tokens across every `.md`, `.txt` and `.json` file in the vault, skipping `.git`, `.github`, `node_modules`, `.runtime`, `.trash` and `scripts`:
 
 | Token | Wizard answer |
 | --- | --- |

@@ -52,6 +52,37 @@ TOOL_NAME=$(printf '%s' "$INPUT" | node -e "
   });
 " 2>/dev/null)
 
+# ─── When the gate cannot read its payload ──────────────────────────────────
+#
+# An empty tool name here is not an answer. It means node could not run, or the
+# payload could not be parsed, and either way the gate has no verdict. Until
+# v3.13.0 that state fell through to the allow at the bottom of this file, so a
+# hook environment without a working node let every deletion pass in silence.
+#
+# Claude Code itself no longer needs node, and hooks inherit the app's
+# environment rather than your login shell, so node can be missing here while
+# your terminal finds it fine. A Permanent Floor guard resolves no verdict
+# toward refusal. This hook only ever sees shell tools, so it refuses them all
+# until node is reachable, and Write and Edit, which cannot delete a file, stay
+# open. The tool name is read with a plain grep because node is what failed.
+#
+# Proven by the "node unrunnable" cases in floor-gate-selftest.mjs.
+if [ -z "$TOOL_NAME" ]; then
+  RAW_TOOL=$(printf '%s' "$INPUT" | grep -oE '"tool_name"[[:space:]]*:[[:space:]]*"[^"]*"' | head -1 | sed -E 's/.*"([^"]*)"$/\1/')
+  case "$RAW_TOOL" in
+    ""|Bash|PowerShell)
+      if ! node -e "process.exit(0)" >/dev/null 2>&1; then
+        echo "FLOOR GATE INERT: node is not runnable from this hook, so the command could not be read." >&2
+      else
+        echo "FLOOR GATE INERT: the hook payload could not be parsed." >&2
+      fi
+      echo "Refusing this shell call because the Permanent Floor cannot be evaluated." >&2
+      echo "Fix: install Node.js, or make sure it is on the PATH Claude Code starts with. Write and Edit are unaffected." >&2
+      exit 2
+      ;;
+  esac
+fi
+
 # Returns success when $1 contains a vault-boundary marker (forward or
 # backslash form), i.e. the text points inside the resolved vault root.
 # Only ever called on a single resolved PATH, never on a whole command string.

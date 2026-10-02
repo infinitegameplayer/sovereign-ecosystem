@@ -1,5 +1,5 @@
 ---
-version: 1.2
+version: 1.3
 status: template
 parent: [[Council Chamber/Codices/Expression/Writing Style Codex]]
 purpose: Catalog of AI writing tells with affirmative-voice replacements. Personalize during onboarding after running the Sovereign's vocabulary reconciliation pass.
@@ -24,6 +24,8 @@ This is the negative space of the Sovereign's voice. The Writing Style Codex say
 **Not a replacement.** This codex extends the Writing Style Codex. It does not replace it. The Writing Style Codex defines the affirmative voice. This codex defines the failure modes to remove. Both run simultaneously on any draft.
 
 ## II. How to Use This Codex
+
+**Always-on entries.** The scope carve-out above loosens most of this codex for internal documents. Two entries hold everywhere with no exemption, because they produce factual error rather than stylistic drift: **62b Manufactured Intent** and **75 Vague-Attribution Authority**. Both assert something about the world that was never checked. They apply to email, chat replies, memo notes, session reports and any other surface, internal or outward.
 
 Three modes:
 
@@ -478,6 +480,15 @@ Naming the mechanism is half the discipline. The other half is the replacement.
 - **Why AI produces it:** Announced plainness scores as candor with raters. The label substitutes for the directness it promises.
 - **Replacement:** Skip the announcement. Write the plain sentence.
 
+**62b. Manufactured Intent**
+- **Pattern:** Asserting deliberate design behind something arbitrary. A number, a date, a count or a choice that came from a calendar, a budget or a shrug gets a reason attached and delivered as though it had been engineered. Usually lands as a closing clause: "which is exactly why it is nine," "and that is the point," "by design."
+- **Specimen:** "Nine days is long enough to do both properly, which is exactly why it is nine." *(The nine days is what fit the calendar.)*
+- **Why AI produces it:** The model has no access to why a number was chosen and cannot tell an engineered decision from an incidental one. Engagement scoring rewards sentences that land as designed rather than as arbitrary, and coherence pressure rewards text that explains itself. So the model supplies a reason shaped to fit a satisfying sentence. The sentence is generated backwards from its own cadence.
+- **Replacement:** State the fact and stop. "The seventeenth through the twenty-fifth." If a real reason exists, give the real one. Arbitrary is allowed, and it usually reads warmer than invented purpose.
+- **Why this entry is different, and why it has no scope exemption:** almost every other tell in this codex is stylistic. This one asserts something untrue. It is the writing-voice face of claim integrity: a claim's truth is verified at the moment the claim is made, never inferred from how well it fits. A fabricated intent travels downstream as though it had been checked, and a reader who knows the real reason loses trust in every other sentence on the page. See Always-on entries in Section II.
+- **The test:** for every clause explaining why something is the way it is, ask whether the reason is known or supplied. Supplied reasons get cut, never softened.
+- **Codex overlap:** Adjacent to 74 (Manufactured Stakes), which inflates importance rather than fabricating purpose, and to 103 (The Significance Tail), which shares the trailing-clause shape.
+
 ## IX. Category VI: Voice and Register Signatures
 
 *Personality-level tells. Above structure, in the felt register the reader picks up.*
@@ -786,3 +797,4 @@ The codex is sealed only after this pass.
 
 - v1.0: Template drafted. Curated subset of 60 entries ported and de-personalized for public release, sequentially numbered.
 - v1.2: Full parity port. Added the 54 entries absent from the v1.0 subset, restored to the source catalog's own numbering (including lettered sub-entries) across all eight categories, and renumbered the v1.0 entries to match. Total entries: 114. Every entry carries a de-personalized "Replacement" label and a genre-neutral specimen. Status: template.
+- v1.3: One entry added, **62b Manufactured Intent** (Category V), asserting deliberate design behind an arbitrary choice. Section II gains an **Always-on entries** rule: 62b and 75 hold on every surface with no internal-document exemption, because both assert unverified facts rather than drifting in style. Total entries: 115. Status: template.

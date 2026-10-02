@@ -28,6 +28,8 @@
 // it rots.
 
 import { spawnSync } from 'node:child_process';
+import { mkdtempSync, writeFileSync, rmSync } from 'node:fs';
+import os from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -101,18 +103,48 @@ const cases = [
   ['ALLOW: lookalike performSync', 'Bash', `node -e "performSync('${DOC}')"`, ALLOW],
   ['ALLOW: lookalike confirmSync', 'Bash', `node -e "confirmSync('${DOC}')"`, ALLOW],
   ['ALLOW: unlinkSync on a non-protected file', 'Bash', 'node -e "require(\'fs\').unlinkSync(\'tmp/build.log\')"', ALLOW],
+
+  // ── Must block: the gate cannot read the command ─────────────────────────
+  // The gate reads its payload with node. Claude Code no longer needs node to
+  // run, and hooks inherit the app's environment rather than your login shell,
+  // so node can be missing from the one PATH that matters while your terminal
+  // finds it fine. Until v3.13.0 an unreadable payload left the tool name empty
+  // and the gate fell through to allow, silently, on every deletion. A gate that
+  // cannot see the command has no verdict, and a Floor guard resolves no verdict
+  // toward refusal. These run with a node that cannot start placed first on
+  // PATH. Refusing `git status` here is the design: while the gate is blind,
+  // every shell call waits until node is reachable again.
+  ['node unrunnable: rm, relative path', 'Bash', `rm "${DOC}"`, BLOCK, { nodeBroken: true }],
+  ['node unrunnable: PS Remove-Item', 'PowerShell', `Remove-Item "${DOC}"`, BLOCK, { nodeBroken: true }],
+  ['node unrunnable: even git status waits', 'Bash', 'git status', BLOCK, { nodeBroken: true }],
 ];
+
+// A node that cannot start. Placed first on PATH, it stands in for every way the
+// hook's environment can fail to reach a working node.
+const SHIM_DIR = mkdtempSync(path.join(os.tmpdir(), 'floor-no-node-'));
+writeFileSync(path.join(SHIM_DIR, 'node'), '#!/bin/sh\nexit 127\n', { mode: 0o755 });
+const PATH_KEY = Object.keys(process.env).find((k) => k.toUpperCase() === 'PATH') || 'PATH';
+const brokenNodeEnv = {
+  ...process.env,
+  [PATH_KEY]: `${SHIM_DIR}${path.delimiter}${process.env[PATH_KEY] || ''}`,
+};
+
+// The degraded cases prove nothing unless the shim actually wins the lookup.
+// If bash still finds a working node, those cases would pass for the wrong
+// reason, so the suite refuses to report them as evidence.
+const shimProbe = spawnSync('bash', ['-c', 'node -e "process.exit(0)"'], { env: brokenNodeEnv, encoding: 'utf8' });
+const shimTook = shimProbe.status !== 0;
 
 let pass = 0;
 let fail = 0;
 const lines = [];
 
-for (const [label, tool, command, expected] of cases) {
+for (const [label, tool, command, expected, opts = {}] of cases) {
   const payload = JSON.stringify({ tool_name: tool, tool_input: { command } });
   const r = spawnSync('bash', [HOOK], {
     input: payload,
     encoding: 'utf8',
-    env: { ...process.env, SOVEREIGN_VAULT_ROOT: VAULT_ROOT },
+    env: { ...(opts.nodeBroken ? brokenNodeEnv : process.env), SOVEREIGN_VAULT_ROOT: VAULT_ROOT },
   });
   const code = r.status;
   const ok = code === expected;
@@ -130,6 +162,12 @@ for (const [label, tool, command, expected] of cases) {
   }
   lines.push(`${ok ? '  ok  ' : ' FAIL '} ${label.padEnd(46)} exit=${code} want=${expected}${note}`);
 }
+
+if (!shimTook) {
+  fail += 1;
+  lines.push(' FAIL  the unrunnable-node shim did not take, so the node-unrunnable cases proved nothing');
+}
+rmSync(SHIM_DIR, { recursive: true, force: true });
 
 console.log('Permanent Floor gate: positive control');
 console.log(`vault root: ${VAULT_ROOT}`);

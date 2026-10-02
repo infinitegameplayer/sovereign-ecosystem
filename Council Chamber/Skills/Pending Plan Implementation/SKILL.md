@@ -31,7 +31,7 @@ Run these gates before Step 1. All must pass before execution begins.
 1. Confirm the target Pending Plan and read back plan intent, risk, affected areas and current breadcrumb context.
 
    Surface the plan's stated goal and its "Distinct from" contrast if one is present. "Building toward X. Distinct from Y." This is the within-session drift detection point. If the plan does not have an explicit contrast, ask the Sovereign to name one before execution begins.
-2. Document `Implementation Snapshot (When Executing)` and `Approved Execution Scope (This Run)`.
+2. Document `Implementation Snapshot (When Executing)` and `Approved Execution Scope (This Run)`. Record the starting commit (`git rev-parse HEAD` in each repo the run will touch). The Step 5 plan-alignment check diffs from it.
 3. Confirm exactly what is approved to implement now and what remains out of scope.
 4. Execute approved work and log actions in `Implementation Actions (Execution Log)`.
 
@@ -39,6 +39,11 @@ Run these gates before Step 1. All must pass before execution begins.
 
    **Archival discipline.** When the plan includes a file archival step, never write a new copy and delete the original as two separate operations. Move or rename directly. `rm` commands are for actual deletions only, not for clearing a replaced copy.
 5. Update `Evidence / Implementation Refs` and `Implementation Outcome (This Run)`.
+
+   **Plan-alignment check (every run that changed files).** Before writing the Outcome, dispatch one fresh Sonnet agent (`model: "sonnet"`) with three inputs: the plan's `Approved Execution Scope (This Run)`, its `Proposed Changes` and `Design Decisions`, and the run's diff from the starting commit recorded in Step 2 (plus any uncommitted changes). It asks the question of [[Council Chamber/Skills/PR Code Review/SKILL]] Lens 6: **does this implementation match the plan that authorized it, and where it deviates, is the deviation a justified improvement or a quiet departure?** It uses the same four verdicts (problematic departure, unimplemented scope, unplanned addition, justified improvement), the same two-sided quoting and the same absence rule. Pass it the Agent 6 text from that skill verbatim.
+   - It runs as a fresh agent, never as the orchestrator checking itself, because the orchestrator wrote the diff and self-agreement is not verification.
+   - Disposition: a problematic departure or unimplemented item is fixed in the run or named in the Outcome as open, with a done-check. An unplanned addition is named in the Outcome with its reason. A justified improvement becomes a plan-update proposal at Step 6. The check never edits the plan's locked decisions.
+   - A run that changed no files skips the check and says so in one line.
 
    **Session Boundary Block.** For multi-session plans, write a structured re-entry anchor at the end of each session's log entry:
 
@@ -94,7 +99,7 @@ Dispatch the cheapest model that does the job well. Before each delegated step, 
 | Multi-step synthesis, drafting, diagnosis, most worker dispatch | Sonnet |
 | Architectural judgment, plan design, judgment-dense synthesis | Opus |
 
-Per-step defaults: the Pre-Execution Checklist (mechanical field checks) routes to Haiku. Steps 1 and 3 (Sovereign-facing scope reads and confirmations) route to Opus. Steps 2, 4 and 5 (execution and logging) route to Sonnet. Step 7 audit passes route to Sonnet for checklist and Opus for challenger.
+Per-step defaults: the Pre-Execution Checklist (mechanical field checks) routes to Haiku. Steps 1 and 3 (Sovereign-facing scope reads and confirmations) route to Opus. Steps 2, 4 and 5 (execution and logging) route to Sonnet. The Step 5 plan-alignment check is a fresh Sonnet agent, never the orchestrator that wrote the diff. Step 7 audit passes route to Sonnet for checklist and Opus for challenger.
 
 Set the model explicitly on every subagent dispatch. Never silently inherit the top tier.
 

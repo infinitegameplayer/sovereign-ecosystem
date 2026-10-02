@@ -58,6 +58,7 @@
         "Council Chamber/scripts/encrypt-stream.mjs",
         "Council Chamber/scripts/external-worker.mjs",
         "Council Chamber/scripts/replace-tokens.mjs",
+        "Council Chamber/scripts/replace-tokens-selftest.mjs",
         "Council Chamber/scripts/se-update.mjs",
         "Council Chamber/scripts/session-coordination.mjs",
         "Council Chamber/scripts/framework-manifest.json",

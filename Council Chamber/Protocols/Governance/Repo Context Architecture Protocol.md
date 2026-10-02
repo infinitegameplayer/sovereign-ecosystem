@@ -72,13 +72,9 @@ Apply this standard when:
 
 ---
 
-## Active Instances
+## The Repos Are the Record
 
-Track your active instances here:
-
-| Repo | AGENTS.md | CLAUDE.md | Last updated |
-|---|---|---|---|
-| *(your repo)* | *(status)* | *(status)* | *(date)* |
+There is no tracking table of active instances. The repos themselves are the record: each repo's context files carry their own state and last-updated history in version control. A second copy of that state in this protocol can only drift from the first, so none is kept. To see which repos carry context files and how current they are, read the repos.
 
 ---
 

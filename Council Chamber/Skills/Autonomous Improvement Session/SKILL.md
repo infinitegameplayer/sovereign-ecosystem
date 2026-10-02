@@ -63,6 +63,8 @@ The flywheel runs at two speeds on purpose. Menu growth is fast and wide: the re
 
 Every menu item and every discovered action carries an `autonomy` level. The level governs execution authority. It is distinct from the tier, which governs output shape: Tier 1 lands edits, Tier 2 writes findings.
 
+**These levels are not Trust Levels, and the two scales must never be read across.** An item carries an autonomy Level 1 to 3, scoped to that one menu item. An agent carries a Trust Level 0 to 4 under [[Council Chamber/Governance/Constitution - Sovereign Ecosystem]] Article IV Section 4 (Trust Tiers), scoped to the whole ecosystem. The numbers overlap and mean different things, and they run in opposite directions: autonomy Level 3 is the most restricted item, Trust Level 4 is the most trusted agent.
+
 - **Level 1, fully autonomous.** Additive, reversible, vault-internal, zero judgment. The agent does it and logs it. Every starter menu item is Level 1.
 - **Level 2, autonomous with parked questions.** The agent acts on the safe part and parks any genuine judgment fork as a question on the decision board.
 - **Level 3, Sovereign-judgment-required.** Structural, voice-bound, outward-facing or approval-gated. Always parked. Never auto-executed.
@@ -78,7 +80,15 @@ One review surface. The closing output is the board, and a durable backing file 
 Four buckets:
 
 1. **Completed this run (for review).** What the skill did autonomously this run, each line reversible via git or trivially undone. Routed Inbox items, archived plans, applied hygiene fixes. This is a record to skim, not a decision. As autonomy widens, this bucket grows and the next one shrinks. That is the flywheel working.
-2. **Approvals and questions.** Genuine judgment forks the agent was unsure of, anything that needed intent before acting. The Sovereign answers with a decision plus a forward rule. A clean run leaves this bucket near empty. Scale the form of each question to context. When the matter is nuanced, technical or rare, give the full Three Solutions: the situation, three real options, the one you recommend and its tradeoff. When it is simple, give one recommended move. Never a bare open question.
+2. **Approvals and questions.** Genuine judgment forks the agent was unsure of, anything that needed intent before acting. The Sovereign answers with a decision plus a forward rule. A clean run leaves this bucket near empty. Never a bare recommendation and never a bare open question.
+
+   **Blast radius sets the explanation budget.** Do not size an explanation by guessing what the Sovereign already knows. Size it to what the change can break, which is a property of the diff.
+
+   - **Routine and reversible** (an index line, a slug, a routed note, a dead reference): one line. Batch them. Over-explaining safe work teaches the Sovereign to skim, and skimming waves through the one entry that mattered.
+   - **Judgment** (a pattern-setting choice, a nuanced routing call, an adoption): one paragraph. The situation, what happens if nothing is done, the recommendation.
+   - **Consequential** (a ceiling, a credential, an outward send path, the Permanent Floor, a governance or CLAUDE.md class change, or this skill's own steps): the full ceremony, every time. The stake in the Sovereign's terms and never in machine terms. Three real options with doing nothing costed at its true price. The recommendation and what it gives up. The tell, meaning how you would know if this was wrong and what you would watch. Reversibility, meaning whether it can be undone and how fast.
+
+   "I do not understand this" is a first-class answer and never a failure. The decision waits while the AI interface explains the change in plain terms, ideally predict-then-reveal. A gate the Sovereign cannot operate is not a gate.
 3. **New menu candidates and autonomy moves.** Improvement types the research rotation and opportunistic-capture layers surfaced, plus any proposed autonomy-level move. The Sovereign accepts, declines or reshapes each. Accepted candidates get woven into the menu in the return session.
 4. **Proposed Pending Plans.** Anything bigger than one session of work, or any governance, memory or CLAUDE.md class change. The agent drafts a cliff-note summary, not a vague question. The board entry is "approve plan creation?". Only surface plans you recommend creating. Every item in this bucket carries a positive recommendation and the reason for it.
 

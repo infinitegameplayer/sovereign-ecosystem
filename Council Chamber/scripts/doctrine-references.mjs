@@ -20,7 +20,7 @@
 //   at doctrine.
 //
 // Vault root resolution: SOVEREIGN_VAULT_ROOT env var if set, otherwise the
-// parent of this script's directory (scripts live in <vault>/scripts/).
+// directory two levels above this script (scripts live in <vault>/Council Chamber/scripts/).
 //
 // Usage:
 //   node Council Chamber/scripts/doctrine-references.mjs            Human report: orphans, index-only, low-inbound.
@@ -37,7 +37,7 @@ import { join, basename, relative, dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const SCRIPT_DIR = dirname(fileURLToPath(import.meta.url));
-const VAULT_ROOT = process.env.SOVEREIGN_VAULT_ROOT || resolve(SCRIPT_DIR, '..');
+const VAULT_ROOT = process.env.SOVEREIGN_VAULT_ROOT || resolve(SCRIPT_DIR, '..', '..');
 
 const CC = join(VAULT_ROOT, 'Council Chamber');
 const SKIP_DIRS = new Set(['.git', 'node_modules', '.trash', '.obsidian', '.runtime', '.claude', '.codex']);
@@ -194,6 +194,14 @@ async function main() {
 
   let set = artifacts;
   if (layerFilter) set = set.filter((a) => a.layer === layerFilter);
+
+  // No doctrine found means a wrong root, never a clean vault. Until v3.13.0
+  // this script resolved the root one level too shallow, scanned nothing and
+  // reported zero orphans for every install.
+  if (set.length === 0) {
+    console.error(`doctrine-references: found no doctrine under ${CC}. That is a wrong vault root, not a clean vault. Set SOVEREIGN_VAULT_ROOT or run from inside the vault.`);
+    process.exit(1);
+  }
 
   if (jsonMode) {
     console.log(JSON.stringify(set.map((a) => ({

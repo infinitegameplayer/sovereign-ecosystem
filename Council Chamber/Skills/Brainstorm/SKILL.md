@@ -29,11 +29,13 @@ The gate is this ecosystem's own Plan, Consent, Execute discipline (Constitution
 
 **Step 1. Read the ground first.** Before the first question, look. Existing Pending Plans, the relevant codex, the live code or surface, recent commits. Arrive with context so the questions are worth the Sovereign's attention. Grep and Glob to locate, scoped Read for what matters.
 
+**Provenance requires reading.** The locate-with-grep efficiency habit is for lookups. The moment a document becomes cited support in the design or the plan, it gets a full read before the citing sentence is written. A grep returns the sentence you searched for and silently withholds the section you needed, and a small file costs minutes to read whole. Found when a design cited documents that had only been grepped: a "Decided, Not Open" section was contradicted and a settled ruling was inverted.
+
 **Step 2. Scope check before detail.** If the idea holds several independent subsystems, name that immediately and decompose before refining anything. A design pass on a project that needed splitting is wasted work. Each piece then earns its own design and its own plan.
 
 **Step 3. Ask one question at a time.** One question per message. Purpose, constraints, what success looks like, what it must never do. Favor open conversation over multiple-choice question boxes; when the subject is a clean fork between real options, a short lettered list is fine. When the subject is naming, vocabulary or felt resonance, switch to open questions with a large candidate list rather than a narrow multiple choice. Let the Sovereign calibrate by what actually lands for them, not by what is easiest to click.
 
-**Step 4. Three solutions, one recommendation.** Present three approaches with their trade-offs, lead with the recommended one and say why (the Three Solutions Rule: [[Council Chamber/Protocols/Governance/Three Solutions Rule]]). The recommendation is a position, not a survey.
+**Step 4. Three solutions, one recommendation.** Present three approaches with their trade-offs, lead with the recommended one and say why (the Three Solutions Rule: [[Council Chamber/Protocols/Governance/Three Solutions Rule]]). The recommendation is a position, not a survey. **When the idea faces a market, one of the three is always the scrappiest real test:** live within a week, in front of real people, built to learn rather than to impress. Research stays a few minutes of complementary perspective beside the aliveness of the idea rather than a gate in front of it, and the build itself is often the experiment.
 
 **Step 5. Present the design in sections.** Scale each section to its complexity: a sentence when it is simple, a few paragraphs when it is not. Ask after each section whether it holds. Cover architecture, the pieces and their boundaries, how the data moves, what happens when it fails, how it gets verified. Go back and clarify whenever something reads thin.
 

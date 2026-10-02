@@ -13,7 +13,7 @@ links:
 
 # Manuscript Anti-AI Edit Pass Skill
 
-Purpose: Run the canonical anti-AI editing pass over a long-form manuscript. Load the Anti-AI Writing Patterns Codex (106 entries across 8 categories), sweep the target text in phases (mechanical lexical first, then judgment-heavy structural and voice passes), assemble a structured edit packet for Sovereign review, and apply approved edits.
+Purpose: Run the canonical anti-AI editing pass over a long-form manuscript. Load the Anti-AI Writing Patterns Codex (115 entries across 8 categories), sweep the target text in phases (mechanical lexical first, then judgment-heavy structural and voice passes), assemble a structured edit packet for Sovereign review, and apply approved edits.
 
 Trigger: Sovereign invocation after a manuscript draft is complete. Also bundled from inside Pending Plan Implementation when the active plan's `## Skill Handover Map` names this skill at the edit phase. Runs chapter-by-chapter during drafting to prevent accumulating a manuscript-sized backlog.
 
@@ -55,7 +55,7 @@ If `sample_first` is set or this is the first invocation against this manuscript
 
 **Step 2. Codex load and reconciliation cross-check.**
 
-Load [[Council Chamber/Codices/Expression/Anti-AI Writing Patterns Codex]] into working memory. Note codex version (currently v1.0, 106 entries). If `vocab_overrides` is provided, surface the proposed additions to the codex reconciliation table for Sovereign approval before sweep begins. The override approval gate prevents drift in the codex over time without explicit codex update.
+Load [[Council Chamber/Codices/Expression/Anti-AI Writing Patterns Codex]] into working memory. Note codex version (currently v1.3, 115 entries). If `vocab_overrides` is provided, surface the proposed additions to the codex reconciliation table for Sovereign approval before sweep begins. The override approval gate prevents drift in the codex over time without explicit codex update.
 
 Note any SOVEREIGN-VOCAB-RECONCILED entries. These hold special handling: the word is permitted in embodied use, flagged in mechanical use. See the Personalization Note in the codex for how to mark and maintain these.
 
@@ -111,7 +111,7 @@ Output: rhetorical findings array.
 
 **Step 8. Voice and Register Sweep (Category VI).**
 
-This step requires the most senior model available because the failure modes are tonal, not pattern-matchable. Read each chapter holistically. Judge against Category VI entries: wisdom-broker register, performed warmth, false intimacy, coach voice, corporate warmth, teacher-explaining-to-the-class, TED-talk cadence, sage tone, manufactured stakes, wholesome-uplift drift, uniform register.
+This step requires the most senior model available because the failure modes are tonal, not pattern-matchable. Read each chapter holistically. Judge against Category VI entries: wisdom-broker register, performed warmth, false intimacy, coach voice, corporate warmth, teacher-explaining-to-the-class, TED-talk cadence, sage tone, manufactured stakes, wholesome-uplift drift, uniform register, reader-instruction on feeling (78a), earn-it framing (78b), the could-be-anywhere sentence (78c: flag sentences with no sensory ground and no phrasing that belongs to one writer; replacements come from the manuscript's own story material or the author's verbatim source).
 
 Apply the Voice Anchoring Sequence from the Writing Style Codex before judging: read the Sovereign's Governing Essence section, Rolling Pattern Signals and the most recent published piece on file. The voice anchor must be loaded before voice judgment can be reliable.
 
@@ -137,6 +137,8 @@ Special check: Elegant Variation Spiral. Track the named subject of each chapter
 
 Special check: Uniform Paragraph Weight. Measure paragraph length variance across the chapter. If variance is below threshold (every paragraph 3-5 sentences with similar word count), flag as uniformity tell.
 
+Special check: Uniform Sentence Cadence (102a). Measure sentence-length distribution per passage. Flag any run of four or more consecutive sentences inside the 12-to-18-word band with the same subject-first shape. The mechanical scan only nominates candidates. The read-aloud judgment on them belongs to the voice pass (Step 8).
+
 Output: formatting findings array with quantitative measures where applicable.
 
 ---
@@ -159,7 +161,7 @@ Assemble all findings into a single structured edit packet for Sovereign review.
 # Manuscript Anti-AI Edit Pass: Edit Packet
 ## Manuscript: [name]
 ## Date: [YYYY-MM-DD]
-## Codex version: v1.0 (106 entries)
+## Codex version: v1.3 (115 entries)
 
 ### Summary
 - Total findings: [count]

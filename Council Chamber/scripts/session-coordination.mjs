@@ -22,7 +22,7 @@
 //   cleanup                                Prune stale and old-closed entries.
 //
 // Vault root resolution: SOVEREIGN_VAULT_ROOT env var if set, otherwise the
-// parent of this script's directory (scripts live in <vault>/scripts/).
+// directory two levels above this script (scripts live in <vault>/Council Chamber/scripts/).
 //
 // State file: .runtime/active-sessions.json (array of session objects).
 // Staleness: an 'active' entry older than ACTIVE_TTL_HOURS is treated as a
@@ -37,7 +37,7 @@ import { join, dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const SCRIPT_DIR = dirname(fileURLToPath(import.meta.url));
-const VAULT_ROOT = process.env.SOVEREIGN_VAULT_ROOT || resolve(SCRIPT_DIR, '..');
+const VAULT_ROOT = process.env.SOVEREIGN_VAULT_ROOT || resolve(SCRIPT_DIR, '..', '..');
 
 const RUNTIME_DIR = join(VAULT_ROOT, '.runtime');
 const STATE_FILE = join(RUNTIME_DIR, 'active-sessions.json');

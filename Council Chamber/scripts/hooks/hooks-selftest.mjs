@@ -98,8 +98,17 @@ const record = (name, ok, detail, kind) => {
 
 // Fire a hook with a payload. Returns {code, out}.
 // Under --negative-control the real hook is replaced by the do-nothing stub.
-function fire(hookFile, payload, { vaultRoot = VAULT, cwd = VAULT } = {}) {
+// A node that cannot start, for the cases where the hook's environment has no
+// working node. Claude Code no longer needs node, and hooks inherit the app's
+// environment rather than a login shell, so this is a state a real install meets.
+const NO_NODE_DIR = `${VAULT}/__no-node`;
+mkdirSync(NO_NODE_DIR, { recursive: true });
+writeFileSync(`${NO_NODE_DIR}/node`, '#!/bin/sh\nexit 127\n', { mode: 0o755 });
+const PATH_KEY = Object.keys(process.env).find((k) => k.toUpperCase() === 'PATH') || 'PATH';
+
+function fire(hookFile, payload, { vaultRoot = VAULT, cwd = VAULT, nodeBroken = false } = {}) {
   const env = { ...process.env };
+  if (nodeBroken) env[PATH_KEY] = `${NO_NODE_DIR}${path.delimiter}${env[PATH_KEY] || ''}`;
   if (vaultRoot === null) delete env.SOVEREIGN_VAULT_ROOT;
   else env.SOVEREIGN_VAULT_ROOT = vaultRoot;
   const r = spawnSync('bash', [NEGATIVE ? STUB : hookFile], {
@@ -153,6 +162,16 @@ const bash = (command) => ({ tool_name: 'Bash', tool_input: { command } });
 
   r = fire(H, write(CLEAN));
   record('floor-guard: quiet on an ordinary file, never blocks', r.code === 0, `code=${r.code}`, 'quiet');
+
+  // Its one promise is that no trust-anchor edit is silent. Until v3.13.0 the
+  // guard read its payload only through node, so without a working node it
+  // exited 0 and said nothing. Both path spellings, because a Windows path
+  // arrives JSON-escaped and the fallback has to read it without a parser.
+  r = fire(H, write(`${VAULT}/.claude/settings.json`), { nodeBroken: true });
+  record('floor-guard: still surfaces a trust-anchor edit without node', /TRUST-ANCHOR/.test(r.out) && r.code === 0, `code=${r.code} out=${r.out.trim().slice(0, 40)}`, 'reacts');
+
+  r = fire(H, write(`${VAULT}/.claude/CLAUDE.md`.replace(/\//g, '\\')), { nodeBroken: true });
+  record('floor-guard: reads a backslash path without node', /TRUST-ANCHOR/.test(r.out) && r.code === 0, `code=${r.code} out=${r.out.trim().slice(0, 40)}`, 'reacts');
 }
 
 // ── the compact pair ────────────────────────────────────────────────────────

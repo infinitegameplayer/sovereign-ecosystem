@@ -21,6 +21,14 @@ One home for every standing watch, tripwire and confirm-flag in the ecosystem. W
 
 **How a watch leaves.** A watch leaves the register only three ways: it fires (the condition met, action taken or routed), it retires (no longer relevant), or it is handed an owner and a home that carries it (a plan, a skill step, a dashboard line). Nothing else removes a row. Log the departure in the Change Log below.
 
+**A firing that asks for an edit spawns a task, never only a paragraph.** When a fired watch's action is an edit to a canonical document (a codex amendment, a charter line, a skill refinement), the fire produces a one-line implementation task with a named home: executed in the firing session, or a dated reminder row. A paragraph in a review note is recognition, not landing.
+
+**The reader-rhythm rule.** Any new watch or confirm-flag names the recurring rhythm that reads it at creation time, or it does not count as an instrument. An unread watch is a wish with a table row.
+
+**Every row carries a done-check, not only a wake condition.** A wake condition says when to look. A done-check says what to look at and what state means resolved. Write it into the Wake condition cell as a trailing clause: `done when: <observable state at a named source>`. Write it at capture time, while the capturing session still knows the source. Without it a row can be read every week forever and never leave.
+
+**Verdicts are three-state.** A done-check returns `open`, `resolved` or `unverifiable`. A check whose source is unreachable returns unverifiable, never open and never resolved. Guessing either way is the failure: an unreachable source read as open nags forever, and read as resolved drops the item silently. An unverifiable row carries forward labeled with the date its check failed. After two consecutive unverifiable reads it goes to the Sovereign as a confirm-or-drop question. This is the carried-item face of Claim Integrity in `.claude/CLAUDE.md`.
+
 **It witnesses. It never nags.** Invitation over force. A watch notices. It does not whip.
 
 ---

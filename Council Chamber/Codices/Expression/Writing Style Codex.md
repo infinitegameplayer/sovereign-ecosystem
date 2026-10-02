@@ -45,6 +45,7 @@ Define the creator's preferred writing style for AI collaboration in a way that 
 - No filler language by default.
 - When in doubt, be specific rather than general.
 - Prefer concrete over abstract.
+- Derived copy answers to the shipped artifact. Social posts, email versions, explainers and any copy reused from a published piece are drawn from the shipped piece, never from a draft or the session that produced it. A word the Sovereign cut stays cut downstream. Grep every provenance claim (a quoted phrase attributed to a source) against the file it cites before saving.
 
 ## What AI Should Do With This
 

@@ -42,7 +42,7 @@ import { dirname, join, resolve } from 'path';
 import { fileURLToPath } from 'url';
 
 const SCRIPT_DIR = dirname(fileURLToPath(import.meta.url));
-const VAULT_ROOT = resolve(SCRIPT_DIR, '..');
+const VAULT_ROOT = resolve(SCRIPT_DIR, '..', '..');
 const LOG_PATH = join(VAULT_ROOT, '.runtime', 'external-worker-log.txt');
 
 // Load .env from scripts directory.

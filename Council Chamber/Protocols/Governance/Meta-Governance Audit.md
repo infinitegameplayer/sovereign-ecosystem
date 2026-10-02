@@ -6,6 +6,8 @@ version: 0.1
 
 Purpose: Periodically evaluate Sovereign Ecosystem system integrity without over-engineering.
 
+**Boundary with Sovereign Tech Watch.** This audit looks inward at the ecosystem's own coherence. The [[Council Chamber/Protocols/Governance/Sovereign Tech Watch Protocol]] looks outward at external tools and platform changes worth adopting. They meet only at the platform self-absorption question, where a native feature absorbs internal scaffolding.
+
 ## Scope Checklist
 - Constitution integrity
 - Codex coherence

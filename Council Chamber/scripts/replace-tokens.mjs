@@ -30,10 +30,10 @@ import { fileURLToPath } from 'url';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-const VAULT_ROOT = path.resolve(__dirname, '..');
+const VAULT_ROOT = path.resolve(__dirname, '..', '..');
 
 // Directories and files to skip
-const SKIP_DIRS = new Set(['.git', 'node_modules', '.runtime', '.trash', 'scripts']);
+const SKIP_DIRS = new Set(['.git', '.github', 'node_modules', '.runtime', '.trash', 'scripts']);
 const SKIP_FILES = new Set(['.gitignore']);
 const FILE_EXTENSIONS = new Set(['.md', '.txt', '.json']);
 

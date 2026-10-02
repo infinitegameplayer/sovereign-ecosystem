@@ -192,25 +192,41 @@ Rationalizations that bypass this gate: "should work now," "I'm confident," "age
 
 **Fact Ratified sweep:** When a canonical fact changes (a name, a price, an availability state or any authoritative value), the ratification is incomplete until a full-vault grep for the old value has run and every downstream reference is reconciled or confirmed as intentional history. Ground truth is the canonical artifact, not the propagation source. The sweep returns a read-only drift list for Sovereign approval before edits land. Ratification and the sweep are one unit of work.
 
-**Claim Integrity:** A claim's truth is verified at the moment the claim is made, not assumed from visible-surface behavior. This is the parent discipline behind three rules that resolve to the same failure mode. The Move audit rule is the relocation face: a move is verified by the wikilink grep, not by the edit landing. The Fact Ratified sweep is the fact face: a ratification is verified against the canonical artifact, not the propagation source. Local to Submitted to Confirmed (see External Publishing Confirmation) is the delivery face: a publish is verified end to end, not at the instrument level. The shared failure mode is a state reported true that holds on one surface and fails on the rest. When drift surfaces, name it as another face of this one class and verify the claim where it is asserted.
+**Claim Integrity:** A claim's truth is verified at the moment the claim is made, not assumed from visible-surface behavior. This is the parent discipline behind three rules that resolve to the same failure mode. The Move audit rule is the relocation face: a move is verified by the wikilink grep, not by the edit landing. The Fact Ratified sweep is the fact face: a ratification is verified against the canonical artifact, not the propagation source. Local to Submitted to Confirmed (see External Publishing Confirmation) is the delivery face: a publish is verified end to end, not at the instrument level. The shared failure mode is a state reported true that holds on one surface and fails on the rest. When drift surfaces, name it as another face of this one class and verify the claim where it is asserted. Four further faces follow.
+
+*The reporting face.* Label every finding by what was directly observed, never by an inference about its cause. A page returning 404 is not a deleted page. When the cause stands unverified, name the observation alone and say the cause is unknown.
+
+*The carried-item face.* An open loop is verified at the moment it is resurfaced, rather than assumed still open because it is still written down. Every item that carries across sessions records its own one-line done-check at capture time: where to look, and what state means done. Verdicts are three-state: `open`, `resolved` and `unverifiable`. A check whose source is unreachable returns unverifiable, never open and never resolved. Mechanics live in the [[Council Chamber/Governance/Watch Register]] header. **A carried item's stated scope is a claim too, and it expires.** When acting on a carried item, re-derive its scope from the question being asked now. An exemption written inside a stale item is the least examined sentence in the ecosystem.
+
+*The absence face.* A successful action proves presence. Nothing observed from inside a running system proves absence. A tool that returns rows proves that tool reached that store. A suite that passes proves the assertions that ran. Neither can testify about what is supposed to be missing. So a negative is only as good as the instrument that reported it, and an instrument is trustworthy only when something has proven it can fail. When reporting that something is absent, clean, empty or safe, name the instrument, confirm it was aimed at the right place and say when it last demonstrated a failure. A claim of absence with no such instrument is reported as unverified rather than as clean.
+
+*The attribution face.* "The Sovereign said" is a claim, verified at the moment it is written. Keep the layers apart in every artifact. The Sovereign's words go inside quotation marks, exact, with the source named (thread, transcript, file). The AI interface's summary stays outside them and reads as the AI interface. Quotation marks around a paraphrase are a false claim. A coinage stays the AI interface's after the Sovereign adopts it. A draft written in the Sovereign's first person is labeled AI-drafted until the Sovereign edits or sends it.
+
+**Existence check on every "create" step:** Any plan step that creates an account, organization, repo, project or resource carries a named-instrument check that it does not already exist, run before the step enters the plan. A stale written line saying the thing is still to be made never outweighs an observed fact that it exists. Presence is checkable, so check it.
+
+**Dependency order over invented dates:** A date reaches a planning surface only when the Sovereign stated it, kept in their own terms, or an external deadline imposes it, marked as external. Everything else is sequenced by what each item waits on and what it unblocks. When an item is blocked, name the block and let it wait. "After X lands" is precise. "Around mid-October" is decoration pretending to be information, and nothing downstream can tell an invented date from a ruled one.
 
 **Pending Plan status vocabulary:** `proposed` (written, scoped, not approved) → `approved` (direction approved, decisions locked) → `ready-for-execution` (implementation plan written) → `implemented` (shipped, activity log final). Status advances one direction only. Regression means rollback or a separate new plan.
+
+## Reporting to the Sovereign
+
+**What was done, then decisions, then actions.** The Sovereign must always be able to tell what was done apart from what they must decide apart from what only their hands or eyes can do. The differentiation is binding. The furniture is not: labelled blocks carry it on a dense session, a two-line reply with the decision in its own sentence carries it on a small one. Headers on a small exchange are drift. Order is chronological, because decisions arise out of the work and a decision presented before its cause asks for a ruling on something not yet explained. The Sovereign does not need the mechanism to own the decision. Technical detail earns a place only where it changes the answer. The rest goes to the commit body.
+
+## Session End
+
+The end of a session runs in one order: finish the work, report it with its decisions, wait for the Sovereign's rulings and execute them, run Session Closeout once, then hand over a paste-ready continuation prompt when the work visibly continues. A decision raised after the close reopens it and doubles the end. Decisions that cannot be ruled in the session are breadcrumbed with a done-check. Detail: [[Council Chamber/Skills/Session Closeout/SKILL]] actions 0 and 4.
 
 ## Skills Location
 
 Skills are in: `Council Chamber/Skills/[Name]/SKILL.md`
 
-To make skills available as slash commands, symlink them into `.claude/skills/`:
+To make skills available as slash commands, link them into `.claude/skills/` with the shipped script:
 
-**Windows (run as Administrator):**
 ```
-mklink /J ".claude\skills\[Skill Name]" "Council Chamber\Skills\[Skill Name]"
+node "Council Chamber/scripts/link-skills.mjs"
 ```
 
-**Mac / Linux:**
-```
-ln -s "Council Chamber/Skills/[Skill Name]" ".claude/skills/[Skill Name]"
-```
+It creates every link in one pass and is safe to re-run after adding a skill. On Windows it makes directory junctions, which need no administrator rights. On Mac and Linux it makes symlinks. Add `--codex` to link `.codex/skills` as well.
 
 ## Approval Gate
 

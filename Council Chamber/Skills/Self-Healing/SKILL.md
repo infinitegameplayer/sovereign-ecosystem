@@ -22,8 +22,11 @@ Activate explicitly if you notice your AI stopping unnecessarily on routine erro
 1. Read the full error message: do not guess or skip it
 2. Identify the root cause (missing dependency, wrong path, syntax error, permission issue, etc.)
 3. Apply the most direct fix
-4. Continue the task without surfacing to the Sovereign unless the error is governance-class (see Constraints)
-5. If the same error recurs after one fix attempt, surface it: do not loop silently
+4. Confirm the fix worked: re-run the failed command or check the specific symptom directly. A fix applied is not a fix verified
+5. Continue the task without surfacing to the Sovereign unless the error is governance-class (see Constraints)
+6. If the same error recurs after verification, surface it: do not loop silently
+
+**Durable record.** A recurring error (one that fails the verification step and needs a second attempt) or a governance block is worth keeping, per the Engineering Codex Section VII (Compound). In a code repo, write it to that repo's `docs/solutions/` learning corpus. Outside a code repo, name it in the session's commit body. Saying it once in chat is not a durable record: the next session needs to find it without hitting the same wall first.
 
 **Error triage:**
 
@@ -47,5 +50,6 @@ Activate explicitly if you notice your AI stopping unnecessarily on routine erro
 ## Refinements
 
 - [2026-03-23] Self-healing must not attempt to auto-fix errors that are blocked by the pre-tool-approval-gate. Surface those to the Sovereign instead.
+- [2026-10-02] A fix was applied and the task moved on with no check that the symptom was gone. Added the verification beat between apply and continue, and the durable-record rule so a recurring error lives somewhere other than the transcript.
 
 > Also installs standalone from https://www.infinitegameos.io/skills/self-healing (dual-distribution: this copy lives in your vault, the public plugin updates independently).

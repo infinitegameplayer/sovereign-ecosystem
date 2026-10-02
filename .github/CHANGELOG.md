@@ -6,6 +6,28 @@ Each entry corresponds to one publish cycle. For full implementation details, se
 
 ---
 
+## v3.13.0, 2026-10-02
+
+A Gate That Cannot See Has No Verdict.
+
+**Security fix. If you installed any version from v3.3.0 through v3.12.0, apply this update.** When your Permanent Floor gate cannot run Node, it allows every deletion and says nothing.
+
+**If you installed v3.10.0, v3.11.0 or v3.12.0 and ran the token script, run it again after updating.** Your `.claude/CLAUDE.md` still says "This vault is the **{{ECOSYSTEM_NAME}}**".
+
+- **The Floor gate refuses when it cannot read the command.** It parsed its payload with `node -e`, and when node could not run, the tool name came back empty and the gate fell through to allow. Claude Code no longer needs Node, and hooks inherit the app's environment rather than your shell, so node can be missing from the hook while your terminal finds it. Shell calls now wait with a `FLOOR GATE INERT` message until node is reachable. The trust-anchor guard surfaces edits without node. Three new gate cases and two new hooks cases fire with a `node` that cannot start, each watched failing on v3.12.0 first.
+- **Six scripts were aimed one folder too low.** When the scripts folder moved into `Council Chamber/` at v3.10.0, six scripts kept finding the vault as the parent of their own folder. None crashed. The token script personalized only `Council Chamber/`. The two doctrine counters reported zero artifacts and zero orphans. All six now find the real root, and **a count of nothing is now a wrong root, never a clean vault**: both counters exit 1 on an empty root, and CI fires them both ways.
+- **New: `replace-tokens-selftest.mjs`.** The first script every Sovereign runs had nothing firing it. The self-test drives it on a throwaway copy and requires that YES leaves no token anywhere and anything else writes nothing.
+- **Two scripts refuse a typo.** `decision-journal.mjs` and `build-skills-index.mjs` ran their write path on a mistyped `--check`.
+- **Node.js is listed as a requirement** in the README and Session 0. The README's old metered-API cost claim is gone: Claude Code needs a paid plan or API credits.
+- **CI runs the guards on Node 22 and 24,** on `actions/checkout` and `actions/setup-node` v7.
+- **Seven weeks of practice, ported.** Plan alignment for PR Code Review and Pending Plan Implementation. An evidence gate that stops the Security Check from turning agreement into severity. Four new Claim Integrity faces, the existence check, dependency order over invented dates, the reporting order and the session end order in `CLAUDE.md`. Session Closeout Actions 0 and 4. Self-Healing verifies its fix. Orchestration Mode in the Engineering Codex. Anti-AI entry 62b. Brainstorm, Autonomous Improvement and the rest, listed in the update file.
+
+A guard that allows on silence has a hole, and an instrument that reports zero on a wrong root has the same hole in a different place. Both were green.
+
+Full detail and the implementation spec: `.github/UPDATES/2026-10-02-v3.13.0-a-gate-that-cannot-see.md`.
+
+---
+
 ## v3.12.0, 2026-08-11
 
 The Skill the Sessions Told You to Open.

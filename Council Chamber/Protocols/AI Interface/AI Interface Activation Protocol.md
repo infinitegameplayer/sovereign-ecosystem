@@ -4,7 +4,7 @@ Purpose: Bring {{AI_INTERFACE_NAME}} online with governed context, explicit cons
 
 ## Preconditions
 - Constitution and Operating Charter are accessible.
-- Governance Core capsule is accessible.
+- `.claude/CLAUDE.md` and the Interface Adapter Registry are accessible.
 - North Star is accessible.
 - Knowledge Map is accessible.
 - Skills Index is accessible.

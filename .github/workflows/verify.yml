@@ -23,14 +23,20 @@ on:
 
 jobs:
   guards:
-    name: Fire the guards
+    name: Fire the guards (Node ${{ matrix.node }})
     runs-on: ubuntu-latest
+    # Both active LTS lines. A Sovereign who follows Session 0 today installs
+    # the newest LTS, and the guards must hold on the Node they actually have.
+    strategy:
+      fail-fast: false
+      matrix:
+        node: ['22', '24']
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v7
 
-      - uses: actions/setup-node@v5
+      - uses: actions/setup-node@v7
         with:
-          node-version: '22'
+          node-version: ${{ matrix.node }}
 
       # The recipient's real starting state. SOVEREIGN_VAULT_ROOT is unset, and
       # the guards must resolve the vault root on their own.
@@ -58,6 +64,38 @@ jobs:
       # describing a vault that no longer exists.
       - name: Decision Journal matches its sources
         run: node "Council Chamber/scripts/decision-journal.mjs" --check
+
+      # Doctrine mass reported zero artifacts in every layer, exit 0, from
+      # v3.10.0 until v3.13.0, because the scripts folder moved and it kept
+      # resolving the vault root one level too shallow. A count of nothing is a wrong root. Both directions
+      # run: it must find doctrine here, and it must fail when aimed at nothing.
+      - name: Doctrine mass finds doctrine on a fresh checkout
+        run: node "Council Chamber/scripts/doctrine-mass.mjs"
+
+      - name: Doctrine mass fails when aimed at an empty root
+        run: |
+          if SOVEREIGN_VAULT_ROOT="$RUNNER_TEMP" node "Council Chamber/scripts/doctrine-mass.mjs" >/dev/null 2>&1; then
+            echo "doctrine-mass reported success on an empty root. A count of nothing passed as clean."
+            exit 1
+          fi
+          echo "  ok  doctrine-mass refused an empty root"
+
+      # Its sibling had the same short root, scanned Council Chamber/Council
+      # Chamber, and reported zero orphans for every install.
+      - name: Doctrine references fail when aimed at an empty root
+        run: |
+          node "Council Chamber/scripts/doctrine-references.mjs" >/dev/null
+          if SOVEREIGN_VAULT_ROOT="$RUNNER_TEMP" node "Council Chamber/scripts/doctrine-references.mjs" >/dev/null 2>&1; then
+            echo "doctrine-references reported success on an empty root."
+            exit 1
+          fi
+          echo "  ok  doctrine-references found doctrine here and refused an empty root"
+
+      # The first script every Sovereign runs. From v3.10.0 to v3.12.0 it
+      # personalized only Council Chamber/ and left the trust anchor carrying
+      # raw tokens, while reporting success. Fired on a throwaway copy.
+      - name: Token script reaches every file and writes nothing without YES
+        run: node "Council Chamber/scripts/replace-tokens-selftest.mjs"
 
       # A skill on disk and absent from the Index is a skill the AI interface
       # never discovers. Present, and unreachable.
@@ -145,7 +183,7 @@ jobs:
     name: The floors hold
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v7
 
       # The em dash floor.
       #

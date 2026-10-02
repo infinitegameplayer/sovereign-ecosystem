@@ -7,16 +7,17 @@ Purpose: Define how new interfaces connect to the Sovereign Ecosystem without be
 - Interfaces are adapters, not authorities.
 - Links/mounts are preferred over copies.
 - Read-only mode is the default fallback when adapters cannot preserve boundaries.
-- Governance Core capsule is the lightweight anchor for interface context.
+- `.claude/CLAUDE.md` plus the `[[Council Chamber/Governance/Interface Adapter Registry]]` are the lightweight anchor for interface context.
 
 ## When to Use
 - Adding a new AI interface (Claude Code, Codex, Gemini, etc.).
 - Introducing a new tool that reads or writes Sovereign Ecosystem files.
 - Changing adapter paths or storage locations.
 
-## Trust Tier Mapping
-- Adapters must declare a trust tier (L0-L4) and allowed containers in `[[Council Chamber/Governance/Interface Adapter Registry]]`.
-- If adapter capabilities are insufficient to enforce boundaries or diff visibility, set tier to L0.
+## Exposure Tier Mapping E0-E4
+- Adapters must declare an exposure tier (E0-E4) and allowed containers in `[[Council Chamber/Governance/Interface Adapter Registry]]`.
+- The adapter scale is lettered apart from the Constitution's trust ladder, which rates agent autonomy. Exposure rates how much consequence an adapter can reach. The two are independent.
+- If adapter capabilities are insufficient to enforce boundaries or diff visibility, set tier to E0.
 - Any tier increase requires explicit approval and a logged change.
 
 ## Steps

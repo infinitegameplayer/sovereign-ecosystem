@@ -81,6 +81,17 @@ Your AI reads this SKILL.md, runs the script, and returns the data.
 
 ## Refinements
 
-*(Empty, populated when execution mistakes occur during sessions.)*
+**`Execution context was destroyed` means a bot challenge, and it is not an empty page.**
+
+A scrape failed with `page.evaluate: Execution context was destroyed, most likely because of a navigation`. **Root cause:** the shared script waits only for `domcontentloaded`, and the site redirected to a bot-challenge page before the evaluation ran. A plain fetch of the same URL returned empty content for the same reason.
+
+**Two things to hold.**
+
+- **Neither failure is evidence about the page.** Reporting an empty scrape as "the page has no content" is a false claim of absence. Name the observation: the fetch failed, and the cause was a challenge redirect. Check `location.href` in the result to see where you actually landed.
+- **`networkidle` alone does not clear a challenge.** A second attempt reached the challenge screen and reported it honestly, a short page titled as a robot check.
+
+**What worked** was a scratchpad variant rather than a change to the shared script: launch args `--disable-blink-features=AutomationControlled`, a current Chrome user agent, a real viewport, locale and timezone, an init script clearing `navigator.webdriver`, then a 12-second wait before evaluating.
+
+**Not folded into `run.js` on purpose.** The shared script stays simple. Copy the variant into the scratchpad when a site challenges, and leave the default alone.
 
 > Also installs standalone from https://www.infinitegameos.io/skills/playwright (dual-distribution: this copy lives in your vault, the public plugin updates independently).

@@ -16,11 +16,13 @@
 //   protocols  all .md under Council Chamber/Protocols, recursive
 //   skills     each Council Chamber/Skills/<name>/SKILL.md (one per skill)
 //   governance all .md under Council Chamber/Governance, recursive
+// Records are excluded from every layer (see RECORD_DIRS below).
 // Keep this definition stable once a baseline is running so the series stays
 // continuous. Changing what counts as an artifact breaks trend comparability.
 //
 // Vault root resolution: SOVEREIGN_VAULT_ROOT env var if set, otherwise the
-// parent of this script's directory (scripts live in <vault>/scripts/).
+// two levels above this script's directory (scripts live in
+// <vault>/Council Chamber/scripts/).
 //
 // Usage:
 //   node Council Chamber/scripts/doctrine-mass.mjs           Print report + paste-ready row.
@@ -36,7 +38,7 @@ import { join, dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const SCRIPT_DIR = dirname(fileURLToPath(import.meta.url));
-const VAULT_ROOT = process.env.SOVEREIGN_VAULT_ROOT || resolve(SCRIPT_DIR, '..');
+const VAULT_ROOT = process.env.SOVEREIGN_VAULT_ROOT || resolve(SCRIPT_DIR, '..', '..');
 
 const CC = join(VAULT_ROOT, 'Council Chamber');
 const BASELINE_PATH = join(CC, 'Governance', 'Doctrine Mass Baseline.md');
@@ -80,19 +82,54 @@ function countLines(content) {
   return normalized.endsWith('\n') ? n - 1 : n;
 }
 
+// Records are not doctrine.
+//
+// Dated audit records, findings reports and one-time reviews can live under the
+// doctrine tree and govern nothing. Counting them inflates doctrine mass with
+// the audit trail about doctrine, so the number meant to show whether the layer
+// is growing ends up partly measuring how often it was audited.
+//
+// Two exclusion mechanisms, because records take two shapes:
+//   1. RECORD_DIRS, for whole folders of run artifacts. Ships empty. To add a
+//      record folder, put its folder name in the list, for example
+//      ['Audit Records']. Any path containing that folder name as a directory
+//      segment is excluded from the count.
+//   2. `doctrine: false` in frontmatter, for individual dated reports sitting
+//      beside real doctrine. An edit, never a move, so marking a file as a
+//      record does not cross the Permanent Floor.
+// Excluded files are reported per layer as `excluded`, so the exclusion stays
+// visible rather than silent.
+const RECORD_DIRS = [];
+
+function isRecordDir(p) {
+  const n = p.split('\\').join('/');
+  return RECORD_DIRS.some((d) => n.includes(`/${d}/`));
+}
+
+function isMarkedRecord(content) {
+  const m = content.replace(/\r\n/g, '\n').match(/^---\n([\s\S]*?)\n---/);
+  if (!m) return false;
+  return /^doctrine:\s*false\s*$/m.test(m[1]);
+}
+
 async function measureLayer(layer) {
-  const files = await walkMd(layer.dir, layer.mode);
+  const all = await walkMd(layer.dir, layer.mode);
   let lines = 0;
-  for (const f of files) {
+  let counted = 0;
+  let excluded = 0;
+  for (const f of all) {
+    if (isRecordDir(f)) { excluded += 1; continue; }
     let content = '';
     try {
       content = await readFile(f, 'utf8');
     } catch {
       continue;
     }
+    if (isMarkedRecord(content)) { excluded += 1; continue; }
+    counted += 1;
     lines += countLines(content);
   }
-  return { key: layer.key, label: layer.label, files: files.length, lines };
+  return { key: layer.key, label: layer.label, files: counted, lines, excluded };
 }
 
 function today() {
@@ -119,10 +156,20 @@ async function main() {
   }
   const totalFiles = results.reduce((a, r) => a + r.files, 0);
   const totalLines = results.reduce((a, r) => a + r.lines, 0);
+  const totalExcluded = results.reduce((a, r) => a + r.excluded, 0);
   const date = today();
 
+  // A vault with no doctrine at all is a wrong root, never a clean result.
+  // From v3.10.0, when the scripts folder moved, until v3.13.0 this script
+  // resolved the root one level too shallow and reported zero artifacts in
+  // every layer, exit 0, for every install.
+  if (totalFiles === 0) {
+    console.error(`doctrine-mass: found no doctrine under ${VAULT_ROOT}. That is a wrong vault root, not an empty vault. Set SOVEREIGN_VAULT_ROOT or run from inside the vault.`);
+    process.exit(1);
+  }
+
   if (jsonMode) {
-    console.log(JSON.stringify({ date, layers: results, totalFiles, totalLines }, null, 2));
+    console.log(JSON.stringify({ date, layers: results, totalFiles, totalLines, totalExcluded }, null, 2));
     return;
   }
 
@@ -130,9 +177,9 @@ async function main() {
   console.log('-------------------------------------------');
   console.log(`Date: ${date}`);
   for (const r of results) {
-    console.log(`  ${r.label.padEnd(11)} ${String(r.files).padStart(4)} artifacts   ${String(r.lines).padStart(7)} lines`);
+    console.log(`  ${r.label.padEnd(11)} ${String(r.files).padStart(4)} artifacts   ${String(r.lines).padStart(7)} lines   excluded ${r.excluded}`);
   }
-  console.log(`  ${'Total'.padEnd(11)} ${String(totalFiles).padStart(4)} artifacts   ${String(totalLines).padStart(7)} lines`);
+  console.log(`  ${'Total'.padEnd(11)} ${String(totalFiles).padStart(4)} artifacts   ${String(totalLines).padStart(7)} lines   excluded ${totalExcluded}`);
   console.log('');
   console.log('Paste-ready baseline row (artifacts / lines):');
   console.log(buildRow(date, results, totalFiles, totalLines));
