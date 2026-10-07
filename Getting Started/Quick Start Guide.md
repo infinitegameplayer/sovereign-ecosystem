@@ -23,7 +23,7 @@ Cloud sync and local vaults do not mix well. Catch this early.
 1. Go to [nodejs.org](https://nodejs.org) and download the **LTS** version
 2. **Windows:** Run the installer. Accept defaults. Confirm "Add to PATH" is checked
 3. **Mac:** Open the .pkg installer and follow the prompts
-4. Close any open terminal windows, open a new one, and run: `node -v`
+4. Close any open terminal windows, open a new one and run: `node -v`
 5. Confirm a version number appears
 
 ### Git

@@ -190,7 +190,7 @@ Do it as close to the front as your exports allow.
 
 Your vault stays lightweight and close to text only. Somewhere between two and a few megabytes for a long time.
 
-Your assets live beside it rather than inside it. Images, video, audio and any PDF of real size belong in a separate project folder outside the vault, organized however makes sense to you. Import the documents there, have your AI harvest the text, and let the vault hold the understanding rather than the raw material.
+Your assets live beside it rather than inside it. Images, video, audio and any PDF of real size belong in a separate project folder outside the vault, organized however makes sense to you. Import the documents there, have your AI harvest the text and let the vault hold the understanding rather than the raw material.
 
 The reason is backups and speed. A vault carrying every PDF you ever read gets heavy, slow to search and awkward to move. A vault carrying what those PDFs meant stays small enough to live anywhere.
 
@@ -322,7 +322,7 @@ Choose modules based on near-term lived use, not fantasy self-expansion. If a mo
 
 **What to Expect**
 
-This session is part imagination, part discernment. You read the module map, notice what sparks, then practice the discipline of sequence over impulse. You will choose one to three near-term candidates, convert them into Pending Plans, and rank one as highest priority for the next guided implementation. The energy here is often high. Let that be energizing without letting it drive.
+This session is part imagination, part discernment. You read the module map, notice what sparks, then practice the discipline of sequence over impulse. You will choose one to three near-term candidates, convert them into Pending Plans and rank one as highest priority for the next guided implementation. The energy here is often high. Let that be energizing without letting it drive.
 
 **Something to Play With**
 
