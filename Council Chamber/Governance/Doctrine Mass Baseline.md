@@ -18,7 +18,7 @@ Append new rows in chronological order. Do not overwrite prior rows. The trend i
 
 ## Counting definition
 
-Each cell is `artifacts / lines`. Produced by `node Council Chamber/scripts/doctrine-mass.mjs`.
+Each cell is `artifacts / lines`. Produced by `node "Council Chamber/scripts/doctrine-mass.mjs"`.
 
 - **Codices:** every `.md` under `Council Chamber/Codices`, recursive.
 - **Protocols:** every `.md` under `Council Chamber/Protocols`, recursive.
@@ -48,7 +48,7 @@ When adding a record, mark it or place it in a record folder at creation time, r
 
 ## How to append
 
-Run `node Council Chamber/scripts/doctrine-mass.mjs --append`. The script measures every layer and inserts one dated row on the line above the `doctrine-mass-rows-end` sentinel. The bare run (no flag) prints the report and a paste-ready row without writing. Run it at each doctrine review pass, or whenever a consolidation or expansion effort makes the before-and-after count worth capturing.
+Run `node "Council Chamber/scripts/doctrine-mass.mjs" --append`. The script measures every layer and inserts one dated row on the line above the `doctrine-mass-rows-end` sentinel. The bare run (no flag) prints the report and a paste-ready row without writing. Run it at each doctrine review pass, or whenever a consolidation or expansion effort makes the before-and-after count worth capturing.
 
 ---
 

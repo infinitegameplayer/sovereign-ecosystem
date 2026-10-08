@@ -12,7 +12,7 @@
  *   {{SOVEREIGN_LEGAL_NAME}}   : legal name, optional, leave blank to skip
  *
  * Usage:
- *   node Council Chamber/scripts/replace-tokens.mjs
+ *   node "Council Chamber/scripts/replace-tokens.mjs"
  *
  * The script will:
  *   1. Ask you for replacement values

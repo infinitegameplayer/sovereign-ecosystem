@@ -55,7 +55,7 @@ State the session: "Beginning End-of-Week Review - 3 this-week engagements, 2 ne
 - **Worker 2: AI Interface Change Log:** Read `Council Chamber/AI Interface/AI Interface Change Log.md` filtered to the past 7 days, flag execution-density pattern if consecutive heavy sessions appear
 - **Worker 3: Transcripts:** Check transcription service for any new transcripts in the past 7 days (if using Transcription Module), coaching sessions, recorded calls, notable conversations
 - **Worker 4: Operations + Collaborations:** Read primary business/projects dashboard and active collaboration dashboards in `Collaborations/` filtered for recent movement
-- **Worker 5: To-Do Dock + Pending Plans:** Scan `To-Do Dock.md` for completed/stale/new items; scan `Pending Plans/` for plans that moved, resolved, activated or need attention; read `Council Chamber/AI Interface/Field Decisions.md` filtered to this week
+- **Worker 5: Capture + Pending Plans:** Scan `Capture.md` for completed/stale/new items; scan `Pending Plans/` for plans that moved, resolved, activated or need attention; read `Council Chamber/AI Interface/Field Decisions.md` filtered to this week
 - **Worker 6: North Star + Operations finances:** Read `Library/North Star.md` for active 0-3 month horizons and Drift Check prompts; scan `Operations/` for financial notes updated this week
 - **Worker 7: Ecosystem SDK intelligence:** Check for Agent SDK changelog updates or ecosystem updates since last review; surface relevant deltas only
 
@@ -100,7 +100,7 @@ Two layers:
 **Themes:**
 - Business and projects lane - offers, workshops, advisory, revenue movement?
 - Collaborations - active partners, relationships - notable conversations, alliances, movement?
-- Structure and governance - Pending Plans, To-Do Dock, ecosystem infrastructure progress?
+- Structure and governance - Pending Plans, Capture, ecosystem infrastructure progress?
 
 **Sovereign speaks freely.** {{AI_INTERFACE_NAME}} reflects briefly, moves.
 

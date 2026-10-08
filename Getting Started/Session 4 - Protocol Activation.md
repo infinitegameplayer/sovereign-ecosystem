@@ -152,10 +152,10 @@ Once that loop becomes familiar, the system starts saving you real energy.
 The structural notes treat `Inbox` as an active working lane.
 The capture protocol also expects a lightweight quick-capture surface.
 
-Both `Inbox/` and `To-Do Dock.md` are pre-shipped in the Foundation.
+Both `Inbox/` and `Capture.md` are pre-shipped in the Foundation.
 Confirm they exist and orient to what they do:
 - `Inbox/` is for captured material that may need thought, routing, or conversion
-- `To-Do Dock.md` is for quick action prompts you do not want in your head
+- `Capture.md` is for quick action prompts you do not want in your head
 
 Useful reference points:
 - `Council Chamber/Templates/Object Templates/InboxItem.md`
@@ -215,7 +215,7 @@ node --version
 
 Then run:
 ```
-node Council Chamber/scripts/replace-tokens.mjs
+node "Council Chamber/scripts/replace-tokens.mjs"
 ```
 
 This script will:
@@ -307,7 +307,7 @@ It is also when the collaboration starts feeling less like "I am managing a tool
 Session 4 is complete when:
 - you understand the basic protocol-versus-skill distinction
 - the core Foundation protocol subset feels legible
-- `Inbox/` and `To-Do Dock.md` are confirmed present and their purpose is clear
+- `Inbox/` and `Capture.md` are confirmed present and their purpose is clear
 - Foundation naming is resolved or a conscious decision has been made to defer further
 
 After this, move to Module Selection.

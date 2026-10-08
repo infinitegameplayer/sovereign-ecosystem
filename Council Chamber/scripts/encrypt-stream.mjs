@@ -120,7 +120,7 @@ export function decryptFile({ inPath, outPath, passphrase }) {
 
 export const ENCRYPTED_SUFFIX = '.enc'
 
-// CLI for restore: node Council Chamber/scripts/encrypt-stream.mjs decrypt <in.zip.enc> <out.zip>
+// CLI for restore: node "Council Chamber/scripts/encrypt-stream.mjs" decrypt <in.zip.enc> <out.zip>
 // Reads the passphrase from BACKUP_ENCRYPTION_KEY (.env on a live machine) or
 // the BACKUP_ENCRYPTION_KEY the operator exports from the password manager when
 // restoring on a fresh machine.
@@ -133,13 +133,13 @@ if (import.meta.url === `file://${process.argv[1]}` || process.argv[1]?.endsWith
       process.exit(1)
     }
     if (!inPath || !outPath) {
-      console.error('Usage: node Council Chamber/scripts/encrypt-stream.mjs decrypt <in.zip.enc> <out.zip>')
+      console.error('Usage: node "Council Chamber/scripts/encrypt-stream.mjs" decrypt <in.zip.enc> <out.zip>')
       process.exit(1)
     }
     const { bytes } = decryptFile({ inPath, outPath, passphrase })
     console.log(`Decrypted ${bytes} bytes -> ${outPath}`)
   } else {
-    console.error('Usage: node Council Chamber/scripts/encrypt-stream.mjs decrypt <in.zip.enc> <out.zip>')
+    console.error('Usage: node "Council Chamber/scripts/encrypt-stream.mjs" decrypt <in.zip.enc> <out.zip>')
     process.exit(1)
   }
 }

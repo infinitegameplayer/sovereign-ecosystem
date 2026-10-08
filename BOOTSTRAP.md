@@ -69,7 +69,7 @@ Personalize the vault from the answers. Two mechanisms.
 | `{{SOVEREIGN_FORMAL_NAME}}` | The formal name if offered, otherwise blank |
 | `{{SOVEREIGN_LEGAL_NAME}}` | The legal name if offered, otherwise blank |
 
-The script is interactive. It prompts for each value, previews every file and location it will change, then waits for a typed `YES` before writing. Run it and feed it the answers, or walk the Sovereign through running `node Council Chamber/scripts/replace-tokens.mjs` themselves and confirming the preview. Either path is fine. The preview-then-confirm gate is a feature, so let it do its job.
+The script is interactive. It prompts for each value, previews every file and location it will change, then waits for a typed `YES` before writing. Run it and feed it the answers, or walk the Sovereign through running `node "Council Chamber/scripts/replace-tokens.mjs"` themselves and confirming the preview. Either path is fine. The preview-then-confirm gate is a feature, so let it do its job.
 
 The token script touches the identity surfaces across the vault. These are the files it personalizes: the adapter anchors `.claude/CLAUDE.md` and `.codex/CODEX.md`, the governance set under `Council Chamber/Governance/`, the codices under `Council Chamber/Codices/`, the protocols under `Council Chamber/Protocols/`, the skills under `Council Chamber/Skills/`, the Operating Charter, and a few Getting Started session files that reference the tokens directly. The script finds every occurrence on its own. You do not need to hand-edit those.
 

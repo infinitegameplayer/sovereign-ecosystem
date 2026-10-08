@@ -763,7 +763,7 @@ Naming the mechanism is half the discipline. The other half is the replacement.
 - **Pattern:** Every paragraph approximately the same length and density. No paragraph breathes differently from any other.
 - **Specimen:** Five consecutive paragraphs at roughly the same sentence count, ending on similar rhythmic cadence.
 - **Why AI produces it:** Token-level optimization produces homogeneous paragraph rhythm. No felt sense of pacing.
-- **Replacement:** Paragraphs vary. Single-line breaths next to dense concept paragraphs. The weight differential is load-bearing.
+- **Replacement:** Paragraphs vary. Single-line breaths next to dense concept paragraphs. The weight differential does the work.
 
 **102a. Uniform Sentence Cadence**
 - **Pattern:** Sentence lengths cluster between roughly 12 and 18 words with the same subject-first shape and the same falling rhythm, sentence after sentence. Entry 102 is the paragraph-scale sibling; this is the tell inside the paragraph. Readers feel the flatness before they can name it.

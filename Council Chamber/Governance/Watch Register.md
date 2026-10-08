@@ -15,7 +15,7 @@ One home for every standing watch, tripwire and confirm-flag in the ecosystem. W
 
 **What belongs here.** A standing point of future attention that lives in prose: a tripwire that fires on a condition, a confirm-flag recorded pending confirmation, a "revisit when X" note, a "hold for a second occurrence" pattern watch, a "read at next Y" recurring attention item.
 
-**What does not.** A task with a due date. Those live on the [[To-Do Dock]] and in the deadline scan. A standing sensing practice with no fireable condition (the North Star Drift Check) stays in its own ritual.
+**What does not.** A task with a due date. Those live in [[Capture]] and in the deadline scan. A standing sensing practice with no fireable condition (the North Star Drift Check) stays in its own ritual.
 
 **How it is read.** At the weekly End-of-Week review. The review scans the register, checks each wake condition against the week and reconciles.
 

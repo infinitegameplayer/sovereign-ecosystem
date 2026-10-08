@@ -32,8 +32,8 @@ Whatever intake engines this vault runs adopt this law at creation time and choo
 - Status (proposed/draft/approved/ready-for-execution/implemented)
 - Domain (if known)
 - Quick capture type (To-Do vs InboxItem):
-  - Route to `To-Do Dock` when the item is a short-lived action prompt that is likely actionable within minutes, later today or within the next few days and does not need archival retention.
-  - For mobile quick capture, unprefixed short text now defaults to `To-Do Dock` unless explicitly marked otherwise.
+  - Route to `Capture` when the item is a short-lived action prompt that is likely actionable within minutes, later today or within the next few days and does not need archival retention.
+  - For mobile quick capture, unprefixed short text now defaults to `Capture` unless explicitly marked otherwise.
   - Route to `InboxItem` when the item is explicitly marked for Inbox retention, when a longer-form capture should stay in `Inbox/` for later review, or when it carries expansion energy that could become a Quest, governance thread, strategic concept or a larger creative build.
 - Classification drift check (Quest vs PendingPlan):
   - If the item appears to be a Sovereign Ecosystem/{{AI_INTERFACE_NAME}} implementation proposal (protocol/skill/template/system/governance change), flag it as a likely PendingPlan.
@@ -47,7 +47,7 @@ Whatever intake engines this vault runs adopt this law at creation time and choo
 - Move into the correct container (Active Chamber or staging).
 - To-Do route:
   - Do not create a dedicated note for each short-lived to-do by default.
-  - Append the item to `[[To-Do Dock]]` in the Sovereign Ecosystem root container for fast mobile access.
+  - Append the item to `[[Capture]]` in the Sovereign Ecosystem root container for fast mobile access.
   - Preserve only enough context to take action; completed entries are deleted, not archived.
 - InboxItem route:
   - Keep in `Inbox/` when routing is still uncertain, when the capture needs tiered Inbox analysis before conversion, or when it has growth potential and belongs in ideation rather than immediate execution.
@@ -84,16 +84,16 @@ Types that almost always qualify for Tier C:
 - Inbox analysis lives at the top of the note while in Inbox.
 - Legacy heading `Intake Analysis` is acceptable in older notes.
 - When routed out of Inbox, move analysis to an "Inbox Analysis (Archive)" section or wrap in an HTML comment block to keep the main document clean.
-- `To-Do Dock` is exempt from archival preservation. It is intentionally volatile.
+- `Capture` is exempt from archival preservation. It is intentionally volatile.
 
 ## Quick Capture Input Spec (Mobile / Future Telegram)
 - Recommended plain-language prefix: `to-do:`
 - Example:
   - `to-do: remind myself that Notion has been the operational workspace for years`
 - Prefix matching is case-insensitive. `TO-DO:`, `To-Do:`, `inbox:` and `INBOX:` all work.
-- If the incoming message clearly begins with `to-do:` or is explicitly framed as a near-term action reminder, route to `[[To-Do Dock]]`.
+- If the incoming message clearly begins with `to-do:` or is explicitly framed as a near-term action reminder, route to `[[Capture]]`.
 - If the incoming message begins with `inbox:`, or reads like a concept with expansion potential, keep it as an `InboxItem` in `Inbox/`.
-- If the incoming message has no prefix, default it to `[[To-Do Dock]]` as a lightweight action capture.
+- If the incoming message has no prefix, default it to `[[Capture]]` as a lightweight action capture.
 - Voice note handling:
   - Transcribe first.
   - Preserve the raw transcript in `Inbox/`.

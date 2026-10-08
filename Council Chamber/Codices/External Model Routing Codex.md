@@ -57,7 +57,7 @@ Provider-to-model recommendations are working hypotheses. Final routing assignme
 | Long-context bulk classification | NVIDIA NIM | `nvidia/nemotron-3-super-120b-a12b` | Large context window, free tier. |
 | Code generation and refactoring | DeepSeek | `deepseek-v4-flash` or `deepseek-v4-pro` | Native Anthropic-compatible endpoint. Paid but low cost. |
 | Reasoning-heavy edge cases | DeepSeek | `deepseek-v4-pro` | Strong reasoning trace via thinking mode, paid tier. |
-| Fast inference on open-weights models | Groq | `llama-3.3-70b-versatile` | Ultra-low-latency on Meta Llama via LPU hardware. OpenAI-compatible endpoint. |
+| Fast inference on open-weights models | Groq | `openai/gpt-oss-120b` | Low-latency inference on Groq LPU hardware. OpenAI-compatible endpoint. The earlier `llama-3.3-70b-versatile` slug returned HTTP 404 "does not exist" on a live dispatch on 2026-10-02. A reasoning model, so give it room: on a budget of a few dozen tokens it can return HTTP 200 with no text. Verify any slug against the live catalog before first use. |
 | Fast reasoning inference | Groq | `openai/gpt-oss-120b` | Open-weights reasoning model at LPU speed. |
 
 Voice-bound and judgment-bound work does not route here. That work stays on the primary provider layer.
@@ -90,9 +90,9 @@ Cross-provider pattern. Every dispatch carries the Ṣāḍguṇya ambassador or
 
 | Class | Provider | Status |
 |---|---|---|
-| Cross-reference health (structural scan) | Groq `llama-3.3-70b-versatile` | Template placeholder. Verify before first use. |
-| Memory file cross-reference health | Groq `llama-3.3-70b-versatile` | Template placeholder. Verify before first use. |
-| Image alt-text gap scan | Groq `llama-3.3-70b-versatile` | Template placeholder. Verify before first use. |
+| Cross-reference health (structural scan) | Groq `openai/gpt-oss-120b` | Template placeholder. Verify before first use. |
+| Memory file cross-reference health | Groq `openai/gpt-oss-120b` | Template placeholder. Verify before first use. |
+| Image alt-text gap scan | Groq `openai/gpt-oss-120b` | Template placeholder. Verify before first use. |
 
 **Assessed and held on the primary provider layer:**
 
@@ -104,7 +104,7 @@ Cross-provider pattern. Every dispatch carries the Ṣāḍguṇya ambassador or
 
 **Primary-provider-bound by category (never worker-eligible).** Voice-bound drafting, concept-page drafting, strategy and judgment work, Sovereign-required harvest work. This boundary is permanent, not a held-pending-maturity classification.
 
-**Enumeration-completeness ceiling.** Groq `llama-3.3-70b-versatile` is reliable for grouping-and-suggesting over a short broken-link set but not for faithfully reproducing a long flat list. A worker given a large enumeration task may truncate output below the token cap. Audit classes whose output is a long enumeration need the threshold and listing done on the orchestrator, with the worker reserved for genuine synthesis judgment.
+**Enumeration-completeness ceiling.** A fast Groq synthesis model is reliable for grouping-and-suggesting over a short broken-link set but not for faithfully reproducing a long flat list. A worker given a large enumeration task may truncate output below the token cap. Audit classes whose output is a long enumeration need the threshold and listing done on the orchestrator, with the worker reserved for genuine synthesis judgment.
 
 ## Integration Path
 
@@ -120,7 +120,7 @@ Script-based dispatch is the integration mode. The single dispatch entry point i
 Invocation shape:
 
 ```
-node Council Chamber/scripts/external-worker.mjs \
+node "Council Chamber/scripts/external-worker.mjs" \
   --provider openrouter \
   --model qwen/qwen3-coder:free \
   --prompt "..." \
@@ -133,6 +133,8 @@ node Council Chamber/scripts/external-worker.mjs \
 ## Model Era Notes
 
 These are integration realities an implementor must handle when calling current frontier model APIs. They are not provider endorsements.
+
+**A fallback hides a dead primary.** A worker slot with a graceful fallback to your main provider never breaks when its model disappears. It quietly moves the work, and the cost, back onto the main provider, and no instrument reports it. So every worker slot with a fallback gets a liveness check of its own: a live dispatch that must return text, run before the slot is trusted and again at each Security Check. Preview models carry the most removal risk.
 
 **Refusal as HTTP 200.** Safety classifiers on current frontier models return `stop_reason: "refusal"` with an HTTP 200 status. This is not a network error. A response handler that only checks the HTTP status code will treat a refused request as a successful completion. Check `stop_reason` explicitly and handle `"refusal"` as a distinct non-completion state.
 

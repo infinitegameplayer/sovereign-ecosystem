@@ -66,7 +66,7 @@ The backup log in the vault is not deleted - it is a permanent record.
 ## Trigger Options
 
 1. Run the Weekly Backup skill in Claude Code or Codex.
-2. Run `node Council Chamber/scripts/backup-vault.mjs` from the vault root in any terminal.
+2. Run `node "Council Chamber/scripts/backup-vault.mjs"` from the vault root in any terminal.
 3. Wrap the same command in a local launcher or scheduled task if you want one-click execution.
 
 ## Error Handling

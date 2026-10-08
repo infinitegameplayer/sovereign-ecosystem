@@ -1,6 +1,6 @@
 ---
 name: session-closeout
-description: Use when wrapping up a session that made commits or governance changes. A fast three-action close: breadcrumb what you touched, refresh the Primer, commit with a readable body. When the work continues in a new session, it ends with a paste-ready continuation prompt, unasked.
+description: Use when wrapping up a session that made commits or governance changes, including when the work continues in a new session and needs a continuation prompt.
 status: active
 tier: foundational
 contrast_tier: 1
@@ -135,7 +135,7 @@ git diff --cached --quiet || git commit -m "Session Closeout YYYY-MM-DD-X: <titl
 
 ## Model Routing
 
-Set `model` explicitly on every Agent call. Escalation workers (A/B/C) run Sonnet. Session closeout is Sonnet's territory by default. See your routing codex for escalation criteria.
+Set `model` explicitly on every Agent call. Escalation workers (A/B/C) run Sonnet, the default for workers. See your routing codex for escalation criteria.
 
 ## Refinements
 

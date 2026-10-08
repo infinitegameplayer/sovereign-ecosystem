@@ -23,10 +23,10 @@
 // directory two levels above this script (scripts live in <vault>/Council Chamber/scripts/).
 //
 // Usage:
-//   node Council Chamber/scripts/doctrine-references.mjs            Human report: orphans, index-only, low-inbound.
-//   node Council Chamber/scripts/doctrine-references.mjs --all      Also list every artifact with its count.
-//   node Council Chamber/scripts/doctrine-references.mjs --json     Emit the full dataset as JSON.
-//   node Council Chamber/scripts/doctrine-references.mjs --layer codices|protocols|skills|governance
+//   node "Council Chamber/scripts/doctrine-references.mjs"            Human report: orphans, index-only, low-inbound.
+//   node "Council Chamber/scripts/doctrine-references.mjs" --all      Also list every artifact with its count.
+//   node "Council Chamber/scripts/doctrine-references.mjs" --json     Emit the full dataset as JSON.
+//   node "Council Chamber/scripts/doctrine-references.mjs" --layer codices|protocols|skills|governance
 //
 // Exit codes:
 //   0  Ran successfully.
@@ -153,7 +153,7 @@ async function main() {
   // AGENTS.md / CLAUDE.md files at the vault root. The vault walk skips
   // .claude (its skills subtree may be junction symlinks that would
   // double-count), so those root files are added by hand: they wikilink a
-  // large share of load-bearing doctrine and their omission otherwise reads
+  // large share of the doctrine the ecosystem rests on and their omission otherwise reads
   // active codices as false orphans.
   const allActive = await walk(VAULT_ROOT, {});
   for (const extra of [join('.claude', 'CLAUDE.md'), 'CLAUDE.md', 'AGENTS.md']) {

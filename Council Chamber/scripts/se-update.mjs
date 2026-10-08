@@ -6,10 +6,10 @@
  * applies approved updates one file at a time.
  *
  * Usage:
- *   node Council Chamber/scripts/se-update.mjs --check
- *   node Council Chamber/scripts/se-update.mjs --diff "<path>"
- *   node Council Chamber/scripts/se-update.mjs --apply "<path>"
- *   node Council Chamber/scripts/se-update.mjs --force-seeded "<path>"
+ *   node "Council Chamber/scripts/se-update.mjs" --check
+ *   node "Council Chamber/scripts/se-update.mjs" --diff "<path>"
+ *   node "Council Chamber/scripts/se-update.mjs" --apply "<path>"
+ *   node "Council Chamber/scripts/se-update.mjs" --force-seeded "<path>"
  *
  * Exit codes:
  *   0  success
@@ -119,13 +119,16 @@ function matchPattern(filePath, pattern) {
 }
 
 // Detect the upstream remote. Returns the remote name or null.
+// Reads the configured URL rather than `remote -v`, which shows the URL after
+// any url.<base>.insteadOf rewrite and so misses a remote whose URL is rewritten.
 function detectUpstreamRemote() {
-  const result = gitSilent('remote -v');
+  const result = gitSilent('config --get-regexp "^remote\\..*\\.url$"');
   if (!result.ok) return null;
 
   for (const line of result.output.split('\n')) {
-    if (line.includes(UPSTREAM_REPO_URL) && line.includes('(fetch)')) {
-      return line.split('\t')[0].trim();
+    const [key, url] = line.trim().split(/\s+/, 2);
+    if (url === UPSTREAM_REPO_URL) {
+      return key.slice('remote.'.length, -'.url'.length);
     }
   }
   return null;
@@ -141,14 +144,17 @@ function fetchUpstream(remoteName) {
 }
 
 // List files changed between local HEAD and the upstream ref, for a given class.
-// Returns an object: { added: [], modified: [], removed: [] }
+// Returns an object per class: { added: [], modified: [], removed: [], renamed: [{ from, to }] }
+// A rename is filed under the class of its new path, except that a rename
+// touching a seeded path on either end stays seeded, so personalization is never offered for overwrite.
 function diffFrameworkFiles(upstreamRef, manifest) {
-  const result = gitSilent(`diff --name-status HEAD ${upstreamRef}`);
+  const result = gitSilent(`diff --name-status -M HEAD ${upstreamRef}`);
   if (!result.ok) {
     throw new Error(`Could not diff against ${upstreamRef}: ${result.output}`);
   }
 
-  const changes = { framework: { added: [], modified: [], removed: [] }, seeded: { added: [], modified: [], removed: [] }, user: { added: [], modified: [], removed: [] } };
+  const empty = () => ({ added: [], modified: [], removed: [], renamed: [] });
+  const changes = { framework: empty(), seeded: empty(), user: empty() };
 
   for (const line of result.output.split('\n')) {
     if (!line.trim()) continue;
@@ -157,18 +163,24 @@ function diffFrameworkFiles(upstreamRef, manifest) {
     const filePath = normalize(parts[parts.length - 1].trim());
     const cls = classifyPath(filePath, manifest);
 
-    if (status.startsWith('A')) {
+    if (status.startsWith('A') || status.startsWith('C')) {
       changes[cls].added.push(filePath);
     } else if (status.startsWith('M')) {
       changes[cls].modified.push(filePath);
     } else if (status.startsWith('D')) {
       changes[cls].removed.push(filePath);
+    } else if (status.startsWith('R')) {
+      const from = normalize(parts[1].trim());
+      const renameCls = classifyPath(from, manifest) === 'seeded' ? 'seeded' : cls;
+      changes[renameCls].renamed.push({ from, to: filePath });
     }
-    // R = rename: treated as removed + added; C = copy: treated as added.
-    // Both are uncommon for upstream framework files; skip for now.
   }
 
   return changes;
+}
+
+function countChanges(classChanges) {
+  return classChanges.added.length + classChanges.modified.length + classChanges.removed.length + classChanges.renamed.length;
 }
 
 // Check that the vault is a git repo.
@@ -219,9 +231,9 @@ function modeCheck() {
     fail(err.message);
   }
 
-  const frameworkTotal = changes.framework.added.length + changes.framework.modified.length + changes.framework.removed.length;
-  const seededTotal = changes.seeded.added.length + changes.seeded.modified.length + changes.seeded.removed.length;
-  const userTotal = changes.user.added.length + changes.user.modified.length + changes.user.removed.length;
+  const frameworkTotal = countChanges(changes.framework);
+  const seededTotal = countChanges(changes.seeded);
+  const userTotal = countChanges(changes.user);
 
   if (frameworkTotal === 0 && seededTotal === 0 && userTotal === 0) {
     console.log('Your vault is up to date with upstream. Nothing to apply.');
@@ -249,8 +261,8 @@ function modeCheck() {
   console.log(`Summary: ${frameworkTotal} framework, ${seededTotal} seeded, ${userTotal} user path(s) differ from upstream.`);
   console.log('');
   console.log('Next steps:');
-  console.log('  Review a file:   node Council Chamber/scripts/se-update.mjs --diff "<path>"');
-  console.log('  Apply a file:    node Council Chamber/scripts/se-update.mjs --apply "<path>"');
+  console.log('  Review a file:   node "Council Chamber/scripts/se-update.mjs" --diff "<path>"');
+  console.log('  Apply a file:    node "Council Chamber/scripts/se-update.mjs" --apply "<path>"');
 }
 
 function printChangeList(classChanges) {
@@ -263,10 +275,16 @@ function printChangeList(classChanges) {
   for (const path of classChanges.removed) {
     console.log(`  - ${path}  [removed in upstream]`);
   }
+  for (const { from, to } of classChanges.renamed) {
+    console.log(`  > ${from} -> ${to}  [renamed in upstream]`);
+  }
+  if (classChanges.renamed.length > 0) {
+    console.log('    A rename: rename your own copy and update links to it, so your content travels with it. The UPDATES/ note for the release says how.');
+  }
 }
 
 function modeDiff(targetPath) {
-  if (!targetPath) fail('--diff requires a file path. Example: node Council Chamber/scripts/se-update.mjs --diff "Council Chamber/Protocols/Session/Session Closeout Protocol.md"');
+  if (!targetPath) fail('--diff requires a file path. Example: node "Council Chamber/scripts/se-update.mjs" --diff "Council Chamber/Protocols/Session/Session Closeout Protocol.md"');
 
   assertGitRepo();
 
@@ -304,7 +322,7 @@ function modeDiff(targetPath) {
 }
 
 function modeApply(targetPath) {
-  if (!targetPath) fail('--apply requires a file path. Example: node Council Chamber/scripts/se-update.mjs --apply "Council Chamber/Protocols/Session/Session Closeout Protocol.md"');
+  if (!targetPath) fail('--apply requires a file path. Example: node "Council Chamber/scripts/se-update.mjs" --apply "Council Chamber/Protocols/Session/Session Closeout Protocol.md"');
 
   assertGitRepo();
 
@@ -352,7 +370,7 @@ function modeApply(targetPath) {
 }
 
 function modeForceSeeded(targetPath) {
-  if (!targetPath) fail('--force-seeded requires a file path. Example: node Council Chamber/scripts/se-update.mjs --force-seeded "Council Chamber/Codices/Humor Codex.md"');
+  if (!targetPath) fail('--force-seeded requires a file path. Example: node "Council Chamber/scripts/se-update.mjs" --force-seeded "Council Chamber/Codices/Humor Codex.md"');
 
   assertGitRepo();
 
@@ -427,10 +445,10 @@ switch (mode) {
     console.log('Sovereign Ecosystem Upstream Sync');
     console.log('');
     console.log('Usage:');
-    console.log('  node Council Chamber/scripts/se-update.mjs --check                       Check for upstream framework changes');
-    console.log('  node Council Chamber/scripts/se-update.mjs --diff "<path>"               Show diff for one file');
-    console.log('  node Council Chamber/scripts/se-update.mjs --apply "<path>"              Apply upstream version of a framework file');
-    console.log('  node Council Chamber/scripts/se-update.mjs --force-seeded "<path>"       Apply upstream version of a seeded file (overwrites personalization)');
+    console.log('  node "Council Chamber/scripts/se-update.mjs" --check                       Check for upstream framework changes');
+    console.log('  node "Council Chamber/scripts/se-update.mjs" --diff "<path>"               Show diff for one file');
+    console.log('  node "Council Chamber/scripts/se-update.mjs" --apply "<path>"              Apply upstream version of a framework file');
+    console.log('  node "Council Chamber/scripts/se-update.mjs" --force-seeded "<path>"       Apply upstream version of a seeded file (overwrites personalization)');
     console.log('');
     console.log('Exit codes: 0 success, 1 error, 2 nothing to do.');
     process.exit(0);

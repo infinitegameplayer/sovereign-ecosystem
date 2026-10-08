@@ -39,7 +39,7 @@ Scope: All Active Chambers.
 - Quest notes may use `completed` or `retired` to indicate archival readiness; metadata preserves the distinction even when the Vault folder is shared.
 
 ## Approval
-- Early phase requires explicit approval per domain/object list.
+- Approval is per artifact: the Sovereign rules on each item, matching the Approval Gate in `.claude/CLAUDE.md`. The domain and object list is how candidates are presented, not the unit of consent.
 - Automation may be enabled after stable operation.
 
 ## Pilot

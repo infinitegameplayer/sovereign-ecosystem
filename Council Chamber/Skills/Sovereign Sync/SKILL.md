@@ -31,7 +31,7 @@ If anything is uncommitted, commit or stash it first.
 ## Step 1. Run the check
 
 ```bash
-node Council Chamber/scripts/se-update.mjs --check
+node "Council Chamber/scripts/se-update.mjs" --check
 ```
 
 The script:
@@ -63,7 +63,7 @@ Present the framework change list to the Sovereign. Group by added, modified and
 For any file the Sovereign wants to see before deciding:
 
 ```bash
-node Council Chamber/scripts/se-update.mjs --diff "<path>"
+node "Council Chamber/scripts/se-update.mjs" --diff "<path>"
 ```
 
 Read the diff together. Note what changed. Note whether the file has been locally modified (the diff shows both directions).
@@ -77,7 +77,7 @@ The Sovereign decides per file: apply, skip or defer to next session.
 For each approved framework file:
 
 ```bash
-node Council Chamber/scripts/se-update.mjs --apply "<path>"
+node "Council Chamber/scripts/se-update.mjs" --apply "<path>"
 ```
 
 The script applies the upstream version and stages the file. Confirm each one before moving to the next.
@@ -104,13 +104,13 @@ The commit body is the sync record. It names what was applied, what was skipped,
 
 ## Seeded Files (separate decision)
 
-If the Sovereign wants to bring in upstream changes to a seeded file (Humor Codex, Primer, To-Do Dock, hook scripts or other seeded surfaces), that is a separate explicit decision. The skill does not surface seeded file updates as part of the standard flow.
+If the Sovereign wants to bring in upstream changes to a seeded file (Humor Codex, Primer, Capture, hook scripts or other seeded surfaces), that is a separate explicit decision. The skill does not surface seeded file updates as part of the standard flow.
 
 If the Sovereign requests a seeded file update:
 
-1. Show the diff: `node Council Chamber/scripts/se-update.mjs --diff "<path>"`
+1. Show the diff: `node "Council Chamber/scripts/se-update.mjs" --diff "<path>"`
 2. Confirm that the Sovereign understands their personalization will be overwritten.
-3. If confirmed: `node Council Chamber/scripts/se-update.mjs --force-seeded "<path>"`
+3. If confirmed: `node "Council Chamber/scripts/se-update.mjs" --force-seeded "<path>"`
 4. Commit separately with a message that names the seeded file and the tradeoff.
 
 ---

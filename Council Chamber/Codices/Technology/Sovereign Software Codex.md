@@ -70,7 +70,7 @@ Source code is regenerable. Any competent agent rebuilds a Worker from a good sp
 So a handover carries three layers, and they are not equal:
 
 1. **The Blueprint.** Architecture, ceilings, doctrine, deploy path. `CLAUDE.md` at the repo root, because a ceiling the working agent never sees is a wish.
-2. **The Proofs.** The test suite, each guard shipping the positive control that must be allowed beside the input that must be refused. The ceiling probe. The evals with their liveness stages. **This is the load-bearing layer and it is the one nobody ships.**
+2. **The Proofs.** The test suite, each guard shipping the positive control that must be allowed beside the input that must be refused. The ceiling probe. The evals with their liveness stages. **This is the layer the whole thing rests on and it is the one nobody ships.**
 3. **The Steward.** The recurring pass that keeps the first two honest. This is the standing engineering-review pass, the code sibling of the ecosystem's periodic stewardship cadence.
 
 **Updates travel as spec plus test, never as a diff.** Once a recipient's agent customizes their copy, their code is no longer the ecosystem's code and a patch will not apply. A test still runs. So the ecosystem ships the intent and the proof, and the recipient's steward figures out how to land it in their version. They own their code. The ecosystem owns the standard. That is what sovereign distribution actually means.

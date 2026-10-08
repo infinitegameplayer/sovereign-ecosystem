@@ -71,7 +71,7 @@ Every menu item and every discovered action carries an `autonomy` level. The lev
 
 A skill-level `auto_execute_threshold` lives in the log frontmatter and defines the line. It starts at `1`. At or below the line the agent executes. Above the line it parks to the decision board. The threshold and per-item levels move only through ratified decisions logged in the run history. Nothing raises its own autonomy.
 
-**v1 posture:** threshold `1`, every starter item Level 1. The autonomy field becomes load-bearing as the menu grows and new items arrive carrying judgment forks or structural reach.
+**v1 posture:** threshold `1`, every starter item Level 1. The autonomy field starts doing real work as the menu grows and new items arrive carrying judgment forks or structural reach.
 
 ## The Decision Board
 
@@ -156,7 +156,7 @@ After execution completes, ask: "Did running this skill surface any defects, fri
 
 Aggregate the opportunistic capture, the research rotation, the self-refinement findings and every fork parked during execution into the four-bucket board. Three Solutions throughout follows [[Council Chamber/Protocols/Governance/Three Solutions Rule]]. Apply the recommendation bar: if you would not recommend a candidate, route it to Patterns Noticed as a one-liner rather than a decision. Every recommended candidate carries a proposed tier and a proposed autonomy level.
 
-**Ground-truth gate on Pending Plan cliff-notes.** The Sovereign approves plan creation from the premise stated in the cliff-note. If the cliff-note's load-bearing claim is a state-claim about an existing artifact, verify it against live state before writing it to the board. A false premise spends a real approval and an entire later session on work that did not need doing. One `ls` or Grep at this gate can kill the candidate cleanly.
+**Ground-truth gate on Pending Plan cliff-notes.** The Sovereign approves plan creation from the premise stated in the cliff-note. If the claim the cliff-note rests on is a state-claim about an existing artifact, verify it against live state before writing it to the board. A false premise spends a real approval and an entire later session on work that did not need doing. One `ls` or Grep at this gate can kill the candidate cleanly.
 
 ### Step 10: Write log entry and decision board, then close
 
@@ -180,7 +180,7 @@ The Sovereign's board answers encode forward. This is the learning loop. The ski
 
 **Bucket 4: Approved Pending Plan (drafted and scheduled).** On a "approve plan creation?", draft the full Pending Plan per [[Council Chamber/Protocols/Planning/Pending Plan Implementation Protocol]], using the board cliff-note as the seed. The plan starts at `status: proposed`. Plan creation is authorized; execution of the drafted plan is not, and runs in its own dedicated session later.
 
-Ground-truth the premise before writing it as fact. The plan's Context premise is its load-bearing claim. The Sovereign approved on the cliff-note, but the full plan re-states the premise as established fact that a later execution session trusts without re-checking. If the premise is a state-claim about an existing artifact, verify it against live state at drafting time. A premise that fails here means the candidate is dead. Report that to the Sovereign rather than drafting a plan around a false claim.
+Ground-truth the premise before writing it as fact. The plan's Context premise is the claim it rests on. The Sovereign approved on the cliff-note, but the full plan re-states the premise as established fact that a later execution session trusts without re-checking. If the premise is a state-claim about an existing artifact, verify it against live state at drafting time. A premise that fails here means the candidate is dead. Report that to the Sovereign rather than drafting a plan around a false claim.
 
 ### Autonomy-Level Move (the climb)
 

@@ -223,7 +223,7 @@ Inbox/
 Library/
 Vault (Archive)/
 Sovereign Command.md
-To-Do Dock.md
+Capture.md
 ```
 
 Four containers and two surfaces. Everything else is either inside them or out of your way.

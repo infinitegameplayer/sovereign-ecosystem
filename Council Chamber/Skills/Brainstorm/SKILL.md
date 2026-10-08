@@ -1,6 +1,6 @@
 ---
 name: brainstorm
-description: Use before any creative or build work in the ecosystem. Turns an idea into a design the Sovereign has approved, through one-question-at-a-time dialogue, a three-solution fork and a written Pending Plan. Gate-bound: no code, no scaffolding, no implementation skill until the design is approved.
+description: "Use before any creative or build work in the ecosystem. Turns an idea into a design the Sovereign has approved, through one-question-at-a-time dialogue, a three-solution fork and a written Pending Plan. Gate-bound: no code, no scaffolding, no implementation skill until the design is approved."
 status: active
 tier: foundational
 ---

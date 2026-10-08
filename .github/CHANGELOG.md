@@ -6,6 +6,27 @@ Each entry corresponds to one publish cycle. For full implementation details, se
 
 ---
 
+## v3.14.0, 2026-10-08
+
+The First Move Gets Its Name.
+
+**If you installed any version, apply this update.** It renames one of your files, and the update script could not see a rename until now.
+
+**If you use the Brainstorm skill, apply this.** Its header has not parsed since v3.5.0, so your AI has not been able to discover it.
+
+- **The To-Do Dock is now Capture,** named for the first move of Tiago Forte's CODE loop: Capture, Organize, Distill, Express. `To-Do Dock.md` becomes `Capture.md` and its protocol becomes the Capture Protocol, with two new sections: where Capture sits in the loop, and whose surface it is. Your AI reads Capture and never adds to it. The rename is yours to make, because the file holds your own items. The update file has the four steps.
+- **`se-update.mjs` reports renames.** It read `git diff --name-status` and skipped every rename line, so a renamed file was never listed. Renames now list with both paths, and a rename touching a seeded file stays seeded. The upstream remote is found from its configured URL, so a URL rewrite no longer hides it. **New: `se-update-selftest.mjs`**, which fails four of six on v3.13.0.
+- **Brainstorm's description was unquoted and contained `Gate-bound: no code`.** In YAML that colon starts a new key, so the header was invalid. Session Closeout had the same fault at v3.13.0. **New guard: `check-skill-frontmatter.mjs`**, with a positive control of ten planted headers. Both run in CI.
+- **Every `node Council Chamber/scripts/...` command is quoted.** Eleven in the docs and the help text of six scripts split on the space and failed when pasted.
+- **Ported from practice.** Self-Healing allows up to three fixes, matching Systematic Debugging. Batch Archival approval is per artifact. The External Model Routing Codex stops naming a Groq model that returned 404, and learns that a fallback hides a dead primary. "Load-bearing" leaves thirteen sentences. Three shipped scripts join the framework class so their updates reach you.
+- **Session Closeout's description names the moment it serves,** including when the work continues and needs a continuation prompt. Actions 0 and 4, the decision gate and the continuation prompt, shipped in v3.13.0. They now also ship in the public Session Closeout plugin.
+
+A report that cannot see a rename and a header that cannot parse fail the same way: the thing is there, and nothing that reads it can tell.
+
+Full detail and the implementation spec: `.github/UPDATES/2026-10-08-v3.14.0-the-first-move-gets-its-name.md`.
+
+---
+
 ## v3.13.0, 2026-10-02
 
 A Gate That Cannot See Has No Verdict.

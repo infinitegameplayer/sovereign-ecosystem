@@ -118,7 +118,7 @@ A continuous 0-to-100 score invites false precision. "Confidence 87" means nothi
 
 **The quote-the-line gate.** Before anchoring a finding at 75 or 100, quote the verbatim line that makes it true, with `file:line`, as the first evidence item. **If you cannot quote the motivating line, you cannot claim 75 or above. Step down to 50.** Enforced twice: as a reviewer instruction, and mechanically at merge, where any 75 or 100 finding arriving without a quote is demoted. This kills the single most common false-positive class, a reviewer asserting a bug exists without pointing at the code that proves it.
 
-**Corroboration promotion.** Two independent reviewers on the same finding promote it one anchor step. Two carve-outs, both load-bearing:
+**Corroboration promotion.** Two independent reviewers on the same finding promote it one anchor step. Two carve-outs, both doing real work:
 - Promotion never bypasses the quote gate. Two un-quoted findings must not combine into a quote-free 75. Agreement corroborates that an issue is real; the quoted line is what licenses high confidence.
 - The orchestrator's own inline scan never counts as corroboration. It shares the session model's blind spots with the other lenses. Self-agreement dressed as consensus is not evidence.
 

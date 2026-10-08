@@ -22,7 +22,7 @@
  *   GROQ_API_KEY         - console.groq.com/keys
  *
  * Usage:
- *   node Council Chamber/scripts/external-worker.mjs \
+ *   node "Council Chamber/scripts/external-worker.mjs" \
  *     --provider openrouter \
  *     --model qwen/qwen3-coder:free \
  *     --prompt "..." \
@@ -137,7 +137,7 @@ function parseArgs(argv) {
 
 function usage() {
   return `Usage:
-  node Council Chamber/scripts/external-worker.mjs \\
+  node "Council Chamber/scripts/external-worker.mjs" \\
     --provider <openrouter|nvidia-nim|deepseek|groq> \\
     --model <provider-specific-model-id> \\
     --prompt "<text>" \\

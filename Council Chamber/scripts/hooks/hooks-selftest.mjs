@@ -37,7 +37,7 @@
 // Cases divide into two kinds, declared per case, because the distinction is
 // real and hiding it would be its own dishonesty:
 //   'reacts' . the hook must DO something. A stub cannot satisfy it, so the
-//              negative control can falsify it. These are the load-bearing ones.
+//              negative control can falsify it. These are the ones that carry the proof.
 //   'quiet'  . the hook must NOT do something. A stub satisfies it trivially,
 //              so the negative control cannot falsify it and does not pretend to.
 //              Reported as n/a rather than counted as a pass.

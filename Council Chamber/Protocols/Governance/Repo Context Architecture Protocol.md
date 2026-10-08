@@ -28,7 +28,7 @@ Read automatically by any AI coding tool: GitHub Copilot, Cursor, OpenAI Codex, 
 - **Critical rules**: constraints discovered through production failures or explicit design decisions; each rule states what not to do and why
 - **Content and voice**: vocabulary to use and avoid; tone and audience
 - **AI discoverability**: what crawler access exists; what structured files are active; upgrade status
-- **Cross-ecosystem links**: which links connect to other nodes; which are load-bearing and must be maintained
+- **Cross-ecosystem links**: which links connect to other nodes; which carry weight and must be maintained
 
 **Format:** Plain markdown. No required sections schema. Follow the content requirements above in whatever order serves readability. Kept focused and scannable.
 

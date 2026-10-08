@@ -6,6 +6,7 @@ Run the Ecosystem Update Check Skill to discover which updates apply to your bui
 
 | Date | Type | Optional | Slug | Title |
 |---|---|---|---|---|
+| 2026-10-08 | core | no | v3.14.0-the-first-move-gets-its-name | v3.14.0 The First Move Gets Its Name: The To-Do Dock Becomes Capture, and the Update Script Learns to See a Rename |
 | 2026-10-02 | core | no | v3.13.0-a-gate-that-cannot-see | v3.13.0 A Gate That Cannot See Has No Verdict. The Floor Refuses When Node Is Missing, and Seven Weeks of Practice Come Home |
 | 2026-08-11 | core | no | v3.12.0-the-skill-the-sessions-told-you-to-open | v3.12.0 The Skill the Sessions Told You to Open. Two Skills Come Home, and Four Counts Become Lists |
 | 2026-08-07 | core | no | v3.11.0-the-instructions-were-in-the-room | v3.11.0 The Instructions Were in the Room. The Session Rhythm Gets Written Down, and the Decision Rule Starts Firing |

@@ -24,7 +24,7 @@ Activate explicitly if you notice your AI stopping unnecessarily on routine erro
 3. Apply the most direct fix
 4. Confirm the fix worked: re-run the failed command or check the specific symptom directly. A fix applied is not a fix verified
 5. Continue the task without surfacing to the Sovereign unless the error is governance-class (see Constraints)
-6. If the same error recurs after verification, surface it: do not loop silently
+6. If the fix does not hold, return to step 2 with what the failure taught. Up to three fixes, each from a fresh root-cause read and never a repeat of the last one. After the third fails, stop and surface it, per [[Council Chamber/Skills/Systematic Debugging/SKILL]] Phase 4
 
 **Durable record.** A recurring error (one that fails the verification step and needs a second attempt) or a governance block is worth keeping, per the Engineering Codex Section VII (Compound). In a code repo, write it to that repo's `docs/solutions/` learning corpus. Outside a code repo, name it in the session's commit body. Saying it once in chat is not a durable record: the next session needs to find it without hitting the same wall first.
 
@@ -36,7 +36,7 @@ Activate explicitly if you notice your AI stopping unnecessarily on routine erro
 | Missing file or directory | Create if clearly intentional, continue |
 | Wrong path | Correct path, continue |
 | Missing dependency (npm, etc.) | Propose install before running, cost/side-effect gate applies |
-| Test failure | Diagnose, fix, re-run once; surface if still failing |
+| Test failure | Diagnose, fix, re-run; up to three fixes, then surface |
 | Permission or governance block | Surface immediately, do not attempt to bypass |
 | External API error | Surface immediately, do not retry without Sovereign awareness |
 
@@ -44,7 +44,7 @@ Activate explicitly if you notice your AI stopping unnecessarily on routine erro
 
 - Never attempt to auto-fix errors blocked by governance hooks (e.g. `pre-tool-approval-gate.sh`). Surface those to the Sovereign.
 - Never auto-retry external API calls (image generation, transcription, CRM tools, etc.). Each call has cost or side effects.
-- Never silently loop on a fix that is not working. One attempt, then surface.
+- Never silently loop on a fix that is not working. Up to three fixes, each from a fresh diagnosis, then surface.
 - Structural file operations (move, rename, delete canonical files) that produce errors must always surface. Approval gates apply to the operation, not just the error.
 
 ## Refinements

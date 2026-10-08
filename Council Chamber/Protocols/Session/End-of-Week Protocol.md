@@ -29,7 +29,7 @@ The backup is the only hard-required step. Everything else depends on what happe
 
 Use fresh each week or as a reference card:
 
-- [ ] **Steward Review**: run the Steward Review skill. Covers: deadline scan, To-Do Dock, Pending Plans sweep, this-week review (3 engagements), next-week brainstorm (2 engagements), and Sovereign Command update.
+- [ ] **Steward Review**: run the Steward Review skill. Covers: deadline scan, Capture, Pending Plans sweep, this-week review (3 engagements), next-week brainstorm (2 engagements) and Sovereign Command update.
 - [ ] **Weekly Story**: optional creative practice. Run your weekly story or narrative ritual after the Steward Review (see Weekly Story section below).
 - [ ] **Session Closeout**: run the Session Closeout skill if any governance work, new artifacts or structural changes happened this week.
 - [ ] **Backup**: run last, after everything else is settled. Run the Backup skill or your backup script.
@@ -56,9 +56,9 @@ This separates the intelligence layer from the input layer. {{AI_INTERFACE_NAME}
 **This Week: Engagement 2: Operations + Collaborations**
 - Your business or creative lane: offers, projects, revenue movement (if applicable)
 - Collaborations: key partners, relational court (conversations, alliances, movement)
-- Structure and governance: Pending Plans, To-Do Dock, Sovereign Ecosystem infrastructure
+- Structure and governance: Pending Plans, Capture, Sovereign Ecosystem infrastructure
 
-*Data sources: your business/project dashboard (if applicable), collaboration dashboards, To-Do Dock, Pending Plans folder, {{AI_INTERFACE_NAME}} Field Decisions (past 7 days)*
+*Data sources: your business/project dashboard (if applicable), collaboration dashboards, Capture, Pending Plans folder, {{AI_INTERFACE_NAME}} Field Decisions (past 7 days)*
 
 **This Week: Engagement 3: Resources + Trajectory**
 - Resources: wealth flow, financial ease or friction (if tracked)
@@ -132,7 +132,7 @@ The Steward Review engagement themes are a starting template. Adapt them to your
 - If your collaboration structure is different, adjust data sources for Engagement 2
 - If you use a different calendar tool, update the data source for Engagement A
 
-The three-beat pattern (data pull --> briefing --> free speech) is the load-bearing architecture. The themes are soft. Move past what doesn't land.
+The three-beat pattern (data pull --> briefing --> free speech) is the architecture the rest stands on. The themes are soft. Move past what doesn't land.
 
 ---
 

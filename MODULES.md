@@ -55,7 +55,7 @@ The Foundation is the smallest complete system that can:
   - Codices Index
 - Core workflows
   - Capture Classify Route
-  - To-Do Dock Protocol
+  - Capture Protocol
   - Pending Plan workflow
   - Quest Progress Update
   - Session Closeout
@@ -110,7 +110,7 @@ The Foundation is the smallest complete system that can:
 - `Council Chamber/AI Interface/Sovereign Command Refresh Log.md` is runtime-created
 - `Council Chamber/Pending Plans/Index.md` is runtime-created
 - `Vault (Archive)/Sovereign Ecosystem Backup Log.md` is runtime-created
-- `To-Do Dock.md` is a runtime surface even if a protocol mentions it on day one
+- `Capture.md` is a runtime surface even if a protocol mentions it on day one
 
 ## Module Install Logic
 

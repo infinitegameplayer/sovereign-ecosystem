@@ -97,10 +97,26 @@ jobs:
       - name: Token script reaches every file and writes nothing without YES
         run: node "Council Chamber/scripts/replace-tokens-selftest.mjs"
 
+      # The only channel that tells an installed vault what upstream changed.
+      # Through v3.13.0 it skipped every line git reported as a rename, so a
+      # renamed file vanished from the report. Fired against a fixture upstream
+      # and a fixture install, with the real upstream URL rewritten to a folder.
+      - name: Update script reports renames, edits and no-change
+        run: node "Council Chamber/scripts/se-update-selftest.mjs"
+
       # A skill on disk and absent from the Index is a skill the AI interface
       # never discovers. Present, and unreachable.
       - name: Skills Index matches the skills on disk
         run: node "Council Chamber/scripts/build-skills-index.mjs" --check
+
+      # The same failure from the other side: a skill whose header does not
+      # parse is on disk, indexed and still never discovered. Brainstorm shipped
+      # that way from v3.5.0 behind one unquoted colon. The control runs first.
+      - name: Skill frontmatter checker positive control
+        run: node "Council Chamber/scripts/check-skill-frontmatter.mjs" --positive-control
+
+      - name: Every skill header parses
+        run: node "Council Chamber/scripts/check-skill-frontmatter.mjs"
 
       # The inverse failure, and the one that shipped. A document telling the
       # Sovereign to open a skill file that is not in the box. Two Getting

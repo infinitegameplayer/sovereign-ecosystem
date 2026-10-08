@@ -23,7 +23,7 @@ It is deliberately named apart from the Constitution's agent trust ladder (Artic
 - E0: Read-only. Reads a system of record, mutates nothing. A misfire returns stale or empty data, never a bad write.
 - E1: Narrow or append-only write. Additive, single-purpose, reversible by construction. No overwrite, no delete.
 - E2: Read-write, reversible, contained. Writes into the vault or a reversible external system, recoverable via git or the tool's own undo. Every write approval-gated.
-- E3: Read-write, live consequence. Writes into a live external system where a bad action carries real-world, hard-to-reverse consequence: money, production deploys, outbound to the world, inbound transactions. Every write approval-gated, and the gate is load-bearing.
+- E3: Read-write, live consequence. Writes into a live external system where a bad action carries real-world, hard-to-reverse consequence: money, production deploys, outbound to the world, inbound transactions. Every write approval-gated, and the whole tier rests on that gate.
 - E4: Autonomous read-write within a Sovereign-ratified class. No adapter holds this tier today.
 
 ## Registry

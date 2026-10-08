@@ -145,7 +145,7 @@ If you have a highest-priority Pending Plan that still matters, decide how it sh
 There are two good options:
 
 - put it in `Sovereign Command` if it truly feels alive now and deserves command-surface attention
-- put it in `To-Do Dock.md` if it needs light tracking but does not belong in the throne room today
+- put it in `Capture.md` if it needs light tracking but does not belong in the throne room today
 
 The full truth still lives in the Pending Plans container.
 
@@ -153,7 +153,7 @@ This is only about visibility.
 
 The rule is simple:
 - if it is genuinely live, it may belong in `Sovereign Command`
-- if it is more of a "do not lose this" item, `To-Do Dock.md` may be the better home for now
+- if it is more of a "do not lose this" item, `Capture.md` may be the better home for now
 
 This lets the system track the Pending Plan without forcing every future idea into the command center.
 
@@ -201,7 +201,7 @@ Useful prompts:
 - What did `Sovereign Command` feel like when it was functioning well?
 - Did the "get to do" energy feel different from a normal task list?
 - What kind of items deserve command-surface visibility for me?
-- Should my highest-priority Pending Plan live in `Sovereign Command`, `To-Do Dock.md`, or stay only in Pending Plans for now?
+- Should my highest-priority Pending Plan live in `Sovereign Command`, `Capture.md` or stay only in Pending Plans for now?
 - What made the command surface feel alive rather than obligatory?
 
 Keep it light.
