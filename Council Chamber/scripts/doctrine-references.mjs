@@ -19,6 +19,11 @@
 //   referrers, not only the doctrine layers, since anything active may point
 //   at doctrine.
 //
+// Records are not doctrine. Dated records are left out of the artifact
+// registry through doctrine-records.mjs, the same boundary doctrine-mass.mjs
+// counts by, so a record is never offered as an orphan. A record still counts
+// as a referrer: a link from it is a real link.
+//
 // Vault root resolution: SOVEREIGN_VAULT_ROOT env var if set, otherwise the
 // directory two levels above this script (scripts live in <vault>/Council Chamber/scripts/).
 //
@@ -35,6 +40,7 @@
 import { readdir, readFile } from 'node:fs/promises';
 import { join, basename, relative, dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { isRecordDir, isMarkedRecord } from './doctrine-records.mjs';
 
 const SCRIPT_DIR = dirname(fileURLToPath(import.meta.url));
 const VAULT_ROOT = process.env.SOVEREIGN_VAULT_ROOT || resolve(SCRIPT_DIR, '..', '..');
@@ -127,6 +133,9 @@ async function main() {
   for (const layer of LAYERS) {
     const files = await walk(layer.dir, { skillOnly: layer.mode === 'skill-md' });
     for (const abs of files) {
+      // Records are not doctrine: the same population doctrine-mass.mjs counts.
+      if (isRecordDir(abs)) continue;
+      if (isMarkedRecord(await readFile(abs, 'utf8'))) continue;
       const rel = relative(VAULT_ROOT, abs).replace(/\\/g, '/');
       artifacts.push({
         layer: layer.key,

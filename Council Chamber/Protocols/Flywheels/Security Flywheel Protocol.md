@@ -40,7 +40,7 @@ Phase 3 - Integration, Protection and Future-Proofing
 
 ## Cross-Flywheel Connections
 - North Star: risk alignment with trajectory.
-- Conduction Flywheel: Trifecta integrity checks.
+- Quest completion readings (Quest Progress Update step 7b): Trifecta integrity checks.
 - Universal Vault Flywheel: sensitive handling guidance.
 
 ## Approval Gate

@@ -13,7 +13,7 @@ links:
 
 # Manuscript Anti-AI Edit Pass Skill
 
-Purpose: Run the canonical anti-AI editing pass over a long-form manuscript. Load the Anti-AI Writing Patterns Codex (115 entries across 8 categories), sweep the target text in phases (mechanical lexical first, then judgment-heavy structural and voice passes), assemble a structured edit packet for Sovereign review, and apply approved edits.
+Purpose: Run the canonical anti-AI editing pass over a long-form manuscript. Load the Anti-AI Writing Patterns Codex (8 categories), sweep the target text in phases (mechanical lexical first, then judgment-heavy structural and voice passes), assemble a structured edit packet for Sovereign review, and apply approved edits.
 
 Trigger: Sovereign invocation after a manuscript draft is complete. Also bundled from inside Pending Plan Implementation when the active plan's `## Skill Handover Map` names this skill at the edit phase. Runs chapter-by-chapter during drafting to prevent accumulating a manuscript-sized backlog.
 
@@ -55,7 +55,7 @@ If `sample_first` is set or this is the first invocation against this manuscript
 
 **Step 2. Codex load and reconciliation cross-check.**
 
-Load [[Council Chamber/Codices/Expression/Anti-AI Writing Patterns Codex]] into working memory. Note codex version (currently v1.3, 115 entries). If `vocab_overrides` is provided, surface the proposed additions to the codex reconciliation table for Sovereign approval before sweep begins. The override approval gate prevents drift in the codex over time without explicit codex update.
+Load [[Council Chamber/Codices/Expression/Anti-AI Writing Patterns Codex]] into working memory. Note the codex version from its frontmatter. If `vocab_overrides` is provided, surface the proposed additions to the codex reconciliation table for Sovereign approval before sweep begins. The override approval gate prevents drift in the codex over time without explicit codex update.
 
 Note any SOVEREIGN-VOCAB-RECONCILED entries. These hold special handling: the word is permitted in embodied use, flagged in mechanical use. See the Personalization Note in the codex for how to mark and maintain these.
 
@@ -161,7 +161,7 @@ Assemble all findings into a single structured edit packet for Sovereign review.
 # Manuscript Anti-AI Edit Pass: Edit Packet
 ## Manuscript: [name]
 ## Date: [YYYY-MM-DD]
-## Codex version: v1.3 (115 entries)
+## Codex version: [current, from the codex frontmatter]
 
 ### Summary
 - Total findings: [count]

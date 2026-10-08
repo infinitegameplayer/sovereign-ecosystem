@@ -46,7 +46,7 @@ Purpose: Define how all Sovereign Ecosystem flywheels align with the Flywheel Co
 
 ## Flywheel Connectivity Map (Current)
 - North Star Flywheel -> Quests -> Artifacts -> Universal Vault Flywheel
-- Quests -> Conduction Flywheel -> Universal Vault Flywheel
+- Quests -> completion reading (Quest Progress Update step 7b) -> Universal Vault Flywheel
 - Universal Vault Flywheel -> Taste Delta + Protocol Delta signals -> North Star Recalibration and Governance refinement
 - Security Flywheel -> Meta-Governance Audit -> Governance refinement + risk hardening proposals
 - Embodied Contribution Flywheel (governance architecture) -> body-led aliveness -> `Sovereign Ecosystem Command` (first practical Intelligence report) -> Quests/Collaborations -> Expression/Speaking -> Business / Contribution Lanes -> Wealth byproduct -> periodic Archetypal + Areas of Life review

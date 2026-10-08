@@ -47,7 +47,7 @@ The Permanent Floor (see Constraints) is the guardrail and it is absolute. Every
 
 The full Tier 1 and Tier 2 menu (per-item execution specs, eligibility rules and output artifacts) lives in [[Council Chamber/Skills/Autonomous Improvement Session/references/menu-catalog]]. Load it at Step 2 and keep it open through Tier 1 and Tier 2 execution.
 
-**Tier 1 (autonomous, edits land directly):** T1-1 wikilink integrity re-sweep, T1-2 index regeneration, T1-3 anti-AI sweep on draft articles, T1-4 memory file slug variant normalization, T1-5 Codices Index completeness sweep, T1-6 superseded-artifact and dead-section sweep, T1-7 runtime log rotation, T1-8 skill mandatory-sections completeness sweep.
+**Tier 1 (autonomous, edits land directly):** T1-1 wikilink integrity re-sweep, T1-2 index regeneration, T1-4 memory file slug variant normalization, T1-5 Codices Index completeness sweep, T1-6 superseded-artifact and dead-section sweep, T1-7 runtime log rotation, T1-8 skill mandatory-sections completeness sweep.
 
 **Tier 2 (read-only scans, findings to the decision board):** T2-1 Inbox triage, T2-2 stale draft surface, T2-3 external link rot, T2-4 memory cross-reference health, T2-5 codex inbound density, T2-6 skill cross-reference health, T2-7 MEMORY.md compression candidates, T2-8 breadcrumb propagation and stale-reference sweep, T2-9 implemented-plan archival candidate sweep, T2-10 status vocabulary conformance, T2-11 tag consistency hygiene, T2-12 hook coverage audit, T2-13 scripts-package dependency and CVE audit, T2-14 orphaned and superseded image sweep, T2-15 skill frontmatter conformance sweep, T2-16 skill status-to-usage drift audit, T2-17 contraction enforcement sweep, T2-18 project-memory lifecycle staleness sweep, T2-19 Term Registry placeholder-resolution scan, T2-20 security audit staleness sentinel, T2-21 MCP server load-vs-use gap audit, T2-22 explicit model-set compliance audit, T2-23 review-date staleness sentinel, T2-24 index-file dead-link audit, T2-25 settings file allow-list integrity audit, T2-26 undocumented required-env-key audit, T2-27 skill disambiguation and trigger-collision scan, T2-28 SKILL.md progressive-disclosure overgrowth scan.
 
@@ -106,7 +106,7 @@ Load [[Council Chamber/Skills/Autonomous Improvement Session/references/menu-cat
 
 **Three-tier eligibility (resolves the cooldown problem):**
 - **Condition-based, no window.** Cheap hygiene and routing that runs whenever there is something to do: T2-1 Inbox triage, T2-9 plan archival, T1-2 index regeneration, T1-5 Codices Index completeness, T1-6 superseded sweep, T2-20 security sentinel. Eligible when the target is non-empty or the condition fires, regardless of last-run date.
-- **Short window, 7 to 14 days.** Cheap scans with moderate drift: T1-1 wikilink, T1-3 anti-AI, T1-4 memory slug, T2-8 breadcrumb.
+- **Short window, 7 to 14 days.** Cheap scans with moderate drift: T1-1 wikilink, T1-4 memory slug, T2-8 breadcrumb.
 - **Long window, 30 to 90 days.** Expensive scans with slow drift: T2-3 link rot, T2-2, T2-4, T2-5, T2-6, T2-7, T2-13. The window matches the cost and the drift speed.
 
 A fixed day-window is the wrong throttle for cheap hygiene. Condition-based items run every session that has something to do.
@@ -279,7 +279,6 @@ Set `model` explicitly on every Agent call. Subagents inherit nothing.
 | Step 3: Select items by priority | Sonnet | Light prioritization across heterogeneous items. |
 | Step 4: Announce plan | Opus | Sovereign-facing prose with capacity framing. |
 | Tier 1 mechanical items (T1-1, T1-2, T1-4) | Haiku | Mechanical path and slug corrections. |
-| Tier 1 judgment items (T1-3 anti-AI) | Sonnet | Pattern-match with light inline-versus-fix judgment. |
 | Step 7: Tier 2 worker dispatch | Sonnet | Read-only scans with structured synthesis. |
 | Step 6 / 8b: opportunistic capture and self-refinement | Opus | Reflection on what was just observed; judgment-dense. |
 | Step 8: research rotation workers | Sonnet | Parallel research workers per category. |

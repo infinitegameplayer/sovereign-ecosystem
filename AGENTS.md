@@ -78,7 +78,7 @@ A structured Obsidian vault template with:
 
 **Skills**: named, structured prompt templates that activate specific capabilities. Skills are invoked by name. Examples: Sovereign Sync, Weekly Backup, Batch Archival.
 
-**Flywheels**: repeating rhythm structures that accumulate signal over time. Examples: Security Flywheel, Conduction Flywheel, North Star Flywheel.
+**Flywheels**: repeating rhythm structures that accumulate signal over time. Examples: Security Flywheel, North Star Flywheel, Universal Vault Flywheel.
 
 **Sovereignty Direction**: the system is designed for progressive sovereignty: local files, local models as they mature, platform-agnostic interfaces as they become practical. Build now. Iterate toward the horizon.
 

@@ -27,6 +27,7 @@ Related Protocols/Codices: [[Council Chamber/Protocols/Planning/Quest Progress U
    - `Evidence / Artifacts`
 6. Refresh `Next Step` and `next_review`.
 7. If warranted, propose status change (`active`, `stalled`, `completed`) and confirm against `End State` / `Completion Signals`.
+7b. **Completion reading, when the status becomes `completed`.** Read the Quest's `Trifecta Reflection` and `Archetypal ROI` sections, then write one paragraph under a `## Completion Reading` section in the Quest itself. It names what the [[Council Chamber/Codices/Conduction Codex]] asks for at completion: archetype activated, domain engaged, range expanded, stability strengthened, blend capacity improved, shadow integrated and the energetic return. Add one North Star bias line only when the same pattern has appeared in more than one completed Quest. If either reflection section is empty, ask for it before writing the reading.
 8. Read back proposed changes and apply only with approval.
 
 ## Quick Entry Tags (Optional, Dataview-Friendly)

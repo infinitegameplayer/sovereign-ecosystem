@@ -58,6 +58,13 @@ Note: Git is the authoritative ledger. AI Interface Change Log is a human-readab
 - Deeper review path:
   - Use the Security Check skill when the trigger is real, rather than forcing it into every audit cycle.
 
+## Finding Format
+Every finding carries six parts: severity (critical, minor or informational), path, verbatim text, a proposed correction and a **class grep**. The class grep is the search that shows whether any sibling file carries the same text, with its result. Auditing workers stay read-only and propose. They never execute a fix.
+
+The class grep is there because a finding that reaches remediation as a path and a line gets fixed at that line, and the same text survives next door. A relocated file already carries its wikilink sweep. The class grep gives every fix the same sweep.
+
+A fix is complete when its class grep returns only history.
+
 ## Outcomes
 - System coherent (no change)
 - Minor structural adjustment

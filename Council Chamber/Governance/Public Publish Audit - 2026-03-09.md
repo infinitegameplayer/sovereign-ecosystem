@@ -2,6 +2,7 @@
 date: 2026-03-09
 status: complete
 scope: public_export
+doctrine: false
 ---
 
 # Public Publish Audit - 2026-03-09

@@ -46,6 +46,7 @@ Define the creator's preferred writing style for AI collaboration in a way that 
 - When in doubt, be specific rather than general.
 - Prefer concrete over abstract.
 - Derived copy answers to the shipped artifact. Social posts, email versions, explainers and any copy reused from a published piece are drawn from the shipped piece, never from a draft or the session that produced it. A word the Sovereign cut stays cut downstream. Grep every provenance claim (a quoted phrase attributed to a source) against the file it cites before saving.
+- Accuracy to the lived detail. Where a draft rounds a lived fact, put back what actually happened. When a draft states a time, a count, a duration or a superlative from the Sovereign's telling, render it as they lived it. Keep their "-ish" and their hedge on any claim they cannot verify. Never round for rhythm. The correction can run either way: a detail the Sovereign asks to soften stays soft. The rule is accuracy rather than maximum precision.
 
 ## What AI Should Do With This
 

@@ -9,7 +9,7 @@ tier: operational
 
 **Purpose:** Browser automation via headless Chromium. Scrape pages, extract structured data, and interact with web interfaces. Returns clean JSON, not screenshots.
 
-**Token efficiency:** ~200-500 tokens per page vs 20,000-30,000 for screenshot-based approaches.
+**Token efficiency:** `run.js` returns body text capped at 8000 characters plus up to 50 links, far less than a screenshot-based read.
 
 ## When to Use
 
@@ -54,7 +54,7 @@ Chromium binary installs to `Council Chamber/scripts/node_modules/`. Add this pa
 - **Empty text:** If a page returns empty text, switch `waitUntil` to `networkidle` and retry.
 - **Browser binary not found:** Run `npx playwright install chromium` from the scripts directory.
 - **Cloudflare blocking:** Add `playwright-extra` and `puppeteer-extra-plugin-stealth` if a site blocks the script.
-- **Timeout:** Increase all timeouts to 15 seconds and switch to `networkidle` for slow pages.
+- **Timeout:** `run.js` already navigates with a 15000 ms timeout and `waitUntil: "domcontentloaded"`. For slow pages, raise the timeout and switch to `networkidle`.
 - Always close the browser in a `finally` block. This is already handled in run.js.
 
 ## Invocation

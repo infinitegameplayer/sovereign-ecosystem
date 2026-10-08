@@ -245,7 +245,6 @@ Before activation, these files are available but not part of the working Foundat
 ### What it adds
 
 - `Council Chamber/Codices/Conduction Codex.md`
-- `Council Chamber/Protocols/Flywheels/Conduction Flywheel Protocol.md`
 - `Council Chamber/Protocols/Flywheels/Flywheel Codex Stewardship Protocol.md`
 - `Council Chamber/Protocols/Flywheels/North Star Flywheel.md`
 - `Council Chamber/Protocols/Flywheels/North Star Recalibration Protocol.md`

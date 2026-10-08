@@ -6,6 +6,23 @@ Each entry corresponds to one publish cycle. For full implementation details, se
 
 ---
 
+## v3.15.0, 2026-10-08
+
+Yours Stays Yours.
+
+**If you filled in your Writing Style Codex, apply `framework-manifest.json` first, before anything else in this update.** Through v3.14.0, one `--apply` replaced your codex with the blank template.
+
+- **The Writing Style Codex is now seeded.** It promised it "stays out of upstream sync, and no update will overwrite it", but the manifest classed it as framework, so `se-update.mjs` offered it as an update and `--apply` overwrote it. It is on the seeded list now, and `--apply` refuses it. The update file has the order of steps and how to recover a codex already overwritten.
+- **The doctrine counters share one records boundary.** The orphan counter had none, so it offered dated records as retirement candidates while the mass counter left them out. **New: `doctrine-records.mjs`**, imported by both, and **`doctrine-records-selftest.mjs`**, which plants a record, requires both counters to drop it and agree, and proves it can fail with a mutant that drops the boundary. The one dated audit the template ships now carries `doctrine: false`.
+- **Ported from practice.** A new Output Rule, accuracy to the lived detail. A fresh-eyes reviewer constituted three ways. Meta-Governance Audit findings carry a class grep. The Autonomous Improvement Session stops scheduling the T1-3 item its own catalog retired. The Manuscript Anti-AI Edit Pass reads the codex version rather than hardcoding it. The Playwright skill states what `run.js` does. A watched repo's renamed URL.
+- **The Conduction Flywheel retires into the Quest.** It fed an Archetypal Governance Map the ecosystem never shipped. **New: Quest Progress Update step 7b** writes a completion reading into each completed Quest. The protocol moves to the archive with a superseded-by marker, and five files point at the step. Archived files are yours, so the move is a step you take; the update file has it.
+
+A file that says it is yours and a manifest that says it is upstream's fail the same way: the promise is true right up until the one command that tests it.
+
+Full detail and the implementation spec: `.github/UPDATES/2026-10-08-v3.15.0-yours-stays-yours.md`.
+
+---
+
 ## v3.14.0, 2026-10-08
 
 The First Move Gets Its Name.

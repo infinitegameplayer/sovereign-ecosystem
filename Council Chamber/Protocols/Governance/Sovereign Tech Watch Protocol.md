@@ -72,7 +72,7 @@ Starter list: add, remove, or replace as your ecosystem evolves.
 
 | Repo | What it covers | Last reviewed |
 |------|----------------|---------------|
-| github.com/affaan-m/everything-claude-code | Claude Code hooks, skills, commands, MCP patterns, cost optimization, agentic engineering | [not yet reviewed] |
+| github.com/affaan-m/ECC | Claude Code hooks, skills, commands, MCP patterns, cost optimization, agentic engineering. Formerly affaan-m/everything-claude-code, renamed upstream; the old URL redirects. | [not yet reviewed] |
 | github.com/Crosstalk-Solutions/project-nomad | Offline-first local knowledge server: Ollama (local LLM), Qdrant (vector search), Kiwix (reference library), offline maps, document OCR/RAG | [not yet reviewed] |
 | github.com/kepano/obsidian-skills | Obsidian-native agent skills by vault creator (Steph Ango). Candidates worth watching: obsidian-bases, json-canvas, defuddle. MIT license. | [not yet reviewed] |
 | github.com/hesreallyhim/awesome-claude-code | Curated Claude Code catalog (skills, hooks, slash commands, MCP servers, clients). CC BY-NC-ND 4.0, reference use only, no commercial derivatives. | [not yet reviewed] |

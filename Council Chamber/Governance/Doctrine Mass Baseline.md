@@ -35,11 +35,11 @@ Keep the definition stable once a baseline is running. Changing what counts as a
 
 ## Records are not doctrine
 
-Dated audit records, findings reports and one-time reviews can sit inside the doctrine tree and govern nothing. Counting them means the number built to show whether doctrine is growing also measures how often doctrine was audited. The script excludes them and reports an `excluded` count per layer, so the exclusion stays visible.
+Dated audit records, findings reports and one-time reviews can sit inside the doctrine tree and govern nothing. Counting them means the number built to show whether doctrine is growing also measures how often doctrine was audited. The script excludes them and reports an `excluded` count per layer, so the exclusion stays visible. The boundary lives in `doctrine-records.mjs`, which `doctrine-references.mjs` imports too, so the orphan count and the mass count measure the same population.
 
 Two exclusion mechanisms, because records take two shapes.
 
-- **Whole folders of run artifacts** are named in `RECORD_DIRS` inside `doctrine-mass.mjs`. The list ships empty. To add a record folder, put its folder name in the list. Any file under a directory of that name is excluded.
+- **Whole folders of run artifacts** are named in `RECORD_DIRS` inside `doctrine-records.mjs`. The list ships empty. To add a record folder, put its folder name in the list. Any file under a directory of that name is excluded.
 - **Individual dated reports sitting beside real doctrine** carry `doctrine: false` in frontmatter. This is an edit rather than a move, so marking a file as a record never crosses the Permanent Floor.
 
 When adding a record, mark it or place it in a record folder at creation time, rather than leaving it for the next audit to find.

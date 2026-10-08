@@ -270,6 +270,8 @@ Whether the session orchestrator does the work itself or dispatches it. This ans
 | Fresh-eyes verification | A review, audit or verification pass on a consequential artifact: a shipped PR, a live-surface change, a manuscript pass, a governance audit or a worker's returned output | Dispatch. A fresh context catches errors in own output that the author context is blind to. In-session work the orchestrator can check itself stays inline, because a second pass over small own-work adds cost without adding quality |
 | Mechanical fan-out | No-judgment volume work (sweeps, format migrations, lookups) | Dispatch to Haiku or external workers per the [[Council Chamber/Codices/External Model Routing Codex]] |
 
+**A fresh-eyes reviewer is constituted three ways.** *Independent:* a new Agent call carrying zero context from the build, handed the artifact and its reference and nothing else. *Ruthless:* its success metric is finding discrepancies, so a first pass returning "looks good" is a failed review and is re-dispatched with a sharper brief. *Specific:* every finding carries a measured value and a location. "The spacing looks off" is unusable. "The gap is 32px in the build and 24px in the reference" is a fix. The value comes from context isolation rather than model tier, so Sonnet per reviewer is the default.
+
 **Stay inline when any of these hold:**
 
 - The next step depends on the full reasoning trail, not a summary of it. Sequential dependent work is the named case.

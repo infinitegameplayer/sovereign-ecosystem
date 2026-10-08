@@ -1,5 +1,6 @@
 ---
-status: draft
+status: retired
+superseded-by: "[[Council Chamber/Skills/Quest Progress Update/SKILL]]"
 version: 0.1
 tier: foundational
 contrast_not:
@@ -10,6 +11,8 @@ clarity_triggers:
 ---
 
 # Conduction Flywheel Protocol
+
+> **Retired in v3.15.0.** This flywheel built an Archetypal Governance Map that the ecosystem never shipped, so its first run had nowhere to write. The reflections it read are real and kept: the Quest Progress Update skill now writes a completion reading into each Quest when it completes (step 7b). Kept here as history.
 
 Purpose: Refine archetypal conduction signals from Quest completion and feed governance updates before Vault archival.
 

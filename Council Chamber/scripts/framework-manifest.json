@@ -58,6 +58,8 @@
         "Council Chamber/scripts/backup.config.example.json",
         "Council Chamber/scripts/doctrine-mass.mjs",
         "Council Chamber/scripts/doctrine-references.mjs",
+        "Council Chamber/scripts/doctrine-records.mjs",
+        "Council Chamber/scripts/doctrine-records-selftest.mjs",
         "Council Chamber/scripts/encrypt-stream.mjs",
         "Council Chamber/scripts/external-worker.mjs",
         "Council Chamber/scripts/replace-tokens.mjs",
@@ -92,6 +94,7 @@
       "note": "MODULES.md calls these 'onboarding-generated' or 'runtime-created' surfaces. They arrive from upstream as starting points and are immediately owned by the Sovereign.",
       "paths": [
         "Council Chamber/Codices/Humor Codex.md",
+        "Council Chamber/Codices/Expression/Writing Style Codex.md",
         "Council Chamber/Governance/Governance Principles.md",
         "Council Chamber/Governance/Watch Register.md",
         "Council Chamber/Governance/Doctrine Mass Baseline.md",

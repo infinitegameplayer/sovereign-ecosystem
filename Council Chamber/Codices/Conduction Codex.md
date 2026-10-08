@@ -176,7 +176,7 @@ Archetypal identification at initiation is provisional.
 
 ### Quest Completion and Archival
 
-At Quest archival, update the Archetypal Governance Map with:
+At Quest completion, the Quest Progress Update skill (step 7b) writes a completion reading into the Quest itself, covering:
 
 - Archetype Activated
 - Domain Engaged
@@ -219,7 +219,7 @@ This integration remains minimal and non-dominant. North Star informs archetypal
 
 ## IX. Implementation Framework (Summary)
 
-- Create the Archetypal Governance Map (core ring, domains, experimental archetypes, edges).
+- Write a completion reading into each completed Quest (Quest Progress Update step 7b). The reading lives in the Quest rather than in a separate map.
 - Upgrade Quest Operating Charter with archetype/domain fields and archival reflections.
 - Add a light North Star archetypal bias line when relevant.
 - Use the Conduction Codex as a governance reference for Trifecta coherence.

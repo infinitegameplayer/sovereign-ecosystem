@@ -16,7 +16,7 @@
 //   protocols  all .md under Council Chamber/Protocols, recursive
 //   skills     each Council Chamber/Skills/<name>/SKILL.md (one per skill)
 //   governance all .md under Council Chamber/Governance, recursive
-// Records are excluded from every layer (see RECORD_DIRS below).
+// Records are excluded from every layer (see doctrine-records.mjs).
 // Keep this definition stable once a baseline is running so the series stays
 // continuous. Changing what counts as an artifact breaks trend comparability.
 //
@@ -36,6 +36,7 @@
 import { readdir, readFile, writeFile, access } from 'node:fs/promises';
 import { join, dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { isRecordDir, isMarkedRecord } from './doctrine-records.mjs';
 
 const SCRIPT_DIR = dirname(fileURLToPath(import.meta.url));
 const VAULT_ROOT = process.env.SOVEREIGN_VAULT_ROOT || resolve(SCRIPT_DIR, '..', '..');
@@ -89,28 +90,10 @@ function countLines(content) {
 // the audit trail about doctrine, so the number meant to show whether the layer
 // is growing ends up partly measuring how often it was audited.
 //
-// Two exclusion mechanisms, because records take two shapes:
-//   1. RECORD_DIRS, for whole folders of run artifacts. Ships empty. To add a
-//      record folder, put its folder name in the list, for example
-//      ['Audit Records']. Any path containing that folder name as a directory
-//      segment is excluded from the count.
-//   2. `doctrine: false` in frontmatter, for individual dated reports sitting
-//      beside real doctrine. An edit, never a move, so marking a file as a
-//      record does not cross the Permanent Floor.
+// RECORD_DIRS, isRecordDir and isMarkedRecord live in doctrine-records.mjs,
+// shared with doctrine-references.mjs so both count the same population.
 // Excluded files are reported per layer as `excluded`, so the exclusion stays
 // visible rather than silent.
-const RECORD_DIRS = [];
-
-function isRecordDir(p) {
-  const n = p.split('\\').join('/');
-  return RECORD_DIRS.some((d) => n.includes(`/${d}/`));
-}
-
-function isMarkedRecord(content) {
-  const m = content.replace(/\r\n/g, '\n').match(/^---\n([\s\S]*?)\n---/);
-  if (!m) return false;
-  return /^doctrine:\s*false\s*$/m.test(m[1]);
-}
 
 async function measureLayer(layer) {
   const all = await walkMd(layer.dir, layer.mode);
