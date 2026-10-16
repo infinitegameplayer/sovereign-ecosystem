@@ -6,6 +6,22 @@ Each entry corresponds to one publish cycle. For full implementation details, se
 
 ---
 
+## v3.17.0, 2026-10-16
+
+Three Verbs.
+
+**If you installed any version with this skill, read Coming from 1.x** in the Autonomous Improvement Session's `SKILL.md` before your next run. **If you ever ran T1-4, run T2-4 once:** T1-4 rewrote correct kebab-case memory links into links that match nothing, and it is retired.
+
+- **Three verbs replace the threshold.** Every menu item carries one: Acts lands its edit, Reports folds read-only findings into the board, Proposes waits for your yes. A verb moves only through a board answer you ratify. `auto_execute_threshold` and the autonomy levels retire.
+- **The board comes to you.** It renders in full as the closing message, under Done, Your decisions, Your hands and Plans to approve, and the run entry is its only stored copy. `decision-board.md` retires; the skill never removes it.
+- **The catalog splits by bundle** into `references/catalog/`, two bundles per run. Item scorecards, a `rulings` ledger with four dispositions, fix checks re-checked over three runs and a self-edit rule that shows its diff first.
+
+A level and a threshold took two numbers to say whether an item runs. A verb says it in one word.
+
+Full detail and the implementation spec: `.github/UPDATES/2026-10-16-v3.17.0-three-verbs.md`.
+
+---
+
 ## v3.16.0, 2026-10-15
 
 The Gate Learns the Container.

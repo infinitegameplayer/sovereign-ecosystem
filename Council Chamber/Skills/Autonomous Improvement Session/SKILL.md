@@ -1,23 +1,24 @@
 ---
 name: autonomous-improvement-session
-description: Use when you have extra session capacity and want to set your ecosystem improving without active attention. Sovereign-invoked only, never scheduled. For low-stakes, additive, vault-internal improvement work where no per-item approval is needed.
+description: Use when you have extra session capacity and want to set your ecosystem improving without active attention. Sovereign-invoked only, never scheduled. For low-stakes, additive, vault-internal improvement work where no per-item approval is needed. Every menu item carries one verb (Acts, Reports or Proposes) and the decision board arrives inline in the closing message.
 status: active
 tier: foundational
 contrast_tier: 1
 external_orientation: true
+version: 2.0
 ---
 
 # Autonomous Improvement Session
 
-**Purpose:** Run a set-and-forget session that improves your ecosystem without your active attention. Burns extra capacity on low-stakes, additive, vault-internal hygiene and improvement work. Tier 1 items land edits directly. Tier 2 items produce findings for later review. The skill is a recursive flywheel: a research rotation grows its own menu of improvement types every cycle, a threshold model lets its execution authority climb one earned step at a time, and a decision board lets the Sovereign ratify the climb on their own schedule. Menu growth is fast and wide. Execution authority is slow and earned.
+**Purpose:** Run a set-and-forget session that improves your ecosystem without your active attention, on extra capacity. The work is low-stakes, additive, vault-internal hygiene and improvement. Every menu item carries one verb. **Acts** items land their edits. **Reports** items fold their findings into the decision board. **Proposes** items surface for the Sovereign's yes and do not run. The skill is a recursive flywheel: the research rotation grows the menu every cycle, fast and wide, and execution authority moves slowly, one ratified verb at a time. Wide net for ideas. Narrow gate for action.
 
-**Trigger:** Sovereign-invoked when extra capacity exists. Examples: heading out, end of week with capacity to burn, end of session with remaining budget. Never scheduled, never auto-fired.
+**Trigger:** Sovereign-invoked when extra capacity exists: heading out, end of week with capacity to burn, end of session with budget left. Never scheduled, never auto-fired.
 
-**Inputs:** The log file at `Council Chamber/Logs/Autonomous Improvement Log.md` (state lives in its frontmatter). Optional invocation hint: number of items to run, a tier preference, a "full sweep" override.
+**Inputs:** The log at `Council Chamber/Logs/Autonomous Improvement Log.md` (state lives in its frontmatter). Optional hint: an item count, an item name or "full sweep".
 
-**Outputs:** One appended entry at the top of the log body and a regenerated decision board at `Council Chamber/Skills/Autonomous Improvement Session/decision-board.md`. Tier 1 items leave evidence as edits in their target files. Tier 2 items fold their findings into the decision board.
+**Outputs:** One run entry at the top of the log body, and the decision board rendered inline in the closing message. The board is stored once: inline, and in the run entry. There is no backing board file. Acts items leave their edits in their target files.
 
-**Output doctrine.** The decision board is the single decision surface. No skill-generated report files land in the Inbox. The Inbox is a routing queue for genuine inbound notes, not a place for this skill's output. The run-log entry plus the session record (a git commit when your vault is git-tracked) is the durable breadcrumb, lightweight by design and matching the Session Closeout slim. Write a standalone report only when a specific run genuinely warrants one.
+**Output doctrine.** No skill-generated report file lands in the Inbox. The Inbox is a routing queue for genuine inbound notes, not a place for this skill's output. The run entry plus the session record (a git commit when your vault is git-tracked) is the durable breadcrumb. Write a standalone report only when a specific run genuinely warrants one.
 
 ---
 
@@ -27,194 +28,186 @@ Load this skill's `CLAUDE.md` first. It holds the operating mindset, the posture
 
 This is an autonomous improvement and hygiene engine. The default verb is DO, not propose.
 
-If an action is additive, reversible, vault-internal and touches no deletion, no canonical-governance ratification, no voice and no outward surface, then execute it and record it in the run log. Do not ask. Routing an Inbox item to its container, archiving an implemented plan, fixing a reference to a retired artifact, adding a missing index entry, normalizing a slug: these are the work, not proposals. If something is broken or missing and the clean fix is obvious and safe, make the fix.
+If an action is additive, reversible, vault-internal and touches no deletion, no canonical-governance ratification, no voice and no outward surface, execute it and record it in the run log. Do not ask. Routing an Inbox item to its container, archiving an implemented plan, fixing a reference to a retired artifact, adding a missing index entry, normalizing a slug: these are the work, not proposals. If something is broken or missing and the clean fix is obvious and safe, make the fix.
 
-Surface to the Sovereign only two things. First, a genuine judgment fork. Concretely that means any one of: the routing heuristics conflict or none clearly applies; the situation is materially novel versus prior clean runs of this action; intent is ambiguous and the choice would set a pattern; or the action is reversible but high-impact (touches many files at once, or a high-inbound-reference artifact). Absent one of those, it is not a fork. Do the work. Second, anything that touches the Permanent Floor. These two reflexes are opposite and must not blur: safe work is act-then-show, Floor-class work is surface-then-wait. "Do not ask" governs the safe domain. It is never license to act on a Floor item, and the Floor's existence is never license to ask about safe work near it. A clean run leaves the Approvals bucket near empty, because the safe work is already done and sits in the Completed bucket for review.
+Surface to the Sovereign only two things. First, a genuine judgment fork: the routing heuristics conflict or none clearly applies; the situation is materially novel against prior clean runs; intent is ambiguous and the choice would set a pattern; or the action is reversible but high-impact (many files at once, or a high-inbound-reference artifact). Absent one of those, it is not a fork. Second, anything that touches the Permanent Floor. The two reflexes never blur: safe work is act-then-show, Floor-class work is surface-then-wait. "Do not ask" is never license to act on a Floor item, and the Floor's existence is never license to ask about safe work near it. A clean run leaves Your decisions near empty, because the safe work is already done and sits in Done.
 
-The Permanent Floor (see Constraints) is the guardrail and it is absolute. Everything above it that is safe is yours to execute. Autonomy within the guardrails is the entire point of this skill.
+The Permanent Floor (Constraints) is absolute. Everything safe above it is yours to execute: do it, then log it.
 
 ---
 
 ## When to Use
 
 - Sovereign says any of: "run autonomous improvement", "set and forget", "burn the rest of my capacity on improvement work", "I'm heading out, run improvement".
-- Sovereign has reviewed the prior run's decision board and wants to act on accepted candidates by weaving them into the menu.
-- Sovereign wants the skill to run a single specific menu item by name.
+- Sovereign has answered the prior run's board and wants the answers landed (the return session).
+- Sovereign wants a single menu item run by name.
 
 ---
 
-## Menu
+## The Menu and the Verbs
 
-The full Tier 1 and Tier 2 menu (per-item execution specs, eligibility rules and output artifacts) lives in [[Council Chamber/Skills/Autonomous Improvement Session/references/menu-catalog]]. Load it at Step 2 and keep it open through Tier 1 and Tier 2 execution.
+The menu lives in [[Council Chamber/Skills/Autonomous Improvement Session/references/catalog/index]], one file per bundle so a worker loads only its own. The index is the one list of item IDs. Open the files of the selected items at Step 2, never the whole catalog.
 
-**Tier 1 (autonomous, edits land directly):** T1-1 wikilink integrity re-sweep, T1-2 index regeneration, T1-4 memory file slug variant normalization, T1-5 Codices Index completeness sweep, T1-6 superseded-artifact and dead-section sweep, T1-7 runtime log rotation, T1-8 skill mandatory-sections completeness sweep.
+- **Acts.** The orchestrator lands the edit, one item at a time, and logs it. Every Tier 1 item, plus T2-1 (Inbox routing) and T2-9 (implemented-plan archival).
+- **Reports.** A read-only scan whose findings fold into the board. The Tier 2 default.
+- **Proposes.** The item does not run; it surfaces on the board for the Sovereign's yes. The entry verb for anything voice-bound, structural or outward-facing. No starter item carries it.
 
-**Tier 2 (read-only scans, findings to the decision board):** T2-1 Inbox triage, T2-2 stale draft surface, T2-3 external link rot, T2-4 memory cross-reference health, T2-5 codex inbound density, T2-6 skill cross-reference health, T2-7 MEMORY.md compression candidates, T2-8 breadcrumb propagation and stale-reference sweep, T2-9 implemented-plan archival candidate sweep, T2-10 status vocabulary conformance, T2-11 tag consistency hygiene, T2-12 hook coverage audit, T2-13 scripts-package dependency and CVE audit, T2-14 orphaned and superseded image sweep, T2-15 skill frontmatter conformance sweep, T2-16 skill status-to-usage drift audit, T2-17 contraction enforcement sweep, T2-18 project-memory lifecycle staleness sweep, T2-19 Term Registry placeholder-resolution scan, T2-20 security audit staleness sentinel, T2-21 MCP server load-vs-use gap audit, T2-22 explicit model-set compliance audit, T2-23 review-date staleness sentinel, T2-24 index-file dead-link audit, T2-25 settings file allow-list integrity audit, T2-26 undocumented required-env-key audit, T2-27 skill disambiguation and trigger-collision scan, T2-28 SKILL.md progressive-disclosure overgrowth scan.
+An item's verb sits in its `**Verb:**` line. Where the line is absent the tier default holds: Tier 1 Acts, Tier 2 Reports. A verb moves only through a ratified board answer, never by the skill's own hand (The Return Session, below). A verb line that does not read as one of the three words does not run: it lands in Your decisions until it is fixed.
 
-**Optional extension: external-surface triage.** If your ecosystem maintains external repositories with issue tracking, add a Step 0 that queries open routine or health issues, clusters by type and priority, routes each into safe-now, fix-via-PR and judgment lanes, and closes consumed issues with a consumption comment. The triage reads and routes. It never pushes to an external main branch. Close a monitor-filed issue only when the condition that filed it has cleared, with evidence in the closing comment. A finding that is still true stays open, and the monitor comments on it rather than filing again. This extension stays off until you run external repos.
+An Acts item still parks its judgment forks. It does the safe part, puts the fork in Your decisions with what the Sovereign needs to rule and carries on with the rest.
+
+**Verbs are not Trust Levels.** A verb is scoped to one menu item. A Trust Level is scoped to an agent across the whole ecosystem, under [[Council Chamber/Governance/Constitution - Sovereign Ecosystem]] Article IV Section 4. The Constitution names the Permanent Floor that never climbs and the per-class climb gated on track record; this skill is one operational expression of both.
+
+**Bundles.** Two per run: any bundle that has never run first, then the oldest date in `bundle_state`. With six starter bundles each comes round every three runs. A bundle's items run when their bundle runs and carry no window of their own. Standalone items keep their own eligibility and sit outside every bundle.
+
+**The site lane keeps its own three words: propose, auto-PR, auto-merge.** It applies only when your ecosystem maintains external repos. Every site-fix class enters at propose. The build-verified pull request is the floor of every rung; only the merge click climbs away. Spec and class registry: [[Council Chamber/Skills/Autonomous Improvement Session/references/catalog/site-lane]].
 
 ---
-
-## The Two Speeds
-
-The flywheel runs at two speeds on purpose. Menu growth is fast and wide: the research rotation casts a wide net for categories and mechanisms of improvement, and the menu of things the skill knows how to do grows every cycle. Execution authority is slow and earned: v1 keeps today's line, and the line climbs item by item only through ratified decisions. Wide net for ideas. Narrow gate for action. The gate widens only with proof.
-
-## The Threshold Model
-
-Every menu item and every discovered action carries an `autonomy` level. The level governs execution authority. It is distinct from the tier, which governs output shape: Tier 1 lands edits, Tier 2 writes findings.
-
-**These levels are not Trust Levels, and the two scales must never be read across.** An item carries an autonomy Level 1 to 3, scoped to that one menu item. An agent carries a Trust Level 0 to 4 under [[Council Chamber/Governance/Constitution - Sovereign Ecosystem]] Article IV Section 4 (Trust Tiers), scoped to the whole ecosystem. The numbers overlap and mean different things, and they run in opposite directions: autonomy Level 3 is the most restricted item, Trust Level 4 is the most trusted agent.
-
-- **Level 1, fully autonomous.** Additive, reversible, vault-internal, zero judgment. The agent does it and logs it. Every starter menu item is Level 1.
-- **Level 2, autonomous with parked questions.** The agent acts on the safe part and parks any genuine judgment fork as a question on the decision board.
-- **Level 3, Sovereign-judgment-required.** Structural, voice-bound, outward-facing or approval-gated. Always parked. Never auto-executed.
-
-A skill-level `auto_execute_threshold` lives in the log frontmatter and defines the line. It starts at `1`. At or below the line the agent executes. Above the line it parks to the decision board. The threshold and per-item levels move only through ratified decisions logged in the run history. Nothing raises its own autonomy.
-
-**v1 posture:** threshold `1`, every starter item Level 1. The autonomy field starts doing real work as the menu grows and new items arrive carrying judgment forks or structural reach.
 
 ## The Decision Board
 
-One review surface. The closing output is the board, and a durable backing file at `Council Chamber/Skills/Autonomous Improvement Session/decision-board.md` holds the same content for continuity. The board is regenerated each run with the current run's open decisions. Resolved decisions log to the Autonomous Improvement Log, not the board.
+The board is delivered inline, in full, as the run's closing message. The conversation is the surface and the run entry is the record. There is no third copy. Resolved decisions log to the run entry.
 
-Four buckets:
+Four buckets, numbered the same on the board and in the run entry. Every heading renders, in order, even when empty ("None this run.").
 
-1. **Completed this run (for review).** What the skill did autonomously this run, each line reversible via git or trivially undone. Routed Inbox items, archived plans, applied hygiene fixes. This is a record to skim, not a decision. As autonomy widens, this bucket grows and the next one shrinks. That is the flywheel working.
-2. **Approvals and questions.** Genuine judgment forks the agent was unsure of, anything that needed intent before acting. The Sovereign answers with a decision plus a forward rule. A clean run leaves this bucket near empty. Never a bare recommendation and never a bare open question.
+1. **Done.** What the run did on its own, each line reversible through git. A record to skim, not a decision. As autonomy widens this bucket grows and Your decisions shrinks. That is the flywheel working.
+2. **Your decisions.** Genuine judgment forks, anything touching the Floor, Proposes items that came due and the menu candidates, skill refinements and verb moves you recommend. The Sovereign accepts, declines or reshapes each. Near empty on a clean run.
+3. **Your hands.** Only what the Sovereign alone can physically do: a connector toggle, a payment, a credential, a sign-in. Before an item lands here, ask whether the agent can do it on the Sovereign's word. If so, it is a decision in bucket 2 ("say go and I will do it"). A pull request merge is a decision too: the Sovereign approves it in bucket 2 and the agent merges it.
+4. **Plans to approve.** Anything bigger than one session, or any governance, memory or CLAUDE.md class change, as a cliff-note asking "approve plan creation?". Only plans you recommend, each with the reason.
 
-   **Blast radius sets the explanation budget.** Do not size an explanation by guessing what the Sovereign already knows. Size it to what the change can break, which is a property of the diff.
+Patterns Noticed lives in the run entry only, never on the board.
 
-   - **Routine and reversible** (an index line, a slug, a routed note, a dead reference): one line. Batch them. Over-explaining safe work teaches the Sovereign to skim, and skimming waves through the one entry that mattered.
-   - **Judgment** (a pattern-setting choice, a nuanced routing call, an adoption): one paragraph. The situation, what happens if nothing is done, the recommendation.
-   - **Consequential** (a ceiling, a credential, an outward send path, the Permanent Floor, a governance or CLAUDE.md class change, or this skill's own steps): the full ceremony, every time. The stake in the Sovereign's terms and never in machine terms. Three real options with doing nothing costed at its true price. The recommendation and what it gives up. The tell, meaning how you would know if this was wrong and what you would watch. Reversibility, meaning whether it can be undone and how fast.
+**A Your-decisions entry exists because the decision is genuinely the Sovereign's, or because it touches the Floor.** A technical call the agent is competent to make belongs in Done, already done, in one line. Every Your-decisions and Plans entry carries at least the situation, the recommended move and the main alternative weighed (the [[Council Chamber/Protocols/Governance/Three Solutions Rule]] floor), and a line `Verified: <check>, <result>` naming the live check its claim passed (Step 7). A claim the session cannot check says so and names the instrument that could. Done lines and Your-hands items carry none.
 
-   "I do not understand this" is a first-class answer and never a failure. The decision waits while the AI interface explains the change in plain terms, ideally predict-then-reveal. A gate the Sovereign cannot operate is not a gate.
-3. **New menu candidates and autonomy moves.** Improvement types the research rotation and opportunistic-capture layers surfaced, plus any proposed autonomy-level move. The Sovereign accepts, declines or reshapes each. Accepted candidates get woven into the menu in the return session.
-4. **Proposed Pending Plans.** Anything bigger than one session of work, or any governance, memory or CLAUDE.md class change. The agent drafts a cliff-note summary, not a vague question. The board entry is "approve plan creation?". Only surface plans you recommend creating. Every item in this bucket carries a positive recommendation and the reason for it.
+**Blast radius sets the explanation budget.** Size an explanation to what the change can break, which is a property of the diff, never a guess about what the Sovereign already knows.
 
-**Your hands.** Before an item goes to a hands list, ask whether the agent can do it on the Sovereign's word. If so it is a decision, not a hands item. The hands list holds only what the Sovereign alone can physically do. Keeping the merge click on external pull requests is an optional posture, not a default.
+- **Routine and reversible** (an index line, a slug, a routed note, a dead reference): one line. Batch them. Over-explaining safe work teaches the Sovereign to skim, and skimming waves through the one entry that mattered.
+- **Judgment** (a pattern-setting choice, a nuanced routing call, an adoption): one paragraph. The situation, what doing nothing costs, the recommendation.
+- **Consequential** (a ceiling, a credential, an outward send path, the Permanent Floor, a governance or CLAUDE.md class change, or this skill's own steps): the full ceremony, every time. The stake in the Sovereign's terms and never in machine terms. Three real options with doing nothing costed at its true price. The recommendation and what it gives up. The tell: how you would know this was wrong and what you would watch. Reversibility: whether it can be undone and how fast.
 
-**Deliver the whole board in the closing message.** Every decision and plan entry ends with `Verified: <live check>, <result>`. The test is answerability: a reader who opens no file can answer every entry from the message alone.
+"I do not understand this" is a first-class answer and never a failure. The decision waits while the AI interface explains the change in plain terms, ideally predict-then-reveal. A gate the Sovereign cannot operate is not a gate.
 
 ---
 
 ## Steps
 
+### Step 0: Due scan (every run, before the menu, outside the budget)
+
+Read each due-dated client and surface only what is due, with the date and the recommended action. Clients: the security audit at 25 or more days since its last run (T2-20), and every active file carrying `next_review` once the date passes. Full spec: [[Council Chamber/Skills/Autonomous Improvement Session/references/catalog/sentinels]]. This step never runs the maintenance it surfaces. A new client is one line here and one entry there, no new machinery.
+
+**Optional extension: external-surface triage.** If your ecosystem maintains external repositories with issue tracking, add a triage here that queries open routine or health issues, clusters them by type and priority and routes each into safe-now, fix-via-PR and judgment lanes. It reads and routes. It never pushes to an external main branch. Close a monitor-filed issue only when the condition that filed it has cleared, with the evidence in the closing comment. A finding still true stays open, and the monitor comments on it rather than filing again. This extension stays off until you run external repos.
+
 ### Step 1: Load state
 
-Read `Council Chamber/Logs/Autonomous Improvement Log.md`. Parse the frontmatter: `menu_state` map (item ID to last-run date), `run_counter` integer, `auto_execute_threshold` integer, `research_state` map (category ID to last-researched date) and `priority_flags` list. If the log does not exist, halt and surface: "Log file missing. Create the seed log per the SKILL.md and retry."
+Read `Council Chamber/Logs/Autonomous Improvement Log.md`. Parse the frontmatter: `run_counter`, `last_run`, `research_state`, `bundle_state`, `priority_flags`, the `menu_state` scorecards and the item maps (`runtime_purge_surfaced`, `fix_checks`, `rulings`). If the log does not exist, halt and say: "Log file missing. Create the seed log per the SKILL.md and retry." A malformed log halts the run too: state integrity is foundational. When the log body passes about 1200 lines, apply the retention rule (Log Structure) now, before the run writes. Then re-check the fix checks the last three runs recorded (the Learning Loop) and mark each fix held, regressed, reverted or unverifiable; the result goes in the run entry's Fix re-check line.
 
-### Step 2: Compute eligibility
+### Step 2: Select and announce
 
-Load [[Council Chamber/Skills/Autonomous Improvement Session/references/menu-catalog]] now. For each menu item (T1-* and T2-*), apply its eligibility rule against the state. Build an eligible-items list. If the Sovereign passed an item name, narrow to that item only.
+Build the due list from the catalog and the log:
 
-**Three-tier eligibility (resolves the cooldown problem):**
-- **Condition-based, no window.** Cheap hygiene and routing that runs whenever there is something to do: T2-1 Inbox triage, T2-9 plan archival, T1-2 index regeneration, T1-5 Codices Index completeness, T1-6 superseded sweep, T2-20 security sentinel. Eligible when the target is non-empty or the condition fires, regardless of last-run date.
-- **Short window, 7 to 14 days.** Cheap scans with moderate drift: T1-1 wikilink, T1-4 memory slug, T2-8 breadcrumb.
-- **Long window, 30 to 90 days.** Expensive scans with slow drift: T2-3 link rot, T2-2, T2-4, T2-5, T2-6, T2-7, T2-13. The window matches the cost and the drift speed.
+- **Condition-based items** run whenever their target is non-empty, never by timer.
+- **Windowed standalone items** run once their window has passed since `last_run`.
+- **Flagged items.** Anything in `priority_flags` is due regardless of window and lifts to the top. Consume the flag at Step 8 when the item delivers.
+- **The two bundles** are the never-run ones first, then the oldest in `bundle_state`.
 
-A fixed day-window is the wrong throttle for cheap hygiene. Condition-based items run every session that has something to do.
+Rank the standalone items (flagged first, then furthest past their window) and take them up to a budget of 8, plus the two bundles. An item name from the Sovereign is the plan. A count honors the ranked list. "Full sweep" runs every due item and every bundle. A Proposes item does not run: it goes to Your decisions as "run it?". Open the catalog files of the selected items only.
 
-Any item listed in the log frontmatter `priority_flags` is eligible this run regardless of its day-window or last-run date. Consume the flag when the item runs and delivers. A flag the Sovereign wants standing is restored manually.
+Announce in one paragraph: "Running N items. Acts: [list]. Reports: [list]. Bundles: [ids]." It is the only Sovereign-facing message until close.
 
-### Step 3: Select items by priority
+### Step 3: Acts items, in sequence
 
-No single run executes everything. Rank eligible items by priority, then select up to a budget of 8 per run. Priority is a simple score, highest first: Sovereign-flagged items (`priority_flags`) lift to the top, research-surfaced high-value items lift next, staleness lifts an item the further it has sat past its window.
+Run each Acts item per its catalog spec, one at a time on the orchestrator, so no two edits collide. A bundle's Acts items (T1-8 in B1) run here too. An editor worker, when one is warranted, runs alone with `model` set. When a genuine judgment fork appears, do the safe part, park the fork to Your decisions with what the Sovereign needs to rule and continue with the rest. For each edit, note a fix check for Step 8: the file, and the cheapest check that fails if the fix is undone (the broken text is absent, or the corrected text is present). The check has to fail on the pre-fix file, or the next re-check cannot tell whether the fix held.
 
-If the Sovereign passed an item count, honor it against the ranked list. If they passed "full sweep", run every eligible item with no cap. Selection respects the threshold: only items at or below `auto_execute_threshold` execute. Eligible items above the line surface on the decision board instead.
+### Step 4: Reports items, in parallel
 
-### Step 4: Announce the plan
+Dispatch one read-only worker per due bundle and one per standalone Reports item or small group, each with its catalog file as the brief and the IDs of the Reports items it runs on one line, `Items: T2-4, T2-7`. The brief says that any Acts item in the file belongs to the orchestrator and is skipped. A read-only worker holds no write tools. Every worker prompt says: run single-context, do not spawn subagents. A worker that fans out returns narration about its children instead of findings, and per-item results get lost in the hop.
 
-Output a one-paragraph plan: "Running N items this session. Tier 1: [list]. Tier 2: [list]. Estimated wall time: [rough estimate]." This is the only announcement until close.
-
-### Step 5: Execute Tier 1 items
-
-For each Tier 1 item, first check its autonomy level against `auto_execute_threshold`:
-- **At or below the line:** dispatch execution. Tier 1 items run sequentially to avoid file-edit conflicts.
-- **Level 2:** execute the safe part. When a genuine judgment fork appears, park it to decision board bucket 2 with the context needed to rule, then continue.
-- **Above the line:** do not execute. Park the whole item to bucket 2.
-
-After each item completes, do a layer-1 opportunistic capture (Step 6), then move to the next item.
-
-### Step 6: Layer 1 opportunistic capture (per item)
-
-Immediately after each Tier 1 item completes, ask: "Did running this item surface any other opportunity types worth adding to the menu?" Capture findings as draft candidate entries. Findings flow into Step 9 synthesis.
-
-### Step 7: Execute Tier 2 items
-
-Dispatch all Tier 2 items in parallel as Sonnet subagents (read-only scans are safely parallel). Each returns a structured finding. Tier 2 items are Level 1: producing a read-only finding is fully autonomous. When a finding needs a ruling the return session should act on, mirror it as a board bucket-2 entry.
-
-**Every scan returns, per item, a count, the instrument used and a reason if it did not run.** A quiet monitor is a claim of health. Read its run log for skipped checks and treat a skipped check as a finding.
+**Every scan returns, per item, a count, the instrument used and a reason if it did not run.** A quiet monitor is a claim of health. Read its run log for skipped checks and treat a skipped check as a finding. A worker that stops at its turn limit before returning every item is resumed once; an item still missing after that is logged as not run under Errors and blockers. Every finding carries its path, its class and the offending line verbatim, so it can be matched against the ledger of rulings. A finding that needs a Sovereign ruling becomes a Your-decisions entry, never a decision buried in a report.
 
 **Databases and send tools.** A run reads databases through a read-only connection only. It never applies migrations and never calls any scheduler or send tool that publishes.
 
-### Step 8: Research rotation (every run)
+### Step 5: Research rotation
 
-The research rotation is the engine of menu growth. It rotates through the research categories registered in the menu catalog (see the Research Rotation Categories section there). Research one category per run. Rank what the worker returns with live defects first, duplicates second and new items last. Fix safe defects now rather than parking them. Read `research_state`, pick the least-recently-researched category and dispatch one Sonnet worker for it. It returns a self-ranked top-5 candidate list with a one-line "why this beat the rest." Candidates flow into Step 9 and surface on the decision board's bucket 3. Update `research_state` with today's date for each researched category.
+One category per run, the least recently researched in `research_state`. One Sonnet worker returns a self-ranked top 5, pointed in order at a live defect in the category (with the file and the check that shows it), a duplicate between existing menu items and only then a new item, which has to beat both. The orchestrator fixes each Acts-safe live defect now, in this run, and logs it in Done with a fix check; the rest go to Your decisions. Set `research_state` to today. The run entry records the yield and the fix rate. Categories and the ground-truth gate: [[Council Chamber/Skills/Autonomous Improvement Session/references/catalog/research]].
 
-The starting registry holds nine categories (R1 through R9; see the menu catalog Research Rotation Categories section), so one is researched per run.
+### Step 6: End-of-run reflection
 
-**Ground-truth gate on state-claims.** Any candidate that asserts a claim about the current state of an existing artifact gets verified against live state before it reaches the board. Run the cheapest live check (an `ls`, a Grep, a scoped Read) at the moment of surfacing. A candidate whose premise fails verification never reaches the Sovereign. A forward proposal to build something absent needs no artifact check. A claim that a present artifact is absent or stale is a factual assertion and must be ground-truthed. The check belongs to the orchestrator, since a Sonnet research worker cannot be trusted to ground-truth its own assertion.
+One pass after Steps 3 to 5. Ask two questions of everything the run touched. Did running these items surface an improvement type worth adding to the menu? Did running the skill surface a defect, friction or gap in the skill itself (a worker timed out, eligibility missed an item, a spec sent a worker to the wrong output, the run entry wanted a field)? Sort the answers into menu candidates, each with a proposed verb and bundle, and skill refinements, each naming the friction observed and the proposed SKILL.md or catalog change. Both go to Your decisions, and only the ones you recommend.
 
-### Step 8b: Post-run skill self-refinement
+### Step 7: Synthesize the board
 
-After execution completes, ask: "Did running this skill surface any defects, friction or improvements in the skill itself?" Capture as Layer 4 candidates. These propose modifications to this SKILL.md, distinct from menu-item candidates. Findings flow into Step 9 under their own category.
+Aggregate the due scan, the parked forks, the Reports findings, the research candidates and the reflection into buckets 2 to 4; Done comes from the run's own work. A finding the Sovereign already ruled on is dropped and counted in the run entry, never raised again. Each Your-decisions entry names what was hit, the safe action already taken, the decision needed and a recommended forward rule. Apply the recommendation bar: a candidate you would not recommend goes to the run entry's Patterns Noticed as one line, or nowhere. An obvious placement gets one line (`Candidate: [name]. Recommended: [verb], [bundle]. Rationale: [one sentence]. Accept?`); an uncertain one gets three options, the recommendation and the tradeoff. Before an item goes to Your hands, ask whether the agent can do it on the Sovereign's word; if so it is a Your-decisions entry. A Plans cliff-note carries the problem, the scope, the rough phase shape and "approve plan creation?".
 
-### Step 9: Synthesize the decision board
+**The ground-truth gate runs here, on every entry, and the entry shows it.** A claim about the current state of an existing artifact is checked live with the cheapest definitive instrument (an `ls`, a Grep, a scoped Read) before it reaches the board, and every Your-decisions and Plans entry carries the check and its result as `Verified: <check>, <result>`. A forward proposal to build something absent needs no artifact check. A recommendation is also checked against work already underway (the owning skill, plan or project) and framed as layering onto it, superseding it or filling a gap in it. A claim that a present artifact is absent or stale is a factual assertion and is ground-truthed. The check belongs to the orchestrator, because a worker cannot ground-truth its own assertion. A Plans cliff-note gets the same check, because the Sovereign approves plan creation on its premise, and a false premise spends a real approval and a whole later session on work that did not need doing.
 
-Aggregate the opportunistic capture, the research rotation, the self-refinement findings and every fork parked during execution into the four-bucket board. Three Solutions throughout follows [[Council Chamber/Protocols/Governance/Three Solutions Rule]]. Apply the recommendation bar: if you would not recommend a candidate, route it to Patterns Noticed as a one-liner rather than a decision. Every recommended candidate carries a proposed tier and a proposed autonomy level.
+### Step 8: Write the log entry
 
-**Ground-truth gate on Pending Plan cliff-notes.** The Sovereign approves plan creation from the premise stated in the cliff-note. If the claim the cliff-note rests on is a state-claim about an existing artifact, verify it against live state before writing it to the board. A false premise spends a real approval and an entire later session on work that did not need doing. One `ls` or Grep at this gate can kill the candidate cleanly.
+Append the run entry at the top of the log body in the shape set out in Log Structure; its board sections carry the board's bucket numbers. Update the frontmatter. For every item that ran, write its scorecard: `last_run` today, `runs` plus one, `findings` plus what it surfaced, `empty_streak` reset to 0 on a finding or plus one on none. (`accepted`, `declined` and `noise` are written in the return session from the Sovereign's answers.) Append this run's fix checks and drop entries older than the last three runs. Set `bundle_state` to today for each bundle run and `research_state` for each category, add one to `run_counter`, set `last_run` and remove consumed `priority_flags`. An item with three empty runs in a row, or whose rulings run more than half noise, goes to Your decisions as a retire or merge proposal.
 
-### Step 10: Write log entry and decision board, then close
+### Step 9: Commit, then present the board
 
-Append a run entry at the top of the log body. Update the frontmatter: set new last-run dates in `menu_state` for items that ran, set new last-run dates in `research_state` for each category researched, increment `run_counter`, set `last_run`. Leave `auto_execute_threshold` unchanged unless a return-session ratified climb moved it.
+The tool calls come first, so the board is the last thing the Sovereign sees.
 
-Write the four-bucket board to `decision-board.md`, replacing the prior run's open decisions. Present the same board as the closing output, whole, in the closing message. Every decision and plan entry ends with `Verified: <live check>, <result>`.
-
-Closing line: "Autonomous Improvement Session complete. [N] items ran. Decision board: [A] approvals and questions, [B] menu candidates, [C] proposed plans. Log and board updated."
+1. **Commit by path, twice when Acts items edited files.** `git add` names each file the run touched, new files by name, and `git commit` takes the same paths: the edited files first, then write that commit into this run's fix checks and commit the log with the rest. A fix check left with no commit reads unverifiable at the next re-check. Never `git add -A` and never a path the run did not touch: sibling sessions may hold uncommitted work in the same tree. A run never edits its own skill files (the Floor); that is the return session's work.
+2. **Check the board before sending it.** Four headings in order (Done, Your decisions, Your hands, Plans to approve), an empty one saying "None this run.", and a Verified line on every Your-decisions and Plans entry. A Stop hook in your AI interface can hold this shape for you if you choose to add one. Each Your-decisions and Plans entry is a numbered line, its options sit under it as bullets and never as numbers, and it carries one Verified line. A Done line reads `[Item ID]: [outcome]`. A Your-hands item names the action, why only those hands can do it and the fastest route.
+3. **Render the whole board as the closing message.** Every entry in full with its recommendation and its Verified line, never a count, a digest or a link. The test: a Sovereign who opens no file can read and answer the whole board from the message alone. Pointing the Sovereign at a file in place of the board is the failure this step exists to prevent. A run that halted before its board says "No board this run" instead.
+4. **End the message** with one line after the full board: "Log updated. Answer any item inline and I will run the return session."
 
 ---
 
-## The Climb and Return-Session Flow (Sovereign-triggered)
+## The Return Session and the Verb Moves (Sovereign-triggered)
 
-The Sovereign's board answers encode forward. This is the learning loop. The skill never modifies its own SKILL.md, menu or autonomy posture autonomously. Every move below is an explicit, Sovereign-triggered edit cycle.
+The Sovereign's board answers encode forward. This is the learning loop. The skill never modifies its own SKILL.md, catalog, verbs or posture on its own (the Permanent Floor). Every move below is an explicit, Sovereign-triggered edit cycle.
 
-**Bucket 2: Approvals and questions (implemented immediately).** Apply the decision to the parked work. If the answer carries a forward rule, encode it. A rule that turns a recurring judgment fork into a deterministic step is the recursion working, and it can move an item from Level 3 to Level 2, or Level 2 to Level 1.
+**The self-edit rule.** An edit to this skill's own files (SKILL.md, its CLAUDE.md, anything under `references/`, the catalog included) follows three rules, every time. Render the diff of the skill files inline, in full, before committing. Commit the skill's files by path in a commit of their own, titled as a self-edit. Never run a procedure from a section marked proposed (a heading reading Proposed, an item whose verb is Proposes): the Sovereign's yes moves the verb first, and the procedure runs from its ratified place after that.
 
-**Bucket 3: Accepted menu candidate (woven in).** Add the new menu item with execution spec, eligibility rule, output artifact and its assigned `autonomy` level, under the correct tier. Seed `menu_state` with today's date (or null for immediate eligibility). Document the promotion in the run entry.
+**Scorecards first.** For every finding the Sovereign answered, update its item's scorecard: `accepted` plus one when taken, `declined` plus one when turned down on its merits, `noise` plus one when called not worth surfacing. Then add each finding not taken to `rulings` in the log frontmatter, so it never returns: its path, item, the offending line, where it was ruled and one disposition. `accepted-as-is` (right as it stands) and `false-positive` (noise) suppress for good. `rule-needs-fixing` suppresses the finding and returns as a skill refinement on the board until the item's rule changes. `deferred` carries an `until` date and returns after it, so "not now" never silences a defect for good.
 
-**Accepted skill self-refinement.** Edit this SKILL.md to apply it. Document it in the Refinements section with date and source-run reference.
+The answers run at four tempos: a ruled fork lands now, an accepted candidate is woven in, a Your-hands item is done or verified and an approved plan is drafted to run later.
 
-**Bucket 4: Approved Pending Plan (drafted and scheduled).** On a "approve plan creation?", draft the full Pending Plan per [[Council Chamber/Protocols/Planning/Pending Plan Implementation Protocol]], using the board cliff-note as the seed. The plan starts at `status: proposed`. Plan creation is authorized; execution of the drafted plan is not, and runs in its own dedicated session later.
+**Your decisions: a ruled fork (implemented now).** Apply the decision to the parked work. A "say go and I will do it" entry answered with go is done now. If the answer carries a forward rule, encode it in the catalog spec it governs. A rule that turns a recurring judgment fork into a deterministic step is the recursion working, and it can move a verb (below). Record the decision in the run entry where the fork was parked.
 
-Ground-truth the premise before writing it as fact. The plan's Context premise is the claim it rests on. The Sovereign approved on the cliff-note, but the full plan re-states the premise as established fact that a later execution session trusts without re-checking. If the premise is a state-claim about an existing artifact, verify it against live state at drafting time. A premise that fails here means the candidate is dead. Report that to the Sovereign rather than drafting a plan around a false claim.
+**Your decisions: an accepted menu candidate (woven in).** Add the item to the catalog file it belongs in (its bundle file, or `standalone.md` when it runs on its own window) with execution spec, eligibility rule, output artifact and a `**Verb:**` line, and add its line to the catalog index. Seed it in `menu_state` as `null`, meaning never run, so a weave date never reads as a run. Record the promotion in the run entry where it surfaced.
 
-### Autonomy-Level Move (the climb)
+**Your decisions: an accepted skill refinement.** Edit SKILL.md, the CLAUDE.md, a reference or the catalog under the self-edit rule. Note it in Refinements with the date and source run.
 
-An item's `autonomy` level lowers, or the skill-level `auto_execute_threshold` rises, only through a ratified decision. The threshold widens from proven workflows, never from projection.
+**Your hands (done or verified).** When the Sovereign says it is done, verify it landed with the instrument that can see it and record the result. "The Sovereign said so" is not the check. When the Sovereign says go instead, the agent does it. An item still open at the session's end gets one line under the run entry, `Still open: [item]`, so the next session resurfaces it.
 
-Every climb passes the **Flywheel Three Laws coherence check** before it lands: does this move serve Smooth Transition, Easier Rotation and Increased Output? These are the mechanical laws of the flywheel, canonical in [[Council Chamber/Governance/Flywheel Integration Standard]], and they are the correct test for a change to a flywheel mechanism. The skill is itself a flywheel, so a climb is judged by whether it smooths a handoff, eases the next rotation and raises real output. The safety guard sits in the Permanent Floor, not here: a move that would touch an outward surface, delete, move a canonical file or self-edit breaches the floor and fails regardless of how high the threshold has climbed. The Flywheel laws test the climb's value. The Permanent Floor tests its safety.
+**Plans to approve: an approved plan (drafted, run later).** Draft the full Pending Plan per [[Council Chamber/Protocols/Planning/Pending Plan Implementation Protocol]], seeded from the cliff-note, at `status: proposed`. Creation is authorized; execution runs in its own session later. Ground-truth the premise at drafting time, even when the cliff-note passed the Step 7 gate: days may have passed, and this is the last gate before the plan calcifies. A premise that fails here kills the candidate; report that rather than drafting a plan around a false claim. Note the spawned plan in the run entry and link it.
 
+### A verb move
+
+An item moves from Proposes to Reports or Acts, or a site-lane class from propose to auto-PR to auto-merge, only through a ratified decision. Authority widens from proven workflows, never from projection. To execute a move, edit the item's `**Verb:**` line (or the class's rung in the site-lane file) and record the item, the old and new verb, the forward rule and the coherence check result in the run entry.
+
+Every move passes the **Flywheel Three Laws coherence check**: does it serve Smooth Transition, Easier Rotation and Increased Output? These are the mechanical laws of the flywheel, canonical in [[Council Chamber/Governance/Flywheel Integration Standard]]. The Flywheel laws test a move's value. The Permanent Floor tests its safety: a move that would touch an outward surface, delete, move a canonical file or self-edit fails regardless. Governance, memory and CLAUDE.md changes never move into execution by this route. They go to Plans to approve.
 
 ### The Learning Loop
 
 - Keep a ledger of rulings in the run log. A finding already ruled on never returns to the board.
 - A scan that cannot be shown to catch a planted defect reports "unverified", not "clean".
 - At each run start, re-check the previous run's fixes. Mark each held, regressed, reverted or unverifiable.
-- A regressed fix is re-landed. A reverted fix goes to the Sovereign, because a revert is a ruling.
+- A regressed fix is re-landed. A reverted fix goes to the Sovereign, because a revert is a ruling. An unverifiable one goes to Your decisions with its reason (a vacuous check, a file moved or gone, a commit no longer in history).
 
 ---
 
-## Future Direction: Scheduling (not v1)
+## Coming from 1.x
 
-v1 is Sovereign-invoked only. Scheduling is a future direction, gated on a track record of clean review-and-climb cycles, never a date. The likely shape, when it arrives, is several runs per week, each with a different priority weighting and a different subset of research categories. The threshold model and the priority score already carry the machinery; scheduling just sets the cadence.
+1.x is the threshold model: every template release through v3.16.0. If your vault ran it, your log and board still work. Here is what each piece means now.
+
+- **`auto_execute_threshold` and the autonomy levels.** Retired. The verb is the authority now. Map each item once, in a return session, by what it did under your threshold. An item at or below the threshold ran: it takes its tier default (Tier 1 Acts, Tier 2 Reports), and a Level 2 item's habit of parking its forks is now what every Acts item does. An item above the threshold was parked whole: it becomes Proposes. With the starting threshold of 1, Level 1 items keep running and Level 2 and Level 3 items become Proposes until you ratify a move. Write the mapping in a run entry. The skill ignores the threshold line if it stays, so removing it is housekeeping rather than a requirement.
+- **`decision-board.md`.** Nothing writes to it any more. Carry its open decisions into your next return session or answer them there. Keep the file as history or archive it yourself. The skill never removes it, because deletion is the Permanent Floor.
+- **The bucket names.** Completed this run is now Done. Approvals and questions is now Your decisions. New menu candidates and autonomy moves fold into Your decisions. Proposed Pending Plans is now Plans to approve. The hands list is now its own heading, Your hands. Old run entries keep their old names: they are history.
+- **`references/menu-catalog.md`.** The catalog now lives in `references/catalog/`, one file per bundle, and `menu-catalog.md` stays as a pointer. If you added your own items to it, move each section into the bundle file that reads the same surface and add its line to the catalog index.
+- **`menu_state`.** A bare date still reads as `last_run`. Scorecards fill in from the next run. Add an empty `bundle_state` map; every bundle reads as never run and the first two go first.
+- **T1-4.** Retired. Its premise was inverted for the current memory convention. If you ran it, run T2-4 once to find any link it rewrote.
 
 ---
 
 ## Log Structure
 
-Single file at `Council Chamber/Logs/Autonomous Improvement Log.md`.
+Single file at `Council Chamber/Logs/Autonomous Improvement Log.md`. Its frontmatter holds state; its body holds run entries, newest first.
+
+**Retention rule.** At session open, when the log body exceeds about 1200 lines, compress the oldest full run entries into one-line summaries (run number, date, items executed, board outcome) until the body sits under 1000 lines, keeping the newest 8 runs in full. Frontmatter state is never compressed. The compression runs as part of the session; it needs no separate approval. The log that watches other logs' rotation carries its own window.
 
 **Frontmatter:**
 
@@ -223,37 +216,63 @@ Single file at `Council Chamber/Logs/Autonomous Improvement Log.md`.
 status: active
 run_counter: N
 last_run: YYYY-MM-DD
-auto_execute_threshold: 1   # the line; items at or below auto-execute, above park to the board
-research_state:             # category ID to last-researched date; rotation picks least-recent
+research_state:             # category ID to last-researched date; the least recent goes next
   R1:
   # ... through R9
-priority_flags: []          # item IDs flagged to lift in Step 3 selection
-menu_state:
-  T1-1: YYYY-MM-DD
-  # ... entries added as items run for the first time
+bundle_state:               # bundle ID to last-run date; never-run bundles first, then the oldest
+  B1:
+  # ... through B6
+priority_flags: []          # item IDs flagged to lift in Step 2 selection
+menu_state:                 # one scorecard per item; null means never run
+  T1-1: {last_run: YYYY-MM-DD, runs: N, findings: N, accepted: N, declined: N, noise: N, empty_streak: N}
+  # a bare YYYY-MM-DD is the 1.x shape and still reads as last_run
+fix_checks: []              # one {run, item, file, commit, absent | present} per Acts edit, the last three runs only
+rulings: []                 # one {path, item, line, disposition, ruled, until} per finding the Sovereign ruled on
+runtime_purge_surfaced: []  # T1-7's surfaced purge candidates
 ---
 ```
 
-**Body:** Reverse-chronological run entries. Newest at the top.
+**The run entry.** It records the board in full, so the log is the board's only durable home.
+
+```markdown
+## Run: YYYY-MM-DD HH:MM (Run N)
+
+**Items attempted:** N. **Items completed:** N. **Bundles this run:** [IDs]
+**Research:** [category ID]: returned N; live defects N, fixed in this run N; duplicates N; new candidates N
+**Dropped by the ledger:** [N, by item; or "none"]
+
+### Fix re-check
+- Held N, regressed N (re-landed in Done), reverted N (Your decisions), unverifiable N
+
+### Decision board (this run)
+#### 1. Done
+#### 2. Your decisions
+#### 3. Your hands
+#### 4. Plans to approve
+
+### Patterns Noticed (log only, never on the board)
+### Reports with no findings
+### Errors and blockers
+```
+
+The return session appends a `### Sovereign review and return session` section under the run entry it answers.
 
 ---
 
 ## Constraints (the Hard Ceiling)
 
-This section is the Hard Ceiling. It holds regardless of how high `auto_execute_threshold` climbs. No ratified climb, accepted candidate or forward rule may breach the permanent floor.
-
-The ceiling is drawn by **action type, not location**. Destructive, voice-bound and outward-broadcast actions stay forbidden forever. Additive, reversible, build-verified correction opens as a gated lane that earns its way toward gateless operation one proven class at a time.
+The ceiling is drawn by action type, not location. Destructive, voice-bound and outward-broadcast actions stay forbidden forever. Additive, reversible, build-verified correction opens as a gated lane that earns its way one proven class at a time.
 
 ### The Permanent Floor (never climbs)
 
-No threshold, climb, candidate or forward rule breaches these. Ever.
+No verb move, accepted candidate or forward rule breaches these. Ever.
 
 - No change to copy, voice or content prose on any live surface. Outward words are voice-bound.
 - No deletions of anything, in the vault or any external repo.
-- No moves of canonical governance files: codices, the Constitution, the Charter, protocols, canonical content. Those require Sovereign approval. This does NOT cover implemented Pending Plan archival. Moving a `status: implemented` plan from the active chamber to the Vault archive is operational lifecycle closure, not a governance move: it stays inside the vault, it is reversible, it deletes nothing and it changes no governance. T2-9 executes that archival autonomously with a move-audit sweep and an index regen.
+- No moves of canonical governance files: codices, the Constitution, the Charter, protocols, canonical content. Those require Sovereign approval. This does NOT cover implemented Pending Plan archival. Moving a `status: implemented` plan from the active chamber to the Vault archive is operational lifecycle closure, not a governance move: it stays inside the vault, it is reversible, it deletes nothing and it changes no governance. T2-9 executes that archival with a move-audit sweep and an index regen.
 - No outward broadcasts. Email sends, social posts, anything that speaks to the world.
 - No direct push to any main branch. Every external change goes through a build-verified pull request.
-- No self-modification. The skill never edits its own menu, threshold, autonomy levels, this SKILL.md, your auto-memory `MEMORY.md` or your settings file autonomously. Those move only after the Sovereign ratifies a decision-board entry.
+- No self-modification. The skill never edits its own catalog, its verbs, this SKILL.md, its `CLAUDE.md`, its `references/` files, your auto-memory `MEMORY.md` or your settings file on its own. Those move only after the Sovereign ratifies a board entry, in a return session that shows the diff inline first.
 
 **Scope of the self-modification ban.** It covers this SKILL.md, its CLAUDE.md, every reference and catalog file and any script that applies its rules. The deletion and write bans bind shell commands and every file type, not only the editor tool.
 
@@ -262,19 +281,17 @@ No threshold, climb, candidate or forward rule breaches these. Ever.
 Two classes of action, both additive or corrective, never voice-bound, always reversible.
 
 - **Read and route.** Reading reports and routing them into lanes. Fully safe.
-- **Additive or corrective technical fixes to external repos**, executed as build-verified pull requests. Opens one proven class at a time, only after the Sovereign authorizes it.
-
-A fix enters at Level 3, propose-only. When the Sovereign authorizes a class, the form is a branch plus a pull request with a green build. The Sovereign merges. A narrow class with a clean track record climbs to auto-open PR, then to auto-merge on green build, one ratified step at a time. The part that climbs away is the merge click, never the build gate.
+- **Additive or corrective technical fixes to external repos**, executed as build-verified pull requests, one proven class at a time through propose, auto-PR and auto-merge, only after the Sovereign authorizes it. The build gate never climbs away; the merge click does.
 
 Read a repo's default branch before opening a pull request. Never assume it is called main.
 
 ### Operational Constraints
 
 - Sovereign-invoked only. The skill never auto-fires and never schedules itself.
-- All Tier 1 items are additive edits or in-place corrections traceable via git. All Tier 2 items are read-only scans.
-- Discovery candidates that would breach the permanent floor stay in Patterns Noticed. They are never surfaced as menu candidates.
-- If any Tier 1 item errors, log the error, skip the item, continue. Do not halt the whole session for one failure.
-- If the log file is missing or malformed at Step 1, halt. State integrity is foundational.
+- Acts items are additive edits or in-place corrections traceable through git. Reports items are read-only, and their findings fold into the board.
+- A candidate that would breach the Floor stays in the run entry's Patterns Noticed and never reaches the board.
+- An item that errors is logged in the run entry and skipped; the run continues.
+- A missing or malformed log halts the run at Step 1. State integrity is foundational.
 - Stage and commit only the paths this run touched. Never add everything, because sibling sessions may hold uncommitted work.
 
 ---
@@ -284,7 +301,7 @@ Read a repo's default branch before opening a pull request. Never assume it is c
 > [!info] Ambassador Doctrine Active
 > This skill operates under the [[Council Chamber/Protocols/Governance/Ambassador Doctrine]].
 > Primary strategy: Saṃśraya. The skill exists to fortify the ecosystem. Every action is reversible, every artifact is logged, every outward surface is gated. The log is the durable ledger of the skill's behavior over time.
-> Secondary: Āsana. Tier 2 scans and the research rotation are intelligence-gathering posture. Observe fully before recommending. Findings return to the Sovereign; the skill never acts on its own observations beyond menu-bounded execution.
+> Secondary: Āsana. Reports items and the research rotation are intelligence-gathering posture. Observe fully before recommending. Findings return to the Sovereign; the skill never acts on its own observations beyond menu-bounded execution.
 > External surfaces touched (read-only by default): outbound URLs for link-rot scans (HEAD or short GET only, no auth bypass) and, under the graduated lane, external repos as a write-via-PR surface (additive or corrective fixes only, never a direct push to a main branch, never a copy or voice change).
 
 Two external write forms are gated:
@@ -296,9 +313,8 @@ Two external write forms are gated:
 
 ## Model Routing
 
-The orchestrator runs at the tier you opened the session with. Set `model` explicitly on every subagent dispatch. Never silently inherit.
-
-- Scan, research and editor workers run on Sonnet.
+- The orchestrator runs at the tier you opened the session with. It owns Step 0, every ground-truth gate, synthesis, the board and every commit.
+- Scan, research and editor workers run on Sonnet, with `model` set explicitly on every subagent dispatch. Never silently inherit. Every worker prompt says: run single-context, do not spawn subagents.
 - Mechanical lookups and deterministic commands run on Haiku.
 - No worker runs above the orchestrator's tier.
 
@@ -306,7 +322,7 @@ The orchestrator runs at the tier you opened the session with. Set `model` expli
 
 ## Planning Mode Rule
 
-Status is `active`. Execution is authorized without per-invocation approval. Sovereign invocation is the only gate. Menu items at or below `auto_execute_threshold` are pre-approved by design (the Hard Ceiling enforces the gate posture). New menu items, autonomy-level climbs and threshold moves require Sovereign ratification through the decision board before they land.
+Status is `active`. Execution is authorized without per-invocation approval. Sovereign invocation is the only gate. Acts and Reports items are pre-approved by design, inside the Hard Ceiling. New menu items, verb moves and edits to this skill's own files need Sovereign ratification through the board before they land.
 
 ---
 
@@ -316,5 +332,6 @@ Status is `active`. Execution is authorized without per-invocation approval. Sov
 Date-stamped entries of calibration notes and rules to prevent recurrence.
 %%
 
-- Skill ported from the source ecosystem in template form. The starter menu is generic vault-internal hygiene (wikilink integrity, index regeneration, anti-AI sweep, slug normalization, codices-index completeness, superseded-artifact sweep, plus read-only scans). The three-site routine-report triage from the source became an optional external-surface extension that stays off until you run external repos. The architecture is preserved intact: the do-not-ask Operating Principle for safe hygiene, the Permanent Floor, the threshold model, the four-bucket decision board, the two speeds, the research rotation and the climb. Adapt the starter menu and research categories to what your ecosystem actually holds during onboarding.
-- 2026-06-10: Menu expanded from 15 inline items to 36 items (T1: 8, T2: 28) in a `references/menu-catalog.md` file, mirroring the source ecosystem structure. Ported all ecosystem-universal items from source T2-1 through T2-42. Items that stayed home: T2-2 (workshop emails), T2-4/T2-5/T2-20/T2-39/T2-40 (site repos), T2-8/T2-18/T2-34 (external-worker infrastructure), T2-12 (three-repo routine triage, now optional extension), T2-21 (email merge tickets), T2-25 (testimonial intake), T2-27 (source-brand capitalization). Items ported with path tokens replacing source-specific paths: T1-7, T1-8, T2-14, T2-17, T2-19, T2-20, T2-25 through T2-28. SKILL.md updated to load the catalog at Step 2, reference nine research rotation categories (R1-R9), add the priority-flag eligibility override, the ground-truth gate on research state-claims and the drafting-time ground-truth gate on Pending Plan premises. SE T2-9 spec enriched with the full source T2-14 execution detail (concurrent-session guard, strongest-evidence confirmation, post-mv re-read note).
+- Skill ported from the source ecosystem in template form. The starter menu is generic vault-internal hygiene. The three-site routine-report triage from the source became an optional external-surface extension that stays off until you run external repos. Adapt the starter menu and research categories to what your ecosystem actually holds during onboarding.
+- 2026-06-10: Menu expanded from 15 inline items to 36 in `references/menu-catalog.md`, mirroring the source ecosystem structure, with path tokens replacing source-specific paths.
+- 2026-10-16 (v2.0): The execution-authority model rewritten. Three verbs (Acts, Reports, Proposes) replace the autonomy levels and `auto_execute_threshold`, and a verb moves only through a ratified board answer. The board renders inline in the closing message under four headings (Done, Your decisions, Your hands, Plans to approve), the run entry is its record and `decision-board.md` retires. The catalog splits into `references/catalog/`, one file per bundle, two bundles per run. Per-item scorecards, retire proposals, fix checks, the self-edit rule, the research yield and a pre-send board check added. T1-4 retired. A Coming from 1.x section added.

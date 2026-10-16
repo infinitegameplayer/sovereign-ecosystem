@@ -8,7 +8,7 @@ Fields:
 
 ## Skills
 - AI Interface Activation (draft, tier: foundational)
-- Autonomous Improvement Session (active, tier: foundational). Set-and-forget hygiene and improvement run. Recursive flywheel with a threshold model, a four-bucket decision board and a research rotation that grows its own menu. Sovereign-invoked, never scheduled.
+- Autonomous Improvement Session (active, tier: foundational). Set-and-forget hygiene and improvement run. Recursive flywheel with three verbs (Acts, Reports, Proposes), two bundles per run, a four-bucket decision board delivered inline and a research rotation that grows its own menu. Sovereign-invoked, never scheduled.
 - Batch Archival (active, tier: foundational)
 - Brainstorm (active, tier: foundational)
 - Ecosystem Update Check (active, tier: foundational)
