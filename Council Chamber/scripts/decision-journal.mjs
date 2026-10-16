@@ -37,6 +37,7 @@
 // not optional.
 
 import { readdir, readFile, writeFile, mkdtemp, mkdir, rm } from 'node:fs/promises';
+import { localDate } from './lib/local-date.mjs';
 import { join } from 'node:path';
 import { tmpdir } from 'node:os';
 
@@ -283,7 +284,7 @@ async function main() {
 
   const check = process.argv.includes('--check');
   const force = process.argv.includes('--force');
-  const today = new Date().toISOString().slice(0, 10);
+  const today = localDate();
   const outPath = join(VAULT, OUTPUT_REL);
 
   let existing = '';

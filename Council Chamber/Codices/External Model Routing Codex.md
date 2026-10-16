@@ -51,9 +51,9 @@ Provider-to-model recommendations are working hypotheses. Final routing assignme
 
 | Slot | Primary Provider | Candidate Model | Routing Rationale |
 |---|---|---|---|
-| Audit sweeps and schema validation | OpenRouter | `qwen/qwen3-coder:free` | Code-focused free model, large context. Pair with fallback due to upstream-host throttling risk. |
+| Audit sweeps and schema validation | OpenRouter | `qwen/qwen3-coder:free` | **Absent from the OpenRouter live catalog as of 2026-10-12** (`GET /api/v1/models`). No replacement verified. Check the catalog before pinning a slug; free code-focused candidates seen in it: `cohere/north-mini-code:free`, `poolside/laguna-s-2.1:free`. Pair with fallback due to upstream-host throttling risk. |
 | Mechanical synthesis passes | OpenRouter | `nvidia/nemotron-3-super-120b-a12b:free` | General synthesis capability on free tier, large context. |
-| Tool-use orchestration tests | NVIDIA NIM | `meta/llama-3.3-70b-instruct` | NIM-hosted with documented tool-use semantics. |
+| Tool-use orchestration tests | NVIDIA NIM | `meta/llama-3.3-70b-instruct` | **Absent from the NIM live catalog as of 2026-10-12** (`GET /v1/models`). NIM removes hosted models without notice. Nearest candidate seen in the catalog: `nvidia/llama-3.1-nemotron-70b-instruct`. Verify before use. |
 | Long-context bulk classification | NVIDIA NIM | `nvidia/nemotron-3-super-120b-a12b` | Large context window, free tier. |
 | Code generation and refactoring | DeepSeek | `deepseek-v4-flash` or `deepseek-v4-pro` | Native Anthropic-compatible endpoint. Paid but low cost. |
 | Reasoning-heavy edge cases | DeepSeek | `deepseek-v4-pro` | Strong reasoning trace via thinking mode, paid tier. |
@@ -122,7 +122,7 @@ Invocation shape:
 ```
 node "Council Chamber/scripts/external-worker.mjs" \
   --provider openrouter \
-  --model qwen/qwen3-coder:free \
+  --model nvidia/nemotron-3-super-120b-a12b:free \
   --prompt "..." \
   --context-pack path/to/context.md \
   [--trace] [--max-tokens 4096] [--format json]

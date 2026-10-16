@@ -6,6 +6,23 @@ Each entry corresponds to one publish cycle. For full implementation details, se
 
 ---
 
+## v3.16.0, 2026-10-15
+
+The Gate Learns the Container.
+
+**If you installed any version, apply this update.** Through v3.15.0 the Permanent Floor gate refused a shell delete only when the command named a protected file by extension. A directory, a `.json`, an image or a glob inside your vault walked through.
+
+- **A delete inside a vault container is refused whatever the extension.** Fired at a fresh v3.15.0 clone, the gate allowed seven of eight delete shapes that named no `.md`: a directory wipe, a `.json`, `git rm -r`, `rmdir`, a node `rmSync`, `find -delete` and `git clean`. **New: `container-delete.mjs`** reads the command and the gate refuses on its verdict, failing closed when the module cannot run. A `CONTAINERS` line beside `PROTECTED_EXTENSIONS` names your top-level folders. 59 new selftest cases, each watched failing before the fix.
+- **Seventeen skills catch up with their canonical versions.** Autonomous Improvement Session (a `Verified:` line on every board entry, the Floor scope statement, a learning loop, read-only database reads, path-scoped commits), Pending Plan Implementation (the Software Build Protocol), Researcher (a Verify phase, finding kinds, web and private-file workers kept apart), Source Harvest (quote checks with controls), Brainstorm (the test ships with its read rule), Session Closeout, Self-Healing, Playwright, Manuscript Anti-AI Edit Pass and Batch Archival.
+- **Ways of Knowing.** Challenge and Illumination Codex Section XII: every claim carries its kind, observed, reported, reasoned, felt or unknown, into every summary.
+- **Two model slugs left their catalogs** and are marked in the External Model Routing Codex. Two scripts stamp the local day instead of the UTC day. Twelve frontmatter wikilinks Obsidian could not read are quoted. **New CI step:** AGENTS.md must name the release the CHANGELOG names; it read v3.11.0 for four releases.
+
+A gate that reads extensions sees files. A vault is made of folders.
+
+Full detail and the implementation spec: `.github/UPDATES/2026-10-15-v3.16.0-the-gate-learns-the-container.md`.
+
+---
+
 ## v3.15.0, 2026-10-08
 
 Yours Stays Yours.

@@ -238,15 +238,20 @@ Authority remains with you.
 
 Related Governance: [[Council Chamber/AI Interface/Operating Charter]]
 
+## XII. Ways of Knowing
 
+Every claim in a research report, a decision record or a challenge carries its kind. Five kinds, one vocabulary across the ecosystem:
 
+| Kind | What it is | How it is carried |
+|---|---|---|
+| Observed | Seen directly | Name the instrument and what it saw |
+| Reported | Someone else's claim | Name the source and quote it |
+| Reasoned | Inferred from other claims | Show the chain. Say whether it is calculated, projected or a judgment |
+| Felt | Recognized in the body or the aliveness | Attribute it to whoever felt it, in their own words |
+| Unknown | Looked for and not settled | Name where it was looked for |
 
+A kind travels with its claim into every summary. A reasoned claim stays reasoned in the headline, and a reported one keeps its source.
 
+Two rules hold the felt class. **A felt read is never promoted to observed. A felt read is never discounted to zero because no instrument measured it.** Where felt and observed disagree, both are carried side by side and the Sovereign weighs them.
 
-
-
-
-
-
-
-
+Origin: the most rigorous scientific method skills keep a slot for what they cannot measure and leave it empty. Missing evidence is never imputed as zero. This section names the instrument that reads that slot.

@@ -2,7 +2,7 @@
 status: active
 created: 2026-03-08
 links:
-  - [[Council Chamber/Checklists/AI Interface Engagement Checklist]]
+  - "[[Council Chamber/Checklists/AI Interface Engagement Checklist]]"
 ---
 
 # AI Interface Engagement Calibration Log

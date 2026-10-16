@@ -45,9 +45,19 @@ Spawn up to 4 sub-agents simultaneously. Each worker gets:
 
 Workers are independent. They do not communicate with each other. Only their final outputs return.
 
+Separate workers that read the open web from workers that read your private files. Paste needed excerpts into the web worker's brief. No worker holds both.
+
+Report-to-file dispatch: a worker with long findings writes them to a file and returns the path plus a short gist. A web worker with no file access returns its claims inline, and you write the file.
+
 **Phase 3: Synthesize**
 
-Aggregate all worker outputs into a single structured report:
+Aggregate all worker outputs into a single structured report.
+
+Label each finding observed, reported, reasoned, felt or unknown, and never upgrade it in the summary. Observed means you saw it directly. Reported means a source said it. Reasoned means inferred. Felt means a judgment or impression. Unknown means not established.
+
+A finding that explains why something happened names two rival explanations from different classes and what would tell them apart. Otherwise it is a lead, not a conclusion.
+
+Report format:
 
 ```
 ## Research Report: [Topic]
@@ -69,7 +79,13 @@ Date: [YYYY-MM-DD]
 [Files read, repos checked, protocols referenced]
 ```
 
-**Phase 4: Present**
+**Phase 4: Verify**
+
+Before presenting, check the claims the report rests on against current files and repos. Report anything unchecked as unverified, never as fact.
+
+**Phase 5: Save and present**
+
+Save the report to a research folder, or the plan's own support folder, and state the path. A report only in the transcript is evidence with no path back.
 
 Present the report. Do not act on findings. The Sovereign decides what moves forward.
 
@@ -113,11 +129,11 @@ Dispatch the cheapest model that does the job well. Before each delegated step, 
 
 | Work type | Model |
 |---|---|
-| Mechanical lookups, deterministic commands, structured extraction against a spec | Haiku |
-| Multi-step synthesis, drafting, diagnosis, most worker dispatch | Sonnet |
+| Mechanical lookups, deterministic commands, structured extraction against a spec, Phase 5 file save | Haiku |
+| Multi-step synthesis, drafting, diagnosis, most worker dispatch, Phase 4 Verify | Sonnet |
 | Architectural judgment, plan design, judgment-dense synthesis | Opus |
 
-Per-phase defaults: Phase 1 (clarify angles) and Phase 4 (present) are Sovereign-facing and route to Opus. Phase 2 (spawn workers) routes per the Cross-Model Perspectives substrate table above. Use Sonnet as the fallback for any angle that does not fit a named type. Phase 3 (synthesize across substrates) routes to Opus because cross-model synthesis carries the highest judgment density.
+Per-phase defaults: Phase 1 (clarify angles) and the Phase 5 presentation are Sovereign-facing and route to Opus. Phase 4 (verify) routes to Sonnet. The Phase 5 file save routes to Haiku. Phase 2 (spawn workers) routes per the Cross-Model Perspectives substrate table above. Use Sonnet as the fallback for any angle that does not fit a named type. Phase 3 (synthesize across substrates) routes to Opus because cross-model synthesis carries the highest judgment density.
 
 Set the model explicitly on every subagent dispatch. Never silently inherit the top tier.
 

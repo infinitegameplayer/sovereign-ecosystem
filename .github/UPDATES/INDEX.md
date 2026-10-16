@@ -6,6 +6,7 @@ Run the Ecosystem Update Check Skill to discover which updates apply to your bui
 
 | Date | Type | Optional | Slug | Title |
 |---|---|---|---|---|
+| 2026-10-15 | core | no | v3.16.0-the-gate-learns-the-container | v3.16.0 The Gate Learns the Container. A Delete With No .md in It Is Still a Delete, and Seventeen Skills Catch Up |
 | 2026-10-08 | core | no | v3.15.0-yours-stays-yours | v3.15.0 Yours Stays Yours. The Voice You Wrote Leaves the Update Path, and Two Counters Agree on What Doctrine Is |
 | 2026-10-08 | core | no | v3.14.0-the-first-move-gets-its-name | v3.14.0 The First Move Gets Its Name: The To-Do Dock Becomes Capture, and the Update Script Learns to See a Rename |
 | 2026-10-02 | core | no | v3.13.0-a-gate-that-cannot-see | v3.13.0 A Gate That Cannot See Has No Verdict. The Floor Refuses When Node Is Missing, and Seven Weeks of Practice Come Home |

@@ -7,10 +7,10 @@ status: active
 tier: operational
 cadence: weekly (Fridays primary, Saturdays backup, pre-trip as needed)
 links:
-  - [[Council Chamber/Protocols/Session/End-of-Week Protocol]]
-  - [[Sovereign Command]]
-  - [[Council Chamber/Protocols/AI Interface/Sovereign Command Protocol]]
-  - [[Library/North Star]]
+  - "[[Council Chamber/Protocols/Session/End-of-Week Protocol]]"
+  - "[[Sovereign Command]]"
+  - "[[Council Chamber/Protocols/AI Interface/Sovereign Command Protocol]]"
+  - "[[Library/North Star]]"
 ---
 
 # End-of-Week Skill

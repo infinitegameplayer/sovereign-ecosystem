@@ -294,6 +294,8 @@ Whether the session orchestrator does the work itself or dispatches it. This ans
 
 Failure modes most tied to this fork: Summary collapse (careless dispatch) and Self-agreement as consensus (over-trusted inline self-review), both in IX.
 
+**Parallel workers write scratch files under their own subfolder** (`scratchpad/<worker>/`), never the shared scratchpad root. Two parallel workers sharing one root can overwrite each other's scripts, and one can run the other's script against the wrong file. The orchestrator names the subfolder in each worker's brief.
+
 ## Verification Loops
 
 Per CLAUDE.md: pass@k for single-session builds and non-critical skill execution. **pass^k** for anything in `Council Chamber/scripts/`, for hook scripts, for MCP tools and for any security gatehouse ceilings your ecosystem runs. Consistency across runs, not a single lucky pass.

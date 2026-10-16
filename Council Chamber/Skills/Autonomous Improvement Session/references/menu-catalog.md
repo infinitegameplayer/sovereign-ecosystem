@@ -139,7 +139,7 @@ The premise was wrong for the workflow. The anti-AI edit pass belongs at draftin
 
 **Execution:**
 1. For each gitignored operational log under `.runtime/` or your scripts log directory (session-stop log, approval-gate log, dispatch log, index-regen log and peers), if it exceeds the line cap, truncate to the last N lines (default cap 2000). This is operational maintenance of a transient append log, not content deletion.
-2. List stale `.runtime` files (30+ days old, not active state files) as Sovereign-approved removal candidates. Do not delete them. File deletion is the Permanent Floor, so the purge stays surfaced, not autonomous.
+2. List stale `.runtime` files (30+ days old, not active state files) as Sovereign-approved removal candidates. Do not delete them. File deletion is the Permanent Floor, so the purge stays surfaced, not autonomous. List literal filenames, never ranges or shorthand, in the purge-surfaced list.
 3. Track already-surfaced purge candidates in the log frontmatter `runtime_purge_surfaced` list. Each run, surface only files not already on that list, and add a tail note counting how many previously-surfaced files still await an approved purge. When the Sovereign approves and the purge executes, clear `runtime_purge_surfaced`.
 4. Never touch a tracked governance or content file, only the named operational logs.
 4b. **Classifier-denial fallback.** When the auto-mode classifier denies the truncation, do not fight it. Put a paste-ready truncation command on decision board Section 1 and treat the item as complete. Explicit Sovereign permission in a return session clears the denial.
@@ -612,9 +612,9 @@ When active, this is a third execution surface distinct from Tier 1 (vault edits
 
 ## Research Rotation Categories
 
-The research rotation (SKILL.md Step 8) is the engine of menu growth. It runs every session, rotating through the categories below. The cadence rule keys count to category total: six or fewer categories means one per session, more than six means two per session. The skill picks the N least-recently-researched categories from `research_state` in the log frontmatter, dispatches one Sonnet worker per category, and each worker returns a self-ranked top-5 candidate list with a one-line "why this beat the rest."
+The research rotation (SKILL.md Step 8) is the engine of menu growth. It runs every session, rotating through the categories below. The cadence rule is one category per run. The skill picks the least-recently-researched category from `research_state` in the log frontmatter, dispatches one Sonnet worker for it, and the worker returns a self-ranked top-5 candidate list with a one-line "why this beat the rest."
 
-Nine categories at creation, so the rule lands on two per session.
+Nine categories at creation, researched one per run.
 
 **Ground-truth gate (standing rule, all categories).** A research candidate that asserts a claim about the current state of an existing artifact is making a claim, and a claim is verified at the moment it is made. Before any such state-claim reaches the decision board, run the cheapest live check that confirms or kills it: an `ls`, a Grep, a scoped Read against the named artifact. A candidate whose premise fails verification never reaches the Sovereign. A forward proposal to build something absent is fine and needs no artifact check. A claim that a present artifact is absent or stale is a factual assertion and must be ground-truthed.
 

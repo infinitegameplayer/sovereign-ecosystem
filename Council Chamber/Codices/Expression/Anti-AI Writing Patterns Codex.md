@@ -1,7 +1,7 @@
 ---
 version: 1.3
 status: template
-parent: [[Council Chamber/Codices/Expression/Writing Style Codex]]
+parent: "[[Council Chamber/Codices/Expression/Writing Style Codex]]"
 purpose: Catalog of AI writing tells with affirmative-voice replacements. Personalize during onboarding after running the Sovereign's vocabulary reconciliation pass.
 ---
 

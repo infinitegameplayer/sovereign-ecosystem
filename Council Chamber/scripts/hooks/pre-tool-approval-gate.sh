@@ -5,6 +5,14 @@
 #
 # Hard blocks (exit 2):
 #   rm *.md inside the vault   -- accidental deletion of ecosystem content
+#   any delete inside a container -- a delete whose target resolves inside one of
+#                                 the vault's top-level containers (CONTAINERS
+#                                 below), whatever the extension: a directory,
+#                                 a json, an image, a glob, or the vault root
+#                                 itself. rm, rmdir, unlink, shred, git rm,
+#                                 git clean, find -delete, Remove-Item, del,
+#                                 .NET IO and node or python deletes. The
+#                                 reading is done by container-delete.mjs
 #   git rm *.md                -- same, via git
 #   mv *.md OUT of the vault   -- moving content outside the vault boundary
 #   git mv *.md                -- always blocked (not a supported archival pattern)
@@ -13,6 +21,11 @@
 # Allowed:
 #   mv *.md within the vault   -- any internal move (Inbox to Library, etc.)
 #   rm *.md outside the vault  -- scratch files, adapter paths, etc.
+#   node_modules, .runtime/    -- regenerable or not a container
+#   a search that names a delete verb (grep, rg), a commit message or echo text
+#   that names a delete, a dry run (git clean -n), a delete outside the vault,
+#   a path built at run time, and the same container names in another repo
+#   (the session cwd sits outside the vault)
 #
 # A gate written against one shell tool does not automatically cover a
 # second shell tool with equivalent capability. This file covers both the
@@ -32,11 +45,19 @@ VAULT_ROOT="${SOVEREIGN_VAULT_ROOT:-$PWD}"
 # moves. Space separated, no leading dots. Add more to widen coverage, e.g.
 #   PROTECTED_EXTENSIONS="md txt canvas"
 PROTECTED_EXTENSIONS="md"
+
+# Top-level containers whose contents no shell delete may touch, whatever the
+# extension. Pipe separated, spelled exactly as the folder names. Add your own
+# top-level folders here, e.g. "Library|Inbox|Projects". The names below come
+# from Council Chamber/Governance/Sovereign Ecosystem Structural Containers.md.
+# A delete aimed at the vault root itself is refused too.
+CONTAINERS="Council Chamber|Library|Vault (Archive)|Inbox|Scriptorium|Explorations"
 # ────────────────────────────────────────────────────────────────────────────
 
 EXT_RE=$(printf '%s' "$PROTECTED_EXTENSIONS" | tr ' ' '|')
 VAULT_FWD=$(printf '%s' "$VAULT_ROOT" | tr '\\' '/')
 VAULT_BACK=$(printf '%s' "$VAULT_ROOT" | tr '/' '\\')
+HOOK_DIR=$(cd "$(dirname "$0")" && pwd)
 
 INPUT=$(cat)
 
@@ -82,6 +103,36 @@ if [ -z "$TOOL_NAME" ]; then
       ;;
   esac
 fi
+
+# ─── Container deletes ──────────────────────────────────────────────────────
+#
+# A delete aimed at a vault container is refused whatever the extension. The
+# extension rules further down guard single files; this guards the places those
+# files live, so a directory delete or a non-md file no longer slips through.
+# container-delete.mjs reads the command (quotes, heredocs, nested shells, cd)
+# and prints "BLOCK: <reason>" or nothing. It runs with the session cwd the
+# payload carries, so a repo with the same folder names stays free.
+#
+# Fail closed: if the module is missing or exits nonzero there is no verdict,
+# and no verdict is a refusal. Proven by the "container:" cases in
+# floor-gate-selftest.mjs.
+case "$TOOL_NAME" in
+  Bash|PowerShell)
+    CONTAINER_VERDICT=$(printf '%s' "$INPUT" | SOVEREIGN_VAULT_ROOT="$VAULT_ROOT" SOVEREIGN_CONTAINERS="$CONTAINERS" node "$HOOK_DIR/container-delete.mjs" 2>/dev/null)
+    CONTAINER_STATUS=$?
+    if [ "$CONTAINER_STATUS" -ne 0 ]; then
+      echo "FLOOR GATE INERT: container-delete.mjs could not run (exit $CONTAINER_STATUS), so the command could not be checked against the vault containers." >&2
+      echo "Refusing this shell call because the Permanent Floor cannot be evaluated." >&2
+      exit 2
+    fi
+    case "$CONTAINER_VERDICT" in
+      BLOCK*)
+        echo "$CONTAINER_VERDICT" >&2
+        exit 2
+        ;;
+    esac
+    ;;
+esac
 
 # Returns success when $1 contains a vault-boundary marker (forward or
 # backslash form), i.e. the text points inside the resolved vault root.

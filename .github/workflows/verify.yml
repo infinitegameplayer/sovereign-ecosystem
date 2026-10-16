@@ -277,3 +277,21 @@ jobs:
             exit 1
           fi
           echo "  ok  no author paths in the clone"
+
+      # AGENTS.md states the shipped version in prose, and prose does not move
+      # when the code does. It read v3.11.0 while v3.15.0 was the Release, and
+      # nothing noticed for four releases because no check read that line. The
+      # newest CHANGELOG heading is the fact; AGENTS.md has to agree with it.
+      - name: AGENTS.md names the current release
+        run: |
+          latest=$(grep -m1 -oE "^## v[0-9]+\.[0-9]+\.[0-9]+" .github/CHANGELOG.md | sed 's/^## //')
+          stated=$(grep -m1 -oE "^\*\*Version:\*\* v[0-9]+\.[0-9]+\.[0-9]+" AGENTS.md | sed 's/.* //')
+          if [ -z "$latest" ] || [ -z "$stated" ]; then
+            echo "Could not read a version from CHANGELOG ($latest) or AGENTS.md ($stated)."
+            exit 1
+          fi
+          if [ "$latest" != "$stated" ]; then
+            echo "AGENTS.md says $stated, CHANGELOG says $latest."
+            exit 1
+          fi
+          echo "  ok  AGENTS.md and CHANGELOG agree on $latest"

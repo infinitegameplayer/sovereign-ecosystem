@@ -37,6 +37,8 @@ Identify the source and confirm it is publicly accessible. Common paths:
 - Docs or protocol site: use `WebFetch`
 - SaaS platform, API documentation, or capability inventory: use `WebFetch` and `WebSearch` to extract feature sets and technical documentation. When source code is unavailable, the harvest operates at the capability and pattern level. The classification framework still applies.
 
+When components carry license fields of their own (a skill's frontmatter, a package manifest), tally every one. A permissive repo can hold non-commercial parts (see Refinements, 2026-10-15).
+
 If authentication is required or the source is private, halt: "Source requires authentication or is private. Sovereign must provide access or assess via available documentation."
 
 Do not proceed using only the README or description as primary evidence. For non-repo sources where no code exists, capability documentation and API references serve as the evidence base.
@@ -66,6 +68,10 @@ For each component, assign a disposition (Adopt / Enrich / Defer / Ignore) and w
 - Which ecosystem skill or protocol is the comparison point?
 - What specifically is novel, and what is already covered?
 
+Checks before a disposition stands (see Refinements, 2026-10-06 and 2026-10-15):
+- When checking whether your system already has an equivalent, search for what the thing does in your own words, never only in the source's vocabulary. A search for the source's name for a tool finds the source's name (see Refinements, 2026-10-06).
+- Before marking anything "covered", open the mechanism in your system said to cover it and read its scope. Covered is a claim (see Refinements, 2026-10-06).
+
 ### Step 5: Draft Harvest Report
 
 Compile the full classification into a harvest report:
@@ -83,6 +89,8 @@ Ignore:  [count]
 
 For each Enrich: specify the exact change to the target file (what to add, where, why).
 For each Adopt: draft the ecosystem-adapted version in outline or propose a Pending Plan if scope requires more than one session.
+
+Before the report quotes the source, check every quote against the source text with an instrument that carries a known-present and a known-absent control, and trust its counts only after the present control is found and the absent one is not (see Refinements, 2026-10-06).
 
 ### Step 6: Approval Gate
 
@@ -206,3 +214,17 @@ _Date-stamped entries for harvest decisions and calibration findings that emerge
 **Template note:** As you run Source Harvests, log your decisions here. The refinements section becomes a precedent record, what you adopted and why, what you rejected, what surprised you. Future harvests reference this section to avoid re-evaluating patterns that have already been classified.
 
 > Also installs standalone from https://www.infinitegameos.io/skills/source-harvest (dual-distribution: this copy lives in your vault, the public plugin updates independently).
+
+**2026-10-15:** a large open-source skills repo (MIT label, well over a hundred skills, per-skill licenses vary)
+
+**The repo's license is not every component's license.** The LICENSE file read MIT, and so did GitHub's field. The skill the harvest leaned on hardest carried a non-commercial license in its own frontmatter, and another carried a different non-commercial license. A reader caught the first by chance. A one-line tally of every `license:` field caught the rest. Step 1 now asks for the tally.
+
+**A rival grep can match "arrival".** The first search for rival explanations in the harvesting system returned hits for "arrival" and looked like coverage. A rerun with word boundaries and a known-present control showed the absence was real. The quote-check lesson of 2026-10-06 applies to absence searches too: an instrument earns trust by finding its control.
+
+**2026-10-06:** four paid courses (copyrighted course material, pattern level)
+
+**A quote checker that reports zero for everything is wired to nothing.** The first version of the script that checked thirty worker quotes against the transcripts returned zero matches for every one, including a phrase visibly in the file. A clean-looking zero and a broken instrument print the same number. It was rebuilt with a known-present and a known-absent control, and only then did its finds mean anything. Step 5 now requires the controls.
+
+**A search aimed at the source's vocabulary walks past your own instrument.** The report first said the harvesting system had no equivalent of the source's monthly money tool. The search had looked for the source's phrases and walked past an existing ledger section that already read the month backward every week. The finding was wrong in part and was corrected before execution. Step 4 now says to search for what a thing does, in your own words.
+
+**"Covered" is a claim that needs your mechanism opened and its scope read.** A referral discount was filed as covered by store credit. Store credit covered one product class, and the source meant a different one, where the system had no referral mechanic at all. The mechanism existed. Its scope was never read. Step 4 now requires opening it before the word is written.

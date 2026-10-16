@@ -1,9 +1,9 @@
 ---
 status: active
 created: 2026-03-01
-source: [[Council Chamber/Pending Plans/PendingPlan - Operationalize Sovereign Ecosystem Support Patterns from OpenAI History]]
+source: "[[Council Chamber/Pending Plans/PendingPlan - Operationalize Sovereign Ecosystem Support Patterns from OpenAI History]]"
 links:
-  - [[Council Chamber/Governance/Sovereign Ecosystem Support Patterns from OpenAI History]]
+  - "[[Council Chamber/Governance/Sovereign Ecosystem Support Patterns from OpenAI History]]"
 last_reviewed: 2026-03-01
 ---
 

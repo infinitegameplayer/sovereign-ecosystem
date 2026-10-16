@@ -55,6 +55,7 @@ Chromium binary installs to `Council Chamber/scripts/node_modules/`. Add this pa
 - **Browser binary not found:** Run `npx playwright install chromium` from the scripts directory.
 - **Cloudflare blocking:** Add `playwright-extra` and `puppeteer-extra-plugin-stealth` if a site blocks the script.
 - **Timeout:** `run.js` already navigates with a 15000 ms timeout and `waitUntil: "domcontentloaded"`. For slow pages, raise the timeout and switch to `networkidle`.
+- **Social post URLs:** A direct social-post URL may bounce to a login wall. Check the landed URL, and try the platform's share or mobile URL.
 - Always close the browser in a `finally` block. This is already handled in run.js.
 
 ## Invocation

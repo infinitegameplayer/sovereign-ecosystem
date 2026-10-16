@@ -47,6 +47,14 @@ Activate explicitly if you notice your AI stopping unnecessarily on routine erro
 - Never silently loop on a fix that is not working. Up to three fixes, each from a fresh diagnosis, then surface.
 - Structural file operations (move, rename, delete canonical files) that produce errors must always surface. Approval gates apply to the operation, not just the error.
 
+## External Orientation
+
+This skill makes no outward call of its own. Recovery stays inside the structure of your vault.
+
+When the failure is external (an API, a service, a hosted tool), stop and return it to the Sovereign. Never auto-retry an external call.
+
+A missing dependency is proposed before it installs. The Sovereign decides what enters the vault.
+
 ## Refinements
 
 - [2026-03-23] Self-healing must not attempt to auto-fix errors that are blocked by the pre-tool-approval-gate. Surface those to the Sovereign instead.

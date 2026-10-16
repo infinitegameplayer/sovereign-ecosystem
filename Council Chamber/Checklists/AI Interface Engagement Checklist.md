@@ -4,8 +4,8 @@ created: 2026-03-08
 format: checklist
 objective: calibrate the AI interface engagement layer per session
 links:
-  - [[Council Chamber/Protocols/AI Interface/AI Interface Engagement Protocol]]
-  - [[Council Chamber/AI Interface/AI Interface Engagement Calibration Log]]
+  - "[[Council Chamber/Protocols/AI Interface/AI Interface Engagement Protocol]]"
+  - "[[Council Chamber/AI Interface/AI Interface Engagement Calibration Log]]"
 ---
 
 # AI Interface Engagement Checklist

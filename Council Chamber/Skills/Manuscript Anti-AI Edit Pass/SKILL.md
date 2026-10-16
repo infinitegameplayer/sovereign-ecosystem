@@ -59,6 +59,8 @@ Load [[Council Chamber/Codices/Expression/Anti-AI Writing Patterns Codex]] into 
 
 Note any SOVEREIGN-VOCAB-RECONCILED entries. These hold special handling: the word is permitted in embodied use, flagged in mechanical use. See the Personalization Note in the codex for how to mark and maintain these.
 
+**Grain protection.** If the Sovereign keeps a ledger of sanctioned stylistic habits (fragments, conjunction openers, run-ons), constructions that match a ledger entry pass every sweep. They are protected voice, never findings. The same shape without a ledger entry stays flaggable. Ambiguous cases go to the Sovereign.
+
 ---
 
 **Step 3. Lexical Sweep (Category I).**

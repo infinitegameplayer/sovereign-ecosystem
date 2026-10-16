@@ -8,6 +8,7 @@ import {
   writeFileSync,
 } from 'fs';
 import { dirname, join } from 'path';
+import { localDate } from './lib/local-date.mjs';
 import { fileURLToPath } from 'url';
 
 const SCRIPT_DIR = dirname(fileURLToPath(import.meta.url));
@@ -33,7 +34,7 @@ if (!BACKUP_PATH || BACKUP_PATH === 'CHANGE_ME') {
 }
 
 function isoDate() {
-  return new Date().toISOString().slice(0, 10);
+  return localDate();
 }
 
 function isoTimestamp() {

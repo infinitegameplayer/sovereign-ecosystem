@@ -55,7 +55,7 @@ Update `.runtime/primer.md`. This is the canonical forward handoff, the first th
 - End with a **Session Opener** line: `Invoke AI Interface Activation. [one-line intent for next session, or "intent to be determined at session start."]` This carries the energy forward, not just the state.
 - **Under a concurrent sibling, read before write.** If another session is active, re-read `.runtime/primer.md` immediately before editing so you build on the sibling's latest write rather than overwriting it.
 
-**Then give Sovereign Command its light touch.** Sovereign Command is the minimal live-signal glance, not the handoff. The Primer carries the detail. Sovereign Command stays short. Two touches only: drop anything this session resolved, and shift the headline (Most Alive Next Move) if the lead moved. If neither changed, leave it. The weekly review re-scans all source lanes as the safety net.
+**Then give Sovereign Command its light touch.** Sovereign Command is the minimal live-signal glance, not the handoff. The Primer carries the detail. Sovereign Command stays short. Two touches only: drop anything this session resolved, and shift the headline (Most Alive Next Move) if the lead moved. If neither changed, leave it. Removal means the words leave. Do not restate a finished item in the past tense; this surface orients attention, it does not record progress. The weekly review re-scans all source lanes as the safety net.
 
 ### 3. Commit with a readable body
 
@@ -67,7 +67,9 @@ No per-session narrative log is written. Git is the log. The commit body is the 
 
 When the work visibly continues in a new session, the session ends without being asked in this order: finish the work, run this close, then hand over a paste-ready prompt for the fresh window. The Primer carries state to every session. The prompt carries surgical direction to the one session that picks this work up, so it opens already aimed.
 
-**It fires when** a Pending Plan names its next sitting, a build stops mid-sequence, or the Sovereign says they will continue in a fresh window. **It stays quiet when** the session closed its own loop and nothing specific follows. Then the closing line offers one in a single sentence rather than drafting it. When the next move is genuinely undetermined, the prompt is the opener plus the two or three live options, stated plainly.
+**It fires when** a Pending Plan names its next sitting, a build stops mid-sequence, or the Sovereign says they will continue in a fresh window, and they can pick it up in their next working session. **It stays quiet when** the session closed its own loop and nothing specific follows. Then the closing line offers one in a single sentence rather than drafting it. When the next move is genuinely undetermined, the prompt is the opener plus the two or three live options, stated plainly.
+
+**Timing test.** Before drafting, ask when the next sitting can open. If it waits on a date or something not yet done, skip the prompt and put a one-line "Next sitting" note in the plan or project note naming what it waits on and what to load. Name that note in the closing line. A prompt written for a sitting that cannot open yet goes stale.
 
 **The shape:**
 

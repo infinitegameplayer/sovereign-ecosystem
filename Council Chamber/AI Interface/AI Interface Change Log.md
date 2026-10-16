@@ -2,8 +2,8 @@
 status: active
 created: 2026-08-11
 links:
-  - [[Council Chamber/Skills/Skills Governance Protocol]]
-  - [[Council Chamber/Protocols/Governance/Meta-Governance Audit]]
+  - "[[Council Chamber/Skills/Skills Governance Protocol]]"
+  - "[[Council Chamber/Protocols/Governance/Meta-Governance Audit]]"
 ---
 
 # AI Interface Change Log

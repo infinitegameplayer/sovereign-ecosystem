@@ -51,7 +51,7 @@ The full Tier 1 and Tier 2 menu (per-item execution specs, eligibility rules and
 
 **Tier 2 (read-only scans, findings to the decision board):** T2-1 Inbox triage, T2-2 stale draft surface, T2-3 external link rot, T2-4 memory cross-reference health, T2-5 codex inbound density, T2-6 skill cross-reference health, T2-7 MEMORY.md compression candidates, T2-8 breadcrumb propagation and stale-reference sweep, T2-9 implemented-plan archival candidate sweep, T2-10 status vocabulary conformance, T2-11 tag consistency hygiene, T2-12 hook coverage audit, T2-13 scripts-package dependency and CVE audit, T2-14 orphaned and superseded image sweep, T2-15 skill frontmatter conformance sweep, T2-16 skill status-to-usage drift audit, T2-17 contraction enforcement sweep, T2-18 project-memory lifecycle staleness sweep, T2-19 Term Registry placeholder-resolution scan, T2-20 security audit staleness sentinel, T2-21 MCP server load-vs-use gap audit, T2-22 explicit model-set compliance audit, T2-23 review-date staleness sentinel, T2-24 index-file dead-link audit, T2-25 settings file allow-list integrity audit, T2-26 undocumented required-env-key audit, T2-27 skill disambiguation and trigger-collision scan, T2-28 SKILL.md progressive-disclosure overgrowth scan.
 
-**Optional extension: external-surface triage.** If your ecosystem maintains external repositories with issue tracking, add a Step 0 that queries open routine or health issues, clusters by type and priority, routes each into safe-now, fix-via-PR and judgment lanes, and closes consumed issues with a consumption comment. The triage reads and routes. It never pushes to an external main branch. This extension stays off until you run external repos.
+**Optional extension: external-surface triage.** If your ecosystem maintains external repositories with issue tracking, add a Step 0 that queries open routine or health issues, clusters by type and priority, routes each into safe-now, fix-via-PR and judgment lanes, and closes consumed issues with a consumption comment. The triage reads and routes. It never pushes to an external main branch. Close a monitor-filed issue only when the condition that filed it has cleared, with evidence in the closing comment. A finding that is still true stays open, and the monitor comments on it rather than filing again. This extension stays off until you run external repos.
 
 ---
 
@@ -91,6 +91,10 @@ Four buckets:
    "I do not understand this" is a first-class answer and never a failure. The decision waits while the AI interface explains the change in plain terms, ideally predict-then-reveal. A gate the Sovereign cannot operate is not a gate.
 3. **New menu candidates and autonomy moves.** Improvement types the research rotation and opportunistic-capture layers surfaced, plus any proposed autonomy-level move. The Sovereign accepts, declines or reshapes each. Accepted candidates get woven into the menu in the return session.
 4. **Proposed Pending Plans.** Anything bigger than one session of work, or any governance, memory or CLAUDE.md class change. The agent drafts a cliff-note summary, not a vague question. The board entry is "approve plan creation?". Only surface plans you recommend creating. Every item in this bucket carries a positive recommendation and the reason for it.
+
+**Your hands.** Before an item goes to a hands list, ask whether the agent can do it on the Sovereign's word. If so it is a decision, not a hands item. The hands list holds only what the Sovereign alone can physically do. Keeping the merge click on external pull requests is an optional posture, not a default.
+
+**Deliver the whole board in the closing message.** Every decision and plan entry ends with `Verified: <live check>, <result>`. The test is answerability: a reader who opens no file can answer every entry from the message alone.
 
 ---
 
@@ -140,11 +144,15 @@ Immediately after each Tier 1 item completes, ask: "Did running this item surfac
 
 Dispatch all Tier 2 items in parallel as Sonnet subagents (read-only scans are safely parallel). Each returns a structured finding. Tier 2 items are Level 1: producing a read-only finding is fully autonomous. When a finding needs a ruling the return session should act on, mirror it as a board bucket-2 entry.
 
+**Every scan returns, per item, a count, the instrument used and a reason if it did not run.** A quiet monitor is a claim of health. Read its run log for skipped checks and treat a skipped check as a finding.
+
+**Databases and send tools.** A run reads databases through a read-only connection only. It never applies migrations and never calls any scheduler or send tool that publishes.
+
 ### Step 8: Research rotation (every run)
 
-The research rotation is the engine of menu growth. It rotates through the research categories registered in the menu catalog (see the Research Rotation Categories section there). Keys how many it runs to how many categories exist: six or fewer categories, research one per session; more than six, research two per session. Read `research_state`, pick the least-recently-researched categories, dispatch one Sonnet worker per selected category. Each returns a self-ranked top-5 candidate list with a one-line "why this beat the rest." Candidates flow into Step 9 and surface on the decision board's bucket 3. Update `research_state` with today's date for each researched category.
+The research rotation is the engine of menu growth. It rotates through the research categories registered in the menu catalog (see the Research Rotation Categories section there). Research one category per run. Rank what the worker returns with live defects first, duplicates second and new items last. Fix safe defects now rather than parking them. Read `research_state`, pick the least-recently-researched category and dispatch one Sonnet worker for it. It returns a self-ranked top-5 candidate list with a one-line "why this beat the rest." Candidates flow into Step 9 and surface on the decision board's bucket 3. Update `research_state` with today's date for each researched category.
 
-The starting registry holds nine categories (R1 through R9; see the menu catalog Research Rotation Categories section), so the rule lands on two per session.
+The starting registry holds nine categories (R1 through R9; see the menu catalog Research Rotation Categories section), so one is researched per run.
 
 **Ground-truth gate on state-claims.** Any candidate that asserts a claim about the current state of an existing artifact gets verified against live state before it reaches the board. Run the cheapest live check (an `ls`, a Grep, a scoped Read) at the moment of surfacing. A candidate whose premise fails verification never reaches the Sovereign. A forward proposal to build something absent needs no artifact check. A claim that a present artifact is absent or stale is a factual assertion and must be ground-truthed. The check belongs to the orchestrator, since a Sonnet research worker cannot be trusted to ground-truth its own assertion.
 
@@ -162,7 +170,7 @@ Aggregate the opportunistic capture, the research rotation, the self-refinement 
 
 Append a run entry at the top of the log body. Update the frontmatter: set new last-run dates in `menu_state` for items that ran, set new last-run dates in `research_state` for each category researched, increment `run_counter`, set `last_run`. Leave `auto_execute_threshold` unchanged unless a return-session ratified climb moved it.
 
-Write the four-bucket board to `decision-board.md`, replacing the prior run's open decisions. Present the same board as the closing output.
+Write the four-bucket board to `decision-board.md`, replacing the prior run's open decisions. Present the same board as the closing output, whole, in the closing message. Every decision and plan entry ends with `Verified: <live check>, <result>`.
 
 Closing line: "Autonomous Improvement Session complete. [N] items ran. Decision board: [A] approvals and questions, [B] menu candidates, [C] proposed plans. Log and board updated."
 
@@ -187,6 +195,14 @@ Ground-truth the premise before writing it as fact. The plan's Context premise i
 An item's `autonomy` level lowers, or the skill-level `auto_execute_threshold` rises, only through a ratified decision. The threshold widens from proven workflows, never from projection.
 
 Every climb passes the **Flywheel Three Laws coherence check** before it lands: does this move serve Smooth Transition, Easier Rotation and Increased Output? These are the mechanical laws of the flywheel, canonical in [[Council Chamber/Governance/Flywheel Integration Standard]], and they are the correct test for a change to a flywheel mechanism. The skill is itself a flywheel, so a climb is judged by whether it smooths a handoff, eases the next rotation and raises real output. The safety guard sits in the Permanent Floor, not here: a move that would touch an outward surface, delete, move a canonical file or self-edit breaches the floor and fails regardless of how high the threshold has climbed. The Flywheel laws test the climb's value. The Permanent Floor tests its safety.
+
+
+### The Learning Loop
+
+- Keep a ledger of rulings in the run log. A finding already ruled on never returns to the board.
+- A scan that cannot be shown to catch a planted defect reports "unverified", not "clean".
+- At each run start, re-check the previous run's fixes. Mark each held, regressed, reverted or unverifiable.
+- A regressed fix is re-landed. A reverted fix goes to the Sovereign, because a revert is a ruling.
 
 ---
 
@@ -239,6 +255,8 @@ No threshold, climb, candidate or forward rule breaches these. Ever.
 - No direct push to any main branch. Every external change goes through a build-verified pull request.
 - No self-modification. The skill never edits its own menu, threshold, autonomy levels, this SKILL.md, your auto-memory `MEMORY.md` or your settings file autonomously. Those move only after the Sovereign ratifies a decision-board entry.
 
+**Scope of the self-modification ban.** It covers this SKILL.md, its CLAUDE.md, every reference and catalog file and any script that applies its rules. The deletion and write bans bind shell commands and every file type, not only the editor tool.
+
 ### The Graduated Lane (opens, earns its climb)
 
 Two classes of action, both additive or corrective, never voice-bound, always reversible.
@@ -248,6 +266,8 @@ Two classes of action, both additive or corrective, never voice-bound, always re
 
 A fix enters at Level 3, propose-only. When the Sovereign authorizes a class, the form is a branch plus a pull request with a green build. The Sovereign merges. A narrow class with a clean track record climbs to auto-open PR, then to auto-merge on green build, one ratified step at a time. The part that climbs away is the merge click, never the build gate.
 
+Read a repo's default branch before opening a pull request. Never assume it is called main.
+
 ### Operational Constraints
 
 - Sovereign-invoked only. The skill never auto-fires and never schedules itself.
@@ -255,6 +275,7 @@ A fix enters at Level 3, propose-only. When the Sovereign authorizes a class, th
 - Discovery candidates that would breach the permanent floor stay in Patterns Noticed. They are never surfaced as menu candidates.
 - If any Tier 1 item errors, log the error, skip the item, continue. Do not halt the whole session for one failure.
 - If the log file is missing or malformed at Step 1, halt. State integrity is foundational.
+- Stage and commit only the paths this run touched. Never add everything, because sibling sessions may hold uncommitted work.
 
 ---
 
@@ -266,24 +287,20 @@ A fix enters at Level 3, propose-only. When the Sovereign authorizes a class, th
 > Secondary: Āsana. Tier 2 scans and the research rotation are intelligence-gathering posture. Observe fully before recommending. Findings return to the Sovereign; the skill never acts on its own observations beyond menu-bounded execution.
 > External surfaces touched (read-only by default): outbound URLs for link-rot scans (HEAD or short GET only, no auth bypass) and, under the graduated lane, external repos as a write-via-PR surface (additive or corrective fixes only, never a direct push to a main branch, never a copy or voice change).
 
+Two external write forms are gated:
+
+- A pull request only. Read the repo's default branch first. Never push to it directly.
+- An issue close only when the condition that filed the issue has cleared, with evidence in the closing comment.
+
 ---
 
 ## Model Routing
 
-Set `model` explicitly on every Agent call. Subagents inherit nothing.
+The orchestrator runs at the tier you opened the session with. Set `model` explicitly on every subagent dispatch. Never silently inherit.
 
-| Step | Default model | Rationale |
-|---|---|---|
-| Step 1: Load state | Haiku | Mechanical YAML read with known schema. |
-| Step 2: Compute eligibility | Haiku | Deterministic date math, no judgment. |
-| Step 3: Select items by priority | Sonnet | Light prioritization across heterogeneous items. |
-| Step 4: Announce plan | Opus | Sovereign-facing prose with capacity framing. |
-| Tier 1 mechanical items (T1-1, T1-2, T1-4) | Haiku | Mechanical path and slug corrections. |
-| Step 7: Tier 2 worker dispatch | Sonnet | Read-only scans with structured synthesis. |
-| Step 6 / 8b: opportunistic capture and self-refinement | Opus | Reflection on what was just observed; judgment-dense. |
-| Step 8: research rotation workers | Sonnet | Parallel research workers per category. |
-| Step 9: synthesize the decision board | Opus | Voice-aware classification, tier and autonomy judgment. |
-| Step 10: write log entry and board | Sonnet | Structured prose with state update. |
+- Scan, research and editor workers run on Sonnet.
+- Mechanical lookups and deterministic commands run on Haiku.
+- No worker runs above the orchestrator's tier.
 
 ---
 
