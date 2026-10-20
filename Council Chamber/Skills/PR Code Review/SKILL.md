@@ -77,7 +77,7 @@ Return the plan's location plus the scope this PR claims to deliver, or exactly 
 
 ### Step 4: Six-Lens Parallel Review (Sonnet x5, x6 when Step 3b found a plan)
 
-Launch the Sonnet agents simultaneously: Agents 1 to 5 always, Agent 6 only when Step 3b returned a plan. Each agent reads the PR diff and returns a list of issues with the reason each was flagged.
+Launch the Sonnet agents simultaneously: Agents 1 to 5 always, Agent 6 only when Step 3b returned a plan. Each agent reads the PR diff and returns a list of issues with the reason each was flagged. A lens that finds nothing returns "No findings" as a complete output. Padding a clean read with weak issues only feeds the later steps noise.
 
 **Agent 1: CLAUDE.md Compliance**
 Read the CLAUDE.md files identified in Step 2. Check whether the changes comply. Note: CLAUDE.md is guidance for Claude as it writes code, so not all instructions apply during review. Focus on instructions that clearly govern the kind of change being made. If reviewing a web repo, spot-check changed pages against basic markup hygiene as a default illustrative check unless your CLAUDE.md says otherwise: rendered `<title>` at a reasonable length, every `<img>` carries an `alt`, exactly one `<h1>` per page, and no duplicate heading that repeats the route's H1.
@@ -155,10 +155,11 @@ Every issue that survives Step 5b gets its own fresh validator subagent. **One p
 
 > You have no commitment to the original finding. If it is wrong, say so. False positives are common. Do not feel pressure to confirm.
 >
-> Answer three questions against the actual code:
+> Answer four questions against the actual code:
 > 1. **Is the issue real in the code as written?** Check for an existing guard, null check or validation the reviewer missed. Check for a misread type or signature. Check whether the pattern is intentional (comments, parallel handlers, project convention).
 > 2. **Did THIS diff introduce it?** Use git blame against the reviewed tree. A pre-existing, undisturbed line fails validation regardless of whether the underlying claim is true.
 > 3. **Is it not already handled elsewhere?** Check callers, middleware, framework defaults and parallel handlers.
+> 4. **What artifact confirms it?** Validated needs a quoted line at its location, a command output or a reproduced failure. A reading with no artifact returns `validated: false`, never true.
 >
 > For a Lens 6 (plan alignment) finding, question 2 becomes: **is the quoted plan line inside the scope this PR claims?** A plan line that belongs to a later phase or a different PR fails validation. For unimplemented scope, repeat the search yourself before you accept the absence.
 >
@@ -316,3 +317,5 @@ Three changes close it. The floor moves to anchor 75 and non-anchor values are n
 The general lesson: **false precision.** A threshold set against a continuous scale, applied to output from an anchored scale, drops a whole tier and looks like it is working. Worth naming explicitly wherever your project tracks engineering failure modes.
 
 **Lens 6, plan alignment.** The five lenses ask whether the code is right. None asked whether it is the code the plan authorized. The lens adds four things: a four-way verdict (a bare "differs" is noise), the unplanned-addition class, two-sided quoting (plan line plus diff line) and the absence rule for unimplemented scope (name the search). Step 3b's `no-plan-found` keeps the lens from costing a Sonnet dispatch on a PR with nothing to compare against. Prove it can fail before trusting it: run it on a fixture with planted departures and confirm it catches them, and rerun that fixture after any edit to the Lens 6 text.
+
+**Validated needs an artifact, and a lens may return nothing.** A fresh-context validator still shares the finder's priors, so it can agree with a finding for the same wrong reason the finder raised it. A validation should rest on something deterministic wherever one can exist: a quoted line at its location, a command output or a reproduced failure. Step 5c's validator brief therefore gains question 4, and a reading that produces no artifact returns `validated: false`. The same logic frees the lenses: a lens that finds nothing returns "No findings" as a complete output, because a lens pushed to produce something produces false positives. This follows from the measured precision of language-model reviewers on their own, which the template does not ship the research to show, so treat the rule as a cautious default and adjust it against your own run summaries.

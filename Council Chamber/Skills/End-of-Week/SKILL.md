@@ -155,6 +155,7 @@ No questions. Present the data. Sovereign reacts freely.
 - Synthesize the signal from Engagements 1-3 - what themes emerged as most alive or most significant?
 - Read current `Sovereign Command.md` - what is the current primary move?
 - Cross-reference with the upcoming calendar (Engagement A) and current North Star horizons
+- **Revisit triggers.** Regenerate the Decision Journal first: `node "Council Chamber/scripts/decision-journal.mjs"`. Nothing else runs it, so without this step the journal goes stale between hand runs. Then read its Revisit triggers section. Each condition gets a three-state done-check against its source: `open`, `resolved` or `unverifiable`. Only a condition that has fired reaches the briefing, with its evidence: "Decision of [date] asked to be revisited when [condition]; it has [evidence]." A condition whose source is unreachable returns `unverifiable` and carries forward. An empty section stays silent.
 
 **Briefing:**
 "Based on what you've shared and what I see, here's what seems most alive heading into next week: [1-3 distilled signals from all prior engagements]"

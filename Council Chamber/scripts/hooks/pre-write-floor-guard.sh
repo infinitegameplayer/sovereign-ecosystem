@@ -72,6 +72,24 @@ if [ "$TOOL_NAME" = "Write" ] || [ "$TOOL_NAME" = "Edit" ]; then
   # are squeezed to one.
   NORM=$(printf '%s' "$FILE_PATH" | tr '\\' '/' | tr -s '/')
 
+  # Resolve . and .. segments before matching. Until v3.18.0 the match read the
+  # path as spelled, so .claude/hooks/../CLAUDE.md and .claude/./settings.json
+  # reached a trust anchor in silence. awk rather than node, so the no-parser
+  # path gets the same resolution. Proven by the "smuggle" floor-guard cases in
+  # hooks-selftest.mjs.
+  NORM=$(printf '%s' "$NORM" | awk -F/ '{
+    n = 0
+    for (i = 1; i <= NF; i++) {
+      s = $i
+      if (s == ".") continue
+      if (s == ".." && n > 0 && seg[n] != ".." && seg[n] != "") { n--; continue }
+      seg[++n] = s
+    }
+    out = seg[1]
+    for (i = 2; i <= n; i++) out = out "/" seg[i]
+    print out
+  }')
+
   if printf '%s' "$NORM" | grep -qiE '\.claude/(settings\.json|CLAUDE\.md)$'; then
     mkdir -p "$VAULT_ROOT/.runtime" 2>/dev/null
     TIMESTAMP=$(date -u +"%Y-%m-%dT%H:%M:%SZ" 2>/dev/null || echo "unknown")

@@ -10,6 +10,15 @@
 // A line qualifies when it carries the #decision tag or the [Decision] marker.
 // Output: Council Chamber/Governance/Decision Journal.md, generated, never hand-edited.
 //
+// Two optional fields on a decision line. This header is the convention's home.
+//   Rejected: <the option turned down>     the road not taken, so the ruling is a choice
+//   Revisit when: <a number, an event or a ruled date>   what would reopen it
+// Example: "2026-01-14 [Decision] Seat at $4,500 flat. Rejected: $6,000. Revisit when: both seats fill."
+// The journal lists every entry carrying a revisit condition in its own section, and the
+// End-of-Week review reads that section. Patterns from Vektoris-AI ADRs ("Revisit when",
+// MIT) and a rejected-option rule restated in plain words. A trigger with no instrument
+// behind it is only a sentence, so the weekly read is the instrument.
+//
 // Usage:
 //   node "Council Chamber/scripts/decision-journal.mjs"
 //   node "Council Chamber/scripts/decision-journal.mjs" --check
@@ -93,7 +102,8 @@ function harvestLines(content, relPath) {
     const dateMatch = line.match(/\b(20\d{2}-\d{2}-\d{2})\b/);
     let text = line.replace(/^[-*]\s*/, '');
     if (text.length > ENTRY_MAX) text = text.slice(0, ENTRY_MAX) + ' ...';
-    out.push({ date: dateMatch ? dateMatch[1] : 'undated', text, source: relPath });
+    const revisit = (line.match(/Revisit when:\s*(.+?)\s*(?=Rejected:|$)/i) || [])[1] || null;
+    out.push({ date: dateMatch ? dateMatch[1] : 'undated', text, source: relPath, revisit });
   }
   return out;
 }
@@ -150,9 +160,23 @@ function render(decisions, today) {
     '',
     'A read-only lens over every #decision-tagged entry in this vault. Sources are canonical. This journal is generated output and is never edited by hand, because a manual edit is overwritten on the next run. Regenerate with `node "Council Chamber/scripts/decision-journal.mjs"`.',
     '',
+    'A decision line may carry two optional fields: `Rejected:` names the option turned down, and `Revisit when:` names the number, event or ruled date that would reopen it. Format and origin: the header of `decision-journal.mjs`.',
+    '',
     `Entries: ${decisions.length}. Grouped by month, newest first. Undated entries last.`,
     '',
   ];
+  const triggers = decisions.filter((d) => d.revisit);
+  lines.push('## Revisit triggers', '');
+  if (triggers.length === 0) {
+    lines.push('None recorded yet.', '');
+  } else {
+    lines.push('Read at the End-of-Week forward engagement. A condition that has fired surfaces with its evidence.', '');
+    for (const d of triggers) {
+      const link = d.source.replace(/\.md$/, '');
+      lines.push(`- **${d.date}** . [[${link}]] . Revisit when: ${d.revisit}`);
+    }
+    lines.push('');
+  }
   if (decisions.length === 0) {
     lines.push(
       'No tagged decisions yet. Tag a line with `#decision` anywhere in the vault and run this again.',
@@ -223,6 +247,33 @@ async function positiveControl() {
     const got = isTagged(c.line);
     rows.push({ name: c.name, ok: got === c.want, detail: `tagged=${got} want=${c.want}` });
   }
+
+  // The optional fields earn their own arm: the parse must lift the revisit
+  // condition out of the line, and the rendered journal must list it in the
+  // Revisit triggers section while leaving a plain decision out of it.
+  const fieldLines = [
+    '- 2026-01-14 [Decision] Seat at flat rate. Rejected: tiered pricing. Revisit when: both seats fill.',
+    '- 2026-01-15 #decision Plain decision with no condition.',
+  ].join('\n');
+  const parsed = harvestLines(fieldLines, 'Library/fields.md');
+  rows.push({
+    name: 'parses a Revisit when field and stops at Rejected:',
+    ok: parsed[0].revisit === 'both seats fill.' && parsed[1].revisit === null,
+    detail: `revisit=${JSON.stringify(parsed.map((p) => p.revisit))}`,
+  });
+  const rendered = render(parsed, '2026-01-16');
+  const triggerSection = (rendered.split('## Revisit triggers')[1] || '').split(/\n## /)[0];
+  rows.push({
+    name: 'renders a Revisit triggers section with the condition',
+    ok: triggerSection.includes('Revisit when: both seats fill.') && !triggerSection.includes('Plain decision'),
+    detail: triggerSection.includes('Revisit when: both seats fill.') ? 'listed' : 'MISSING',
+  });
+  const emptyRendered = render([], '2026-01-16');
+  rows.push({
+    name: 'renders None recorded yet when no condition exists',
+    ok: emptyRendered.includes('## Revisit triggers\n\nNone recorded yet.'),
+    detail: 'empty vault',
+  });
 
   // And one end to end, because a pure function passing is not the same as the
   // script refusing to write. This stages a real vault and checks the file on disk.

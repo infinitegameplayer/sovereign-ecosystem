@@ -6,6 +6,24 @@ Each entry corresponds to one publish cycle. For full implementation details, se
 
 ---
 
+## v3.18.0, 2026-10-20
+
+The Outward Gate.
+
+**If you installed any version, apply this update.** Through v3.17.0 no shipped hook watched a connected-service tool, and the trust-anchor guard let `.claude/hooks/../CLAUDE.md` and `.claude/./settings.json` through in silence.
+
+- **New: the Outward Gate.** Every `mcp__` tool that is not a read, and any script you name, asks once per service per session, auto mode included. Consent is recorded only after the call ran. Fails closed on a bad payload or a broken config. Copy `outward-gate.config.example.json` to `outward-gate.config.json` to let a local-only server pass or to name your outward scripts.
+- **The trust-anchor guard resolves `.` and `..` before it matches.** Planted against v3.17.0, three of seven spellings that should surface stayed silent. Four smuggle cases join the selftest, each watched failing first.
+- **Every PreToolUse guard fails closed when it crashes:** `"onFailure": "block"`, fired on Claude Code v2.1.304 and needing v2.1.295 or later.
+- **Three instruments with controls in CI:** `plan-hash.mjs` (an approval names its plan), `quote-check.mjs` (a quotation is found in its source) and `decay-lint.mjs` (the new decay face). Claim Integrity also gains the ruling face.
+- **Four skills catch up:** PR Code Review (validated needs an artifact, a lens may return "No findings"), Source Harvest (the commit read is recorded), End-of-Week (revisit triggers) and Pending Plan Implementation (the plan-hash check). The Decision Journal carries `Rejected:` and `Revisit when:`.
+
+A tool that reaches outside the vault was the one door no guard stood in.
+
+Full detail and the implementation spec: `.github/UPDATES/2026-10-20-v3.18.0-the-outward-gate.md`.
+
+---
+
 ## v3.17.0, 2026-10-16
 
 Three Verbs.

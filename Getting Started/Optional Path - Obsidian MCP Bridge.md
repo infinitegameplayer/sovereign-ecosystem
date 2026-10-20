@@ -112,6 +112,8 @@ The cyanheads/obsidian-mcp-server supports a `OBSIDIAN_ENABLE_WRITES` environmen
 
 Treat this as a deliberate expansion, not a default. Read operations carry no risk of unintended change. Write operations do.
 
+The Outward Gate (`Council Chamber/scripts/hooks/outward-gate.mjs`) asks before any connected-service tool that is not a read, so the first write through this bridge in each session asks for your yes, and later writes in that session pass. This server only writes inside your own vault. If you want it to pass whole, copy `outward-gate.config.example.json` to `outward-gate.config.json` in the same folder and add `"obsidian"` to `openServers`.
+
 ## Completion Signal
 
 This optional path is complete when:

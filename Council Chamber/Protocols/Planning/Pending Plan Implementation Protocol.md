@@ -86,6 +86,14 @@ Keep it to one line so the plan note stays the source of truth and `Sovereign Co
 11. Sync Pending Plans Index (when Pending Plans changed)
    - Update `Council Chamber/Pending Plans/Index.md` in the same pass as the approved status, archive or move changes, so the Index never describes a state the container has left.
 
+## An Approval Names Its Plan
+- When a plan moves to `approved`, the same edit writes `approved_hash:` into its frontmatter. The value is the output of `node "Council Chamber/scripts/plan-hash.mjs" <plan>`.
+- The hash covers what the plan says it will do. It ignores frontmatter and the sections a run writes: the Activity Log, Applicability Updates, Partial Implementation Notes, Reconciliation Notes, Evidence / Implementation Refs and the Implementation sections. It holds still while the plan executes and moves only when its scope does.
+- Step 1 of the Pending Plan Implementation skill runs `plan-hash.mjs --verify`. On a change since approval, show the Sovereign what moved (`git log -p` on the plan since the approval date) and execute only after their yes.
+- A plan approved before it carried `approved_hash` reads as unpinned. Pin it at its next approval.
+- Why: an approval without a named version cannot be told apart from approval of a later edit. Two open-source projects reached the same rule on their own: claude-obsidian binds an approval to the expanded plan by hash, and myPKA's reviewer verdicts name the bytes they cleared (both MIT).
+- The instrument proves itself: `node "Council Chamber/scripts/plan-hash.mjs" --positive-control` passes an unchanged plan, fails a plan whose scope changed and fails its own mutant check if the hash stops seeing scope.
+
 ## Recommended Question Set (Implementation Conversation)
 - What part of this Pending Plan is approved to implement right now?
 - What should stay out of scope in this run?

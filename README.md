@@ -13,6 +13,7 @@ The point is to build a strong foundation and then do real things with it.
 
 This is a template for:
 - governance
+- safety checks that come with tests that prove they work
 - capture and routing
 - planning
 - session rhythm

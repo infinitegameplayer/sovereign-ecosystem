@@ -2,6 +2,7 @@
 status: proposed
 created: 
 approved-date: 
+approved_hash: 
 source: 
 links: 
 timing: 

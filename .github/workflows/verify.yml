@@ -98,6 +98,32 @@ jobs:
       - name: Doctrine counters share one records boundary
         run: node "Council Chamber/scripts/doctrine-records-selftest.mjs"
 
+      # Three instruments for Claim Integrity, new in v3.18.0. Each carries a
+      # control that was watched failing on a mutant before it was trusted.
+      # An approval names its plan: an unchanged plan passes, a scope change fails.
+      - name: Plan hash positive control
+        run: node "Council Chamber/scripts/plan-hash.mjs" --positive-control
+
+      # A quotation is found in its source or reported missing. The checker
+      # proves itself with a present and an absent control before judging.
+      - name: Quote check positive control
+        run: node "Council Chamber/scripts/quote-check.mjs" --positive-control
+
+      # The decay face: a dated or volatile canonical line names what expires it.
+      # Both directions on a real checkout: it must find doctrine here, and it
+      # must fail when aimed at nothing.
+      - name: Decay instrument positive control
+        run: node "Council Chamber/scripts/decay-lint.mjs" --positive-control
+
+      - name: Decay instrument reads a fresh checkout and refuses an empty root
+        run: |
+          node "Council Chamber/scripts/decay-lint.mjs" >/dev/null
+          if SOVEREIGN_VAULT_ROOT="$RUNNER_TEMP" node "Council Chamber/scripts/decay-lint.mjs" >/dev/null 2>&1; then
+            echo "decay-lint reported success on an empty root."
+            exit 1
+          fi
+          echo "  ok  decay-lint read doctrine here and refused an empty root"
+
       # The first script every Sovereign runs. From v3.10.0 to v3.12.0 it
       # personalized only Council Chamber/ and left the trust anchor carrying
       # raw tokens, while reporting success. Fired on a throwaway copy.

@@ -6,7 +6,8 @@
         "hooks": [
           {
             "type": "command",
-            "command": "SOVEREIGN_VAULT_ROOT=\"$CLAUDE_PROJECT_DIR\" bash \"$CLAUDE_PROJECT_DIR/Council Chamber/scripts/hooks/pre-write-floor-guard.sh\""
+            "command": "SOVEREIGN_VAULT_ROOT=\"$CLAUDE_PROJECT_DIR\" bash \"$CLAUDE_PROJECT_DIR/Council Chamber/scripts/hooks/pre-write-floor-guard.sh\"",
+            "onFailure": "block"
           }
         ]
       },
@@ -15,7 +16,18 @@
         "hooks": [
           {
             "type": "command",
-            "command": "SOVEREIGN_VAULT_ROOT=\"$CLAUDE_PROJECT_DIR\" bash \"$CLAUDE_PROJECT_DIR/Council Chamber/scripts/hooks/pre-tool-approval-gate.sh\""
+            "command": "SOVEREIGN_VAULT_ROOT=\"$CLAUDE_PROJECT_DIR\" bash \"$CLAUDE_PROJECT_DIR/Council Chamber/scripts/hooks/pre-tool-approval-gate.sh\"",
+            "onFailure": "block"
+          }
+        ]
+      },
+      {
+        "matcher": "^mcp__.*|^Bash$|^PowerShell$",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "SOVEREIGN_VAULT_ROOT=\"$CLAUDE_PROJECT_DIR\" bash \"$CLAUDE_PROJECT_DIR/Council Chamber/scripts/hooks/outward-gate.sh\"",
+            "onFailure": "block"
           }
         ]
       }
@@ -74,6 +86,15 @@
           {
             "type": "command",
             "command": "SOVEREIGN_VAULT_ROOT=\"$CLAUDE_PROJECT_DIR\" bash \"$CLAUDE_PROJECT_DIR/Council Chamber/scripts/hooks/post-bash-move-audit.sh\""
+          }
+        ]
+      },
+      {
+        "matcher": "^mcp__.*|^Bash$|^PowerShell$",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "SOVEREIGN_VAULT_ROOT=\"$CLAUDE_PROJECT_DIR\" bash \"$CLAUDE_PROJECT_DIR/Council Chamber/scripts/hooks/outward-gate.sh\""
           }
         ]
       }

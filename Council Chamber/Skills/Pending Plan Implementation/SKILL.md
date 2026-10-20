@@ -30,6 +30,8 @@ Run these gates before Step 1. All must pass before execution begins.
 
 1. Confirm the target Pending Plan and read back plan intent, risk, affected areas and current breadcrumb context.
 
+   **Is this the version approved?** Run `node "Council Chamber/scripts/plan-hash.mjs" --verify "<plan>"`. Exit 0: proceed. Exit 1: the plan's scope changed after the Sovereign approved it. Show them what moved (`git log -p` on the plan since the approval date) and execute only after their yes. Exit 3: unpinned, approved before the plan carried `approved_hash`. Read the scope back as usual and pin it at the next approval. Rule: [[Council Chamber/Protocols/Planning/Pending Plan Implementation Protocol]], "An approval names its plan".
+
    Surface the plan's stated goal and its "Distinct from" contrast if one is present. "Building toward X. Distinct from Y." This is the within-session drift detection point. If the plan does not have an explicit contrast, ask the Sovereign to name one before execution begins.
 2. Document `Implementation Snapshot (When Executing)` and `Approved Execution Scope (This Run)`. Record the starting commit (`git rev-parse HEAD` in each repo the run will touch). The Step 5 plan-alignment check diffs from it.
 3. Confirm exactly what is approved to implement now and what remains out of scope.

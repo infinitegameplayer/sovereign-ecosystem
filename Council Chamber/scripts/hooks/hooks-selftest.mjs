@@ -106,8 +106,8 @@ mkdirSync(NO_NODE_DIR, { recursive: true });
 writeFileSync(`${NO_NODE_DIR}/node`, '#!/bin/sh\nexit 127\n', { mode: 0o755 });
 const PATH_KEY = Object.keys(process.env).find((k) => k.toUpperCase() === 'PATH') || 'PATH';
 
-function fire(hookFile, payload, { vaultRoot = VAULT, cwd = VAULT, nodeBroken = false } = {}) {
-  const env = { ...process.env };
+function fire(hookFile, payload, { vaultRoot = VAULT, cwd = VAULT, nodeBroken = false, extraEnv = {} } = {}) {
+  const env = { ...process.env, ...extraEnv };
   if (nodeBroken) env[PATH_KEY] = `${NO_NODE_DIR}${path.delimiter}${env[PATH_KEY] || ''}`;
   if (vaultRoot === null) delete env.SOVEREIGN_VAULT_ROOT;
   else env.SOVEREIGN_VAULT_ROOT = vaultRoot;
@@ -172,6 +172,24 @@ const bash = (command) => ({ tool_name: 'Bash', tool_input: { command } });
 
   r = fire(H, write(`${VAULT}/.claude/CLAUDE.md`.replace(/\//g, '\\')), { nodeBroken: true });
   record('floor-guard: reads a backslash path without node', /TRUST-ANCHOR/.test(r.out) && r.code === 0, `code=${r.code} out=${r.out.trim().slice(0, 40)}`, 'reacts');
+
+  // Smuggles: a trust anchor reached by another spelling of its path. Until
+  // v3.18.0 the guard matched the path as spelled, and the first three of these
+  // passed in silence when planted. Named one per vector after
+  // odere-pro/claude-wiki-pages-plugin's protect-raw.bats (MIT).
+  const smuggles = [
+    ['through ../', `${VAULT}/.claude/hooks/../CLAUDE.md`, {}],
+    ['through ./', `${VAULT}/.claude/./settings.json`, {}],
+    ['backslashes with ..', `${VAULT}/.claude/agents/../settings.json`.replace(/\//g, '\\'), {}],
+    ['through ../ without node', `${VAULT}/.claude/hooks/../CLAUDE.md`, { nodeBroken: true }],
+  ];
+  for (const [how, file, opts] of smuggles) {
+    r = fire(H, write(file), opts);
+    record(`floor-guard: SMUGGLE ${how} still surfaces`, /TRUST-ANCHOR/.test(r.out) && r.code === 0, `code=${r.code} out=${r.out.trim().slice(0, 40)}`, 'reacts');
+  }
+
+  r = fire(H, write(`${VAULT}/.claude/../Scriptorium/clean.md`));
+  record('floor-guard: quiet on a traversal that lands on an ordinary file', !/TRUST-ANCHOR/.test(r.out) && r.code === 0, `code=${r.code}`, 'quiet');
 }
 
 // ── the compact pair ────────────────────────────────────────────────────────
@@ -302,6 +320,88 @@ const bash = (command) => ({ tool_name: 'Bash', tool_input: { command } });
   record('move-audit: does not stall on a short-named external move', elapsed < 10000 && !/move audit/i.test(r.out), `elapsed=${elapsed}ms`, 'quiet');
 }
 
+// ── outward-gate.sh ─────────────────────────────────────────────────────────
+// Acts that leave the vault: connected-service tools (mcp__*) and the outward
+// scripts the Sovereign names in outward-gate.config.json.
+// Consent is once per service per session and is recorded only on PostToolUse, so
+// a denied call can never set it. An "ask" forces a prompt even in auto mode, so
+// the cases look for the ask decision, never for a block. The config is a fixture
+// in the temp vault, reached through OUTWARD_GATE_CONFIG; the shipped example is
+// empty, so the default install has nothing open and no script named.
+{
+  const H = hook('outward-gate.sh');
+  const NO_CONFIG = { extraEnv: { OUTWARD_GATE_CONFIG: `${VAULT}/no-such-outward-gate.config.json` } };
+  const CONFIG_FILE = `${VAULT}/outward-gate.config.json`;
+  const WITH_CONFIG = { extraEnv: { OUTWARD_GATE_CONFIG: CONFIG_FILE } };
+  let seq = 0;
+  const session = () => `selftest-${process.pid}-${++seq}`;
+  const mcp = (tool_name, sid, event = 'PreToolUse') => ({ hook_event_name: event, session_id: sid, tool_name, tool_input: {} });
+  const sh = (command, sid, event = 'PreToolUse') => ({ hook_event_name: event, session_id: sid, tool_name: 'Bash', tool_input: { command } });
+  const asks = (r) => /"permissionDecision":"ask"/.test(r.out);
+  const silent = (r) => r.code === 0 && !/permissionDecision/.test(r.out);
+
+  let sid = session();
+  let r = fire(H, mcp('mcp__acme__create_post', sid), NO_CONFIG);
+  record('outward-gate: asks on the first write to a service', asks(r), `code=${r.code} out=${r.out.trim().slice(0, 40)}`, 'reacts');
+  record('outward-gate: the ask names the service and the session', /acme/.test(r.out) && /rest of this session/.test(r.out), `out=${r.out.trim().slice(0, 40)}`, 'reacts');
+
+  // A denied call never ran, so PostToolUse never fired, so consent is not set.
+  r = fire(H, mcp('mcp__acme__create_post', sid), NO_CONFIG);
+  record('outward-gate: a denied call leaves no consent behind', asks(r), `code=${r.code} out=${r.out.trim().slice(0, 40)}`, 'reacts');
+
+  fire(H, mcp('mcp__acme__create_post', sid, 'PostToolUse'), NO_CONFIG);
+  const again = fire(H, mcp('mcp__acme__delete_post', sid), NO_CONFIG);
+  const other = fire(H, mcp('mcp__other__create_post', sid), NO_CONFIG);
+  const consentFile = path.join(VAULT, '.runtime', 'outward-consent', `${sid}.json`);
+  record(
+    'outward-gate: passes after consent is recorded, only for that service',
+    existsSync(consentFile) && silent(again) && asks(other),
+    `recorded=${existsSync(consentFile)} same=${silent(again) ? 'pass' : 'ask'} other=${asks(other) ? 'ask' : 'pass'}`,
+    'reacts'
+  );
+
+  sid = session();
+  r = fire(H, mcp('mcp__acme__list_posts', sid), NO_CONFIG);
+  record('outward-gate: a read verb passes', silent(r), `code=${r.code} out=${r.out.trim().slice(0, 40)}`, 'quiet');
+
+  r = fire(H, mcp('mcp__acme__export_all', sid), NO_CONFIG);
+  record('outward-gate: an export verb is not a read verb, it asks', asks(r), `code=${r.code} out=${r.out.trim().slice(0, 40)}`, 'reacts');
+
+  // Fails closed: a payload that is not a JSON object, and one that is an array.
+  r = fire(H, 'not an object', NO_CONFIG);
+  record('outward-gate: fails closed on a payload that is not an object', r.code === 2, `code=${r.code}`, 'reacts');
+  r = fire(H, [1, 2], NO_CONFIG);
+  record('outward-gate: fails closed on an array payload', r.code === 2, `code=${r.code}`, 'reacts');
+
+  // Write and Edit are never matched, so a broken gate always leaves the repair door.
+  r = fire(H, { hook_event_name: 'PreToolUse', session_id: sid, tool_name: 'Write', tool_input: { file_path: CLEAN } }, NO_CONFIG);
+  record('outward-gate: Write is never matched', silent(r), `code=${r.code} out=${r.out.trim().slice(0, 40)}`, 'quiet');
+
+  // Configured lists: a named outward script asks, --dry-run passes, an unlisted
+  // script passes, a listed open server passes.
+  writeFileSync(CONFIG_FILE, JSON.stringify({ openServers: ['localdocs'], outwardScripts: { 'send-newsletter': 'resend' } }));
+  sid = session();
+  r = fire(H, sh('node "Council Chamber/scripts/send-newsletter.mjs" --live', sid), WITH_CONFIG);
+  record('outward-gate: a configured outward script asks', asks(r) && /resend/.test(r.out), `code=${r.code} out=${r.out.trim().slice(0, 40)}`, 'reacts');
+  r = fire(H, sh('node "Council Chamber/scripts/send-newsletter.mjs" --dry-run', sid), WITH_CONFIG);
+  record('outward-gate: --dry-run on a configured script passes', silent(r), `code=${r.code} out=${r.out.trim().slice(0, 40)}`, 'quiet');
+  r = fire(H, sh('node "Council Chamber/scripts/link-checker.mjs"', sid), WITH_CONFIG);
+  record('outward-gate: a script not in the config passes', silent(r), `code=${r.code} out=${r.out.trim().slice(0, 40)}`, 'quiet');
+  r = fire(H, mcp('mcp__localdocs__create_note', sid), WITH_CONFIG);
+  record('outward-gate: a configured open server passes whole', silent(r), `code=${r.code} out=${r.out.trim().slice(0, 40)}`, 'quiet');
+  r = fire(H, sh('node "Council Chamber/scripts/send-newsletter.mjs" --live', sid), NO_CONFIG);
+  record('outward-gate: with no config the default list is empty', silent(r), `code=${r.code} out=${r.out.trim().slice(0, 40)}`, 'quiet');
+
+  // A config that exists but is unusable must never open the gate.
+  writeFileSync(CONFIG_FILE, '{ "outwardScripts": ');
+  r = fire(H, sh('node "Council Chamber/scripts/send-newsletter.mjs" --live', sid), WITH_CONFIG);
+  record('outward-gate: a malformed config fails closed', r.code === 2 && /does not parse/.test(r.out), `code=${r.code} out=${r.out.trim().slice(0, 40)}`, 'reacts');
+  writeFileSync(CONFIG_FILE, JSON.stringify({ openServers: 'localdocs' }));
+  r = fire(H, mcp('mcp__acme__list_posts', sid), WITH_CONFIG);
+  record('outward-gate: a config of the wrong shape fails closed', r.code === 2, `code=${r.code} out=${r.out.trim().slice(0, 40)}`, 'reacts');
+  rmSync(CONFIG_FILE, { force: true });
+}
+
 // ── the registration audit ──────────────────────────────────────────────────
 // What this suite cannot see. Every case above fires its hook directly, which
 // proves the script works and says nothing about whether a session will ever
@@ -373,6 +473,44 @@ if (audit.error) {
       ok: seesPS,
       detail: seesPS ? 'matcher includes PowerShell' : 'BLIND to the tool that causes the damage',
     });
+  }
+
+  // The Outward Gate must be reachable from every tool it guards, and from none
+  // it must never hold. Each matcher is a regex, so each registration's matcher
+  // is tested on its own against each tool name. Joining several matchers into
+  // one string builds a different regex ("Write|Edit Bash" has the alternative
+  // "Edit Bash") and calls a correctly wired guard blind.
+  const gateWiring = [
+    ['PreToolUse', ['mcp__acme__create_post', 'Bash', 'PowerShell'], ['Write', 'Edit']],
+    ['PostToolUse', ['mcp__acme__create_post', 'Bash', 'PowerShell'], ['Write', 'Edit']],
+  ];
+  for (const [event, mustReach, mustNotReach] of gateWiring) {
+    const hits = audit.registered.filter((r) => r.event === event && r.command.includes('outward-gate.sh'));
+    const reaches = (tool) => hits.some((h) => { try { return new RegExp(h.matcher === '(all)' ? '.*' : h.matcher).test(tool); } catch { return false; } });
+    const blind = mustReach.filter((t) => !reaches(t));
+    const wall = mustNotReach.filter((t) => reaches(t));
+    registrationRows.push({
+      name: `registration: outward-gate.sh on ${event}`,
+      ok: hits.length > 0 && blind.length === 0 && wall.length === 0,
+      detail: hits.length === 0 ? 'NOT REGISTERED' : blind.length ? `BLIND TO: ${blind.join(', ')}` : wall.length ? `MATCHES (must never): ${wall.join(', ')}` : `reaches ${mustReach.length} tools, spares Write and Edit`,
+    });
+  }
+
+  // Every PreToolUse command hook must carry onFailure "block", so a guard that
+  // cannot start holds the call instead of waving it through.
+  try {
+    const settings = JSON.parse(readFileSync(path.join(ROOT, '.claude', 'settings.json'), 'utf8'));
+    const open = [];
+    for (const group of settings.hooks?.PreToolUse || []) {
+      for (const h of group.hooks || []) if (h.onFailure !== 'block') open.push(path.basename((h.command || '').replace(/"\s*$/, '')));
+    }
+    registrationRows.push({
+      name: 'registration: every PreToolUse hook blocks on failure',
+      ok: open.length === 0,
+      detail: open.length === 0 ? 'onFailure "block" on all' : `no onFailure "block": ${open.join(', ')}`,
+    });
+  } catch (e) {
+    registrationRows.push({ name: 'registration: every PreToolUse hook blocks on failure', ok: false, detail: `cannot read: ${e.message}` });
   }
 }
 

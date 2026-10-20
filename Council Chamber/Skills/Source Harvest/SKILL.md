@@ -53,6 +53,8 @@ Fetch and list all components. Typical targets:
 - Protocol or governance documents
 - Supporting scripts
 
+Record the commit read for each repo, its SHA and date (`gh api repos/OWNER/REPO/commits/BRANCH --jq '.sha[0:12] + " " + .commit.committer.date'`; on Git Bash for Windows prefix the command with `MSYS_NO_PATHCONV=1`), in the inventory and in the report. A quote checked against a branch can fail against next week's text with nothing to say why; a pinned commit lets anyone re-read the same bytes. Size each repo from its tree, never from its README: a description's counts are a claim (see Refinements, 2026-10-20 second pass).
+
 Present the inventory to the Sovereign: "Found [N] components: [brief list by category]." Confirm before proceeding to classification.
 
 ### Step 3: Read Every Component
@@ -90,7 +92,7 @@ Ignore:  [count]
 For each Enrich: specify the exact change to the target file (what to add, where, why).
 For each Adopt: draft the ecosystem-adapted version in outline or propose a Pending Plan if scope requires more than one session.
 
-Before the report quotes the source, check every quote against the source text with an instrument that carries a known-present and a known-absent control, and trust its counts only after the present control is found and the absent one is not (see Refinements, 2026-10-06).
+Before the report quotes the source, check every quote against the source text with an instrument that carries a known-present and a known-absent control, and trust its counts only after the present control is found and the absent one is not (see Refinements, 2026-10-06). The instrument is `node "Council Chamber/scripts/quote-check.mjs" --doc <report> --source <reader reports or clone> [--source <url>]`; it runs both controls itself and stops at exit 2 if either misbehaves. Run it on the finished report, not only on worker quotes: its first run caught three misquotes in the orchestrator's own prose (see Refinements, 2026-10-20).
 
 ### Step 6: Approval Gate
 
@@ -214,6 +216,18 @@ _Date-stamped entries for harvest decisions and calibration findings that emerge
 **Template note:** As you run Source Harvests, log your decisions here. The refinements section becomes a precedent record, what you adopted and why, what you rejected, what surprised you. Future harvests reference this section to avoid re-evaluating patterns that have already been classified.
 
 > Also installs standalone from https://www.infinitegameos.io/skills/source-harvest (dual-distribution: this copy lives in your vault, the public plugin updates independently).
+
+**2026-10-20, second pass:** six more open-source Obsidian and Claude Code repos (four MIT, two ideas only)
+Adopt 0, Enrich 5, Defer 7, Ignore 32 (21 covered, 11 contrast). All approved and executed the same session.
+
+**The repos that sell enforcement were the ones whose gates did not hold.** One signed its evidence with a salt kept in eight of its own hook files. One ended its write gate on exit 1, which the hooks reference says lets the action go ahead. One exited 0 on every branch of a gate. Read a gate's exit path before crediting it as a gate, and check the exit code against the current hooks reference, not memory.
+
+**A README's counts and license line are claims.** One repo said 44, 47 and 48 hooks in three files and ended its README on a bare "MIT" with no license file. Step 2 now sizes from the tree and records the commit read.
+
+**2026-10-20:** open-source Obsidian and Claude Code repos (62 repos across eight themes, mostly MIT)
+Adopt 3, Enrich 6, Defer 14, Ignore 16 (8 covered, 8 contrast). All approved and executed the same session.
+
+**A quote checker belongs in the toolbox, not in each harvest.** Three harvests running had each built a throwaway one. This run shipped `quote-check.mjs`, and its first use found three misquotes in the report's own prose, plus a worker quote filed under the wrong path. Step 5 now names it.
 
 **2026-10-15:** a large open-source skills repo (MIT label, well over a hundred skills, per-skill licenses vary)
 
