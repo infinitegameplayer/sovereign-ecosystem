@@ -117,7 +117,7 @@ function fire(hookFile, payload, { vaultRoot = VAULT, cwd = VAULT, nodeBroken = 
     cwd,
     env,
   });
-  return { code: r.status, out: (r.stdout || '') + (r.stderr || '') };
+  return { code: r.status, out: (r.stdout || '') + (r.stderr || ''), stdout: r.stdout || '' };
 }
 
 const write = (file_path) => ({ tool_name: 'Write', tool_input: { file_path } });
@@ -190,6 +190,44 @@ const bash = (command) => ({ tool_name: 'Bash', tool_input: { command } });
 
   r = fire(H, write(`${VAULT}/.claude/../Scriptorium/clean.md`));
   record('floor-guard: quiet on a traversal that lands on an ordinary file', !/TRUST-ANCHOR/.test(r.out) && r.code === 0, `code=${r.code}`, 'quiet');
+
+  // v3.19.0: the rest of the self-modification surface. The Shai-Hulud npm worm
+  // wave of October 2026 persists by writing .claude/settings.json and
+  // .vscode/tasks.json into any repo it reaches, so these match outside the vault
+  // too. Each "surfaces" case below stayed silent on the v3.18.0 guard.
+  const OTHER = path.join(os.tmpdir(), 'se-other-repo').replace(/\\/g, '/');
+  const newAnchors = [
+    ['.mcp.json in the vault', `${VAULT}/.mcp.json`, {}],
+    ['the home .claude.json', `${VAULT}/home/.claude.json`, {}],
+    ['an installed plugin hook', `${VAULT}/home/.claude/plugins/cache/x/hooks/run.sh`, {}],
+    ['.vscode/tasks.json in another repo (the worm shape)', `${OTHER}/.vscode/tasks.json`, {}],
+    ['.mcp.json with backslashes, without node', `${VAULT}/.mcp.json`.replace(/\//g, '\\'), { nodeBroken: true }],
+  ];
+  for (const [what, file, opts] of newAnchors) {
+    r = fire(H, write(file), opts);
+    record(`floor-guard: surfaces ${what}`, /TRUST-ANCHOR/.test(r.out) && r.code === 0, `code=${r.code} out=${r.out.trim().slice(0, 40)}`, 'reacts');
+  }
+  r = fire(H, write(`${OTHER}/.claude/settings.json`));
+  record('floor-guard: surfaces .claude/settings.json in another repo (the worm shape)', /TRUST-ANCHOR/.test(r.out) && r.code === 0, `code=${r.code}`, 'reacts');
+  for (const [what, file] of [
+    ['.vscode/settings.json', `${OTHER}/.vscode/settings.json`],
+    ['a settings.json outside .claude', `${VAULT}/Council Chamber/scripts/settings.json`],
+    ['an mcp.json with no leading dot', `${VAULT}/Scriptorium/mcp.json`],
+    ['a .claude/plugins-notes.md beside the plugin folder', `${VAULT}/.claude/plugins-notes.md`],
+  ]) {
+    r = fire(H, write(file));
+    record(`floor-guard: quiet on ${what}`, !/TRUST-ANCHOR/.test(r.out) && r.code === 0, `code=${r.code} out=${r.out.trim().slice(0, 40)}`, 'quiet');
+  }
+
+  // The surface has to reach the session. A hook that exits 0 shows its stderr to
+  // nobody outside verbose mode, so the guard prints a systemMessage on stdout,
+  // which Claude Code shows. Until v3.19.0 it wrote stderr alone.
+  for (const [how, opts] of [['with node', {}], ['without node', { nodeBroken: true }]]) {
+    r = fire(H, write(`${VAULT}/.claude/settings.json`), opts);
+    let msg = '';
+    try { msg = String(JSON.parse(r.stdout.trim()).systemMessage || ''); } catch { msg = ''; }
+    record(`floor-guard: the surface is a systemMessage the session shows, ${how}`, /TRUST-ANCHOR/.test(msg) && msg.includes('.claude/settings.json') && r.code === 0, `code=${r.code} stdout=${r.stdout.trim().slice(0, 60)}`, 'reacts');
+  }
 }
 
 // ── the compact pair ────────────────────────────────────────────────────────
@@ -399,6 +437,47 @@ const bash = (command) => ({ tool_name: 'Bash', tool_input: { command } });
   writeFileSync(CONFIG_FILE, JSON.stringify({ openServers: 'localdocs' }));
   r = fire(H, mcp('mcp__acme__list_posts', sid), WITH_CONFIG);
   record('outward-gate: a config of the wrong shape fails closed', r.code === 2, `code=${r.code} out=${r.out.trim().slice(0, 40)}`, 'reacts');
+  rmSync(CONFIG_FILE, { force: true });
+
+  // v3.19.0: CLI deploys and secret writes ask with no config at all. Each "asks"
+  // case below passed in silence on the v3.18.0 gate.
+  const ps = (command, sid) => ({ hook_event_name: 'PreToolUse', session_id: sid, tool_name: 'PowerShell', tool_input: { command } });
+  for (const [label, make, service] of [
+    ['flyctl deploy, PowerShell form', (s) => ps('flyctl deploy .\\app -a my-app --remote-only 2>&1', s), 'fly'],
+    ['fly secrets set', (s) => sh('fly secrets set API_TOKEN=x -a my-app', s), 'fly'],
+    ['npx wrangler deploy after cd', (s) => sh('cd worker && npx wrangler deploy', s), 'cloudflare'],
+    ['wrangler secret put', (s) => sh('wrangler secret put API_KEY', s), 'cloudflare'],
+    ['vercel deploy --prod', (s) => sh('vercel deploy --prod --yes', s), 'vercel'],
+    ['vercel env add', (s) => sh('vercel env add API_KEY production', s), 'vercel'],
+    ['npm run deploy', (s) => sh('npm run deploy', s), 'deploy'],
+  ]) {
+    r = fire(H, make(session()), NO_CONFIG);
+    record(`outward-gate: asks before ${label}`, asks(r) && r.out.includes(`outward act on ${service} `), `code=${r.code} out=${r.out.trim().slice(0, 40)}`, 'reacts');
+  }
+  for (const [label, command] of [
+    ['flyctl status', 'flyctl status -a my-app'],
+    ['flyctl ssh running a script', 'flyctl ssh console -a my-app -C "node /app/probe.mjs"'],
+    ['wrangler dev', 'npx wrangler dev'],
+    ['vercel env ls', 'vercel env ls production'],
+    ['a deploy with --dry-run', 'npx wrangler deploy --dry-run'],
+    ['npm run deploy:check', 'npm run deploy:check'],
+  ]) {
+    r = fire(H, sh(command, session()), NO_CONFIG);
+    record(`outward-gate: silent on ${label}`, silent(r), `code=${r.code} out=${r.out.trim().slice(0, 40)}`, 'quiet');
+  }
+
+  // outwardCommands: the Sovereign names their own deploy commands, matched as whole
+  // words at the start of a command, so a longer word sharing the prefix passes.
+  writeFileSync(CONFIG_FILE, JSON.stringify({ outwardCommands: { 'firebase deploy': 'firebase' } }));
+  r = fire(H, sh('cd site && firebase deploy --only hosting', session()), WITH_CONFIG);
+  record('outward-gate: a configured outward command asks', asks(r) && r.out.includes('outward act on firebase '), `code=${r.code} out=${r.out.trim().slice(0, 40)}`, 'reacts');
+  r = fire(H, sh('firebase deploy:list', session()), WITH_CONFIG);
+  record('outward-gate: a longer word sharing a configured prefix passes', silent(r), `code=${r.code} out=${r.out.trim().slice(0, 40)}`, 'quiet');
+  r = fire(H, sh('firebase emulators:start', session()), WITH_CONFIG);
+  record('outward-gate: an unconfigured subcommand passes', silent(r), `code=${r.code} out=${r.out.trim().slice(0, 40)}`, 'quiet');
+  writeFileSync(CONFIG_FILE, JSON.stringify({ outwardCommands: ['firebase deploy'] }));
+  r = fire(H, sh('git status', session()), WITH_CONFIG);
+  record('outward-gate: an outwardCommands list of the wrong shape fails closed', r.code === 2 && /outwardCommands/.test(r.out), `code=${r.code} out=${r.out.trim().slice(0, 60)}`, 'reacts');
   rmSync(CONFIG_FILE, { force: true });
 }
 

@@ -1,4 +1,5 @@
 {
   "openServers": [],
-  "outwardScripts": {}
+  "outwardScripts": {},
+  "outwardCommands": {}
 }

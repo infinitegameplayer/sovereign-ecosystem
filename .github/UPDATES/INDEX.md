@@ -6,6 +6,7 @@ Run the Ecosystem Update Check Skill to discover which updates apply to your bui
 
 | Date | Type | Optional | Slug | Title |
 |---|---|---|---|---|
+| 2026-10-23 | core | no | v3.19.0-the-worm-paths | v3.19.0 The Worm Paths. Every File a Session Trusts Is Watched, and a Deploy Asks First |
 | 2026-10-20 | core | no | v3.18.0-the-outward-gate | v3.18.0 The Outward Gate. A Connected Service Asks First, and a Trust Anchor Has No Second Spelling |
 | 2026-10-16 | core | no | v3.17.0-three-verbs | v3.17.0 Three Verbs. The Improvement Session Trades Its Threshold for Acts, Reports and Proposes, and the Board Comes to You |
 | 2026-10-15 | core | no | v3.16.0-the-gate-learns-the-container | v3.16.0 The Gate Learns the Container. A Delete With No .md in It Is Still a Delete, and Seventeen Skills Catch Up |

@@ -6,14 +6,25 @@
 # non-wildcard edit can slip past them. This closes that path: no edit to a
 # trust-anchor file is ever silent.
 #
-# Trust-anchor files guarded:
+# Trust-anchor files guarded, matched by suffix in any repo:
 #   .claude/settings.json   (permissions, hooks, self-modification surface)
 #   .claude/CLAUDE.md       (the ecosystem trust anchor)
+#   .mcp.json               (the MCP servers a session starts)
+#   .claude.json            (the home-level config, which also lists MCP servers)
+#   .claude/plugins/**      (installed plugins, which carry their own hooks)
+#   .vscode/tasks.json      (tasks that can run when a folder opens)
+# The last four joined in v3.19.0. They are the persistence paths of the
+# Shai-Hulud npm worm wave of October 2026, which writes .claude/settings.json
+# and .vscode/tasks.json into every repo it reaches, so they match in any
+# repo, not only this vault.
 #
 # This is a surface-and-log guard, not a hard block. Sovereign-directed edits
 # to these files are legitimate, so the hook exits 0 and lets the edit
-# proceed. Its job is to make the edit loud in the transcript and durable in
+# proceed. Its job is to make the edit loud in the session and durable in
 # the log, so a trust-anchor change is always visible to the Sovereign.
+# The surface is a systemMessage on stdout, which Claude Code shows. Until
+# v3.19.0 it went to stderr alone, which a hook exiting 0 shows nobody outside
+# verbose mode. The stderr line stays for anyone reading the hook output.
 # Runs alongside pre-tool-approval-gate.sh.
 #
 # Configuration: set SOVEREIGN_VAULT_ROOT to the absolute path of your vault
@@ -90,9 +101,12 @@ if [ "$TOOL_NAME" = "Write" ] || [ "$TOOL_NAME" = "Edit" ]; then
     print out
   }')
 
-  if printf '%s' "$NORM" | grep -qiE '\.claude/(settings\.json|CLAUDE\.md)$'; then
+  if printf '%s' "$NORM" | grep -qiE '\.claude/(settings\.json|CLAUDE\.md)$|(^|/)\.mcp\.json$|(^|/)\.claude\.json$|(^|/)\.claude/plugins/.+$|(^|/)\.vscode/tasks\.json$'; then
     mkdir -p "$VAULT_ROOT/.runtime" 2>/dev/null
     TIMESTAMP=$(date -u +"%Y-%m-%dT%H:%M:%SZ" 2>/dev/null || echo "unknown")
+    # NORM carries no backslashes, so a double quote is the one character to escape.
+    SHOWN=$(printf '%s' "$NORM" | sed 's/"/\\"/g')
+    printf '{"systemMessage":"TRUST-ANCHOR FILE EDIT: %s on %s. Confirmation required. Surfaced, not blocked."}\n' "$TOOL_NAME" "$SHOWN"
     echo "TRUST-ANCHOR FILE EDIT: $TOOL_NAME on $FILE_PATH. Confirmation required. Surfaced, not blocked." >&2
     echo "[$TIMESTAMP] $TOOL_NAME: $FILE_PATH" >> "$LOG_FILE" 2>/dev/null
   fi

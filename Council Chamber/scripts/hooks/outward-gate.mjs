@@ -21,7 +21,9 @@
 //                          A server listed in openServers passes whole. Anything
 //                          else, an unknown server or verb included, is outward.
 //   Bash, PowerShell       Outward when the command runs a script named in
-//                          outwardScripts, unless it carries --dry-run.
+//                          outwardScripts, runs a CLI deploy or secret write
+//                          (OUTWARD_COMMANDS, built in), or runs a command named
+//                          in outwardCommands, unless it carries --dry-run.
 //   Outward with no consent for its service this session: print permissionDecision
 //   "ask". Per the hooks reference, an ask forces a prompt in auto mode too.
 // PostToolUse
@@ -32,9 +34,13 @@
 // outward-gate.config.example.json to outward-gate.config.json beside this file and
 // edit it. Shape:
 //   { "openServers": ["my-local-server"],
-//     "outwardScripts": { "send-newsletter": "resend" } }
+//     "outwardScripts": { "send-newsletter": "resend" },
+//     "outwardCommands": { "firebase deploy": "firebase" } }
 // openServers: MCP server names that pass whole (servers that never leave your
 // machine). outwardScripts: script basename (no .mjs) mapped to the service it reaches.
+// outwardCommands: a command's leading words mapped to the service it reaches, for a
+// deploy tool the built-in list does not name. Matched as whole words, so
+// "firebase deploy" asks and "firebase deploy:list" passes.
 // A missing config file means the defaults (nothing open, no scripts named). A config
 // that exists but does not parse, or has the wrong shape, FAILS CLOSED: exit 2 with the
 // reason on stderr. A broken config silently reverting to an empty script list would
@@ -48,8 +54,9 @@
 // onFailure "block". Write and Edit are never matched, so a broken gate always
 // leaves a door to repair it.
 //
-// What this does not cover: a script outside outwardScripts passes. The list is the
-// gate's scope, and hooks-selftest pins its behavior.
+// What this does not cover: a script outside outwardScripts and a command outside
+// OUTWARD_COMMANDS and outwardCommands pass. The lists are the gate's scope, and
+// hooks-selftest pins its behavior.
 //
 // Proven by: hooks-selftest.mjs (outward-gate cases). Run it after ANY edit here.
 
@@ -66,9 +73,21 @@ const PRUNE_MS = 7 * 86400000;
 
 const READ_VERBS = new Set(['get', 'list', 'search', 'read', 'query', 'count', 'aggregate', 'introspect', 'filter']);
 
+// CLI deploys and secret writes, on for every install (v3.19.0). The command start is
+// the line start or a shell separator, so "cd app && npx wrangler deploy" is read.
+// npm run deploy ends at a word boundary that excludes ':', so deploy:check passes.
+const CMD_START = `(^|[\\s;&|("'])`;
+const CMD_END = `(?=$|[\\s;&|)"'])`;
+const OUTWARD_COMMANDS = [
+  { re: new RegExp(`${CMD_START}(fly|flyctl)(\\.exe)?\\s+(deploy|secrets\\s+(set|unset|import))\\b`, 'i'), service: 'fly' },
+  { re: new RegExp(`${CMD_START}(npx\\s+)?wrangler(\\.cmd)?\\s+(deploy|publish|secret\\s+(put|delete|bulk)|versions\\s+deploy)\\b`, 'i'), service: 'cloudflare' },
+  { re: new RegExp(`${CMD_START}(npx\\s+)?vercel(\\.cmd)?\\s+(deploy|--prod|promote|env\\s+(add|rm|remove|update))\\b`, 'i'), service: 'vercel' },
+  { re: new RegExp(`${CMD_START}npm\\s+run\\s+deploy${CMD_END}`, 'i'), service: 'deploy' },
+];
+
 // Throws on a config that exists but is unusable; the caller turns that into exit 2.
 function loadConfig() {
-  const empty = { openServers: new Set(), outwardScripts: {} };
+  const empty = { openServers: new Set(), outwardScripts: {}, outwardCommands: [] };
   if (!existsSync(CONFIG)) return empty;
   let j;
   try { j = JSON.parse(readFileSync(CONFIG, 'utf8')); } catch (e) { throw new Error(`config ${CONFIG} does not parse (${e.message})`); }
@@ -79,10 +98,19 @@ function loadConfig() {
   if (!scripts || typeof scripts !== 'object' || Array.isArray(scripts) || !Object.values(scripts).every((s) => typeof s === 'string')) {
     throw new Error(`config ${CONFIG}: outwardScripts must be an object mapping script name to service name`);
   }
-  return { openServers: new Set(open), outwardScripts: scripts };
+  const commands = j.outwardCommands === undefined ? {} : j.outwardCommands;
+  if (!commands || typeof commands !== 'object' || Array.isArray(commands)
+    || !Object.entries(commands).every(([k, s]) => typeof s === 'string' && k.trim() !== '')) {
+    throw new Error(`config ${CONFIG}: outwardCommands must be an object mapping a command to service name`);
+  }
+  const outwardCommands = Object.entries(commands).map(([words, service]) => ({
+    re: new RegExp(`${CMD_START}${words.trim().split(/\s+/).map(escapeRe).join('\\s+')}${CMD_END}`, 'i'),
+    service,
+  }));
+  return { openServers: new Set(open), outwardScripts: scripts, outwardCommands };
 }
 
-const escapeRe = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+function escapeRe(s) { return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); }
 
 function classify(payload, cfg) {
   const tool = String(payload.tool_name || '');
@@ -99,6 +127,10 @@ function classify(payload, cfg) {
     if (/--dry-run\b/.test(cmd)) return null;
     for (const [script, service] of Object.entries(cfg.outwardScripts)) {
       if (new RegExp(`(^|[\\\\/\\s"'])${escapeRe(script)}\\.mjs\\b`).test(cmd)) return { service, act: `${script}.mjs` };
+    }
+    for (const { re, service } of [...OUTWARD_COMMANDS, ...cfg.outwardCommands]) {
+      const hit = cmd.match(re);
+      if (hit) return { service, act: hit[0].trim().replace(/^[;&|("']+/, '') };
     }
   }
   return null;

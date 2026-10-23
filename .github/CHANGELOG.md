@@ -6,6 +6,24 @@ Each entry corresponds to one publish cycle. For full implementation details, se
 
 ---
 
+## v3.19.0, 2026-10-23
+
+The Worm Paths.
+
+**If you installed any version, apply this update.** Through v3.18.0 an edit to `.mcp.json`, `~/.claude.json`, an installed plugin or `.vscode/tasks.json` went through in silence, the trust-anchor guard's warning never reached the session, and a CLI deploy did not ask.
+
+- **The trust-anchor guard watches six files, in any repo.** `.mcp.json`, `.claude.json`, `.claude/plugins/**` and `.vscode/tasks.json` join `.claude/settings.json` and `.claude/CLAUDE.md`. They are the paths the Shai-Hulud npm worm wave of October 2026 wrote to persist.
+- **The guard's warning reaches the session.** It prints a `systemMessage` on stdout, which Claude Code shows. Until now it wrote stderr alone, which a hook exiting 0 shows nobody outside verbose mode.
+- **The Outward Gate asks before CLI deploys and secret writes** on fly, wrangler, vercel and `npm run deploy`, once per service per session, with no config needed. `--dry-run`, `wrangler dev`, `vercel env ls` and `npm run deploy:check` pass.
+- **Name your own deploy commands** with `outwardCommands` in `outward-gate.config.json`, matched as whole words.
+- **29 new selftest cases**, sixteen watched failing against v3.18.0 first.
+
+Your next session's settings, servers and tasks are written in files. Every one of them is now watched.
+
+Full detail and the implementation spec: `.github/UPDATES/2026-10-23-v3.19.0-the-worm-paths.md`.
+
+---
+
 ## v3.18.0, 2026-10-20
 
 The Outward Gate.
