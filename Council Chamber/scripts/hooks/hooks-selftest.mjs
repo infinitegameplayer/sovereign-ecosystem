@@ -443,21 +443,57 @@ const bash = (command) => ({ tool_name: 'Bash', tool_input: { command } });
   record('outward-gate: a config of the wrong shape fails closed', r.code === 2, `code=${r.code} out=${r.out.trim().slice(0, 40)}`, 'reacts');
   rmSync(CONFIG_FILE, { force: true });
 
-  // v3.19.0: CLI deploys and secret writes ask with no config at all. Each "asks"
-  // case below passed in silence on the v3.18.0 gate.
+  // v3.19.0: secret writes ask with no config at all. Each passed in silence on the
+  // v3.18.0 gate.
   const ps = (command, sid) => ({ hook_event_name: 'PreToolUse', session_id: sid, tool_name: 'PowerShell', tool_input: { command } });
   for (const [label, make, service] of [
-    ['flyctl deploy, PowerShell form', (s) => ps('flyctl deploy .\\app -a my-app --remote-only 2>&1', s), 'fly'],
     ['fly secrets set', (s) => sh('fly secrets set API_TOKEN=x -a my-app', s), 'fly'],
-    ['npx wrangler deploy after cd', (s) => sh('cd worker && npx wrangler deploy', s), 'cloudflare'],
     ['wrangler secret put', (s) => sh('wrangler secret put API_KEY', s), 'cloudflare'],
-    ['vercel deploy --prod', (s) => sh('vercel deploy --prod --yes', s), 'vercel'],
     ['vercel env add', (s) => sh('vercel env add API_KEY production', s), 'vercel'],
-    ['npm run deploy', (s) => sh('npm run deploy', s), 'deploy'],
   ]) {
     r = fire(H, make(session()), NO_CONFIG);
     record(`outward-gate: asks before ${label}`, asks(r) && r.out.includes(`outward act on ${service} `), `code=${r.code} out=${r.out.trim().slice(0, 40)}`, 'reacts');
   }
+
+  // v3.20.0: CLI deploys are quiet. No ask, one "quiet" line in the gate's log. The
+  // log line is what makes these falsifiable: a gate that did nothing writes none.
+  const GATE_LOG = path.join(VAULT, '.runtime', 'outward-gate.log');
+  const gateLog = () => (existsSync(GATE_LOG) ? readFileSync(GATE_LOG, 'utf8') : '');
+  for (const [label, make, service] of [
+    ['flyctl deploy, PowerShell form', (s) => ps('flyctl deploy .\\app -a my-app --remote-only 2>&1', s), 'fly'],
+    ['npx wrangler deploy after cd', (s) => sh('cd worker && npx wrangler deploy', s), 'cloudflare'],
+    ['vercel deploy --prod', (s) => sh('vercel deploy --prod --yes', s), 'vercel'],
+    ['npm run deploy', (s) => sh('npm run deploy', s), 'deploy'],
+  ]) {
+    const s = session();
+    r = fire(H, make(s), NO_CONFIG);
+    record(`outward-gate: ${label} is quiet, logged and never asked`, silent(r) && gateLog().includes(`quiet ${s} ${service} `), `code=${r.code} out=${r.out.trim().slice(0, 40)}`, 'reacts');
+  }
+
+  // An asking act in the same command outranks a quiet one.
+  r = fire(H, sh('npx wrangler deploy && npx wrangler secret put API_KEY', session()), NO_CONFIG);
+  record('outward-gate: a deploy chained to a secret write asks', asks(r) && r.out.includes('outward act on cloudflare '), `code=${r.code} out=${r.out.trim().slice(0, 40)}`, 'reacts');
+
+  // A quiet deploy that ran records no consent, so a later secret write still asks.
+  sid = session();
+  fire(H, sh('npx wrangler deploy', sid), NO_CONFIG);
+  fire(H, sh('npx wrangler deploy', sid, 'PostToolUse'), NO_CONFIG);
+  r = fire(H, sh('npx wrangler secret put API_KEY', sid), NO_CONFIG);
+  record('outward-gate: a quiet deploy opens no door to a secret write', asks(r) && !existsSync(path.join(VAULT, '.runtime', 'outward-consent', `${sid}.json`)), `code=${r.code} out=${r.out.trim().slice(0, 40)}`, 'reacts');
+
+  // A server launched with --read-only in .mcp.json passes whole; the same server
+  // without the flag asks, and so does one with no .mcp.json entry at all.
+  const MCP_FILE = `${VAULT}/.mcp.json`;
+  writeFileSync(MCP_FILE, JSON.stringify({ mcpServers: { docs: { command: 'npx', args: ['-y', 'docs-server', '--read-only'] } } }));
+  r = fire(H, mcp('mcp__docs__execute_sql', session()), NO_CONFIG);
+  const roPass = r;
+  writeFileSync(MCP_FILE, JSON.stringify({ mcpServers: { docs: { command: 'npx', args: ['-y', 'docs-server'] } } }));
+  r = fire(H, mcp('mcp__docs__execute_sql', session()), NO_CONFIG);
+  record('outward-gate: a --read-only server passes whole, and removing the flag asks again', silent(roPass) && asks(r), `ro=${silent(roPass) ? 'pass' : 'ask'} flagless=${asks(r) ? 'ask' : 'pass'}`, 'reacts');
+  writeFileSync(MCP_FILE, '{ "mcpServers": ');
+  r = fire(H, mcp('mcp__docs__execute_sql', session()), NO_CONFIG);
+  record('outward-gate: an unreadable .mcp.json fails toward ask', asks(r), `code=${r.code} out=${r.out.trim().slice(0, 40)}`, 'reacts');
+  rmSync(MCP_FILE, { force: true });
   for (const [label, command] of [
     ['flyctl status', 'flyctl status -a my-app'],
     ['flyctl ssh running a script', 'flyctl ssh console -a my-app -C "node /app/probe.mjs"'],

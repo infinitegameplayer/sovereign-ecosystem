@@ -6,6 +6,21 @@ Each entry corresponds to one publish cycle. For full implementation details, se
 
 ---
 
+## v3.20.0, 2026-10-25
+
+Deploys Go Quiet.
+
+**If you run Claude Code in auto mode, apply this update.** Through v3.19.1 the Outward Gate asked before every CLI deploy, once per service per session, a click on an act you had already directed.
+
+- **Deploys are quiet:** fly, wrangler and vercel deploys and `npm run deploy` are logged and never asked or recorded as consent.
+- **Secret writes still ask**, and an asking act in the same command outranks a quiet one. A quiet deploy opens no door to a later secret write.
+- **A server launched with `--read-only` in `.mcp.json` passes whole**, read on every call, so removing the flag asks again.
+- **`SECURITY.md`** says what the gate now asks before.
+
+Full detail and the implementation spec: `.github/UPDATES/2026-10-25-v3.20.0-deploys-go-quiet.md`.
+
+---
+
 ## v3.19.1, 2026-10-25
 
 Your Keys Stay Home.

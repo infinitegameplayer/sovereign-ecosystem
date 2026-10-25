@@ -15,11 +15,22 @@
 // Consent is once per service per session. The first outward act on a service asks;
 // later acts on that service in the same session pass, deploys and deletes included.
 //
+// QUIET ACTS (v3.20.0). A built-in CLI deploy (fly deploy, wrangler deploy, vercel
+// deploy or promote, npm run deploy) is quiet: logged, never asked and never recorded
+// as consent. A deploy is the act you asked your AI to do, and in auto mode an ask on
+// every deploy is a click with nothing to decide. Secret writes still ask. Because a
+// quiet deploy records no consent, it never opens the door to a secret write on the
+// same service, and when one command holds a quiet act and an asking act, the asking
+// act wins.
+//
 // PreToolUse
 //   mcp__<server>__<tool>  The tool's leading verb decides. A read verb passes in
 //                          silence, which leaves the normal permission flow in place.
-//                          A server listed in openServers passes whole. Anything
-//                          else, an unknown server or verb included, is outward.
+//                          A server listed in openServers passes whole, and so does
+//                          a server launched with --read-only in .mcp.json, read on
+//                          every call so removing the flag closes the door again.
+//                          Anything else, an unknown server or verb included, is
+//                          outward.
 //   Bash, PowerShell       Outward when the command runs a script named in
 //                          outwardScripts, runs a CLI deploy or secret write
 //                          (OUTWARD_COMMANDS, built in), or runs a command named
@@ -73,16 +84,33 @@ const PRUNE_MS = 7 * 86400000;
 
 const READ_VERBS = new Set(['get', 'list', 'search', 'read', 'query', 'count', 'aggregate', 'introspect', 'filter']);
 
+// A server launched with --read-only in .mcp.json cannot write, whatever its tools
+// are called, so it passes whole (v3.20.0). Read from the config on every call rather
+// than listed in this file, so removing the flag closes the door again with no edit
+// here. An unreadable .mcp.json yields no read-only servers, which fails toward ask.
+function readOnlyServers() {
+  try {
+    const cfg = JSON.parse(readFileSync(join(VAULT, '.mcp.json'), 'utf8'));
+    return new Set(Object.entries(cfg.mcpServers || {})
+      .filter(([, v]) => Array.isArray(v && v.args) && v.args.includes('--read-only'))
+      .map(([k]) => k));
+  } catch { return new Set(); }
+}
+
 // CLI deploys and secret writes, on for every install (v3.19.0). The command start is
 // the line start or a shell separator, so "cd app && npx wrangler deploy" is read.
 // npm run deploy ends at a word boundary that excludes ':', so deploy:check passes.
+// Secret writes ask. Deploys are quiet since v3.20.0 (see QUIET ACTS above).
 const CMD_START = `(^|[\\s;&|("'])`;
 const CMD_END = `(?=$|[\\s;&|)"'])`;
 const OUTWARD_COMMANDS = [
-  { re: new RegExp(`${CMD_START}(fly|flyctl)(\\.exe)?\\s+(deploy|secrets\\s+(set|unset|import))\\b`, 'i'), service: 'fly' },
-  { re: new RegExp(`${CMD_START}(npx\\s+)?wrangler(\\.cmd)?\\s+(deploy|publish|secret\\s+(put|delete|bulk)|versions\\s+deploy)\\b`, 'i'), service: 'cloudflare' },
-  { re: new RegExp(`${CMD_START}(npx\\s+)?vercel(\\.cmd)?\\s+(deploy|--prod|promote|env\\s+(add|rm|remove|update))\\b`, 'i'), service: 'vercel' },
-  { re: new RegExp(`${CMD_START}npm\\s+run\\s+deploy${CMD_END}`, 'i'), service: 'deploy' },
+  { re: new RegExp(`${CMD_START}(fly|flyctl)(\\.exe)?\\s+secrets\\s+(set|unset|import)\\b`, 'i'), service: 'fly' },
+  { re: new RegExp(`${CMD_START}(npx\\s+)?wrangler(\\.cmd)?\\s+secret\\s+(put|delete|bulk)\\b`, 'i'), service: 'cloudflare' },
+  { re: new RegExp(`${CMD_START}(npx\\s+)?vercel(\\.cmd)?\\s+env\\s+(add|rm|remove|update)\\b`, 'i'), service: 'vercel' },
+  { re: new RegExp(`${CMD_START}(fly|flyctl)(\\.exe)?\\s+deploy\\b`, 'i'), service: 'fly', quiet: true },
+  { re: new RegExp(`${CMD_START}(npx\\s+)?wrangler(\\.cmd)?\\s+(deploy|publish|versions\\s+deploy)\\b`, 'i'), service: 'cloudflare', quiet: true },
+  { re: new RegExp(`${CMD_START}(npx\\s+)?vercel(\\.cmd)?\\s+(deploy|--prod|promote)\\b`, 'i'), service: 'vercel', quiet: true },
+  { re: new RegExp(`${CMD_START}npm\\s+run\\s+deploy${CMD_END}`, 'i'), service: 'deploy', quiet: true },
 ];
 
 // Throws on a config that exists but is unusable; the caller turns that into exit 2.
@@ -118,20 +146,24 @@ function classify(payload, cfg) {
   if (m) {
     const [, server, name] = m;
     if (cfg.openServers.has(server)) return null;
+    if (readOnlyServers().has(server)) return null;
     const verb = name.split(/[_-]/)[0].toLowerCase();
     if (READ_VERBS.has(verb)) return null;
-    return { service: server, act: name };
+    return { service: server, act: name, quiet: false };
   }
   if (tool === 'Bash' || tool === 'PowerShell') {
     const cmd = String((payload.tool_input || {}).command || '');
     if (/--dry-run\b/.test(cmd)) return null;
+    // Collect every outward act in the command; an asking act outranks a quiet one.
+    const hits = [];
     for (const [script, service] of Object.entries(cfg.outwardScripts)) {
-      if (new RegExp(`(^|[\\\\/\\s"'])${escapeRe(script)}\\.mjs\\b`).test(cmd)) return { service, act: `${script}.mjs` };
+      if (new RegExp(`(^|[\\\\/\\s"'])${escapeRe(script)}\\.mjs\\b`).test(cmd)) hits.push({ service, act: `${script}.mjs`, quiet: false });
     }
-    for (const { re, service } of [...OUTWARD_COMMANDS, ...cfg.outwardCommands]) {
+    for (const { re, service, quiet } of [...OUTWARD_COMMANDS, ...cfg.outwardCommands]) {
       const hit = cmd.match(re);
-      if (hit) return { service, act: hit[0].trim().replace(/^[;&|("']+/, '') };
+      if (hit) hits.push({ service, act: hit[0].trim().replace(/^[;&|("']+/, ''), quiet: Boolean(quiet) });
     }
+    return hits.find((h) => !h.quiet) || hits[0] || null;
   }
   return null;
 }
@@ -167,6 +199,12 @@ function run(payload) {
   const hit = classify(payload, loadConfig());
   if (!hit) return;
   const session = payload.session_id;
+
+  // A quiet act is logged once, before it runs, and never asks or records consent.
+  if (hit.quiet) {
+    if (event !== 'PostToolUse') log(`quiet ${safeSession(session)} ${hit.service} (${hit.act})`);
+    return;
+  }
 
   if (event === 'PostToolUse') {
     const services = readConsent(session);

@@ -6,6 +6,7 @@ Run the Ecosystem Update Check Skill to discover which updates apply to your bui
 
 | Date | Type | Optional | Slug | Title |
 |---|---|---|---|---|
+| 2026-10-25 | core | no | v3.20.0-deploys-go-quiet | v3.20.0 Deploys Go Quiet. The Outward Gate Asks Where There Is Something to Decide |
 | 2026-10-25 | core | no | v3.19.1-your-keys-stay-home | v3.19.1 Your Keys Stay Home. Git Ignores the Files That Hold Them, and SECURITY.md Says What the Guards Are |
 | 2026-10-23 | core | no | v3.19.0-the-worm-paths | v3.19.0 The Worm Paths. Every File a Session Trusts Is Watched, and a Deploy Asks First |
 | 2026-10-20 | core | no | v3.18.0-the-outward-gate | v3.18.0 The Outward Gate. A Connected Service Asks First, and a Trust Anchor Has No Second Spelling |
