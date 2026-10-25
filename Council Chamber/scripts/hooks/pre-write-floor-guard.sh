@@ -8,6 +8,7 @@
 #
 # Trust-anchor files guarded, matched by suffix in any repo:
 #   .claude/settings.json   (permissions, hooks, self-modification surface)
+#   .claude/settings.local.json (your personal permission grants and hooks)
 #   .claude/CLAUDE.md       (the ecosystem trust anchor)
 #   .mcp.json               (the MCP servers a session starts)
 #   .claude.json            (the home-level config, which also lists MCP servers)
@@ -16,7 +17,8 @@
 # The last four joined in v3.19.0. They are the persistence paths of the
 # Shai-Hulud npm worm wave of October 2026, which writes .claude/settings.json
 # and .vscode/tasks.json into every repo it reaches, so they match in any
-# repo, not only this vault.
+# repo, not only this vault. settings.local.json joined in v3.19.1: it carries
+# the same permissions and hooks as settings.json, and the guard missed it.
 #
 # This is a surface-and-log guard, not a hard block. Sovereign-directed edits
 # to these files are legitimate, so the hook exits 0 and lets the edit
@@ -101,7 +103,7 @@ if [ "$TOOL_NAME" = "Write" ] || [ "$TOOL_NAME" = "Edit" ]; then
     print out
   }')
 
-  if printf '%s' "$NORM" | grep -qiE '\.claude/(settings\.json|CLAUDE\.md)$|(^|/)\.mcp\.json$|(^|/)\.claude\.json$|(^|/)\.claude/plugins/.+$|(^|/)\.vscode/tasks\.json$'; then
+  if printf '%s' "$NORM" | grep -qiE '\.claude/(settings\.json|settings\.local\.json|CLAUDE\.md)$|(^|/)\.mcp\.json$|(^|/)\.claude\.json$|(^|/)\.claude/plugins/.+$|(^|/)\.vscode/tasks\.json$'; then
     mkdir -p "$VAULT_ROOT/.runtime" 2>/dev/null
     TIMESTAMP=$(date -u +"%Y-%m-%dT%H:%M:%SZ" 2>/dev/null || echo "unknown")
     # NORM carries no backslashes, so a double quote is the one character to escape.

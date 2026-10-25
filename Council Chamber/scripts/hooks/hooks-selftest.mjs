@@ -202,6 +202,10 @@ const bash = (command) => ({ tool_name: 'Bash', tool_input: { command } });
     ['an installed plugin hook', `${VAULT}/home/.claude/plugins/cache/x/hooks/run.sh`, {}],
     ['.vscode/tasks.json in another repo (the worm shape)', `${OTHER}/.vscode/tasks.json`, {}],
     ['.mcp.json with backslashes, without node', `${VAULT}/.mcp.json`.replace(/\//g, '\\'), { nodeBroken: true }],
+    // v3.19.1: the local settings file carries permissions and hooks too, and
+    // stayed silent on the v3.19.0 guard.
+    ['.claude/settings.local.json in the vault', `${VAULT}/.claude/settings.local.json`, {}],
+    ['.claude/settings.local.json without node', `${VAULT}/.claude/settings.local.json`, { nodeBroken: true }],
   ];
   for (const [what, file, opts] of newAnchors) {
     r = fire(H, write(file), opts);

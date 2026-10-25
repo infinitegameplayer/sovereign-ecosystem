@@ -35,6 +35,13 @@ Thumbs.db
 .env
 *.local
 
+# Files that hold your own keys or permissions. The Obsidian MCP Bridge guide
+# has you copy .mcp.json.example to .mcp.json and put an API key in it, and
+# Claude Code writes your personal permission grants to settings.local.json.
+# "*.local" above matches neither, so both are named here.
+.mcp.json
+.claude/settings.local.json
+
 # Token replacement log (user-specific, generated on first run)
 Council Chamber/scripts/replace-tokens-log.txt
 

@@ -6,6 +6,21 @@ Each entry corresponds to one publish cycle. For full implementation details, se
 
 ---
 
+## v3.19.1, 2026-10-25
+
+Your Keys Stay Home.
+
+**If you followed the Obsidian MCP Bridge guide, apply this update before your next push.** Through v3.19.0 git would have published `.mcp.json`, the file the guide has you fill with your API key, and `.claude/settings.local.json` edited in silence.
+
+- **`.gitignore` names `.mcp.json` and `.claude/settings.local.json`.** `*.local` matched neither. Check your history with `git log --oneline -- .mcp.json`.
+- **The trust-anchor guard watches seven files.** `.claude/settings.local.json` joins the six from v3.19.0.
+- **`SECURITY.md` gains Responsible Use:** what this template will not help with, what you are responsible for, what the section does not change and the hooks are guardrails, not a sandbox.
+- **Two new selftest cases**, both watched failing against the v3.19.0 pattern first.
+
+Full detail and the implementation spec: `.github/UPDATES/2026-10-25-v3.19.1-your-keys-stay-home.md`.
+
+---
+
 ## v3.19.0, 2026-10-23
 
 The Worm Paths.
