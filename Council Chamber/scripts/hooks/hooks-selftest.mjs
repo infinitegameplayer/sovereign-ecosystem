@@ -332,6 +332,13 @@ const bash = (command) => ({ tool_name: 'Bash', tool_input: { command } });
   rmSync(MOJI, { force: true });
   r = fire(H, bash('echo touched'));
   record('encoding: silent when the recent files are clean', !/mojibake|corruption/i.test(r.out), `out=${r.out.trim().slice(0, 40)}`, 'quiet');
+
+  // node_modules is pruned, never walked (v3.21.0). Damage inside it stays unreported.
+  mkdirSync(`${VAULT}/node_modules/pkg`, { recursive: true });
+  writeFileSync(`${VAULT}/node_modules/pkg/README.md`, 'A corrupted em dash lives here: â€" and it should be caught.\n');
+  r = fire(H, bash('echo touched'));
+  rmSync(`${VAULT}/node_modules`, { recursive: true, force: true });
+  record('encoding: never reports from node_modules', !/mojibake|corruption/i.test(r.out), `out=${r.out.trim().slice(0, 40)}`, 'quiet');
 }
 
 // ── post-bash-move-audit.sh ─────────────────────────────────────────────────
@@ -408,6 +415,23 @@ const bash = (command) => ({ tool_name: 'Bash', tool_input: { command } });
 
   r = fire(H, mcp('mcp__acme__export_all', sid), NO_CONFIG);
   record('outward-gate: an export verb is not a read verb, it asks', asks(r), `code=${r.code} out=${r.out.trim().slice(0, 40)}`, 'reacts');
+
+  // Some connectors name their tools after themselves first (claude_ai_Slack's
+  // slack_list_user_channels). The verb is the word after the service's own name,
+  // so the read passes and the send still asks (v3.21.0).
+  r = fire(H, mcp('mcp__claude_ai_Slack__slack_list_user_channels', sid), NO_CONFIG);
+  record('outward-gate: a read named after its own connector passes', silent(r), `code=${r.code} out=${r.out.trim().slice(0, 40)}`, 'quiet');
+  r = fire(H, mcp('mcp__claude_ai_Slack__slack_send_message', sid), NO_CONFIG);
+  record('outward-gate: a send named after its own connector still asks', asks(r), `code=${r.code} out=${r.out.trim().slice(0, 40)}`, 'reacts');
+
+  // find and download only read (v3.21.0). A compound name reads only when every
+  // verb after an "and" reads too, so find_and_replace still asks.
+  r = fire(H, mcp('mcp__acme__find_funders_by_topic', sid), NO_CONFIG);
+  record('outward-gate: a find verb passes', silent(r), `code=${r.code} out=${r.out.trim().slice(0, 40)}`, 'quiet');
+  r = fire(H, mcp('mcp__acme__download_file_content', sid), NO_CONFIG);
+  record('outward-gate: a download verb passes', silent(r), `code=${r.code} out=${r.out.trim().slice(0, 40)}`, 'quiet');
+  r = fire(H, mcp('mcp__acme__find_and_replace', sid), NO_CONFIG);
+  record('outward-gate: find_and_replace asks, since replace writes', asks(r), `code=${r.code} out=${r.out.trim().slice(0, 40)}`, 'reacts');
 
   // Fails closed: a payload that is not a JSON object, and one that is an array.
   r = fire(H, 'not an object', NO_CONFIG);
@@ -630,6 +654,21 @@ if (audit.error) {
     });
   } catch (e) {
     registrationRows.push({ name: 'registration: every PreToolUse hook blocks on failure', ok: false, detail: `cannot read: ${e.message}` });
+  }
+
+  // The settings deny reading a .env file anywhere in the vault (v3.21.0), so a key
+  // kept there never enters a session's context. Claude Code enforces the rule; this
+  // row proves the rule is still in the file.
+  try {
+    const settings = JSON.parse(readFileSync(path.join(ROOT, '.claude', 'settings.json'), 'utf8'));
+    const deny = settings.permissions?.deny || [];
+    registrationRows.push({
+      name: 'registration: settings deny reading .env files',
+      ok: deny.includes('Read(**/.env)'),
+      detail: deny.includes('Read(**/.env)') ? 'Read(**/.env) denied' : 'NO DENY for Read(**/.env)',
+    });
+  } catch (e) {
+    registrationRows.push({ name: 'registration: settings deny reading .env files', ok: false, detail: `cannot read: ${e.message}` });
   }
 }
 

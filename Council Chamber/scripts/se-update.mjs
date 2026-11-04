@@ -10,6 +10,7 @@
  *   node "Council Chamber/scripts/se-update.mjs" --diff "<path>"
  *   node "Council Chamber/scripts/se-update.mjs" --apply "<path>"
  *   node "Council Chamber/scripts/se-update.mjs" --force-seeded "<path>"
+ *   node "Council Chamber/scripts/se-update.mjs" --coverage   (maintainers, upstream repo)
  *
  * Exit codes:
  *   0  success
@@ -422,6 +423,29 @@ function modeForceSeeded(targetPath) {
   console.log('The file is staged. Review with: git diff --cached');
 }
 
+// --coverage: a maintainer check, run on the upstream repo. Every shipped file under
+// a governed folder must be framework or seeded, or --apply can never deliver a fix
+// to it. Through v3.20.0 the Outward Gate, container-delete.mjs and six skills sat in
+// the user class, so --apply refused the files three releases told installs to apply
+// (v3.21.0). An installed vault adds its own skills and scripts, which are user files
+// by design, so this check belongs to upstream and never to an installed vault.
+const GOVERNED = /^(Council Chamber\/(scripts|Skills|Codices|Protocols|Governance|Checklists|Templates)\/|\.claude\/|\.github\/)/;
+
+function modeCoverage() {
+  assertGitRepo();
+  const manifest = loadManifest();
+  const files = git('-c core.quotePath=false ls-files').split('\n').map((f) => normalize(f.trim())).filter(Boolean);
+  const uncovered = files.filter((f) => GOVERNED.test(f) && classifyPath(f, manifest) === 'user');
+  if (uncovered.length === 0) {
+    console.log(`Coverage: every shipped file under a governed folder is framework or seeded (${files.length} tracked).`);
+    return;
+  }
+  console.log('Coverage: these shipped files are in the user class, so --apply refuses any fix to them.');
+  console.log('Add each to framework-manifest.json (framework patterns, or seeded paths for a file the Sovereign personalizes):');
+  for (const f of uncovered) console.log(`  ${f}`);
+  process.exit(1);
+}
+
 // --- Arg parsing and dispatch ---
 
 const args = process.argv.slice(2);
@@ -441,6 +465,9 @@ switch (mode) {
   case '--force-seeded':
     modeForceSeeded(targetArg);
     break;
+  case '--coverage':
+    modeCoverage();
+    break;
   default:
     console.log('Sovereign Ecosystem Upstream Sync');
     console.log('');
@@ -449,6 +476,7 @@ switch (mode) {
     console.log('  node "Council Chamber/scripts/se-update.mjs" --diff "<path>"               Show diff for one file');
     console.log('  node "Council Chamber/scripts/se-update.mjs" --apply "<path>"              Apply upstream version of a framework file');
     console.log('  node "Council Chamber/scripts/se-update.mjs" --force-seeded "<path>"       Apply upstream version of a seeded file (overwrites personalization)');
+    console.log('  node "Council Chamber/scripts/se-update.mjs" --coverage                    Maintainers: every shipped file under a governed folder is framework or seeded');
     console.log('');
     console.log('Exit codes: 0 success, 1 error, 2 nothing to do.');
     process.exit(0);

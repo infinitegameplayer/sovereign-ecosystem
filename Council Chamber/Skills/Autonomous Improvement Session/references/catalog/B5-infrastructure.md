@@ -58,7 +58,7 @@ Two bundles run per run (SKILL.md Step 2). This bundle's Reports items go to one
 
 **Execution:**
 1. Grep `Council Chamber/scripts/**/*.mjs` (and equivalent script files) for env-key reads that hard-exit on absence (a `process.exit(1)` guarded on a missing `process.env.X` or `env.X`).
-2. For each required key, check whether it appears in `Council Chamber/scripts/.env` or equivalent secrets file or carries a documented placeholder.
+2. For each required key, check whether it carries a documented placeholder (a key list in a codex or README). Never open `Council Chamber/scripts/.env` or another secrets file: `.claude/settings.json` denies reading `.env` files (since v3.21.0), so key values never enter a session. List each required key on the board for the Sovereign to confirm it is set.
 3. Flag two failure modes: a key required by a live script but absent or undocumented (a future opaque failure), and a key tied to a service retired from the ecosystem (flag the owning script as a dead-integration archival candidate).
 4. Surface on the decision board. Read-only.
 

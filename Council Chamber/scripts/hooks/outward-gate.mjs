@@ -82,7 +82,8 @@ const LOG = join(VAULT, '.runtime', 'outward-gate.log');
 const CONFIG = process.env.OUTWARD_GATE_CONFIG || join(HERE, 'outward-gate.config.json');
 const PRUNE_MS = 7 * 86400000;
 
-const READ_VERBS = new Set(['get', 'list', 'search', 'read', 'query', 'count', 'aggregate', 'introspect', 'filter']);
+// find and download added in v3.21.0: a find_* or download_* tool only reads.
+const READ_VERBS = new Set(['get', 'list', 'search', 'read', 'query', 'count', 'aggregate', 'introspect', 'filter', 'find', 'download']);
 
 // A server launched with --read-only in .mcp.json cannot write, whatever its tools
 // are called, so it passes whole (v3.20.0). Read from the config on every call rather
@@ -147,8 +148,17 @@ function classify(payload, cfg) {
     const [, server, name] = m;
     if (cfg.openServers.has(server)) return null;
     if (readOnlyServers().has(server)) return null;
-    const verb = name.split(/[_-]/)[0].toLowerCase();
-    if (READ_VERBS.has(verb)) return null;
+    // Some connectors name their tools after themselves first (claude_ai_Slack's
+    // slack_list_user_channels), so the verb is the word after the service's own name.
+    // Without this, every such read asked as an outward act. A send still reads as
+    // "send" and still asks (v3.21.0).
+    const own = server.split('_').pop().toLowerCase();
+    const bare = name.toLowerCase().startsWith(`${own}_`) ? name.slice(own.length + 1) : name;
+    const words = bare.toLowerCase().split(/[_-]/);
+    // A compound name reads only if every verb after an "and" reads too, so
+    // find_and_replace still asks.
+    const verbs = [words[0], ...words.flatMap((w, i) => (w === 'and' && words[i + 1] ? [words[i + 1]] : []))];
+    if (verbs.every((v) => READ_VERBS.has(v))) return null;
     return { service: server, act: name, quiet: false };
   }
   if (tool === 'Bash' || tool === 'PowerShell') {

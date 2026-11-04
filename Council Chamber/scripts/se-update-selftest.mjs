@@ -134,6 +134,21 @@ try {
   // Arm 3: the seeded side of a rename is still protected.
   r = check('--apply', 'Capture.md');
   record('seeded rename: --apply refuses the new path', r.code === 1 && /Refused/.test(r.out), `exit ${r.code}`);
+
+  // Arm 4 (v3.21.0): --coverage, run in the upstream repo. Every shipped file under a
+  // governed folder is framework or seeded, or --apply can never deliver a fix to it.
+  const coverage = () => {
+    const c = spawnSync(process.execPath, [path.join(up, SCRIPTS, 'se-update.mjs'), '--coverage'], { encoding: 'utf8' });
+    return { code: c.status, out: `${c.stdout}${c.stderr}` };
+  };
+  r = coverage();
+  record('coverage: every governed file classed, exits 0', r.code === 0 && /every shipped file/i.test(r.out), `exit ${r.code}`);
+  const PLANT = `${SCRIPTS}/hooks/new-guard.sh`;
+  write(up, PLANT, '#!/bin/sh\nexit 0\n');
+  git(up, 'add', '-A');
+  git(up, 'commit', '-q', '-m', 'v3: a guard the manifest does not name');
+  r = coverage();
+  record('coverage: a shipped guard in the user class fails and is named', r.code === 1 && r.out.includes(PLANT), `exit ${r.code}`);
 } catch (err) {
   record('fixture built and ran', false, err.message.split('\n')[0]);
 } finally {

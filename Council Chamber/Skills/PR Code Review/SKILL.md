@@ -20,6 +20,20 @@ This skill is a lightweight per-PR gate before a merge: scoped to the diff, auto
 
 ---
 
+## Constraints
+
+- Do not build, run tests, or typecheck the app. CI handles these. Do not attempt them.
+- Use `gh` CLI for all GitHub operations. Do not use WebFetch for GitHub data.
+- Always get the full SHA via `gh pr view --json headRefOid`, never via shell variable expansion in the comment.
+- Confidence is anchored to exactly one of 0, 25, 50, 75, 100. Any other value is invalid and gets re-anchored, never rounded.
+- The actionable floor is anchor 75. Do not lower it without Sovereign approval. The one carve-out is the critical-at-50 exception in Step 6.
+- No finding posts at 75 or above without a verbatim `file:line` quote. This gate is not waivable.
+- Every posted finding survived an independent validator pass.
+- Post at most one review comment per PR run.
+- If a technical error surfaces during the review run (MCP failure, gh CLI error, agent failure), invoke the Systematic Debugging skill before retrying. Do not layer workarounds on top of undiagnosed errors.
+
+---
+
 ## Tool Scope
 
 This skill uses `gh` CLI for all GitHub interaction. Allowed tools are scoped to:
@@ -153,19 +167,7 @@ Every issue that survives Step 5b gets its own fresh validator subagent. **One p
 
 **Pass this to each validator verbatim:**
 
-> You have no commitment to the original finding. If it is wrong, say so. False positives are common. Do not feel pressure to confirm.
->
-> Answer four questions against the actual code:
-> 1. **Is the issue real in the code as written?** Check for an existing guard, null check or validation the reviewer missed. Check for a misread type or signature. Check whether the pattern is intentional (comments, parallel handlers, project convention).
-> 2. **Did THIS diff introduce it?** Use git blame against the reviewed tree. A pre-existing, undisturbed line fails validation regardless of whether the underlying claim is true.
-> 3. **Is it not already handled elsewhere?** Check callers, middleware, framework defaults and parallel handlers.
-> 4. **What artifact confirms it?** Validated needs a quoted line at its location, a command output or a reproduced failure. A reading with no artifact returns `validated: false`, never true.
->
-> For a Lens 6 (plan alignment) finding, question 2 becomes: **is the quoted plan line inside the scope this PR claims?** A plan line that belongs to a later phase or a different PR fails validation. For unimplemented scope, repeat the search yourself before you accept the absence.
->
-> Conservative bias is preferred. When in doubt, reject.
->
-> Return exactly: `{"validated": true|false, "reason": "<one sentence>"}`
+Read [[Council Chamber/Skills/PR Code Review/references/validator-brief]] and follow it at this step.
 
 A `validated: false` verdict drops the issue. **Record the reason in the run summary so the loss is auditable rather than silent.**
 
@@ -189,36 +191,7 @@ Repeat the eligibility check from Step 1. The PR state may have changed while an
 
 If issues remain after filtering, post a PR comment using `gh pr comment`. Follow this format exactly:
 
----
-
-### Code review
-
-Found [N] issues:
-
-1. [Brief description of issue] (CLAUDE.md says "[exact quote]")
-
-[Link to file and line: full SHA, line range with at least 1 line of context on each side]
-https://github.com/[owner]/[repo]/blob/[full-sha]/[path/to/file]#L[start]-L[end]
-
-2. [Brief description of issue] (bug due to [file and code snippet])
-
-[Link]
-
----
-
-If no issues passed the filter, post:
-
----
-
-### Code review
-
-No issues found. Checked for bugs and CLAUDE.md compliance.
-
-🤖 Generated with [Claude Code](https://claude.ai/code)
-
----
-
-When Lens 6 ran, the no-issues line reads "Checked for bugs, CLAUDE.md compliance and alignment with the governing plan." When it returned `no-plan-found`, the line stays as above. The comment never claims a plan check that did not happen.
+Read [[Council Chamber/Skills/PR Code Review/references/comment-template]] and follow it at this step.
 
 **Link format rules:**
 - Full SHA required, not abbreviated
@@ -273,20 +246,6 @@ Do not flag any of the following categories. Pass this list to scoring agents to
 
 ---
 
-## Constraints
-
-- Do not build, run tests, or typecheck the app. CI handles these. Do not attempt them.
-- Use `gh` CLI for all GitHub operations. Do not use WebFetch for GitHub data.
-- Always get the full SHA via `gh pr view --json headRefOid`, never via shell variable expansion in the comment.
-- Confidence is anchored to exactly one of 0, 25, 50, 75, 100. Any other value is invalid and gets re-anchored, never rounded.
-- The actionable floor is anchor 75. Do not lower it without Sovereign approval. The one carve-out is the critical-at-50 exception in Step 6.
-- No finding posts at 75 or above without a verbatim `file:line` quote. This gate is not waivable.
-- Every posted finding survived an independent validator pass.
-- Post at most one review comment per PR run.
-- If a technical error surfaces during the review run (MCP failure, gh CLI error, agent failure), invoke the Systematic Debugging skill before retrying. Do not layer workarounds on top of undiagnosed errors.
-
----
-
 ## Planning Mode Rule
 
 Status is active. Execution authorized on Sovereign invocation. No pre-approval gate required beyond the Step 1 eligibility check.
@@ -308,14 +267,6 @@ Status is active. Execution authorized on Sovereign invocation. No pre-approval 
 
 _Date-stamped entries for edge cases and rule corrections that emerge in practice._
 
-**Anchored confidence, quote gate, validator pass.** Harvested at source level from the EveryInc/compound-engineering-plugin (`ce-code-review`).
-
-The harvest surfaced a live defect in this skill in its earlier form. An earlier rubric already produced anchored values (0, 25, 50, 75, 100), but the filter step used to threshold at 80. Every anchor-75 finding, defined in the rubric itself as "highly confident, double-checked, will be hit in practice," was silently dropped. A finding that squeaked through at 85 was a model ignoring the scale it was handed. The skill had been quietly discarding its best-calibrated tier and reporting clean runs.
-
-Three changes close it. The floor moves to anchor 75 and non-anchor values are now invalid rather than rounded. The **quote-the-line gate** requires a verbatim `file:line` for any claim at 75 or above, enforced twice (as a reviewer instruction, and mechanically at merge, where an unquoted 75 is demoted to 50). The **validator pass** gives every surviving finding a fresh Sonnet subagent told it has no commitment to the finding, answering three questions: is it real, did this diff introduce it, is it not handled elsewhere. Conservative bias, and every rejection's reason is recorded so the loss is auditable.
-
-The general lesson: **false precision.** A threshold set against a continuous scale, applied to output from an anchored scale, drops a whole tier and looks like it is working. Worth naming explicitly wherever your project tracks engineering failure modes.
+Earlier entries: [[Council Chamber/Skills/PR Code Review/references/refinements-log]].
 
 **Lens 6, plan alignment.** The five lenses ask whether the code is right. None asked whether it is the code the plan authorized. The lens adds four things: a four-way verdict (a bare "differs" is noise), the unplanned-addition class, two-sided quoting (plan line plus diff line) and the absence rule for unimplemented scope (name the search). Step 3b's `no-plan-found` keeps the lens from costing a Sonnet dispatch on a PR with nothing to compare against. Prove it can fail before trusting it: run it on a fixture with planted departures and confirm it catches them, and rerun that fixture after any edit to the Lens 6 text.
-
-**Validated needs an artifact, and a lens may return nothing.** A fresh-context validator still shares the finder's priors, so it can agree with a finding for the same wrong reason the finder raised it. A validation should rest on something deterministic wherever one can exist: a quoted line at its location, a command output or a reproduced failure. Step 5c's validator brief therefore gains question 4, and a reading that produces no artifact returns `validated: false`. The same logic frees the lenses: a lens that finds nothing returns "No findings" as a complete output, because a lens pushed to produce something produces false positives. This follows from the measured precision of language-model reviewers on their own, which the template does not ship the research to show, so treat the rule as a cautious default and adjust it against your own run summaries.

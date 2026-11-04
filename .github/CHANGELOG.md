@@ -6,6 +6,23 @@ Each entry corresponds to one publish cycle. For full implementation details, se
 
 ---
 
+## v3.21.0, 2026-11-03
+
+Every Fix Can Arrive.
+
+**If you installed v3.17.0 or earlier and applied v3.18.0, v3.19.0 or v3.20.0 by their steps, apply this update.** The update script refused the Outward Gate and the trust-anchor guard those releases told you to apply. If you saw `Refused: ... is a user file`, your vault does not have the gate they describe. **Also apply it if you run long Autonomous Improvement Sessions or keep keys in a `.env` file.**
+
+- **Every shipped file is one the update script can deliver.** Twenty files the manifest never named are classed, and `se-update.mjs --coverage` fails in CI on any it misses. Apply the manifest first, then check again.
+- **Two skills keep their rules after a compaction.** The Autonomous Improvement Session's Constraints moved from byte 30,542 to 2,119, inside what Claude Code re-attaches. PR Code Review fits too. Moves only, 0 words lost.
+- **`.env` files are closed to reads** in `.claude/settings.json`. Add the deny by hand.
+- **The routing codex names models that answer.** Three dead slugs replaced or marked vacant, verified on dispatch.
+- **The Outward Gate reads the verb after a connector's own name**, and `find` and `download` read. The encoding check prunes `.git` and `node_modules`.
+- **The README names Claude Code 2.1.295 or later**, which the guards' fail-closed setting needs.
+
+Full detail and the implementation spec: `.github/UPDATES/2026-11-03-v3.21.0-every-fix-can-arrive.md`.
+
+---
+
 ## v3.20.0, 2026-10-25
 
 Deploys Go Quiet.

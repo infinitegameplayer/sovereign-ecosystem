@@ -23,8 +23,8 @@
  *
  * Usage:
  *   node "Council Chamber/scripts/external-worker.mjs" \
- *     --provider openrouter \
- *     --model qwen/qwen3-coder:free \
+ *     --provider groq \
+ *     --model openai/gpt-oss-120b \
  *     --prompt "..." \
  *     [--context-pack path/to/context.md] \
  *     [--trace] [--max-tokens 4096] [--format json] [--temperature 0.7]

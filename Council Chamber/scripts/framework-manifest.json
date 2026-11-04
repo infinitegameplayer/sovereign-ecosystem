@@ -1,7 +1,7 @@
 {
   "_comment": "Sovereign Ecosystem Framework Manifest. Classifies every repo path into framework, seeded or user. Default rule: any path not matched by a pattern below is class 'user' and is never touched by upstream updates.",
-  "_version": "1.1.0",
-  "_updated": "2026-07-10",
+  "_version": "1.2.0",
+  "_updated": "2026-11-03",
   "default_class": "user",
   "classes": {
     "framework": {
@@ -31,6 +31,12 @@
         "Council Chamber/Skills/Sovereign Sync/**",
         "Council Chamber/Skills/Weekly Backup/**",
         "Council Chamber/Skills/Weekly Story/**",
+        "Council Chamber/Skills/Brainstorm/**",
+        "Council Chamber/Skills/PR Code Review/**",
+        "Council Chamber/Skills/Pending Plan Implementation/**",
+        "Council Chamber/Skills/Researcher/**",
+        "Council Chamber/Skills/Systematic Debugging/**",
+        "Council Chamber/Codices/Technology/**",
         "Council Chamber/AI Interface/AI Interface Knowledge Map.md",
         "Council Chamber/AI Interface/Operating Charter.md",
         "Council Chamber/Codices/Challenge and Illumination Codex.md",
@@ -45,6 +51,13 @@
         "Getting Started/**",
         "Council Chamber/scripts/hooks/floor-gate-selftest.mjs",
         "Council Chamber/scripts/hooks/hooks-selftest.mjs",
+        "Council Chamber/scripts/hooks/outward-gate.mjs",
+        "Council Chamber/scripts/hooks/outward-gate.config.example.json",
+        "Council Chamber/scripts/hooks/container-delete.mjs",
+        "Council Chamber/scripts/lib/**",
+        "Council Chamber/scripts/plan-hash.mjs",
+        "Council Chamber/scripts/quote-check.mjs",
+        "Council Chamber/scripts/decay-lint.mjs",
         "Council Chamber/scripts/build-skills-index.mjs",
         "Council Chamber/scripts/link-skills.mjs",
         "Council Chamber/scripts/link-skills-selftest.mjs",
@@ -117,7 +130,10 @@
         "Council Chamber/scripts/hooks/post-write-index-regen.sh",
         "Council Chamber/scripts/hooks/pre-compact-state-capture.sh",
         "Council Chamber/scripts/hooks/pre-write-floor-guard.sh",
-        "Council Chamber/scripts/hooks/pre-tool-approval-gate.sh"
+        "Council Chamber/scripts/hooks/pre-tool-approval-gate.sh",
+        "Council Chamber/scripts/hooks/outward-gate.sh",
+        "Council Chamber/scripts/hooks/post-bash-encoding-check.sh",
+        "Council Chamber/scripts/hooks/post-bash-move-audit.sh"
       ],
       "explanation": {
         "Humor Codex.md": "Ships as a seeded starter per v2.11.0. Personalization is a named onboarding step. Upstream changes are reference material only.",
@@ -149,7 +165,7 @@
     ".hidden": "Framework. Hidden blessings ship from upstream. The easter egg log lives at the repo root as .github/EASTER_EGGS.md.",
     "Council Chamber/Codices": "Mixed. Most codices are framework. Humor Codex is seeded (personalized during onboarding). Ṣāḍguṇya codex is seeded (doctrine the Sovereign may adapt to their own sovereignty practice).",
     ".runtime/primer.md": "Treated as seeded. Pre-personalization it is boilerplate; post-personalization it is the Sovereign's own session handoff surface.",
-    "Council Chamber/scripts/hooks": "Seeded, not framework. Scripts arrive from upstream but require installation-specific configuration. The Sovereign applies hook updates by reviewing diffs, not via --apply. Two exceptions, both listed explicitly in the framework file list: floor-gate-selftest.mjs and hooks-selftest.mjs. They are the positive controls on the guards, they take no installation-specific configuration (each resolves the vault root exactly as the guard it tests does), and they are the files in this directory that must arrive from upstream unmodified. A test the Sovereign has quietly weakened is worse than no test.",
+    "Council Chamber/scripts/hooks": "Seeded, not framework. Scripts arrive from upstream but require installation-specific configuration. The Sovereign applies hook updates by reviewing diffs, not via --apply. Two exceptions, both listed explicitly in the framework file list: floor-gate-selftest.mjs and hooks-selftest.mjs. They are the positive controls on the guards, they take no installation-specific configuration (each resolves the vault root exactly as the guard it tests does), and they are the files in this directory that must arrive from upstream unmodified. A test the Sovereign has quietly weakened is worse than no test. Since v3.21.0 the node modules join them as framework: outward-gate.mjs, its example config and container-delete.mjs read every setting from the environment or from outward-gate.config.json, which stays a user file. Every shell hook is seeded, and `se-update.mjs --coverage` fails on a shipped file this manifest does not name.",
     ".github/workflows": "Framework. The clean-clone verification that fires every guard on every push and weekly on a schedule. It exists because v3.3.0 shipped a deletion guard that had been read and never fired, and nothing in this repo was verified on any push, so there was no moment at which that could have been caught. A Sovereign may add jobs. Removing the guard jobs removes the only thing standing between a broken guard and a silent ship."
   }
 }

@@ -60,10 +60,12 @@ if [[ "$TOOL_NAME" != "Bash" && "$TOOL_NAME" != "PowerShell" ]]; then
   exit 0
 fi
 
-# Find .md files modified in the last 60 seconds within the vault
-MODIFIED=$(find "$SCOPE_ROOT" -name "*.md" -newermt "60 seconds ago" \
-  -not -path "*/.git/*" \
-  -not -path "*/node_modules/*" \
+# Find .md files modified in the last 60 seconds within the vault. .git and
+# node_modules are pruned, never walked: -not -path only hid them from the output
+# while find still walked every file inside them, which made the hook slow after
+# every shell call in a vault holding a project with its dependencies (v3.21.0).
+MODIFIED=$(find "$SCOPE_ROOT" \( -name .git -o -name node_modules \) -prune -o \
+  -name "*.md" -newermt "60 seconds ago" -print \
   2>/dev/null)
 
 if [[ -z "$MODIFIED" ]]; then

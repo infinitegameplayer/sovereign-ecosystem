@@ -137,6 +137,13 @@ jobs:
       - name: Update script reports renames, edits and no-change
         run: node "Council Chamber/scripts/se-update-selftest.mjs"
 
+      # A shipped file the manifest does not name is a user file, and --apply
+      # refuses every fix to it. Through v3.20.0 the Outward Gate was one. Upstream
+      # only: an installed vault's own skills and scripts are user files by design.
+      - name: Every shipped file is one the update script can deliver
+        if: github.repository == 'infinitegameplayer/sovereign-ecosystem'
+        run: node "Council Chamber/scripts/se-update.mjs" --coverage
+
       # A skill on disk and absent from the Index is a skill the AI interface
       # never discovers. Present, and unreachable.
       - name: Skills Index matches the skills on disk

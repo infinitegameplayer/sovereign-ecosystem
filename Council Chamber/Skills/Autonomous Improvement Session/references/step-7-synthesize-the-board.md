@@ -1,0 +1,10 @@
+---
+status: active
+parent: "[[Council Chamber/Skills/Autonomous Improvement Session/SKILL]]"
+---
+
+# Step 7: Synthesize the board detail
+
+Aggregate the due scan, the parked forks, the Reports findings, the research candidates and the reflection into buckets 2 to 4; Done comes from the run's own work. A finding the Sovereign already ruled on is dropped and counted in the run entry, never raised again. Each Your-decisions entry names what was hit, the safe action already taken, the decision needed and a recommended forward rule. Apply the recommendation bar: a candidate you would not recommend goes to the run entry's Patterns Noticed as one line, or nowhere. An obvious placement gets one line (`Candidate: [name]. Recommended: [verb], [bundle]. Rationale: [one sentence]. Accept?`); an uncertain one gets three options, the recommendation and the tradeoff. Before an item goes to Your hands, ask whether the agent can do it on the Sovereign's word; if so it is a Your-decisions entry. A Plans cliff-note carries the problem, the scope, the rough phase shape and "approve plan creation?".
+
+**The ground-truth gate runs here, on every entry, and the entry shows it.** A claim about the current state of an existing artifact is checked live with the cheapest definitive instrument (an `ls`, a Grep, a scoped Read) before it reaches the board, and every Your-decisions and Plans entry carries the check and its result as `Verified: <check>, <result>`. A forward proposal to build something absent needs no artifact check. A recommendation is also checked against work already underway (the owning skill, plan or project) and framed as layering onto it, superseding it or filling a gap in it. A claim that a present artifact is absent or stale is a factual assertion and is ground-truthed. The check belongs to the orchestrator, because a worker cannot ground-truth its own assertion. A Plans cliff-note gets the same check, because the Sovereign approves plan creation on its premise, and a false premise spends a real approval and a whole later session on work that did not need doing.
