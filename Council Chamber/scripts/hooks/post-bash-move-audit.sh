@@ -240,11 +240,18 @@ while IFS= read -r SRC; do
 done <<< "$MD_SOURCES"
 
 if [[ $HAS_WARN -eq 1 ]]; then
-  echo "--- Move Audit (CLAUDE.md Move audit rule) ---"
-  printf '%s' "$WARN_LINES"
-  echo "The move and the sweep are one unit of work. Update every active reference"
-  echo "before session close."
-  echo "----------------------------------------------"
+  # The warning goes out as additionalContext, the only PostToolUse channel the
+  # AI reads. Through v3.21.0 it was plain stdout on exit 0, which reaches the
+  # debug log and never the AI (see emit-context.mjs). Without the helper it
+  # falls back to plain stdout rather than saying nothing.
+  HOOK_DIR=$(cd "$(dirname "$0")" && pwd)
+  {
+    echo "--- Move Audit (CLAUDE.md Move audit rule) ---"
+    printf '%s' "$WARN_LINES"
+    echo "The move and the sweep are one unit of work. Update every active reference"
+    echo "before session close."
+    echo "----------------------------------------------"
+  } | if [[ -f "$HOOK_DIR/emit-context.mjs" ]]; then node "$HOOK_DIR/emit-context.mjs"; else cat; fi
 
   mkdir -p "$SCOPE_ROOT/.runtime" 2>/dev/null
   TIMESTAMP=$(date -u +"%Y-%m-%dT%H:%M:%SZ" 2>/dev/null || echo "unknown")

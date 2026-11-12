@@ -9,7 +9,8 @@
 #
 # Root cause this catches: PowerShell (or any tool) reading a UTF-8 file without
 # an explicit encoding, then writing it back as UTF-8. Non-ASCII characters get
-# double-encoded. An em dash becomes â€", a curly quote becomes â€™, and so on.
+# double-encoded. An em dash becomes â€ followed by a curly right double quote,
+# a curly apostrophe becomes â€™, and so on.
 # The standing rule this enforces: any PowerShell file operation uses an explicit
 # UTF-8 encoding. Never Get-Content or Set-Content without one on a file that
 # holds non-ASCII text.
@@ -73,9 +74,16 @@ if [[ -z "$MODIFIED" ]]; then
 fi
 
 # Known mojibake signatures (UTF-8 read as Windows-1252 then re-encoded).
-# â€" = em dash, â€™ = right single quote, â€œ = left double quote,
-# â€ = right double quote, âœ" = checkmark, â€¦ = ellipsis.
-PATTERN='â€"|â€™|â€œ|â€\x9d|âœ"|â€¦|Ã¢|Ã©|Ã¨|Ã¼'
+# â€ plus a right double quote (U+201D) = em dash, â€™ = right single quote,
+# â€œ = left double quote, â€ plus U+009D = right double quote, âœ plus a left
+# double quote (U+201C) = checkmark, â€¦ = ellipsis.
+#
+# The em dash and checkmark signatures end in a CURLY quote, written below as
+# \x{201D} and \x{201C}. Through v3.21.0 both ended in a straight quote ("),
+# which is not what the damage leaves, so the hook was blind to a corrupted em
+# dash, the most common case. The selftest planted the same straight quote and
+# passed. Its plants are now the real bytes of a Windows-1252 round trip.
+PATTERN='â€\x{201D}|â€™|â€œ|â€\x9d|âœ\x{201C}|â€¦|Ã¢|Ã©|Ã¨|Ã¼'
 
 FOUND=""
 while IFS= read -r file; do
@@ -89,14 +97,21 @@ while IFS= read -r file; do
 done <<< "$MODIFIED"
 
 if [[ -n "$FOUND" ]]; then
-  echo "--- Encoding Corruption Detected ---"
-  echo "[WARN] Mojibake signatures found in recently modified files:"
-  printf "%b\n" "$FOUND"
-  echo ""
-  echo "A tool likely read UTF-8 as Windows-1252 and wrote it back."
-  echo "Fix: restore from git, or reverse with a cp1252 byte decode."
-  echo "Prevention: always set an explicit UTF-8 encoding in PowerShell."
-  echo "------------------------------------"
+  # The warning goes out as additionalContext, the only PostToolUse channel the
+  # AI reads. Through v3.21.0 it was plain stdout on exit 0, which reaches the
+  # debug log and never the AI (see emit-context.mjs). Without the helper it
+  # falls back to plain stdout rather than saying nothing.
+  HOOK_DIR=$(cd "$(dirname "$0")" && pwd)
+  {
+    echo "--- Encoding Corruption Detected ---"
+    echo "[WARN] Mojibake signatures found in recently modified files:"
+    printf "%b\n" "$FOUND"
+    echo ""
+    echo "A tool likely read UTF-8 as Windows-1252 and wrote it back."
+    echo "Fix: restore from git, or reverse with a cp1252 byte decode."
+    echo "Prevention: always set an explicit UTF-8 encoding in PowerShell."
+    echo "------------------------------------"
+  } | if [[ -f "$HOOK_DIR/emit-context.mjs" ]]; then node "$HOOK_DIR/emit-context.mjs"; else cat; fi
 
   mkdir -p "$SCOPE_ROOT/.runtime" 2>/dev/null
   TIMESTAMP=$(date -u +"%Y-%m-%dT%H:%M:%SZ" 2>/dev/null || echo "unknown")

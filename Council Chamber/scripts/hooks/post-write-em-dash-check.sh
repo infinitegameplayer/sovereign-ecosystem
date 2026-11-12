@@ -90,12 +90,19 @@ fi
 COUNT=$(grep -c "—" "$FILE_PATH" 2>/dev/null || echo "0")
 
 if [ "$COUNT" -gt 0 ]; then
-  echo "--- Em Dash Check ---"
-  echo "[WARN] $COUNT em dash(es) found in $(basename "$FILE_PATH")."
-  echo "First occurrences:"
-  grep -n "—" "$FILE_PATH" | head -5
-  echo "Replace with a period, a comma or a colon before session close."
-  echo "---------------------"
+  # The warning goes out as additionalContext, the only PostToolUse channel the
+  # AI reads. Through v3.21.0 it was plain stdout on exit 0, which reaches the
+  # debug log and never the AI (see emit-context.mjs). Without the helper it
+  # falls back to plain stdout rather than saying nothing.
+  HOOK_DIR=$(cd "$(dirname "$0")" && pwd)
+  {
+    echo "--- Em Dash Check ---"
+    echo "[WARN] $COUNT em dash(es) found in $(basename "$FILE_PATH")."
+    echo "First occurrences:"
+    grep -n "—" "$FILE_PATH" | head -5
+    echo "Replace with a period, a comma or a colon before session close."
+    echo "---------------------"
+  } | if [ -f "$HOOK_DIR/emit-context.mjs" ]; then node "$HOOK_DIR/emit-context.mjs"; else cat; fi
 fi
 
 exit 0

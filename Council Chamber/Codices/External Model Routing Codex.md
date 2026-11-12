@@ -51,7 +51,7 @@ Provider-to-model recommendations are working hypotheses. Final routing assignme
 
 | Slot | Primary Provider | Candidate Model | Routing Rationale |
 |---|---|---|---|
-| Audit sweeps and schema validation | OpenRouter | `qwen/qwen3-coder:free` | **Absent from the OpenRouter live catalog as of 2026-10-12** (`GET /api/v1/models`). No replacement verified. Check the catalog before pinning a slug; free code-focused candidates seen in it: `cohere/north-mini-code:free`, `poolside/laguna-s-2.1:free`. Pair with fallback due to upstream-host throttling risk. |
+| Audit sweeps and schema validation | OpenRouter | `cohere/north-mini-code:free`, fallback `nvidia/nemotron-3-ultra-550b-a55b:free` | **Repaired 2026-11-05.** Both answered two known-answer dispatches through `external-worker.mjs` correctly (a three-note sum and a four-record schema audit), on two different upstream hosts (Cohere, NVIDIA). Both listed in the live catalog on 2026-11-11 (`GET /api/v1/models`, 467 models). `poolside/laguna-s-2.1:free`, once offered here as a candidate, answered HTTP 404 ("no longer available on OpenRouter") and left the catalog. Was: `qwen/qwen3-coder:free`, absent since 2026-10-12. A listed slug can still answer 404, so dispatch a known-answer task before pinning one. |
 | Mechanical synthesis passes | Groq | `openai/gpt-oss-120b`, fallback NVIDIA NIM `nvidia/nemotron-3.5-super-vl-120b-a12b` | **Replaced 2026-10-29.** Both answered a known-answer JSON synthesis correctly on two dispatches each. Two hosts, so the fallback survives either provider's removal. Was: OpenRouter `nvidia/nemotron-3-super-120b-a12b:free`, gone from the catalog and HTTP 404 on dispatch on 2026-10-29 ("This model is unavailable for free"). |
 | Tool-use orchestration tests | NVIDIA NIM | `nvidia/nemotron-3.5-super-vl-120b-a12b`, fallback Groq `openai/gpt-oss-120b` | **Proven 2026-10-29.** Offered two tools (the right one and a decoy), both models chose the right tool with exact arguments on two dispatches each, and a control question drew no tool call. `nvidia/nemotron-3.5-super-vl-120b-a12b` is labeled early-access on `build.nvidia.com`, which is why the fallback sits on another host. Candidates that are listed in the NIM catalog and answered HTTP 404 or 410 on dispatch: `moonshotai/kimi-k2.6`, `nvidia/llama-3.1-nemotron-70b-instruct`, `nvidia/nemotron-3-super-120b-a12b`, `z-ai/glm-5.3` (end of life 2026-10-28). Was: `meta/llama-3.3-70b-instruct`, absent since 2026-10-12. |
 | Long-context bulk classification | NVIDIA NIM | **Vacant 2026-10-29.** Was `nvidia/nemotron-3-super-120b-a12b` | **The slug is listed in `GET /v1/models` and answered HTTP 404 on two dispatches, 2026-10-29.** No replacement verified: the slot's need is the context window, and no candidate's long-context behavior has been dispatched. `nvidia/nemotron-3.5-super-vl-120b-a12b` passed short synthesis the same day and is the first to test. A catalog listing is not a served model: give any candidate a real dispatch before writing it in. |
@@ -122,7 +122,7 @@ Invocation shape:
 ```
 node "Council Chamber/scripts/external-worker.mjs" \
   --provider openrouter \
-  --model nvidia/nemotron-3-super-120b-a12b:free \
+  --model cohere/north-mini-code:free \
   --prompt "..." \
   --context-pack path/to/context.md \
   [--trace] [--max-tokens 4096] [--format json]

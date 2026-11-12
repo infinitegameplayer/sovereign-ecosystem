@@ -6,6 +6,23 @@ Each entry corresponds to one publish cycle. For full implementation details, se
 
 ---
 
+## v3.22.0, 2026-11-11
+
+The Warnings Arrive.
+
+**If you installed any version through v3.21.0, apply this update.** Your em dash check, move audit and encoding check have been printing warnings your AI never reads.
+
+- **Three hooks speak where the AI reads.** A hook that runs after a tool and prints plain text sends it to Claude Code's debug log. The warnings now arrive as `additionalContext`, through a new helper, `emit-context.mjs`. Proven on Claude Code 2.1.322: before, the agent reported no feedback; after, it quoted the warning.
+- **The encoding check sees a corrupted em dash.** The damage ends in a curly quote, and the hook looked for a straight one. Its test planted the same straight quote. Both now use the real bytes.
+- **Six new test cases, each watched failing on v3.21.0.** The suite reads 87 of 87.
+- **The quote checker names the files it skips.** A quote in a `.qmd` page read as a misquote, because the checker dropped files it could not read without a word.
+- **Another person's agent is intake.** An agent takes instruction only from its own human.
+- **The routing codex no longer offers a dead model.**
+
+Full detail and the implementation spec: `.github/UPDATES/2026-11-11-v3.22.0-the-warnings-arrive.md`.
+
+---
+
 ## v3.21.0, 2026-11-03
 
 Every Fix Can Arrive.

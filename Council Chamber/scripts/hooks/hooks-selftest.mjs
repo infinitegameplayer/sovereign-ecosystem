@@ -123,6 +123,31 @@ function fire(hookFile, payload, { vaultRoot = VAULT, cwd = VAULT, nodeBroken = 
 const write = (file_path) => ({ tool_name: 'Write', tool_input: { file_path } });
 const bash = (command) => ({ tool_name: 'Bash', tool_input: { command } });
 
+// The channel the AI reads. A PostToolUse hook's plain stdout on exit 0 goes to
+// the debug log and never reaches the AI, so a warning that is printed is not a
+// warning that is delivered. Through v3.21.0 every case below checked only that
+// the warning was printed, and all three warning hooks passed while warning no
+// one. This returns the additionalContext the AI would read, or '' if none.
+function contextOf(r) {
+  for (const line of r.stdout.split('\n')) {
+    try {
+      const j = JSON.parse(line);
+      const c = j?.hookSpecificOutput?.additionalContext;
+      if (j?.hookSpecificOutput?.hookEventName === 'PostToolUse' && typeof c === 'string') return c;
+    } catch { /* not a JSON line */ }
+  }
+  return '';
+}
+
+// The bytes a Windows-1252 round trip leaves behind, built from the damage
+// itself rather than typed: each UTF-8 byte of the original read as a cp1252
+// character. An em dash ends in a curly right double quote, a checkmark in a
+// curly left one. Through v3.21.0 the plants were typed with a straight quote,
+// which matched the hook's own straight-quote pattern and proved nothing about
+// real damage, which the hook could not see.
+const CP1252 = { 0x80: '€', 0x93: '“', 0x94: '”', 0x9c: 'œ' };
+const mojibake = (s) => [...Buffer.from(s, 'utf8')].map((b) => CP1252[b] ?? String.fromCharCode(b)).join('');
+
 // ── post-write-em-dash-check.sh ─────────────────────────────────────────────
 // It must WARN on an em dash in the vault, stay SILENT on a clean file, and
 // stay silent on a file outside the vault. And it must survive a lowercase
@@ -132,6 +157,7 @@ const bash = (command) => ({ tool_name: 'Bash', tool_input: { command } });
 
   let r = fire(H, write(DIRTY));
   record('em-dash: warns on an em dash', /em dash/i.test(r.out), `out=${r.out.trim().slice(0, 40)}`, 'reacts');
+  record('em-dash: the warning reaches the AI as additionalContext', /em dash/i.test(contextOf(r)) && r.code === 0, `code=${r.code} stdout=${r.stdout.trim().slice(0, 60)}`, 'reacts');
 
   r = fire(H, write(CLEAN));
   record('em-dash: silent on a clean file', !/WARN/i.test(r.out), `out=${r.out.trim().slice(0, 40)}`, 'quiet');
@@ -320,10 +346,25 @@ const bash = (command) => ({ tool_name: 'Bash', tool_input: { command } });
   const MOJI = `${VAULT}/Scriptorium/mojibake.md`;
 
   // The bytes UTF-8 leaves behind when an em dash makes the round trip through
-  // Windows-1252. This is the damage, written on purpose.
-  writeFileSync(MOJI, 'A corrupted em dash lives here: â€" and it should be caught.\n');
+  // Windows-1252. This is the damage, written on purpose, built by mojibake()
+  // so it is the real damage and never a typed look-alike.
+  writeFileSync(MOJI, `A corrupted em dash lives here: ${mojibake('—')} and it should be caught.\n`);
   let r = fire(H, bash('echo touched'));
   record('encoding: warns on a corrupted file in the vault', /mojibake|corruption/i.test(r.out), `out=${r.out.trim().slice(0, 40)}`, 'reacts');
+  record('encoding: the warning reaches the AI as additionalContext', /mojibake/i.test(contextOf(r)) && r.code === 0, `code=${r.code} stdout=${r.stdout.trim().slice(0, 60)}`, 'reacts');
+
+  // A checkmark ends in the other curly quote. Its own case, so neither
+  // signature can go blind behind the other.
+  writeFileSync(MOJI, `A corrupted checkmark lives here: ${mojibake('✓')} and it should be caught.\n`);
+  r = fire(H, bash('echo touched'));
+  record('encoding: warns on a corrupted checkmark', /mojibake|corruption/i.test(r.out), `out=${r.out.trim().slice(0, 40)}`, 'reacts');
+
+  // A real em dash beside straight quotes is writing, not damage.
+  writeFileSync(MOJI, 'A real em dash — and "straight quotes" are not damage.\n');
+  r = fire(H, bash('echo touched'));
+  record('encoding: quiet on a real em dash beside straight quotes', !/mojibake|corruption/i.test(r.out), `out=${r.out.trim().slice(0, 40)}`, 'quiet');
+
+  writeFileSync(MOJI, `A corrupted em dash lives here: ${mojibake('—')} and it should be caught.\n`);
 
   // Same damage, delivered by the PowerShell tool. It must still be seen.
   r = fire(H, { tool_name: 'PowerShell', tool_input: { command: `Set-Content "${MOJI}" "x"` } });
@@ -335,7 +376,7 @@ const bash = (command) => ({ tool_name: 'Bash', tool_input: { command } });
 
   // node_modules is pruned, never walked (v3.21.0). Damage inside it stays unreported.
   mkdirSync(`${VAULT}/node_modules/pkg`, { recursive: true });
-  writeFileSync(`${VAULT}/node_modules/pkg/README.md`, 'A corrupted em dash lives here: â€" and it should be caught.\n');
+  writeFileSync(`${VAULT}/node_modules/pkg/README.md`, `A corrupted em dash lives here: ${mojibake('—')} and it should be caught.\n`);
   r = fire(H, bash('echo touched'));
   rmSync(`${VAULT}/node_modules`, { recursive: true, force: true });
   record('encoding: never reports from node_modules', !/mojibake|corruption/i.test(r.out), `out=${r.out.trim().slice(0, 40)}`, 'quiet');
@@ -355,6 +396,7 @@ const bash = (command) => ({ tool_name: 'Bash', tool_input: { command } });
   writeFileSync(`${VAULT}/Library/refers.md`, 'See [[Council Chamber/Skills/Demo/Note]] for detail.\n');
   let r = fire(H, bash('mv "Council Chamber/Skills/Demo/Note.md" "Library/Note.md"'));
   record('move-audit: warns when a moved file still has references', /move audit|wikilink|reference/i.test(r.out), `out=${r.out.trim().slice(0, 40)}`, 'reacts');
+  record('move-audit: the warning reaches the AI as additionalContext', /move audit/i.test(contextOf(r)) && r.code === 0, `code=${r.code} stdout=${r.stdout.trim().slice(0, 60)}`, 'reacts');
 
   // A move of a file nothing links to: correctly silent, not a false alarm.
   writeFileSync(`${VAULT}/Scriptorium/lonely.md`, '# Lonely\n');

@@ -34,7 +34,8 @@
 //        [--figures] [--min <chars>] [--json]
 //   node "Council Chamber/scripts/quote-check.mjs" --positive-control
 //
-// A directory source is read recursively (.md, .txt, .json, .jsonl, .html, .py, .ts, .js, .mjs, .csv).
+// A directory source is read recursively (the extensions in TEXT_EXTS below); every
+// other file is counted and reported as SKIPPED, never dropped in silence.
 // A URL source is fetched once. The script reads the paths it is given and does not
 // need the vault root, so it has no root to resolve.
 //
@@ -46,12 +47,13 @@
 // READ-ONLY: never writes to the vault. The positive control writes only to a
 // temp directory it removes. Output is a report on stdout.
 
-import { readFileSync, readdirSync, statSync, mkdtempSync, writeFileSync, rmSync } from 'node:fs';
+import { readFileSync, readdirSync, statSync, mkdtempSync, mkdirSync, writeFileSync, rmSync } from 'node:fs';
 import { join, extname } from 'node:path';
 import { tmpdir } from 'node:os';
 import { fileURLToPath } from 'node:url';
 
-const TEXT_EXTS = new Set(['.md', '.txt', '.json', '.jsonl', '.html', '.py', '.ts', '.js', '.mjs', '.csv']);
+// Docs sites write in .qmd, .mdx and .rst; configs and test packs in YAML and TOML (v3.22.0).
+const TEXT_EXTS = new Set(['.md', '.qmd', '.mdx', '.rst', '.txt', '.json', '.jsonl', '.yaml', '.yml', '.toml', '.html', '.py', '.ts', '.tsx', '.js', '.mjs', '.csv']);
 const NONCE = 'zq-quote-check-absent-control-7f3a91';
 const USAGE = 'Usage: node quote-check.mjs --doc <path> --source <path|dir|url> [--source ...] [--figures] [--min <chars>] [--json]\n       node quote-check.mjs --positive-control';
 const KNOWN_FLAGS = new Set(['--doc', '--source', '--figures', '--min', '--json', '--positive-control']);
@@ -90,18 +92,21 @@ export function extractFigures(text) {
   return [...new Set(text.match(re) || [])];
 }
 
-function walk(dir, files = []) {
+// Files outside TEXT_EXTS are counted, never dropped in silence: a skipped file
+// reads as a missing quote, so the report names how many were skipped and their extensions.
+function walk(dir, files = [], skipped = []) {
   for (const name of readdirSync(dir)) {
     if (name === '.git' || name === 'node_modules') continue;
     const p = join(dir, name);
     const st = statSync(p);
-    if (st.isDirectory()) walk(p, files);
+    if (st.isDirectory()) walk(p, files, skipped);
     else if (TEXT_EXTS.has(extname(name).toLowerCase())) files.push(p);
+    else skipped.push(extname(name).toLowerCase() || '(none)');
   }
-  return files;
+  return { files, skipped };
 }
 
-async function loadSources(specs) {
+async function loadSources(specs, skippedOut = []) {
   const loaded = [];
   for (const spec of specs) {
     try {
@@ -110,7 +115,8 @@ async function loadSources(specs) {
         if (!r.ok) throw new Error(`HTTP ${r.status}`);
         loaded.push({ name: spec, text: await r.text() });
       } else if (statSync(spec).isDirectory()) {
-        const files = walk(spec);
+        const { files, skipped } = walk(spec);
+        if (skipped.length > 0) skippedOut.push({ dir: spec, count: skipped.length, exts: [...new Set(skipped)].sort() });
         if (files.length === 0) throw new Error('directory holds no readable text files');
         for (const f of files) loaded.push({ name: f, text: readFileSync(f, 'utf8') });
       } else {
@@ -152,12 +158,13 @@ export function runControls(sources) {
 }
 
 export async function check({ docText, sourceSpecs, figures = false, min = 12, sources = null }) {
-  const loaded = sources || await loadSources(sourceSpecs);
+  const skipped = [];
+  const loaded = sources || await loadSources(sourceSpecs, skipped);
   const controls = runControls(loaded);
-  if (!controls.ok) return { controls, items: [], unreadable: loaded.filter(s => s.text === null) };
+  if (!controls.ok) return { controls, items: [], unreadable: loaded.filter(s => s.text === null), skipped };
   const items = extractQuotes(docText, min).map(q => ({ kind: 'quote', text: q, ...locate(q, loaded) }));
   if (figures) for (const f of extractFigures(docText)) items.push({ kind: 'figure', text: f, ...locate(f, loaded) });
-  return { controls, items, unreadable: loaded.filter(s => s.text === null) };
+  return { controls, items, unreadable: loaded.filter(s => s.text === null), skipped };
 }
 
 // Positive control: plants every case in a temp-dir fixture and requires each to
@@ -201,6 +208,15 @@ async function positiveControl() {
     ok(!bad.controls.ok && bad.items.length === 0, 'an unreadable source fails the controls and judges nothing');
     const empty = await check({ docText: doc, sourceSpecs: [], sources: [{ name: 'x', text: NONCE + ' padding padding padding padding' }] });
     ok(!empty.controls.ok, 'a source that holds the nonce fails the absent control');
+    // A docs site written in .qmd was once skipped in silence by a directory walk
+    // and read as four misquotes (v3.22.0). A skipped file is counted and named.
+    const docsDir = join(dir, 'docs');
+    mkdirSync(docsDir);
+    writeFileSync(join(docsDir, 'guide.qmd'), 'The grader sees a random code made for each grading request, as written here.\n', 'utf8');
+    writeFileSync(join(docsDir, 'logo.bin'), 'binary-ish content that is never read as text', 'utf8');
+    const qmd = await check({ docText: 'Quoted: "a random code made for each grading request".', sourceSpecs: [docsDir] });
+    ok(qmd.items[0]?.verdict === 'found', 'a quote in a .qmd file under a directory source is found');
+    ok(qmd.skipped?.length === 1 && qmd.skipped[0].count === 1, 'a directory source reports the files it skipped');
   } finally {
     rmSync(dir, { recursive: true, force: true });
   }
@@ -237,6 +253,7 @@ async function main() {
   else {
     console.log(`CONTROL present: ${r.controls.present ? 'found' : 'MISSED'} | CONTROL absent: ${r.controls.absent ? 'not found' : 'FALSE HIT'}`);
     for (const u of r.unreadable) console.log(`UNREADABLE  ${u.name}  (${u.error})`);
+    for (const s of r.skipped) console.log(`SKIPPED  ${s.dir}  ${s.count} file(s) not read (${s.exts.join(' ')}). A miss may live there: name the file as its own --source.`);
     if (!r.controls.ok) { console.log('Instrument untrusted. Nothing judged.'); process.exit(2); }
     for (const i of r.items) console.log(`${i.verdict.toUpperCase().padEnd(8)} ${i.kind.padEnd(6)} ${i.text}${i.source ? `  <- ${i.source}` : ''}`);
     const missing = r.items.filter(i => i.verdict === 'missing').length;
