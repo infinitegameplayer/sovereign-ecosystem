@@ -72,8 +72,8 @@ Two bundles run per run (SKILL.md Step 2). This bundle's Reports items go to one
 **Verb:** Reports.
 
 **Execution:**
-1. Count lines per `Council Chamber/Skills/*/SKILL.md`.
-2. Flag any SKILL.md over 300 lines without a `references/` subdirectory.
+1. Measure each `Council Chamber/Skills/*/SKILL.md` in bytes and in lines. After a compaction, Claude Code re-attaches only the start of each invoked skill, about 5,000 tokens or 18,000 bytes (Claude Code behavior as of 2026-11; recheck when the docs change). A rule that sits past that point is not in front of the AI after a compaction.
+2. Flag any SKILL.md whose binding text (the rules the AI must obey, not reference tables) ends past 18,000 bytes, and any over 300 lines without a `references/` subdirectory. A rise in the flagged count since the last run is a finding with the skill named.
 3. For each flagged skill, classify the bulk (routing tables, lookup references, session logs, examples) and propose what extracts to `references/` without breaking operational flow. The split itself is a structural change, Sovereign-gated.
 
 **Output artifact:** Findings on the decision board.

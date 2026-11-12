@@ -45,21 +45,25 @@ If this errors or the script is not available, note it and proceed - collaborati
 
 Check `Council Chamber/Skills/Ecosystem Update Check/sync-state.json`. If `last_check_date` is null or more than 30 days ago, surface it once before the review begins: "Ecosystem update check is overdue. Want to run it before we start or after?" Do not block the review. One mention only.
 
-Read `Council Chamber/Governance/Watch Register.md`. For each active watch, check its wake condition against this week's data pull. Fire any watch whose condition has been met: take or route the action, log it in the register's own Change Log, and remove the row. Retire any watch that is no longer relevant, with the same log entry. Carry forward anything still open, and still alive, into Engagement B (Priority + Forward Flow) if it belongs there.
+Read `Council Chamber/Governance/Watch Register.md`. For each active watch, check its wake condition against this week's data pull. Fire any watch whose condition has been met: take or route the action, log it in the register's own Change Log and remove the row. Retire any watch that is no longer relevant, with the same log entry. Carry forward anything still open, and still alive, into Engagement B (Priority + Forward Flow) if it belongs there. A watch row that names a particular engagement is read in that engagement, so scan the register for the name of this review in Step 0.
 
 State the session: "Beginning End-of-Week Review - 3 this-week engagements, 2 next-week engagements, then Sovereign Command update."
 
-**Parallel data pull:** Fire all 7 workers simultaneously. Hold results. Do not present yet. Workers feed the engagement briefings in Steps 1-5.
+**Parallel data pull:** Fire all 7 workers simultaneously. Do not present yet. As each worker returns, write its result under its own heading to a scratch file, and brief each engagement from that file. Results held only in working memory are lost when the context compacts, and a resumed step then knows where it stands but not what it is briefing from. Workers feed the engagement briefings in Steps 1-5.
 
 - **Worker 1: Session logs:** Scan `Vault (Archive)/Session Logs/` for files created in the past 7 days, note build/creation activity and structural changes
 - **Worker 2: AI Interface Change Log:** Read `Council Chamber/AI Interface/AI Interface Change Log.md` filtered to the past 7 days, flag execution-density pattern if consecutive heavy sessions appear
-- **Worker 3: Transcripts:** Check transcription service for any new transcripts in the past 7 days (if using Transcription Module), coaching sessions, recorded calls, notable conversations
+- **Worker 3: Transcripts:** Check transcription service for any new transcripts in the past 7 days (if using Transcription Module), coaching sessions, recorded calls, notable conversations. Read the folders where processed transcripts come to rest, not only the intake folder. Intake is a staging area, and an empty one means everything was routed, not that nothing was captured. Report anything still sitting in intake separately, as unrouted backlog. When a reader works a dated window, hand it the count of items per day so an empty day reads as empty and not as unread.
 - **Worker 4: Operations + Collaborations:** Read primary business/projects dashboard and active collaboration dashboards in `Collaborations/` filtered for recent movement
 - **Worker 5: Capture + Pending Plans:** Scan `Capture.md` for completed/stale/new items; scan `Pending Plans/` for plans that moved, resolved, activated or need attention; read `Council Chamber/AI Interface/Field Decisions.md` filtered to this week
 - **Worker 6: North Star + Operations finances:** Read `Library/North Star.md` for active 0-3 month horizons and Drift Check prompts; scan `Operations/` for financial notes updated this week
 - **Worker 7: Ecosystem SDK intelligence:** Check for Agent SDK changelog updates or ecosystem updates since last review; surface relevant deltas only
 
+**A failed read is a finding.** A worker that errors, skips a source or covers only part of its window says so, in those words, in that engagement's scan line. A failed read is never reported as a zero and a skipped source is never trimmed away to leave a clean week. A partial read names the dates it covered. One worker's failure never halts the review.
+
 All workers complete before any briefing begins.
+
+**Check a worker's claim at source.** A worker's report that a plan, ledger or log is inconsistent, or that a loop is still open, is a claim. Check it at the container that owns the thread (the plan, its index or the ledger itself) before it reaches a briefing. The same holds for an open question carried in a digest, a transcript or a coaching note. A stale second-hand state costs the Sovereign a read and costs the briefing their trust.
 
 ---
 
@@ -156,6 +160,7 @@ No questions. Present the data. Sovereign reacts freely.
 - Read current `Sovereign Command.md` - what is the current primary move?
 - Cross-reference with the upcoming calendar (Engagement A) and current North Star horizons
 - **Revisit triggers.** Regenerate the Decision Journal first: `node "Council Chamber/scripts/decision-journal.mjs"`. Nothing else runs it, so without this step the journal goes stale between hand runs. Then read its Revisit triggers section. Each condition gets a three-state done-check against its source: `open`, `resolved` or `unverifiable`. Only a condition that has fired reaches the briefing, with its evidence: "Decision of [date] asked to be revisited when [condition]; it has [evidence]." A condition whose source is unreachable returns `unverifiable` and carries forward. An empty section stays silent.
+- **Surface only what is the Sovereign's to act on.** An item reaches the briefing when they own it, created it, own its domain or asked about it. An item that merely mentions them is context, and context belongs in the scan line, not on their plate. A true finding placed in front of the wrong person still costs them the read.
 
 **Briefing:**
 "Based on what you've shared and what I see, here's what seems most alive heading into next week: [1-3 distilled signals from all prior engagements]"
@@ -195,6 +200,10 @@ Brief summary of what emerged across the full review - 2-4 lines. What was most 
 
 ---
 
+## Model Routing
+
+Set `model` explicitly on every subagent dispatch. Sonnet is the default for the parallel engagement workers. Haiku takes mechanical lookups (change-log windowing, deadline scan, file stat). Opus is for architectural judgment only. Subagents inherit nothing, so never rely on the orchestrator's tier.
+
 ## Planning Mode Rule
 
 Status is `active`. This skill is authorized to execute without additional approval gates. Step 0 day confirmation is a soft gate - Sovereign invocation overrides. The only hard gate is Step 6: Sovereign must explicitly approve the Sovereign Command update before it is written.
@@ -209,6 +218,7 @@ Internal Contrast Layer
 - Drift check (Engagement 3, Theme C) is sensing, not solving. Do not pivot into action items.
 - Sovereign Command update is proposal-first, always. Do not pre-write the update before the Sovereign confirms.
 - Engagements are soft - if a theme does not land, pass without friction. If the Sovereign wants to go deeper, follow.
+- Ask for confirmation, not recall. Draft what the Sovereign said in passing and let them confirm, correct or strike it. An open "is there something that has not been said?" asks them to search a week on demand.
 - Calendar-sync.mjs --future 7 may fail if tokens are expired, network is unavailable, or script is not set up. Surface the error and offer to proceed with Sovereign's verbal input. Do not halt the full review.
 - The End-of-Week Review is the intel ring. A Weekly Story session (if the Sovereign runs one) transforms this material into narrative. They serve different purposes.
 - Business dashboard path in Engagement 2 is intentionally generic. Each Sovereign adapts it to their domain structure.

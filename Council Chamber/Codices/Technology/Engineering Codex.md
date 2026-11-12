@@ -58,6 +58,8 @@ This is the fix for a real drift: handing the Sovereign implementation detail th
 
 **Deferred to Follow-Up Work.** Tangential "while we're here" ideas go to their own subsection. Never into an active unit. This is the compound-opportunity sweep, applied at plan time.
 
+**A fence counts every door.** A plan that keeps a category of content inside one room lists every way the content could leave it before naming the check: each route that reads it, each prompt the system builds out of stored rows, and each write that a later session loads. An edit that answers with the body is a read. The category's mark lives on the rows that hold the content, set when they are written, never looked up through a link that can dangle once its parent is deleted.
+
 ## II. Build
 
 **The idempotency check.** Before starting any unit, verify whether the work is already present and matches intent. It may have shipped in a prior session or on a prior branch. Verify, mark complete, move on. Never silently reimplement.
@@ -82,6 +84,12 @@ The gate: **do not write the test and the implementation in the same step, and n
 
 **The incremental commit heuristic.** Can you write a commit message describing a complete, valuable change? Commit. Would the message be "WIP" or "partial X"? Wait. Commit before switching context and before attempting anything risky.
 
+**A tool that changes a live service proves itself on both sides.** It runs dry unless told to apply, and the dry run prints what it would touch and what that costs. It writes only if the target still holds what it read, then reads the result back and checks it before reporting success. A fake proves the logic. Only a live read proves the wiring, so run the dry run against the real service before the commit.
+
+**A change only the live system can prove ships switched off.** Some faults show only against real traffic, a real provider or a real device, and no local suite reaches them. A change of that kind ships behind a switch whose off value is the old behavior, and turning it on is its own small change once the live system has shown it right. The reason is the rollback: a bad turn-on is undone by setting one value back, not by a revert and a redeploy. The change names the switch, its off value and the condition that turns it on.
+
+**A narrowed check keeps the old check's case.** When a change replaces or narrows a check, commit a test that plants the violation the old check caught (a plant is a deliberate violation, written to watch the check fail) and expects it to fail. The new tests prove the new rule bites. Only this one proves the replacement still covers what it replaced. When the narrowing drops that case on purpose, the plant becomes a control that expects it to pass, and the change names the drop. A plant listed in a report and never committed proves nothing to the next reader.
+
 ## III. Verify
 
 The done gate is layered. Each layer has its own evidence.
@@ -96,9 +104,23 @@ The done gate is layered. Each layer has its own evidence.
 
 **The unifying principle: evidence is witnessed and reported by whoever did the work. It is never reconstructed or assumed afterward.** This is the code-work face of Claim Integrity ([[.claude/CLAUDE]]), and it is the same discipline as the Move audit rule and the Fact Ratified sweep, applied to a different surface.
 
-**A green matrix with a red suite is not ready.** Before declaring anything shipped, run the project's full test suite once.
+**A green matrix with a red suite is not ready.** Before declaring anything shipped, run the project's full test suite once. A failure called pre-existing names where else it fails (the base branch). A failure called a flake names its isolated reruns. A guard's description says what it does not stop.
 
-**The durable sink rule.** A known issue, a deferred finding or an accepted residual goes into a committed record file. Never only into a session transcript, and never only into a plan's activity log if the code repo is where the next agent will look. *A defer that produces no durable artifact is data loss.*
+**The durable sink rule.** A known issue, a deferred finding or an accepted residual goes into a committed record file. Never only into a session transcript, and never only into a plan's activity log if the code repo is where the next agent will look. *A defer that produces no durable artifact is data loss.* Each accepted residual also names the later check that would catch it, or says plainly that none exists. A residual with a named catcher is a decision. One without is a hope.
+
+**Test the way the code runs.** A suite proves only the runtime it ran in. A test runner can resolve a file the real runtime cannot, so the suite stays green while the script breaks. For each runtime a change reaches (plain `node`, a bundled function, a hook fed its harness's JSON on stdin, CI's fresh install), name the test that runs the code that way. Where none can run locally, the change says so and names the later check that will. This is the green build (IX), caught before it ships.
+
+**Plants enumerate; they never brainstorm.** A plant set imagined by the builder tests what the builder imagined. List every field or flag that marks the protected class, list every route the data takes (stored, shown, scored, used in a condition, used as a label), and plant one violation per pair. The missed case lives in a pair nobody thought to try.
+
+**A live fact is a value with its command.** An audit that states what a live system does (a header, a setting, a version, a count) records the value, the command that read it and its output. A fact remembered, scraped from a page or summarized by a fetch stays marked unverified until it is read side by side with the system. An error born in an audit outlives every later gate, because each gate trusts the audit.
+
+**A protecting list equals what it protects.** An allow-list, a content security policy or a protected set is tested for exact equality with what the code uses, so an addition on either side fails until the other moves with it.
+
+**A fake that can loop is bounded.** A fake clock, sleep or retry fails after a set number of calls, so a mutation that loops turns red rather than hanging the run.
+
+**A guard refuses, with a code of its own.** A guard that only warns can pass unseen. Where a guard can block, it refuses, and the refusal carries its own code (an exit code, an error code, a SQLSTATE) that its test matches, so the test proves this guard fired rather than that something failed. A destructive helper refuses the wrong environment before it acts. A hook that runs after the act and cannot undo it reports instead, and its header says so. A Claude Code hook that enforces a policy blocks with exit 2, because exit 1 is a non-blocking error and the act goes ahead. Where the hook itself may crash, `onFailure: "block"` (Claude Code 2.1.295 or later) turns the crash into a refusal, and every such guard leaves one tool open to repair it, so a broken guard cannot lock out its own fix.
+
+**A guard sits where the artifact is made.** A check inside the build step sees every source a value can come from. A later gate sees only what reached it. The change names the placement it rejected and what that would have cost.
 
 ## IV. Review
 
@@ -112,7 +134,7 @@ The done gate is layered. Each layer has its own evidence.
 | 75 | Double-checked and confirmed. It will affect users, callers or runtime behavior in normal usage. Clearly present and actionable. |
 | 100 | Verifiable from the code itself. Compile error, type mismatch, definitive logic bug, or an explicit standards violation with a quotable rule. No interpretation required. |
 
-The actionable floor is **75**. Below it, suppress. One exception: a critical finding at 50 surfaces anyway, because a critical-but-uncertain issue is worse to lose than to over-report.
+The actionable floor is **75**. Below it, a finding stays off the posted review and goes to the run summary, where each one is decided: fixed with its commit, or kept with its reason. One exception: a critical finding at 50 surfaces anyway, because a critical-but-uncertain issue is worse to lose than to over-report.
 
 A continuous 0-to-100 score invites false precision. "Confidence 87" means nothing, cannot be audited and cannot be reproduced. Five anchors with behavioral criteria can be.
 
@@ -143,15 +165,19 @@ Conservative bias. When in doubt, reject. A rejected finding's reason is recorde
 
 **Review never mutates the tree.** Review returns findings. Applying is a separate step, batched by file rather than by finding.
 
+**Review the head that ships.** A review is true of the commit it read, and only that one. It names that commit. A later commit makes it stale, so a fix round gets a narrow review of everything changed since the reviewed head, pass or fail on each earlier finding and alert to anything the fix itself introduced, rather than a fresh full review. A review that never named its head counts as no review. Each round is logged as round, head, verdict and fix commit. The agent that wrote the change never certifies it. Each fix is a new commit named for its finding, so the narrow re-check reads exactly that diff, and what a review leaves over becomes a small item of its own (an issue, a plan item) rather than a wider change. Findings in the author's own work are expected. Good work is measured by where they are found (the author's own run of the reviewer the merger will run) and by how they are recorded.
+
+**Answering a review sorts each finding three ways.** "Fixed" or "won't fix" loses what kind of finding it was. **Overtaken or wrong:** a point the same day's work made stale was not an error when it was written, and the answer says so, which keeps the record fair to its author. **Claim or commitment:** a forward statement that cannot yet be proven becomes a commitment with an owner, never a promise written as already kept. **Whose decision:** a finding that needs another person's agreement goes to that person by name rather than being settled by whoever answers. A document that answers another person's proposal opens with what it inherits and does not reopen, and closes with where it differs. A "no change" answer cites the line of code it rests on, and the next reader checks the reply against that line as an artifact of its own.
+
 ## V. Refine
 
 Three lenses, run as a cheap pass on a fresh diff before review:
 
-- **Reuse.** New code that duplicates an existing utility, or hand-rolled logic that a runtime primitive already covers. Only when behavior-equivalent.
-- **Quality.** Redundant state, parameter sprawl, copy-paste variants, leaky abstractions, nested conditionals, dead code.
+- **Reuse.** New code that duplicates an existing utility, or hand-rolled logic that a runtime primitive already covers. Only when behavior-equivalent. Reuse stops at the app boundary: across independently deployed apps, copy the file and keep the copies in step by a check, because a shared file's blast radius is every deploy that imports it. The copy is a choice with a cost, and the change names it. Every copied comment is re-read against its new home, since a comment copied with its code still describes the place it came from.
+- **Quality.** Redundant state, parameter sprawl, copy-paste variants, leaky abstractions, nested conditionals, dead code. A key test on an object that came from data (a request body, parsed JSON, a spec) uses `Object.hasOwn(obj, key)`, never `key in obj`, so data never borrows a key from the prototype.
 - **Efficiency.** Unnecessary work, N+1 patterns, missed concurrency, recurring no-op state updates, listener leaks.
 
-**The hard guard: never simplify away a safety check.** Input validation at a trust boundary, error handling that prevents data loss, and any security check are not removable boilerplate. A ceiling that looks like ceremony is still a ceiling.
+**The hard guard: never simplify away a safety check.** Input validation at a trust boundary, error handling that prevents data loss and any security check are not removable boilerplate. A ceiling that looks like ceremony is still a ceiling. Nor widen one to get something through. When a permission or an allow blocks a needed act, add a narrow path that checks it and records it.
 
 **Simplify at phase boundaries, not per unit.** Early patterns may look duplicated and then intentionally diverge. Wait for two or three units or a natural boundary.
 
@@ -183,6 +209,8 @@ Two tracks. A **bug** learning records a defect and its fix: symptoms, root caus
 
 **Flags are questions, not failures.** A document may legitimately cite a path that the very fix it documents deleted. Every flag is adjudicated and the adjudication is reported. Nothing is auto-fixed and nothing is auto-passed.
 
+**Text says only what the system enforces.** The semantic pass is not only for learnings. A code comment, a repo `CLAUDE.md`, a design, a plan or a pull request body that states a behavior is making a claim, and it names what enforces it or reads as intent. "No notifications" in a rules file beside a module that sends one is the failure: true when written, false since, and nothing tied the sentence to the code. This is the enforcement face of Claim Integrity ([[.claude/CLAUDE]]).
+
 **Staleness.** A learning is maintained on five outcomes: Keep, Update, Consolidate, Replace, Delete. The distinction that does the work: drift is **cosmetic** when references moved and the solution still holds (Update), and **substantive** when the solution itself changed (Replace). If you find yourself rewriting the solution section, stop. That is a Replace.
 
 Age alone is never a staleness signal. A contradiction with current reality is a strong Replace signal, because the document is now actively misleading rather than merely dusty.
@@ -195,11 +223,13 @@ The vault stays canonical. The repo anchor is a local mirror of ratified decisio
 
 The failure this prevents: a ratified ceiling that exists only in a document the working agent never loads is not a ceiling. It is a wish.
 
+**In someone else's repo, work in their toolchain.** A collaborator's repo often exports the owner's own setup (its `CLAUDE.md`, the plugins its `.claude/settings.json` turns on) so a second agent works the way theirs does. That parity is the point. Wherever your side differs from it, the gap is the first place to look. Run the reviewer they will run, before they run it, and answer its findings in their shape. Bring design work in the shape and folder their agent reads.
+
 ## VIII-b. Upgrade
 
 Applies to every piece of running software in your ecosystem: every app, every site, `Council Chamber/scripts`. Software that nobody upgrades is software that is quietly rotting, and the argument for an agent doing it is one asymmetry: an agent can read every changelog of every pinned dependency every week, and a human never will.
 
-**The upgrades land in the session that finds them.** A sweep ending in a list of things somebody should do later is a sweep that did nothing. Apply what the evidence supports, hold what it does not, and carry the reason for each. A held upgrade is a decision, never a chore deferred. Only genuinely large scope earns a Pending Plan, and that plan runs right after rather than someday.
+**The upgrades land in the session that finds them.** A sweep ending in a list of things somebody should do later is a sweep that did nothing. Apply what the evidence supports, hold what it does not, and carry the reason for each. A held upgrade is a decision, never a chore deferred, and it names the condition that ends the hold rather than a date. Only genuinely large scope earns a Pending Plan, and that plan runs right after rather than someday.
 
 **A manifest, never a category.** List every surface checked, by name, in a table. A category is a place to forget something. A list is a place to notice. Anything checked and boring gets one line and no ceremony, because boring is the expected result and dressing it up teaches the reader to skim.
 

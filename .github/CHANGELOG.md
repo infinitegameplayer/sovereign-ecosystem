@@ -6,6 +6,26 @@ Each entry corresponds to one publish cycle. For full implementation details, se
 
 ---
 
+## v3.23.0, 2026-11-12
+
+The Lessons Travel.
+
+**If you run the Autonomous Improvement Session or work with more than one session open on the same vault, apply this update.** Two shipped instructions could act on files they should not: the superseded sweep could archive a governance file on its own, and the concurrent close told a session to stage its files where a sibling's commit could take them. Everything else is doctrine: 118 rules the source vault learned since October, each written for a stranger's vault.
+
+- **The superseded sweep no longer moves governance.** A superseded codex, governance document or protocol goes to your decision board as a fork. Files retired in place on purpose are skipped.
+- **A concurrent close commits by path and never stages.** The shared index is a window both ways; a pathspec commit never opens it.
+- **Claim Integrity gains its seventh face, the enforcement face:** a sentence that states how a system behaves says only what the system enforces. The reporting, absence and attribution faces each gain the lines that make them checkable.
+- **The Engineering Codex gains 22 rules,** among them: a tool that changes a live service runs dry, writes only if the target still holds what it read, then reads back; a guard refuses with its own code; a narrowed check keeps the old check's case; a protecting list equals what it protects; a fence counts every door; review the head that ships.
+- **Plans name their risks, their authority and their departures.** Eight additions to the Pending Plan Implementation Protocol.
+- **Source Harvest 1.1:** 26 lessons, five in the steps and the rest in a new lessons file beside the skill, plus four older rules the public library already carried.
+- **Security Check, End-of-Week, Brainstorm, Session Closeout, Researcher and nine more skills** carry what the source vault learned running them.
+- **The Watch Register holds Holds,** a standing "not yet" that binds every agent, and one routing question decides which loop an item belongs in.
+- **New optional path: The Membrane.** Keep the core of your vault home while some of its work travels.
+
+Full detail, the rules declined and held with their reasons, and the implementation spec: `.github/UPDATES/2026-11-12-v3.23.0-the-lessons-travel.md`.
+
+---
+
 ## v3.22.0, 2026-11-11
 
 The Warnings Arrive.

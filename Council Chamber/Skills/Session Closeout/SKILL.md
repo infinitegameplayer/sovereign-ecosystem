@@ -12,7 +12,7 @@ Purpose: Close a session fast, leave the breadcrumbs that future review actually
 
 The durable trail already lives in three places: the git commit body (the backward record of what the session did), archived vault artifacts (plans, codices, their activity logs) and governance breadcrumbs annotated where each change happened. The Primer carries the forward handoff. Closeout feeds those trails. It does not duplicate them.
 
-Trigger: a session that made commits or governance-level changes.
+Trigger: a session that made commits or governance-level changes. **Skip rule:** a small session that only saves, files or commits one reference note closes with the commit alone, with no full Session Closeout.
 Inputs: what shipped, what got touched, what comes next.
 Outputs: breadcrumbs in the artifacts touched, a refreshed Primer, a light-touch Sovereign Command, a commit with a readable body.
 Related Protocols/Codices: [[Council Chamber/Protocols/Session/Session Closeout Protocol]] (doctrine; this skill is operational authority), [[Council Chamber/Skills/Autonomous Improvement Session/SKILL]].
@@ -81,6 +81,10 @@ When the work visibly continues in a new session, the session ends without being
 
 Written for a reader with zero context. Paste-ready in a fenced block in the chat, after the closing line. A copy may also live in the plan, but the chat block is the delivery.
 
+## The Context Mark
+
+Either the Sovereign or the AI raises the context mark. The AI cannot see the context meter. It reads the work instead: past about 40 tool calls, or after a compaction, it names at the next phase boundary what remains and whether that fits in this session or rides a continuation prompt. When the Sovereign names a reading at or under half, the AI offers the close at the next boundary rather than opening new work. Together they choose between wrapping with breadcrumbs for a follow-on session and finishing in this one. When little work remains and the context is good, finishing here is fine.
+
 ## The Session Log Index (historical)
 
 Any session logs already in `Vault (Archive)/Session Logs/` are a frozen historical archive. No new per-session narrative logs are written. Recent activity lives in the git commit bodies, which is what the weekly review and the Weekly Story now read. The index is left as-is, a record of the pre-slim era. Nothing appends to it going forward.
@@ -119,13 +123,24 @@ git add -A
 git reset HEAD -- <transient runtime files, e.g. editor workspace state, local settings>
 ```
 
-**c. Concurrent path (a sibling is or was active, or HEAD moved).** Do not `git add -A`. Stage only the files this session created or edited, named explicitly. Files dirty in the tree that this session did not touch belong to the sibling. When in doubt whether a dirty file is yours, it is not.
+**c. Concurrent path (a sibling is or was active, or HEAD moved).** Do not `git add -A`. Do not stage at all. Commit the named paths directly, so this session's files never sit in the shared index where a sibling's commit can take them. Files dirty in the tree that this session did not touch belong to the sibling. When in doubt whether a dirty file is yours, it is not.
 
 ```bash
-git add "path/one.md" "path/two.md"   # this session's files only
+git commit -m "Session Closeout YYYY-MM-DD-X: <title>" -m "<2-3 readable sentences>" -- "path/one.md" "path/two.md"   # this session's files only
 ```
 
-**d. Commit only if something is staged.** The body is the readable 2-3 sentence summary:
+A pathspec commit cannot reach an untracked file. Git errors with `pathspec ... did not match any file(s) known to git` and the whole commit fails. For each new file, put that specific path in the index first, then commit in the same command sequence:
+
+```bash
+git add -- "new/file/one.md" "new/file/two.md"     # only this session's new files
+git commit -m "..." -m "..." -- <all this session's paths, new and modified>
+```
+
+Never `git add -A` or `git add .` on the concurrent path, because both sweep the sibling's work into the index. Staging is a window of exposure in both directions: a sibling's commit can also carry your staged files into the ledger under its own message. A pathspec commit reads the working tree for the named paths and never leaves them in the index.
+
+**If a sibling's commit carries your files anyway:** do not amend and do not revert. Verify the files landed intact (`git diff HEAD -- <paths>` returns empty), then write this session's readable body as its own commit and name the SHA that actually carries the files.
+
+**d. Solo path commit.** Commit only if something is staged. The body is the readable 2-3 sentence summary:
 
 ```bash
 git diff --cached --quiet || git commit -m "Session Closeout YYYY-MM-DD-X: <title>" -m "<2-3 readable sentences: what shipped, key decision, what's next>"

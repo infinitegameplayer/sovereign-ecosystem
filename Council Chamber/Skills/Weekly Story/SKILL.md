@@ -57,6 +57,8 @@ Write a cohesive weekly narrative in three parts:
 
 **Thread forward**: one short paragraph. Name what is unresolved, what is building, what the sovereign is walking into next week. Not a task list. The living edge.
 
+**Title.** The week's title carries the week, never the series. Before proposing titles, check each against the series name and drop any that repeats the series' own image.
+
 **Frontmatter:**
 ```yaml
 ---

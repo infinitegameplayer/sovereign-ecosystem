@@ -34,7 +34,7 @@ The Sovereign Ecosystem is a structured Obsidian vault template with an AI inter
 - `BOOTSTRAP.md`: Guided onboarding wizard at the repo root. A self-deleting six-question setup that personalizes the vault and points to the first session
 - `.runtime/primer.md`: Pre-loaded forward handoff surface, read first at session start
 - `MODULES.md`: Index of optional modules and what each adds
-- `Getting Started/`: Onboarding session sequence, Sessions 0 through 9, plus Optional Paths including the Obsidian MCP Bridge and Local Inference and Semantic Search
+- `Getting Started/`: Onboarding session sequence, Sessions 0 through 9, plus Optional Paths including the Obsidian MCP Bridge, Local Inference and Semantic Search and The Membrane
 - `Council Chamber/`: Governance, codices, protocols, skills, templates, scripts. Includes the External Model Routing Codex (external worker dispatch) and the Manuscript Anti-AI Edit Pass skill
 - `.mcp.json.example`: Template MCP config for the optional Obsidian vault bridge, read-only by default
 - `Council Chamber/scripts/external-worker.mjs`: Dispatch entry point for secondary external model providers

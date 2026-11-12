@@ -30,6 +30,9 @@ Constraints:
 - Support sweep recommendations are proposal-only until explicitly approved.
 - Support sweeps exist to support the active `Sovereign Command` direction, not replace it.
 - Do not prompt on `North Star` during activation unless explicitly requested; North Star updates/refinements belong to the North Star Recalibration flow.
+- Before asking the Sovereign for a source or re-processing one (a transcript, a partner site, a shared file), search the vault and prior sessions for the saved copy. A ruling the Sovereign already gave is never re-asked: search the session and the Decision Journal first.
+- A standing ruling is read with discernment, not followed blindly. When the world has moved (better information, a new platform, a changed process) and a ruling now limits the work, raise it with the evidence rather than re-asking it bare.
+- When the Sovereign says they are leaving, the work that can run without them goes first in the session. Decisions that need them wait until they return.
 
 ## Steps
 1. Load required governance documents.

@@ -23,10 +23,11 @@ Related Protocols/Codices: [[Council Chamber/Protocols/Archival/Backup Protocol]
 
 1. Verify that `Council Chamber/scripts/backup.config.json` exists. If it does not, copy `Council Chamber/scripts/backup.config.example.json` to `Council Chamber/scripts/backup.config.json` and set `BACKUP_PATH` before proceeding.
 2. Confirm that `BACKUP_PATH` is non-empty and no longer set to the example placeholder.
-3. Run `node "Council Chamber/scripts/backup-vault.mjs"` from the vault root. Capture terminal output.
-4. Confirm that a new entry was appended to `Vault (Archive)/Sovereign Ecosystem Backup Log.md` by reading the last log entry and verifying today's date is present.
-5. Report to the user: backup date, files copied, total size, destination path, duration. Use the log entry as the source of truth for these values.
-6. Optional: run `git status` in the vault root and surface any untracked or modified files as a brief note - not a gate, just ambient awareness.
+3. Run `node "Council Chamber/scripts/session-coordination.mjs" check` first. If any session other than this one is listed active, hold the backup. Name those sessions to the Sovereign and run only on their go, because a backup running beside live sessions slows them, and the Sovereign knows which listed sessions are live and which are stale entries that linger until their time limit.
+4. Run `node "Council Chamber/scripts/backup-vault.mjs"` from the vault root. Capture terminal output.
+5. Confirm that a new entry was appended to `Vault (Archive)/Sovereign Ecosystem Backup Log.md` by reading the last log entry and verifying today's date is present.
+6. Report to the user: backup date, files copied, total size, destination path, duration. Use the log entry as the source of truth for these values.
+7. Optional: run `git status` in the vault root and surface any untracked or modified files as a brief note - not a gate, just ambient awareness.
 
 ## Planning Mode Rule
 
@@ -40,8 +41,8 @@ Tier: 1 (foundational).
 <!--
 Internal Contrast Layer
 - This skill runs a local script, not AI file operations. The backup happens outside the vault's git history.
-- Step 4 (log confirmation) is not optional. A backup that does not confirm its own log entry has no connective visibility.
-- Git status in Step 6 is ambient awareness, not a compliance check. Do not block or alarm on git ownership warnings.
+- Step 5 (log confirmation) is not optional. A backup that does not confirm its own log entry has no connective visibility.
+- Git status in Step 7 is ambient awareness, not a compliance check. Do not block or alarm on git ownership warnings.
 - The skill is the ritual. The script is the execution. Both must run for a complete backup.
 -->
 

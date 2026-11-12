@@ -62,12 +62,17 @@ Keep it to one line so the plan note stays the source of truth and `Sovereign Co
    - Identify dependencies, blockers and relevant links to review first.
 3. Confirm Approved Execution Scope
    - Document what is in scope vs out of scope for this run.
+   - **A unit that grows past its approved scope stops.** Say so in the Activity Log and file the growth as its own item. The run is never widened to fit it, because a review covers one decision at a time.
 4. Execute Approved Work
    - Implement changes in the Sovereign Ecosystem and/or record field actions affecting implementation.
+   - **A step with live effects is its own step, and it stops.** A deploy, a send, a migration on a live store or a change to a live account is never folded into a build step. The plan writes it as its own step and lists each command with what it should print. The step stops where the ecosystem already stops a live act (the Permanent Floor, the session's consent), and it is done when each command printed what the list said, not when the code is done. The next commit can undo a code step. It cannot unsend a send.
 5. Log Implementation Actions
    - Add concise entries to `Implementation Actions (Execution Log)`.
+   - **A departure is named.** Work that differs from the approved plan is logged as `[Departure]` with its reason, and every document that describes the changed behavior (the plan, a skill, a repo `CLAUDE.md`, a design) moves in the same change, never after it.
+   - **A conflict between authorities is a decision, never a refinement.** When the plan disagrees with a codex, a skill, a ruling or its own source, follow the authority the plan names (Template Notes, Authority), and log `Decision for the Sovereign:` with both passages quoted and the one followed named. Calling it a refinement hides a choice the Sovereign has not made. One exception to following the named authority: when it cannot be built (the database cannot evaluate the design's condition, the platform lacks the call), build what works, log it the same way and propose the edit to the authority in the same change. Followed to the letter, the rule would build something that cannot run.
 6. Capture Outcome
    - Record what was implemented, what remains and proposed `implementation_state`.
+   - **The outcome is evidence.** Paste the summary line of each command that ran (tests, build, deploy, probe), then list what to check after and what still waits. A later change to the work updates this section in the same edit, so it stays the map of the work as it is now.
 7. Propose Resolution (if warranted)
    - Propose status update / archival / remaining scope changes (approval-gated).
    - If the plan has a plan-specific `support_files_path`, propose support-file disposition as part of closure readiness:
@@ -202,6 +207,7 @@ Required sections:
 ```
 ## Proposed Changes
 ## Risk Level
+## Risks
 ## Affected Areas
 ## PendingPlan Activity Log
 ## Applicability Updates
@@ -241,6 +247,9 @@ Additional required sections:
 - `Planning Mode Rule` section: do not include in plan notes. It lives in the skill only.
 - `Breadcrumbs` / `Breadcrumb Writebacks`: use `PendingPlan Activity Log` as the canonical section name
 - `Applicability Updates` and `Reconciliation Notes` are standard sections in both tiers
+- **`Risks`** (both tiers). Each risk names the unit or step whose test exercises it, or it is cut. A risk with no test is a worry. One with a test is a plan. `Risk Level` stays as the one-word rating.
+- **Authority.** `Proposed Changes` opens with one line naming what wins when the plan and its sources disagree (for example: "If this plan and its source design disagree, the design wins"). A conflict found during execution is then raised by the rule in Implementation Workflow step 5, never settled quietly.
+- **Decisions say what holds if unanswered,** for technical forks the AI owns only (a library choice, an internal default, an order of work). The `Decision Point` names the default the work proceeds on if the Sovereign does not answer, so the build never waits on it. Never for the Sovereign's own decisions: copy, price, money, plan status, the Permanent Floor. Those wait for their word.
 
 ## Relationship to Other Pending Plan Protocols
 - [[Council Chamber/Protocols/Planning/Pending Plan Progress Update Protocol]] is for breadcrumb updates and applicability changes (often via Session Closeout).

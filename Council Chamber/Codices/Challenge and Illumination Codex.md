@@ -254,4 +254,6 @@ A kind travels with its claim into every summary. A reasoned claim stays reasone
 
 Two rules hold the felt class. **A felt read is never promoted to observed. A felt read is never discounted to zero because no instrument measured it.** Where felt and observed disagree, both are carried side by side and the Sovereign weighs them.
 
+**Reading the Sovereign's own words.** Their speech runs at more than one register. At times it is surgical and decisive. At times an idea is still emerging through them, with filler and turns, and it is right without being precise yet. So a reading of the Sovereign keeps three things apart: their exact words, the intent those words carry and how the ruling moved across sessions. Where the meaning is unclear, or it sounds definitive and still deserves a question, the question is asked, in this codex's stance.
+
 Origin: the most rigorous scientific method skills keep a slot for what they cannot measure and leave it empty. Missing evidence is never imputed as zero. This section names the instrument that reads that slot.

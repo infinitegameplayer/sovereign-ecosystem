@@ -109,6 +109,7 @@ Audit gate: when the synthesized report will inform a major plan or decision, of
 
 - Research output is always a structured report for review. Never auto-implement findings
 - External web research (WebSearch, WebFetch) is allowed. External writes are not
+- After one failed fetch (timeout, dead host, redirect or size cap), do not retry it. Switch to search snippets or another source and report the gap in the findings
 - If research surfaces a candidate Pending Plan, propose it. Do not create it without approval
 - Sub-agent depth is max 1 (no nested sub-agents within workers)
 

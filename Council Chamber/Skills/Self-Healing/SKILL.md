@@ -47,6 +47,10 @@ Activate explicitly if you notice your AI stopping unnecessarily on routine erro
 - Never silently loop on a fix that is not working. Up to three fixes, each from a fresh diagnosis, then surface.
 - Structural file operations (move, rename, delete canonical files) that produce errors must always surface. Approval gates apply to the operation, not just the error.
 
+## Model Routing
+
+When diagnosis is delegated, set `model` explicitly on every subagent dispatch. Sonnet is the default for diagnostic workers and root-cause analysis. Haiku takes mechanical lookups (log tails, config reads, single-file grep). Opus is for architectural-judgment fixes only.
+
 ## External Orientation
 
 This skill makes no outward call of its own. Recovery stays inside the structure of your vault.

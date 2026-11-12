@@ -43,7 +43,7 @@ The gate is this ecosystem's own Plan, Consent, Execute discipline (Constitution
 
 **Step 6. Check it against your own durability bar.** Before the design is called approved, test it against whatever standard your ecosystem holds for quality, differentiation or long-term maintainability. If you keep a codex or checklist for that test, apply it here. A design that quietly dilutes what makes your build distinctive, or trades a durable pattern for a shortcut, needs another pass before it is approved.
 
-**Step 7. Write it as a Pending Plan.** The canonical artifact is a Pending Plan, never a spec file in a code directory. When a plan already exists for the territory, update it in place: locked architecture, sequencing, and an activity log entry. When none exists, create one from the Pending Plan object template. Status advances to `approved` only with Sovereign consent, and `approved` means direction approved and decisions locked, not execution authorized.
+**Step 7. Write it as a Pending Plan.** The canonical artifact is a Pending Plan, never a spec file in a code directory. When a plan already exists for the territory, update it in place: locked architecture, sequencing, out of scope and an activity log entry. When none exists, create one from the Pending Plan object template. **Out of scope** names what the plan will not do, and each deferral with where it lands: a sibling plan, a deferred item or a breadcrumb with its done-check. A deferral with no landing place is a loss, not a deferral. Status advances to `approved` only with Sovereign consent, and `approved` means direction approved and decisions locked, not execution authorized.
 
 **Step 8. Self-review with fresh eyes.** Sweep the written plan before handing it back:
 
@@ -57,7 +57,7 @@ Fix inline and move on. No second review of the review.
 
 **Step 9. Hand the plan to the Sovereign.** State the plan's vault path plainly and ask them to read it before implementation planning begins. Changes requested means back to Step 7.
 
-**Step 10. Terminal state: the plan lifecycle.** The only next move is the Pending Plan lifecycle: `approved` to `ready-for-execution` (implementation plan written) to execution. Invoke no implementation skill from inside a brainstorm. If your ecosystem has an adversarial pre-build pass, run it before a large build begins.
+**Step 10. Terminal state: the plan lifecycle.** The only next move is the Pending Plan lifecycle: `approved` to `ready-for-execution` (implementation plan written) to execution. Invoke no implementation skill from inside a brainstorm. If your ecosystem has an adversarial pre-build pass, run it before a large build begins. When the design pass ran long, close it with breadcrumbs in the plan and begin the build in a fresh session.
 
 ## Visual Preview
 
@@ -70,6 +70,7 @@ When the design turns on something visual (a layout, a card, competing looks), b
 - Cut what the idea does not need. An unbuilt feature costs nothing to remove.
 - Approval is per section, not one verdict at the end.
 - The design is done when the Sovereign says it is done, not when the drafting feels complete.
+- Only what the Sovereign said goes in as theirs. Anything the AI proposes is labeled as the AI's call, to check, in the written plan until the Sovereign confirms it in their own words. A plan is read later as the record of what its owner decided, and an unmarked proposal becomes their position without their ever saying it.
 - Keep some life in the pass. A brainstorm that reads like a requirements document has already drifted.
 
 ## Refinements

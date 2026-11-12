@@ -24,6 +24,7 @@ The menu, one file per bundle, so a worker loads only its own. SKILL.md holds th
 - T2-9: Implemented-plan archival candidate sweep (Acts)
 - T2-12: Hook coverage audit (Reports)
 - T2-24: Index-file dead-link audit (Reports)
+- T2-61: Skill self-review, every 8 runs (Reports)
 
 **[[Council Chamber/Skills/Autonomous Improvement Session/references/catalog/sentinels|sentinels]]** (Step 0, every run)
 

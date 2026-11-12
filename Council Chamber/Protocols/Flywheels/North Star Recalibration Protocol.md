@@ -2,6 +2,8 @@
 
 Purpose: Define how the North Star is recalibrated without fragmentation, overwhelm or structural drift.
 
+Governed by: [[Council Chamber/Governance/Flywheel Integration Standard]]
+
 ## Core Principles
 - Single-thread depth: one section at a time.
 - Structure before refinement.

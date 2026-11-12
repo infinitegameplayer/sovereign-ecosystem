@@ -13,6 +13,8 @@ clarity_triggers:
 
 Purpose: Define the Sovereign Ecosystem-wide protocol for establishing, evaluating, evolving and approving Universal and Domain Taste Profiles over time.
 
+Governed by: [[Council Chamber/Governance/Flywheel Integration Standard]]
+
 Scope: Ongoing operation across quests, domains and archival review cycles. This protocol remains valid whether Taste work is executed through a dedicated Quest or embedded in other governance workflows (e.g., Flywheel review, domain pilots).
 
 ## Protocol Role (vs Quest Role)

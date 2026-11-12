@@ -31,6 +31,8 @@ One home for every standing watch, tripwire and confirm-flag in the ecosystem. W
 
 **It witnesses. It never nags.** Invitation over force. A watch notices. It does not whip.
 
+**The routing rule. One question, five answers.** At the moment an item is captured, ask what it is waiting on. A date, where nothing moves until the day arrives: the deadline scan. A condition in the world, a threshold or an event that may never come: this register. One seat's judgment, where the work is a read rather than a build: the surface named by your deferral contract (Capture Classify Route Protocol, Intake Routing Law rule 3). Scope and consent, where the work spans phases, files or sessions and needs a design before anyone executes: a Pending Plan. The Sovereign's own hand: [[Capture]]. When two answers fit, route to whichever gate opens first, because that is the real blocker, and name the later one inside the entry. Three consequences follow. A dated item does not live in this register. A condition-fired item does not live in the deadline scan. A watch handed a plan, a skill step or a recurring pass stops being a watch, because the home now carries it.
+
 ---
 
 ## Active Watches
@@ -39,6 +41,15 @@ One home for every standing watch, tripwire and confirm-flag in the ecosystem. W
 
 | Watch | Owner | Wake condition | Source |
 |---|---|---|---|
+
+### Holds (bind every agent until their clear-condition is met)
+
+A hold is a standing "not yet" on an action: don't send it, don't publish it, don't quote it outward. It binds every session, cloud routine and worker, not only the reader of the note where it was first written. It leaves the way any row leaves, and its done-check is its clear-condition. Without this table a hold lives in the note, build file or draft that set it, and the next session never sees it.
+
+**Readers.** The weekly review reads the clear-conditions. A session or worker about to take a held action reads this table first. That second reading depends on the agent remembering to look, so keep the table short and put the held action in plain words in the first column.
+
+| Hold | Binds | Clear-condition | Set by | Source |
+|---|---|---|---|---|
 
 ---
 

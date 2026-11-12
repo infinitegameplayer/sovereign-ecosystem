@@ -67,7 +67,7 @@ Find the pattern before fixing:
 
 3. **Identify differences.** What is different between working and broken? List every difference, however small.
 
-4. **Understand dependencies.** What does this component need? What settings, environment variables, or upstream conditions does it assume?
+4. **Understand dependencies.** What does this component need? What settings, environment variables or upstream conditions does it assume? When the fix relies on how a library behaves, read that behavior in the installed source and name the file, so the reviewer can check it too. Do not rely on its documentation or on memory.
 
 ### Phase 3: Hypothesis and Testing
 

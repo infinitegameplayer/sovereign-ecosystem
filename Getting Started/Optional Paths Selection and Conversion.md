@@ -39,6 +39,7 @@ Look through:
 - [Optional Path - Lightweight Business or Life Operating Surface.md](Optional%20Path%20-%20Lightweight%20Business%20or%20Life%20Operating%20Surface.md)
 - [Optional Path - Local Inference and Semantic Search.md](Optional%20Path%20-%20Local%20Inference%20and%20Semantic%20Search.md)
 - [Optional Path - Obsidian MCP Bridge.md](Optional%20Path%20-%20Obsidian%20MCP%20Bridge.md)
+- [Optional Path - The Membrane.md](Optional%20Path%20-%20The%20Membrane.md)
 
 Do not ask:
 "Which one should I do right now?"

@@ -2,6 +2,8 @@
 
 Purpose: Define the pattern intelligence loop that turns recalibration into compounding clarity.
 
+Governed by: [[Council Chamber/Governance/Flywheel Integration Standard]]
+
 ## Inputs
 - The current North Star note.
 - The most recent North Star log.

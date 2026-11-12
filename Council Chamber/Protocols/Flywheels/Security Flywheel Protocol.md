@@ -13,6 +13,8 @@ clarity_triggers:
 
 Purpose: Run layered security checks on-demand and during Meta-Governance Audit.
 
+Governed by: [[Council Chamber/Governance/Flywheel Integration Standard]]
+
 ## Triggers
 - Manual Security Check Skill (monthly-ish or when needed).
 - Meta-Governance Audit cycle.

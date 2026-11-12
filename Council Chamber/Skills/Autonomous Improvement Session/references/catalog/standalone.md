@@ -48,12 +48,12 @@ parent: "[[Council Chamber/Skills/Autonomous Improvement Session/SKILL]]"
 **Verb:** Acts.
 
 **Execution:**
-1. Grep active containers (`Council Chamber/`, `Library/`, and any equivalent active-content container in your vault) for frontmatter `status: superseded` or `status: retired` on files still outside your archive location.
+1. Grep active containers (`Council Chamber/`, `Library/`, and any equivalent active-content container in your vault) for frontmatter `status: superseded` or `status: retired` on files still outside your archive location. A superseded codex, governance document or protocol is never moved by this item. It goes to the board as a fork, because moving a canonical governance file needs the Sovereign's approval. Skip a file retired in place on purpose: a body that opens with a retirement notice saying it is kept as history or as a reference, or a file a prior run's ruling named as kept in place. Otherwise the same files re-flag every run.
 2. For each that carries an explicit `superseded-by` pointer or a clear archival destination, archive it via plain `mv` to the matching archive location, run the move-audit sweep (grep the vault for the old path and repoint active references to the canonical superseder, not to the archive path), regenerate any affected index.
 3. Find temporary or transitional sections that point at a path that no longer exists. Remove the dead section.
-4. Surface as judgment forks only: a superseded file with no destination pointer, or a section whose staleness is ambiguous. Act on the clear cases.
+4. Surface as judgment forks only: a superseded file with no destination pointer; a superseded codex, governance document or protocol; or a section whose staleness is ambiguous. Act on the clear cases.
 
-**Repoint rule:** when a file carries a `superseded-by` pointer, the move-audit repoints active references to that canonical superseder, never to the archive path. No active note or codex points at a superseded version when a current canonical one exists.
+**Repoint rule:** when a file carries a `superseded-by` pointer, the move-audit repoints active references to that canonical superseder, never to the archive path. No active note or codex points at a superseded version when a current canonical one exists. Repoint resolvable inbound path-wikilinks even when the referencing document sits in an archive context (for example a `Reference:` header in an archived change-log volume), so the link keeps resolving. A prose mention of the moved file's name stays as intentional history.
 
 **Eligibility:** Condition-based. Eligible whenever a superseded or retired file sits in an active container, or a confirmed dead-path temporary section exists.
 **Output artifact:** Archived and cleaned files, move-audit repoints, all recorded in Done.
@@ -120,8 +120,10 @@ A move is the floor-safe action: inside the vault, reversible, deletes nothing, 
 3. For each flagged plan, confirm completion from the strongest available evidence: frontmatter `status: implemented`, recent commits and git log naming the plan complete, and external confirmation such as a sent email or a live URL. Treat Next-Step and activity-log prose as the weakest signal because it goes stale after the work ships. When status and body disagree, investigate to the actual state rather than defaulting to a hold.
 4. Archive each confirmed plan via plain `mv` to the archive directory. Run the move-audit wikilink sweep (grep the vault for the old active path and repoint every active reference; skip historical session logs and the plan's own body). Regenerate the active index. Record each archival in the run log entry with the plan name, implemented date and evidence.
 5. Concurrent-session guard: skip archival of any plan whose file carries uncommitted working-tree modifications. Another session may be mid-closeout and the move would collide. Archive on a later run and note the hold in the run entry.
+6. Fresh read after the move. Edits to a just-moved file require a read at its new path. The pre-move read does not carry across the `mv`.
+7. Open done-check guard. Before archiving, grep the plan for done-checks whose state reads `open`. If an open check lives only in the plan and not in the [[Council Chamber/Governance/Watch Register]] (grep the register for the check's subject), hold the archive and note it in the run entry. Archive on a later run once each check grades or is carried to the register. The archive is not a place anyone reads for open loops. A check carried to the register records its fix check on the register's Change Log line for the carry, never on the row. A row leaves when its watch fires, so a `present` check on the row would read that retirement as a regression.
 
-Implemented Pending Plan archival is operational lifecycle closure, not a governance move. It stays inside the vault, it is reversible, it deletes nothing and it changes no governance. The move and the move-audit sweep are one unit of work. A plan with an explicit hold-active instruction is the only skip.
+Implemented Pending Plan archival is operational lifecycle closure, not a governance move. It stays inside the vault, it is reversible, it deletes nothing and it changes no governance. The move and the move-audit sweep are one unit of work. A plan with an explicit hold-active instruction, uncommitted edits (step 5) or an open done-check tracked nowhere else (step 7) is skipped.
 **Eligibility:** Condition-based. Eligible whenever a `status: implemented` plan sits in the active directory. No day-window.
 **Output artifact:** Archived plans, repointed references, a regenerated index and the archival record in the run log entry.
 
@@ -145,3 +147,18 @@ Implemented Pending Plan archival is operational lifecycle closure, not a govern
 
 **Eligibility:** Not run in 30+ days.
 **Output artifact:** Findings on the decision board.
+
+### T2-61: Skill self-review, every 8 runs
+
+**Verb:** Reports.
+
+The look back at the skill as a whole: is it getting better, run over run? Each item judges its own target. This one judges the skill. Eight runs is two full bundle cycles, so every bundled item has run at least twice inside the window.
+
+**Execution:**
+1. **Gather (orchestrator).** The window is the last eight run entries in the log, newest first. Collect the paths and line ranges: each entry's board, Research line, Patterns Noticed, Errors and blockers and return-session section; the `menu_state` scorecards; the refinements log since the previous self-review; and the `rulings` ledger.
+2. **Dispatch one read-only worker** (model set explicitly, single-context, no subagents) with those paths and six questions. (a) Which items yield nothing or mostly noise across the window, and should retire or merge? (b) Which Patterns Noticed lines or errors recur in two or more runs with no action taken? (c) Which rulings does the Sovereign keep making by hand that a catalog rule could make? A decision made the same way twice is a missing rule. (d) Research yield, fix rate and acceptance by category across the window. (e) Which board entries came back unanswered, reversed or reopened, and why? (f) Where did the skill's own instruments fail: fix checks that came back unverifiable, workers that stopped at their turn limit, scorecards that never filled? Every answer cites the run entry and line it rests on.
+3. **Look outward only when a question points there.** When an answer turns on how others run self-improving agent loops, one worker with web access returns sourced practice (URLs), scoped to that question.
+4. **Synthesize.** Each finding that survives the ground-truth gate becomes a Your-decisions skill refinement or a retire or merge proposal, only the recommended ones, each with its Verified line. The run never edits the skill. The return session lands what the Sovereign accepts, under the self-edit rule.
+
+**Eligibility:** Every 8 runs. Due when `run_counter` is 8 or more above the run number in the newest `### Self-review` section of the log (never run: due at run 8).
+**Output artifact:** Your-decisions entries and a `### Self-review` section in the run entry: the window (run numbers), one line per question and the recurring items named.

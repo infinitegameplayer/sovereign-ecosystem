@@ -29,6 +29,8 @@ Related Protocols/Codices: [[Council Chamber/Protocols/Planning/Pending Plan Pro
 - `#learning`
 - `#decision`
 
+A decision line may also name the option turned down (`Rejected:`) and what would reopen it (`Revisit when:`). Format: the header of `Council Chamber/scripts/decision-journal.mjs`.
+
 ## Planning Mode Rule
 - If status is proposed or draft, execution is not authorized.
 
