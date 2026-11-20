@@ -69,44 +69,48 @@ const skills = readdirSync(SKILLS_DIR)
     return {
       name,
       status: fm.status || 'draft',
-      // Deliberately undefined when frontmatter is silent, so the resolver below
-      // can tell "the skill said operational" apart from "the skill said nothing".
-      tier: fm.tier || undefined,
+      tier: fm.tier || '',
     };
   })
   .sort((a, b) => a.name.localeCompare(b.name));
+
+// A missing or off-vocabulary tier stops the build, in both modes, with every
+// such skill named, and nothing is written (v3.25.0). Until then a silent tier
+// was filled from the old index or defaulted to operational, and both are
+// guesses: a skill's tier is what its own SKILL.md declares, and nothing else.
+// post-write-index-regen.sh delivers this refusal to the session, so a new
+// skill missing its tier is named at the moment it is written, never left
+// quietly out of the index.
+const TIERS = new Set(['foundational', 'operational']);
+const badTier = skills.filter((s) => !TIERS.has(s.tier));
+if (badTier.length) {
+  for (const s of badTier) {
+    console.error(`Skills Index: ${s.name}/SKILL.md tier is ${s.tier ? `"${s.tier}"` : 'missing'}. Add "tier: foundational" or "tier: operational" to its frontmatter.`);
+  }
+  console.error(`Skills Index: REFUSED, ${badTier.length} skill(s) without a valid tier. Nothing written.`);
+  process.exit(1);
+}
 
 const existing = existsSync(INDEX_PATH)
   ? readFileSync(INDEX_PATH, 'utf8').replace(/\r\n/g, '\n')
   : '';
 
-// Preserve what a human put here. Two things are read back off the existing
-// index: the prose appended after the "(status, tier: x)" cap, and the tier
-// itself.
+// Preserve what a human put here: the prose appended after the
+// "(status, tier: x)" cap is read back off the existing index.
 const curated = new Map();
-const priorTier = new Map();
 for (const line of existing.split('\n')) {
-  const m = line.match(/^- (.+?) \((?:active|draft|deprecated)[^)]*?(?:tier:\s*(\w+))?\)(.*)$/);
+  const m = line.match(/^- (.+?) \((?:active|draft|deprecated)[^)]*?\)(.*)$/);
   if (!m) continue;
-  if (m[2]) priorTier.set(m[1], m[2]);
-  if (m[3] && m[3].trim()) curated.set(m[1], m[3]);
+  if (m[2] && m[2].trim()) curated.set(m[1], m[2]);
 }
 
-// Tier resolution, and the order is the whole point.
-//
-// Frontmatter wins when it speaks, because that is what the skill declares
-// about itself and what the AI interface reads. When frontmatter is SILENT, the
-// existing index value is preserved rather than defaulted.
-//
-// The first cut of this script defaulted a silent tier to "operational" and
-// quietly demoted two skills a human had curated as foundational. A generator
-// that invents a value where its source said nothing is not regenerating an
-// index, it is overwriting knowledge with a guess. Absence of data is not data.
+// The tier is the one each SKILL.md declares, checked above. The first cut of
+// this script defaulted a silent tier to "operational" and quietly demoted two
+// skills a human had curated as foundational; the second preserved the old
+// index value instead. Absence of data is not data, so a silent tier now stops
+// the build rather than being filled from anywhere.
 const roster = skills
-  .map((s) => {
-    const tier = s.tier || priorTier.get(s.name) || 'operational';
-    return `- ${s.name} (${s.status}, tier: ${tier})${curated.get(s.name) || ''}`;
-  })
+  .map((s) => `- ${s.name} (${s.status}, tier: ${s.tier})${curated.get(s.name) || ''}`)
   .join('\n');
 
 // Split the file: everything before "## Skills", then the generated roster, then

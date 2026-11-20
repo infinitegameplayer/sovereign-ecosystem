@@ -258,6 +258,236 @@ const mojibake = (s) => [...Buffer.from(s, 'utf8')].map((b) => CP1252[b] ?? Stri
     try { msg = String(JSON.parse(r.stdout.trim()).systemMessage || ''); } catch { msg = ''; }
     record(`floor-guard: the surface is a systemMessage the session shows, ${how}`, /TRUST-ANCHOR/.test(msg) && msg.includes('.claude/settings.json') && r.code === 0, `code=${r.code} stdout=${r.stdout.trim().slice(0, 60)}`, 'reacts');
   }
+
+  // ── shell writes: Bash and PowerShell ─────────────────────────────────────
+  // An agent edits a trust anchor through the shell as easily as through Edit, and
+  // until the shell reader landed the guard saw none of it. Each 'reacts' case below
+  // must surface a systemMessage naming the tool AND log a line AND exit 0; each
+  // 'quiet' case must print nothing, log nothing and exit 0. Paths are the fixture
+  // VAULT or invented repo names: the hook only reads the text of a command, it never
+  // touches the path, so no real file is involved.
+  const logCount = () => {
+    const f = `${VAULT}/.runtime/floor-guard.log`;
+    return existsSync(f) ? readFileSync(f, 'utf8').split('\n').filter(Boolean).length : 0;
+  };
+  const shell = (tool, command, cwd) => ({ tool_name: tool, ...(cwd ? { cwd } : {}), tool_input: { command } });
+  const ps = (command, cwd) => shell('PowerShell', command, cwd);
+  const sh = (command, cwd) => shell('Bash', command, cwd);
+  // Fire one shell payload and judge it both ways. A surface is the systemMessage,
+  // the stderr line and the log line together, not any one of them.
+  const judgeShell = (payload, opts = {}) => {
+    const before = logCount();
+    const res = fire(H, payload, opts);
+    let msg = '';
+    try { msg = String(JSON.parse(res.stdout.trim()).systemMessage || ''); } catch { msg = ''; }
+    const logged = logCount() - before;
+    const surfaced = res.code === 0 && /^TRUST-ANCHOR FILE EDIT: /.test(msg) && msg.includes(payload.tool_name) && /TRUST-ANCHOR FILE EDIT: .*\n?/.test(res.out) && logged >= 1;
+    const quiet = res.code === 0 && !/TRUST-ANCHOR/.test(res.out) && res.stdout.trim() === '' && logged === 0;
+    return { res, surfaced, quiet, logged, msg };
+  };
+
+  // Bash must-surface. Each shape is one the source guard's own suite learned from a miss.
+  const bashReacts = [
+    ['sed -i, relative path', sh('sed -i "s/a/b/" .claude/settings.json')],
+    ['sed -i.bak', sh('sed -i.bak "s/a/b/" "Some Repo/.claude/settings.local.json"')],
+    ['sed -Ei combined flags', sh('sed -Ei "s/a/b/" .claude/CLAUDE.md')],
+    ['perl -pi -e', sh(`perl -pi -e 's/a/b/' ".mcp.json"`)],
+    ['perl -0777 -pi', sh(`perl -0777 -pi -e 's/a/b/g' "${VAULT}/.claude/CLAUDE.md"`)],
+    ['redirect >', sh(`echo x > "${VAULT}/.claude/settings.json"`)],
+    ['redirect >> with no space', sh('echo x >>.claude/settings.local.json')],
+    ['redirect into .mcp.json', sh('echo {} > .mcp.json')],
+    ['redirect into the home .claude.json', sh('echo {} > "$HOME/.claude.json"')],
+    ['heredoc into a trust anchor', sh(`cat > "${VAULT}/.claude/CLAUDE.md" <<'EOF'\nnew text\nEOF`)],
+    ['heredoc with an apostrophe, then a write', sh("cat > /tmp/x <<'EOF'\nthe owner's note\nEOF\nsed -i s/a/b/ .claude/CLAUDE.md")],
+    ['tee', sh(`echo x | tee "${VAULT}/.mcp.json"`)],
+    ['tee -a', sh(`echo x | tee -a "${VAULT}/.mcp.json" > /dev/null`)],
+    ['mv a trust anchor away', sh(`mv "${VAULT}/.claude/settings.json" /tmp/settings.json`)],
+    ['mv onto a trust anchor', sh(`mv /tmp/x.json "${VAULT}/.mcp.json"`)],
+    ['cp onto a trust anchor', sh(`cp /tmp/s.json "${VAULT}/.claude/settings.json"`)],
+    ['SMUGGLE: cp onto settings.json through ../', sh('cp /tmp/x ".claude/agents/../settings.json"')],
+    ['SMUGGLE: redirect through ./', sh('echo x > .claude/./settings.json')],
+    ['SMUGGLE: case variant', sh('echo x > .CLAUDE/Settings.JSON')],
+    ['rm a trust anchor', sh('rm -f .claude/settings.local.json')],
+    ['git mv a trust anchor', sh('git mv .claude/settings.json old.json')],
+    ['git rm a trust anchor', sh('git -C . rm .claude/CLAUDE.md')],
+    ['git checkout --', sh('git checkout -- .claude/CLAUDE.md')],
+    ['git restore', sh('git restore .vscode/tasks.json')],
+    ['variable holds the directory', sh('D=".claude"; sed -i "s/a/b/" "$D/settings.json"')],
+    ['braced variable', sh('D=".claude" && echo x > "${D}/settings.json"')],
+    ['cd then a relative write', sh('cd Some/Repo/.claude && sed -i "s/a/b/" settings.json')],
+    ['relative to the payload cwd', sh('echo x >> settings.json', `${VAULT}/.claude`)],
+    ['node -e writeFileSync', sh(`node -e "require('fs').writeFileSync('${VAULT}/.mcp.json', '{}')"`)],
+    ['python open for write', sh(`python -c "open('${VAULT}/.claude/settings.json', 'w').write('x')"`)],
+    ['second segment writes', sh('cat .claude/settings.json && sed -i "s/a/b/" .claude/settings.json')],
+    ['env prefix', sh('env FOO=1 sed -i s/a/b/ .claude/CLAUDE.md')],
+    ['nohup prefix', sh('nohup sed -i s/a/b/ .claude/CLAUDE.md')],
+    ['time prefix', sh('time sed -i s/a/b/ .claude/CLAUDE.md')],
+    ['then inside an if', sh('if true; then echo x >> .claude/CLAUDE.md; fi')],
+    ['bash -c', sh('bash -c "echo x >> .claude/CLAUDE.md"')],
+    ['sh -c', sh("sh -c 'sed -i s/a/b/ .claude/CLAUDE.md'")],
+    ['lone ampersand', sh('echo a & sed -i s/a/b/ .claude/CLAUDE.md')],
+    ['escaped space in the path', sh('echo x > My\\ Repo/.claude/settings.json')],
+    ['install', sh('install -m 644 /tmp/foo .claude/CLAUDE.md')],
+    ['truncate', sh('truncate -s 0 .claude/CLAUDE.md')],
+    ['dd of=', sh('dd if=/dev/null of=.claude/CLAUDE.md')],
+    ['cp into the .claude directory', sh('cp /tmp/a.json ".claude/"')],
+    ['cp -r a directory into .claude', sh('cp -r /tmp/h ".claude"')],
+    ['mv onto the .vscode directory', sh('mv /tmp/a.json ".vscode"')],
+    ['cp into an installed plugin folder', sh('cp /tmp/evil.sh "home/.claude/plugins/cache/x/"')],
+    ['cp a tasks.json into .vscode', sh('cp /tmp/tasks.json .vscode/tasks.json')],
+    ['rm -rf .claude', sh('rm -rf .claude')],
+    ['rm -rf .claude/ with a trailing slash', sh('rm -rf .claude/')],
+    ['rm -rf .vscode', sh('rm -rf .vscode')],
+    ['rm -rf the installed plugins folder', sh('rm -rf home/.claude/plugins')],
+    ['mv the .claude directory away', sh('mv .claude /tmp/claude-old')],
+    ['$HOME settings path', sh('echo x >> "$HOME/.claude/settings.json"')],
+    ['a trust-anchor name in another repo surfaces (by design)', sh('echo x >> .claude/CLAUDE.md', `${os.tmpdir().replace(/\\/g, '/')}/se-other-repo`)],
+  ];
+  for (const [what, payload] of bashReacts) {
+    const j = judgeShell(payload);
+    record(`floor-guard: Bash surfaces ${what}`, j.surfaced, `code=${j.res.code} log+${j.logged} out=${j.res.out.trim().slice(0, 50)}`, 'reacts');
+  }
+
+  // Bash must-stay-quiet. A guard that surfaces every command has become a wall.
+  const bashQuiet = [
+    ['git status', sh('git status')],
+    ['cat a trust anchor', sh('cat .claude/settings.json')],
+    ['grep a trust anchor', sh('grep -n hooks .claude/settings.json .claude/CLAUDE.md')],
+    ['sed without -i', sh('sed -n 1,20p .claude/settings.json')],
+    ['perl reading only', sh(`perl -ne 'print if /x/' .mcp.json`)],
+    ['cp FROM a trust anchor', sh('cp .claude/settings.json /tmp/settings.json')],
+    ['cp a trust anchor into scratch', sh('cp .claude/CLAUDE.md /tmp/')],
+    ['a stderr redirect only', sh('wc -l .claude/settings.json 2>&1')],
+    ['redirect to /dev/null', sh('git diff -- .claude/settings.json > /dev/null')],
+    ['a write to another file', sh('sed -i "s/a/b/" Scriptorium/notes.md')],
+    ['a settings.json outside .claude', sh('sed -i "s/a/b/" config/settings.json')],
+    ['.vscode/settings.json', sh('echo x > .vscode/settings.json')],
+    ['a commit message naming a write', sh('git commit -m "sed -i on settings.json, echo x > .mcp.json"')],
+    ['git add a trust anchor', sh('git add -- .claude/settings.json')],
+    ['git checkout a branch', sh('git checkout main')],
+    ['an unknown variable', sh('sed -i "s/a/b/" "$UNSET/settings.json"')],
+    ['an ordinary file', sh('echo x > notes.txt')],
+    ['bash -c reading', sh('bash -c "cat .claude/CLAUDE.md"')],
+    ['an ampersand inside quotes', sh('echo "a & b" > /tmp/x')],
+    ['rm in the runtime directory', sh('rm -rf .runtime/fixtures/case1')],
+    ['a heredoc body naming a write', sh("cat > /tmp/notes <<'EOF'\nsed -i s/a/b/ .claude/CLAUDE.md\nEOF")],
+    ['a copy into a plain directory', sh('cp /tmp/n.md Scriptorium/')],
+    ['an mcp.json with no leading dot', sh('echo x > Scriptorium/mcp.json')],
+  ];
+  for (const [what, payload] of bashQuiet) {
+    const j = judgeShell(payload);
+    record(`floor-guard: Bash quiet on ${what}`, j.quiet, `code=${j.res.code} log+${j.logged} out=${j.res.out.trim().slice(0, 50)}`, 'quiet');
+  }
+
+  // PowerShell must-surface. Backslash paths unquoted, because a reader that took the
+  // backslash as an escape would miss exactly those.
+  const psReacts = [
+    ['Set-Content -Path', ps('Set-Content -Path ".claude/CLAUDE.md" -Value x -Encoding UTF8')],
+    ['Set-Content, absolute backslash path', ps('Set-Content -LiteralPath "C:\\work\\repo\\.claude\\settings.json" -Value x')],
+    ['Set-Content, unquoted absolute backslash path', ps('Set-Content C:\\work\\repo\\.claude\\CLAUDE.md x')],
+    ['Remove-Item, unquoted relative backslash path', ps('Remove-Item .claude\\settings.local.json')],
+    ['(Get-Content) -replace | Set-Content', ps("(Get-Content .claude/settings.json -Encoding UTF8) -replace 'a','b' | Set-Content .claude/settings.json -Encoding UTF8")],
+    ['Out-File -FilePath', ps('"{}" | Out-File -FilePath "C:\\work\\repo\\.mcp.json" -Encoding UTF8')],
+    ['Add-Content positional path', ps("Add-Content '.vscode\\tasks.json' 'x'")],
+    ['Copy-Item onto a trust anchor', ps('Copy-Item x .vscode/tasks.json')],
+    ['Copy-Item -Destination', ps('Copy-Item -Path C:\\tmp\\x.json -Destination ".claude\\settings.json"')],
+    ['Copy-Item into the .claude directory', ps('Copy-Item C:\\tmp\\x.json ".claude\\"')],
+    ['Remove-Item the .claude directory', ps('Remove-Item -Recurse -Force ".claude"')],
+    ['Remove-Item the .vscode directory', ps('Remove-Item -Recurse -Force .vscode')],
+    ['rm alias on the .claude directory', ps('rm -r -fo .claude')],
+    ['Move-Item a trust anchor away', ps('Move-Item ".claude/settings.json" C:\\tmp\\settings.json')],
+    ['Rename-Item a trust anchor', ps('Rename-Item .mcp.json mcp.old')],
+    ['redirect >', ps('"x" > .claude/CLAUDE.md')],
+    ['redirect >> with a stream prefix', ps('echo x 2>&1 >> ".mcp.json"')],
+    ['variable holds the path', ps('$p = "C:\\work\\repo\\.claude\\CLAUDE.md"; Set-Content -Path $p -Value x')],
+    ['variable holds the directory, glued assignment', ps('$d=".claude"; Set-Content "$d\\settings.json" x')],
+    ['[IO.File]::WriteAllText', ps('[IO.File]::WriteAllText("C:\\work\\repo\\.claude\\settings.json", "x")')],
+    ['the home .claude.json through $env:USERPROFILE', ps('Set-Content "$env:USERPROFILE\\.claude.json" "{}"')],
+    ['an installed plugin hook', ps('Set-Content "$HOME\\.claude\\plugins\\cache\\x\\hooks\\run.ps1" "x"')],
+    ['alias sc', ps('sc .claude/CLAUDE.md x')],
+    ['relative to the payload cwd', ps('Set-Content settings.json "{}"', `${VAULT}/.claude`)],
+    ['a second statement writes', ps('Get-Content .claude/CLAUDE.md; Set-Content .claude/CLAUDE.md x')],
+    ['git rm a trust anchor', ps('git rm ".claude/CLAUDE.md"')],
+    ['sed -i through PowerShell', ps('sed -i "s/a/b/" .claude/settings.json')],
+    ['node -e writeFileSync', ps(`node -e "require('fs').writeFileSync('${VAULT}/.mcp.json', '{}')"`)],
+  ];
+  for (const [what, payload] of psReacts) {
+    const j = judgeShell(payload);
+    record(`floor-guard: PowerShell surfaces ${what}`, j.surfaced, `code=${j.res.code} log+${j.logged} out=${j.res.out.trim().slice(0, 50)}`, 'reacts');
+  }
+
+  const psQuiet = [
+    ['Get-Content a trust anchor', ps('Get-Content .claude/CLAUDE.md -Encoding UTF8')],
+    ['Select-String a trust anchor', ps('Select-String -Path ".claude/CLAUDE.md" -Pattern hooks')],
+    ['a read with stderr to $null', ps('Get-Content .claude/settings.json 2>$null')],
+    ['a write to another file', ps('Set-Content -Path "Scriptorium\\notes.md" -Value x -Encoding UTF8')],
+    ['Copy-Item FROM a trust anchor', ps('Copy-Item .claude/CLAUDE.md C:\\tmp\\claude.md')],
+    ['a commit message naming a write', ps('git commit -m "Set-Content .claude/CLAUDE.md" -- x.md')],
+    ['git add a trust anchor', ps('git add -- ".claude/CLAUDE.md"')],
+    ['Copy-Item a note into a plain directory', ps('Copy-Item C:\\tmp\\n.md "Scriptorium\\"')],
+    ['git status', ps('git status')],
+  ];
+  for (const [what, payload] of psQuiet) {
+    const j = judgeShell(payload);
+    record(`floor-guard: PowerShell quiet on ${what}`, j.quiet, `code=${j.res.code} log+${j.logged} out=${j.res.out.trim().slice(0, 50)}`, 'quiet');
+  }
+
+  // The three outputs together, read off one Bash hit: the message names the tool and
+  // the path, stderr carries the line, the log carries the line with the tool and path.
+  {
+    const before = logCount();
+    const res = fire(H, sh(`sed -i "s/a/b/" "${VAULT}/.claude/settings.json"`));
+    let msg = '';
+    try { msg = String(JSON.parse(res.stdout.trim()).systemMessage || ''); } catch { msg = ''; }
+    const logTail = existsSync(`${VAULT}/.runtime/floor-guard.log`) ? readFileSync(`${VAULT}/.runtime/floor-guard.log`, 'utf8').split('\n').filter(Boolean).slice(before).join('\n') : '';
+    record('floor-guard: a Bash hit names the tool and the path in the message', /Bash on /.test(msg) && msg.includes('.claude/settings.json') && res.code === 0, `msg=${msg.slice(0, 60)}`, 'reacts');
+    record('floor-guard: a Bash hit writes the stderr line', /TRUST-ANCHOR FILE EDIT: Bash on .*\.claude\/settings\.json/.test(res.out.replace(res.stdout, '')), `out=${res.out.replace(res.stdout, '').trim().slice(0, 60)}`, 'reacts');
+    record('floor-guard: a Bash hit writes the log line', /^\[[^\]]+\] Bash \(sed -i\): .*\.claude\/settings\.json$/m.test(logTail), `log=${logTail.slice(0, 60)}`, 'reacts');
+  }
+
+  // No node, shell calls: the same promise as the Write path. The reading cannot tell
+  // a write from a read, so it names the path and says it matched without parsing.
+  for (const [what, payload] of [
+    ['a Bash write to a trust anchor', sh(`sed -i "s/a/b/" "${VAULT}/.claude/settings.json"`)],
+    ['a Bash redirect into .mcp.json', sh('echo {} > .mcp.json')],
+    ['a PowerShell write with a backslash path', ps('Set-Content C:\\work\\repo\\.claude\\CLAUDE.md x')],
+    ['a Bash rm -rf of the .claude directory', sh('rm -rf .claude')],
+  ]) {
+    const j = judgeShell(payload, { nodeBroken: true });
+    record(`floor-guard: still surfaces ${what} without node`, j.surfaced && /without parsing/.test(j.msg), `code=${j.res.code} log+${j.logged} out=${j.res.out.trim().slice(0, 50)}`, 'reacts');
+  }
+  for (const [what, payload] of [
+    ['git status', sh('git status')],
+    ['a PowerShell git status', ps('git status')],
+    ['an ordinary Bash write', sh('echo x > notes.txt')],
+  ]) {
+    const j = judgeShell(payload, { nodeBroken: true });
+    record(`floor-guard: quiet on ${what} without node`, j.quiet, `code=${j.res.code} log+${j.logged} out=${j.res.out.trim().slice(0, 50)}`, 'quiet');
+  }
+
+  // With the vault root unset the log lands under the working directory.
+  {
+    const j = judgeShell(sh('sed -i "s/a/b/" .claude/settings.json'), { vaultRoot: null });
+    record('floor-guard: a Bash hit surfaces with SOVEREIGN_VAULT_ROOT unset', j.surfaced, `code=${j.res.code} log+${j.logged}`, 'reacts');
+  }
+
+  // The module on its own: a payload that is not a JSON object exits 1, and a clean
+  // object exits 0 with an empty hit list. Under --negative-control the stub stands in.
+  {
+    const mod = (input) => spawnSync(NEGATIVE ? 'bash' : process.execPath, [NEGATIVE ? STUB : hook('floor-guard-shell.mjs')], { input, encoding: 'utf8' });
+    for (const [what, input] of [['garbage', 'not json at all'], ['an array', '[]'], ['null', 'null'], ['empty input', '']]) {
+      const m = mod(input);
+      // The module's own refusal line, so a missing module (which also exits 1) fails the case.
+      record(`floor-guard-shell: ${what} payload exits 1`, m.status === 1 && /payload is not a JSON object/.test(m.stderr || ''), `exit=${m.status} err=${(m.stderr || '').trim().slice(0, 50)}`, 'reacts');
+    }
+    const m = mod(JSON.stringify(sh('git status')));
+    let parsed = null;
+    try { parsed = JSON.parse(m.stdout); } catch { parsed = null; }
+    record('floor-guard-shell: a clean Bash payload exits 0 with no hits', m.status === 0 && parsed && Array.isArray(parsed.hits) && parsed.hits.length === 0, `exit=${m.status} out=${(m.stdout || '').trim().slice(0, 40)}`, 'reacts');
+    const h = mod(JSON.stringify(sh('echo x > .mcp.json')));
+    try { parsed = JSON.parse(h.stdout); } catch { parsed = null; }
+    record('floor-guard-shell: a hit lists the path and the verb', h.status === 0 && parsed && parsed.hits.length === 1 && /\.mcp\.json$/.test(parsed.hits[0].path) && parsed.hits[0].via === '>', `exit=${h.status} out=${(h.stdout || '').trim().slice(0, 60)}`, 'reacts');
+  }
 }
 
 // ── the compact pair ────────────────────────────────────────────────────────
@@ -333,6 +563,32 @@ const mojibake = (s) => [...Buffer.from(s, 'utf8')].map((b) => CP1252[b] ?? Stri
       : 'a regen command is configured and ran',
     'reacts'
   );
+
+  // The tier refusal (v3.25.0). The fixture gets the real builder and an index,
+  // then a skill written with no tier. The rebuild must refuse, name the skill to
+  // the AI and leave the index as it was. With the tier added, the same write
+  // must rebuild the index in silence. Fired from a subfolder cwd, since the
+  // session is often not at the vault root.
+  const SCRIPTS = path.join(VAULT, 'Council Chamber', 'scripts');
+  mkdirSync(SCRIPTS, { recursive: true });
+  writeFileSync(path.join(SCRIPTS, 'build-skills-index.mjs'), readFileSync(path.join(ROOT, 'Council Chamber', 'scripts', 'build-skills-index.mjs')));
+  const INDEX = path.join(VAULT, 'Council Chamber', 'Skills', 'Skills Index.md');
+  const INDEX_BEFORE = '# Skills Index\n\n## Skills\n- Other (active, tier: operational)\n';
+  writeFileSync(INDEX, INDEX_BEFORE);
+  mkdirSync(path.join(VAULT, 'Council Chamber', 'Skills', 'Other'), { recursive: true });
+  writeFileSync(path.join(VAULT, 'Council Chamber', 'Skills', 'Other', 'SKILL.md'), '---\nname: other\nstatus: active\ntier: operational\n---\n');
+  const DEMO = path.join(VAULT, 'Council Chamber', 'Skills', 'Demo', 'SKILL.md');
+  const SUB = path.join(VAULT, 'Scriptorium');
+  writeFileSync(DEMO, '---\nname: demo\nstatus: active\n---\n');
+  let r2 = fire(H, write(DEMO.replace(/\\/g, '/')), { cwd: SUB });
+  let ctx = contextOf(r2);
+  record('index-regen: an untiered skill is named to the AI, not only logged', /Demo\/SKILL\.md tier is missing/.test(ctx) && /not rebuilt/.test(ctx), `context=${ctx.trim().slice(0, 60)}`, 'reacts');
+  record('index-regen: a refused rebuild leaves the index untouched', readFileSync(INDEX, 'utf8') === INDEX_BEFORE, 'index compared byte for byte', 'quiet');
+  writeFileSync(DEMO, '---\nname: demo\nstatus: active\ntier: foundational\n---\n');
+  r2 = fire(H, write(DEMO.replace(/\\/g, '/')), { cwd: SUB });
+  ctx = contextOf(r2);
+  record('index-regen: a tiered skill is indexed from a subfolder cwd', /- Demo \(active, tier: foundational\)/.test(readFileSync(INDEX, 'utf8')), `index=${readFileSync(INDEX, 'utf8').replace(/\n/g, ' | ').slice(0, 80)}`, 'reacts');
+  record('index-regen: a clean rebuild says nothing to the AI', ctx === '', `context=${ctx.trim().slice(0, 40)}`, 'quiet');
 }
 
 // ── post-bash-encoding-check.sh ─────────────────────────────────────────────
@@ -598,6 +854,131 @@ const mojibake = (s) => [...Buffer.from(s, 'utf8')].map((b) => CP1252[b] ?? Stri
   rmSync(CONFIG_FILE, { force: true });
 }
 
+// ── pre-bash-git-add-guard.sh and pre-shell-git-verb-gate.sh ────────────────
+// Two git guards on Bash and PowerShell. The add guard refuses a sweeping
+// stage or commit aimed at this vault, where other sessions may be working; the
+// verb gate asks before a git command that destroys work, in any spelling.
+// Each case reads the decision the session acts on (deny, ask or nothing), never
+// only the exit code. New in v3.25.0; every 'reacts' case below failed against
+// v3.24.0, which shipped neither hook.
+{
+  const ADD = hook('pre-bash-git-add-guard.sh');
+  const VERB = hook('pre-shell-git-verb-gate.sh');
+  const OTHER = path.join(os.tmpdir(), 'se-other-repo').replace(/\\/g, '/');
+  const shellCall = (tool, command, cwd = VAULT) => ({ tool_name: tool, tool_input: { command }, cwd });
+  const decisionOf = (r) => {
+    try { return JSON.parse(r.stdout.trim()).hookSpecificOutput?.permissionDecision || 'none'; } catch { return 'none'; }
+  };
+  // The Git Bash spelling of a Windows path (/c/Users/...). Elsewhere, the path itself.
+  const gitBashForm = VAULT.replace(/^([A-Za-z]):\//, (_, d) => `/${d.toLowerCase()}/`);
+  const heredoc = 'git commit -m "$(cat <<\'EOF\'\nNever git add -A and never git commit -a, other sessions run here.\nEOF\n)" -- "Council Chamber/x.md"';
+  const herestring = 'git commit -m @\'\nmentions git add . and git commit -am in the text\n\'@ -- "x.md"';
+
+  // [name, tool, command, cwd, expected decision, options]
+  const addCases = [
+    ['denies git add -A in the vault', 'Bash', 'git add -A', VAULT, 'deny'],
+    ['denies git add --all', 'Bash', 'git add --all', VAULT, 'deny'],
+    ['denies git add .', 'Bash', 'git add .', VAULT, 'deny'],
+    ['denies git add -u with no path', 'Bash', 'git add -u', VAULT, 'deny'],
+    ['denies git add -- . (a dot is not a pathspec of files)', 'Bash', 'git add -- .', VAULT, 'deny'],
+    ['denies git commit -a', 'Bash', 'git commit -a -m "x"', VAULT, 'deny'],
+    ['denies git commit -am', 'Bash', 'git commit -am "x"', VAULT, 'deny'],
+    ['denies git commit --all', 'Bash', 'git commit --all -m x', VAULT, 'deny'],
+    ['denies a chained add -A then commit', 'Bash', 'git add -A && git commit -m x', VAULT, 'deny'],
+    ['denies in PowerShell with a backslash cwd in another case', 'PowerShell', 'git add -A', VAULT.replace(/\//g, '\\').toUpperCase(), 'deny'],
+    ['denies from a vault subfolder cwd', 'Bash', 'git add .', `${VAULT}/Council Chamber`, 'deny'],
+    ['denies the Git Bash cwd form', 'Bash', 'git add .', gitBashForm, 'deny'],
+    ['denies git -C pointing at the vault from another cwd', 'Bash', `git -C "${VAULT}" add -A`, OTHER, 'deny'],
+    ['denies cd into the vault then add .', 'Bash', `cd "${VAULT}" && git add .`, OTHER, 'deny'],
+    ['denies the call inside bash -c', 'Bash', 'bash -c "git add -A"', VAULT, 'deny'],
+    ['denies a cd through a variable assigned to the vault', 'Bash', `S="${VAULT}"; cd "$S" && git add -A`, OTHER, 'deny'],
+    ['denies a PowerShell Set-Location through a variable', 'PowerShell', `$S = '${VAULT}'; Set-Location $S; git add .`, OTHER, 'deny'],
+    ['denies a cd through an environment variable naming the vault', 'Bash', 'cd "$SE_TEST_VAULT" && git add -A', OTHER, 'deny', { extraEnv: { SE_TEST_VAULT: VAULT } }],
+    ['asks when the cd target is a variable it cannot read', 'Bash', 'cd "$SE_NO_SUCH_VAR" && git add -A', OTHER, 'ask'],
+    ['asks when the cd target is a command substitution', 'Bash', 'cd "$(git rev-parse --show-toplevel)" && git add -A', OTHER, 'ask'],
+    ['denies in the folder it shipped in, with the vault root unset', 'Bash', 'git add -A', ROOT, 'deny', { vaultRoot: null }],
+    ['allows a pathspec add', 'Bash', 'git add -- "Council Chamber/x.md"', VAULT, 'none'],
+    ['allows two quoted paths without --', 'Bash', 'git add "a.md" "b.md"', VAULT, 'none'],
+    ['allows add -u with a path', 'Bash', 'git add -u -- "Council Chamber/x.md"', VAULT, 'none'],
+    ['allows a pathspec commit', 'Bash', 'git commit -m "msg" -- "Council Chamber/x.md"', VAULT, 'none'],
+    ['allows commit --amend', 'Bash', 'git commit --amend --no-edit', VAULT, 'none'],
+    ['allows add -A in another repo', 'Bash', 'git add -A', OTHER, 'none'],
+    ['allows add . in another repo through PowerShell', 'PowerShell', 'git add .', OTHER, 'none'],
+    ['allows git -C at another repo while cwd is the vault', 'Bash', `git -C "${OTHER}" add -A`, VAULT, 'none'],
+    ['allows a cd through a variable assigned to another folder', 'Bash', `S="${OTHER}"; cd "$S" && git add -A`, VAULT, 'none'],
+    ['allows the same through PowerShell', 'PowerShell', `$S = '${OTHER}'; Set-Location $S; git add -A`, VAULT, 'none'],
+    ['allows a heredoc message that mentions the words', 'Bash', heredoc, VAULT, 'none'],
+    ['allows an unquoted heredoc body with a line reading git add -A', 'Bash', 'git commit -F - -- "x.md" <<\'EOF\'\ngit add -A\ngit commit -a\nEOF', VAULT, 'none'],
+    ['allows a PowerShell here-string message that mentions the words', 'PowerShell', herestring, VAULT, 'none'],
+    ['allows a quoted message that mentions the words', 'Bash', 'git commit -m "never git add -A" -- "x.md"', VAULT, 'none'],
+    ['allows echo of the words', 'Bash', 'echo "git add -A"', VAULT, 'none'],
+    ['allows git status', 'Bash', 'git status --short', VAULT, 'none'],
+    ['ignores other tools', 'Write', 'git add -A', VAULT, 'none'],
+  ];
+  for (const [name, tool, command, cwd, want, opts = {}] of addCases) {
+    const r = fire(ADD, shellCall(tool, command, cwd), opts);
+    const got = decisionOf(r);
+    record(`git-add-guard: ${name}`, got === want && r.code === 0, `expected ${want}, got ${got} (code=${r.code})`, want === 'none' ? 'quiet' : 'reacts');
+  }
+  let r = fire(ADD, 'not an object');
+  record('git-add-guard: fails closed on a payload that is not an object', r.code === 2, `code=${r.code}`, 'reacts');
+  r = fire(ADD, []);
+  record('git-add-guard: fails closed on an array payload', r.code === 2, `code=${r.code}`, 'reacts');
+  r = fire(ADD, shellCall('Bash', 'git add -A'), { nodeBroken: true });
+  record('git-add-guard: holds the call when node cannot run', r.code === 2, `code=${r.code}`, 'reacts');
+
+  // [name, tool, command, expected decision]
+  const verbCases = [
+    ['asks: branch -D', 'Bash', 'git branch -D old', 'ask'],
+    ['asks: git -C dir branch -D', 'Bash', `git -C "${OTHER}" branch -D old`, 'ask'],
+    ['asks: branch --delete --force', 'Bash', 'git branch --delete --force old', 'ask'],
+    ['asks: branch -d -f', 'Bash', 'git branch -d -f old', 'ask'],
+    ['asks: branch -fd', 'PowerShell', 'git branch -fd old', 'ask'],
+    ['asks: git.exe head', 'PowerShell', 'git.exe branch -D old', 'ask'],
+    ['asks: absolute-path head', 'Bash', '"/c/Program Files/Git/bin/git" branch -D old', 'ask'],
+    ['asks: PowerShell call operator', 'PowerShell', '& git branch -D old', 'ask'],
+    ['asks: --no-pager before the verb', 'Bash', 'git --no-pager branch -D old', 'ask'],
+    ['asks: --git-dir= before the verb', 'Bash', 'git --git-dir=.git reset --hard', 'ask'],
+    ['asks: reset HEAD~1 --hard', 'Bash', 'git reset HEAD~1 --hard', 'ask'],
+    ['asks: clean -df', 'Bash', 'git clean -df', 'ask'],
+    ['asks: clean -xdf', 'Bash', 'git clean -xdf', 'ask'],
+    ['asks: clean --force', 'Bash', 'git clean --force -d', 'ask'],
+    ['asks: update-ref -d', 'Bash', 'git update-ref -d refs/heads/x', 'ask'],
+    ['asks: push --force', 'Bash', 'git push --force origin main', 'ask'],
+    ['asks: push -f', 'Bash', 'git push -f origin main', 'ask'],
+    ['asks: push --force-with-lease=', 'Bash', 'git push --force-with-lease=main origin main', 'ask'],
+    ['asks: push delete refspec', 'Bash', 'git push origin :old', 'ask'],
+    ['asks: push force refspec', 'Bash', 'git push origin +main', 'ask'],
+    ['asks: push --delete', 'Bash', 'git push origin --delete old', 'ask'],
+    ['asks: reflog expire', 'Bash', 'git reflog expire --expire=now --all', 'ask'],
+    ['asks: gc --prune=now', 'Bash', 'git gc --prune=now', 'ask'],
+    ['asks: chained after a safe command', 'Bash', 'git status && git branch -D old', 'ask'],
+    ['asks: inside bash -c', 'Bash', 'bash -c "git branch -D old"', 'ask'],
+    ['asks: inside powershell -Command', 'Bash', 'powershell -Command "git reset --hard"', 'ask'],
+    ['passes: branch -d (merged-only delete)', 'Bash', 'git branch -d merged', 'none'],
+    ['passes: branch -f moves a branch, no delete', 'Bash', 'git branch -f topic HEAD', 'none'],
+    ['passes: reset --soft', 'Bash', 'git reset --soft HEAD~1', 'none'],
+    ['passes: clean -n dry run', 'Bash', 'git clean -nd', 'none'],
+    ['passes: clean -fdn dry run', 'Bash', 'git clean -fdn', 'none'],
+    ['passes: plain push', 'Bash', 'git push origin main', 'none'],
+    ['passes: push a feature branch', 'Bash', `git -C "${OTHER}" push origin feature/fix`, 'none'],
+    ['passes: commit message naming the verbs', 'Bash', 'git commit -m "never git branch -D or git reset --hard" -- "x.md"', 'none'],
+    ['passes: heredoc body naming the verbs', 'Bash', 'git commit -F - -- "x.md" <<\'EOF\'\ngit reset --hard\ngit push --force\nEOF', 'none'],
+    ['passes: echo of the verbs', 'Bash', 'echo "git branch -D x"', 'none'],
+    ['passes: git log', 'Bash', 'git log --oneline -5', 'none'],
+    ['passes: other tools', 'Write', 'git branch -D old', 'none'],
+  ];
+  for (const [name, tool, command, want] of verbCases) {
+    const r2 = fire(VERB, shellCall(tool, command));
+    const got = decisionOf(r2);
+    record(`git-verb-gate: ${name}`, got === want && r2.code === 0, `expected ${want}, got ${got} (code=${r2.code})`, want === 'none' ? 'quiet' : 'reacts');
+  }
+  r = fire(VERB, 'not an object');
+  record('git-verb-gate: fails closed on a payload that is not an object', r.code === 2, `code=${r.code}`, 'reacts');
+  r = fire(VERB, shellCall('Bash', 'git branch -D old'), { nodeBroken: true });
+  record('git-verb-gate: holds the call when node cannot run', r.code === 2, `code=${r.code}`, 'reacts');
+}
+
 // ── the registration audit ──────────────────────────────────────────────────
 // What this suite cannot see. Every case above fires its hook directly, which
 // proves the script works and says nothing about whether a session will ever
@@ -689,6 +1070,27 @@ if (audit.error) {
       name: `registration: outward-gate.sh on ${event}`,
       ok: hits.length > 0 && blind.length === 0 && wall.length === 0,
       detail: hits.length === 0 ? 'NOT REGISTERED' : blind.length ? `BLIND TO: ${blind.join(', ')}` : wall.length ? `MATCHES (must never): ${wall.join(', ')}` : `reaches ${mustReach.length} tools, spares Write and Edit`,
+    });
+  }
+
+  // The guards that read shell commands must be reachable from both shell tools
+  // (v3.25.0). A guard that reads Bash and is registered on Write alone reads
+  // nothing. The two git guards must never hold Write or Edit, which stay the
+  // door to repair a broken guard.
+  const shellWiring = [
+    ['pre-bash-git-add-guard.sh', ['Bash', 'PowerShell'], ['Write', 'Edit']],
+    ['pre-shell-git-verb-gate.sh', ['Bash', 'PowerShell'], ['Write', 'Edit']],
+    ['pre-write-floor-guard.sh', ['Write', 'Edit', 'Bash', 'PowerShell'], []],
+  ];
+  for (const [file, mustReach, mustNotReach] of shellWiring) {
+    const hits = audit.registered.filter((r) => r.event === 'PreToolUse' && r.command.includes(file));
+    const reaches = (tool) => hits.some((h) => { try { return new RegExp(`^(?:${h.matcher === '(all)' ? '.*' : h.matcher})$`).test(tool); } catch { return false; } });
+    const blind = mustReach.filter((t) => !reaches(t));
+    const wall = mustNotReach.filter((t) => reaches(t));
+    registrationRows.push({
+      name: `registration: ${file} on PreToolUse`,
+      ok: hits.length > 0 && blind.length === 0 && wall.length === 0,
+      detail: hits.length === 0 ? 'NOT REGISTERED' : blind.length ? `BLIND TO: ${blind.join(', ')}` : wall.length ? `MATCHES (must never): ${wall.join(', ')}` : `reaches ${mustReach.join(', ')}`,
     });
   }
 

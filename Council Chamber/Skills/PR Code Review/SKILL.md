@@ -2,6 +2,7 @@
 name: pr-code-review
 description: Automated pull request review for your repo, six parallel lenses (the sixth, plan alignment, runs when a governing plan is found), anchored confidence, CLAUDE.md compliance and GitHub comment posting.
 status: active
+tier: operational
 version: 1.0
 source: anthropics/claude-plugins-official, plugins/code-review (harvested at source level)
 ---

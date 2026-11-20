@@ -2,6 +2,7 @@
 name: source-harvest
 description: Use when extracting patterns from any external repo or tool. Read source level, not description level. Classify, extract and integrate what serves the ecosystem.
 status: active
+tier: foundational
 version: 1.1
 ---
 

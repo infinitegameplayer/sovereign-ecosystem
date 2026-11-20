@@ -109,6 +109,13 @@ jobs:
       - name: Quote check positive control
         run: node "Council Chamber/scripts/quote-check.mjs" --positive-control
 
+      # Partner material never reaches an outside model, and a key-shaped string
+      # leaves only with a logged override (v3.25.0). Fired on a fixture vault with
+      # no provider key: every gate must refuse before the key check, and a clean
+      # prompt must get past every gate to it, so the gates are not a wall.
+      - name: Client material and redaction gates positive control
+        run: node "Council Chamber/scripts/client-material-guard-selftest.mjs"
+
       # The decay face: a dated or volatile canonical line names what expires it.
       # Both directions on a real checkout: it must find doctrine here, and it
       # must fail when aimed at nothing.

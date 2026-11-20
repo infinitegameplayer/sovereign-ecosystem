@@ -2,6 +2,7 @@
 name: quest-progress-update
 description: Use when updating a Quest note with real-world progress, ecosystem changes, learnings, evidence and the next step.
 status: draft
+tier: foundational
 version: 0.1
 ---
 

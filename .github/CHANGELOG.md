@@ -6,6 +6,23 @@ Each entry corresponds to one publish cycle. For full implementation details, se
 
 ---
 
+## v3.25.0, 2026-11-19
+
+The Fence Counts Every Door.
+
+**If you run more than one session on your vault, send work to outside models through `external-worker.mjs`, or let your agent use the shell, apply this update.** Your trust-anchor guard watched the Write and Edit tools, and a shell command writing the same file passed it in silence. Nothing stopped one session from sweeping another's unfinished work into its commit, and nothing asked before a git command that throws work away. The external worker sent whatever it was given.
+
+- **The trust-anchor guard reads the shell.** A redirect, `sed -i`, `tee`, copy, move, delete or interpreter write aimed at settings, `CLAUDE.md`, `.mcp.json`, a plugin or `.vscode/tasks.json` is named, in Bash and in PowerShell. When node cannot run, a by-name match still names it.
+- **A sweeping commit in your vault is refused.** `git add -A`, `git add .` and `git commit -a` aimed at this vault are refused with the pathspec form to use instead. A folder built from a variable it cannot read asks rather than refuses.
+- **A destructive git command asks first,** in any spelling: `branch -D`, `reset --hard`, `clean -f`, a forced or deleting push, `reflog expire`, `gc --prune`.
+- **Outside models refuse partner material.** A context pack under `Collaborations/` and a prompt carrying a partner's full name stop before any send. A redaction gate stops emails, card-like numbers, payment ids, key-shaped strings and long encoded blobs unless you pass `--allow-sensitive`, which is logged. Both run before the key check.
+- **The Skills Index refuses a skill with no tier,** and names it to your agent when it happens. Four shipped skills gained their tier. If your own skills lack one, the next rebuild names them.
+- The worker no longer stops on a missing `.env` before it can say which key it needs, and the index hook rebuilds from the vault root when the session sits in a subfolder.
+
+Full detail and the implementation spec: `.github/UPDATES/2026-11-19-v3.25.0-the-fence-counts-every-door.md`.
+
+---
+
 ## v3.24.0, 2026-11-19
 
 Every Spelling Counts.

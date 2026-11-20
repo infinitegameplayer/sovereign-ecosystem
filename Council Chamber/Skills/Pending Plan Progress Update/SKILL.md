@@ -2,6 +2,7 @@
 name: pending-plan-progress-update
 description: Use when updating a Pending Plan mid-arc with breadcrumbs, applicability changes, partial implementation notes and reconciliation-ready context.
 status: draft
+tier: foundational
 version: 0.1
 ---
 

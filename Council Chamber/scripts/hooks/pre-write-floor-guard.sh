@@ -1,6 +1,7 @@
 #!/bin/sh
 # pre-write-floor-guard.sh
-# PreToolUse hook (Write|Edit): surfaces any edit to a trust-anchor file.
+# PreToolUse hook (Write|Edit|Bash|PowerShell): surfaces any edit to a
+# trust-anchor file, through the file tools or through the shell.
 #
 # Bulk-edit protections catch wholesale rewrites, but a single-line
 # non-wildcard edit can slip past them. This closes that path: no edit to a
@@ -33,9 +34,27 @@
 # root. Falls back to the current working directory, which is the vault root
 # when hooks run under Claude Code.
 #
-# Invoked by the AI interface's PreToolUse hook before each Write or Edit call.
+# Shell writes (v3.25.0): an agent can edit the same files with sed -i, a
+# redirect, tee, cp, mv, rm or an interpreter write, and with PowerShell's
+# Set-Content, Out-File, Copy-Item, Remove-Item and their aliases. Through
+# v3.24.0 the guard saw none of it. A Bash or PowerShell call is read by floor-guard-shell.mjs,
+# which prints the trust-anchor paths the command writes, moves, copies onto or
+# deletes (an rm or mv of .claude, .claude/plugins or .vscode counts, because it
+# takes the files inside). Each hit gets the same three outputs as a Write hit.
+# Its KNOWN LIMITS (paths built at run time and the like) are named in that
+# file's header, so silence on a shell call is not coverage.
+#
+# When node cannot run on a shell call, the same lesson as v3.13.0 applies: a
+# plain grep of the raw payload looks for any trust-anchor name and surfaces the
+# call, worded as "matched by name without parsing". That reading cannot tell a
+# write from a read, so it may surface a harmless cat. Unknown resolves toward
+# visible. Write and Edit are read as they always were.
+#
+# Invoked by the AI interface's PreToolUse hook before each Write, Edit, Bash or
+# PowerShell call. Register it on all four:  "matcher": "Write|Edit|Bash|PowerShell"
 
 VAULT_ROOT="${SOVEREIGN_VAULT_ROOT:-$PWD}"
+HOOK_DIR=$(cd "$(dirname "$0")" 2>/dev/null && pwd)
 LOG_FILE="$VAULT_ROOT/.runtime/floor-guard.log"
 
 INPUT=$(cat)
@@ -111,6 +130,55 @@ if [ "$TOOL_NAME" = "Write" ] || [ "$TOOL_NAME" = "Edit" ]; then
     printf '{"systemMessage":"TRUST-ANCHOR FILE EDIT: %s on %s. Confirmation required. Surfaced, not blocked."}\n' "$TOOL_NAME" "$SHOWN"
     echo "TRUST-ANCHOR FILE EDIT: $TOOL_NAME on $FILE_PATH. Confirmation required. Surfaced, not blocked." >&2
     echo "[$TIMESTAMP] $TOOL_NAME: $FILE_PATH" >> "$LOG_FILE" 2>/dev/null
+  fi
+fi
+
+if [ "$TOOL_NAME" = "Bash" ] || [ "$TOOL_NAME" = "PowerShell" ]; then
+  HITS=""
+  PARSED=0
+  if [ "$NO_PARSER" -eq 0 ] && [ -f "$HOOK_DIR/floor-guard-shell.mjs" ]; then
+    RESULT=$(printf '%s' "$INPUT" | node "$HOOK_DIR/floor-guard-shell.mjs" 2>/dev/null)
+    if [ $? -eq 0 ] && [ -n "$RESULT" ]; then
+      # Line 1 of HITS names every hit for the message, the lines after it are
+      # the log entries. Prints nothing when the command hit no trust anchor.
+      HITS=$(printf '%s' "$RESULT" | node -e "
+        var d = '';
+        process.stdin.on('data', function(c) { d += c; });
+        process.stdin.on('end', function() {
+          var j = JSON.parse(d);
+          if (!j.hits.length) return;
+          var named = j.hits.map(function(h) { return h.path + (h.via ? ' via ' + h.via : ''); }).join('; ');
+          var lines = j.hits.map(function(h) { return j.tool + (h.via ? ' (' + h.via + ')' : '') + ': ' + h.path; });
+          process.stdout.write(named + '\n' + lines.join('\n') + '\n');
+        });
+      " 2>/dev/null)
+      [ $? -eq 0 ] && PARSED=1
+    fi
+  fi
+
+  mkdir -p "$VAULT_ROOT/.runtime" 2>/dev/null
+  TIMESTAMP=$(date -u +"%Y-%m-%dT%H:%M:%SZ" 2>/dev/null || echo "unknown")
+
+  if [ "$PARSED" -eq 1 ]; then
+    if [ -n "$HITS" ]; then
+      NAMED=$(printf '%s\n' "$HITS" | head -1 | sed 's/\\/\\\\/g; s/"/\\"/g')
+      RAWNAMED=$(printf '%s\n' "$HITS" | head -1)
+      printf '{"systemMessage":"TRUST-ANCHOR FILE EDIT: %s on %s. Confirmation required. Surfaced, not blocked."}\n' "$TOOL_NAME" "$NAMED"
+      echo "TRUST-ANCHOR FILE EDIT: $TOOL_NAME on $RAWNAMED. Confirmation required. Surfaced, not blocked." >&2
+      printf '%s\n' "$HITS" | tail -n +2 | sed "s/^/[$TIMESTAMP] /" >> "$LOG_FILE" 2>/dev/null
+    fi
+  else
+    # The module could not run or answer. Flatten the raw payload to forward
+    # slashes and look for any trust-anchor name, including a bare .claude or
+    # .vscode directory, which an rm or mv takes with the files inside.
+    FLAT=$(printf '%s' "$INPUT" | tr '\\' '/' | tr -s '/')
+    MATCH=$(printf '%s' "$FLAT" | grep -oiE '\.claude([^[:alnum:]_-]|$)|\.mcp\.json|\.vscode([^[:alnum:]_-]|$)' | head -1)
+    if [ -n "$MATCH" ]; then
+      SHOWN=$(printf '%s' "$MATCH" | sed 's/"/\\"/g')
+      printf '{"systemMessage":"TRUST-ANCHOR FILE EDIT: %s command names a trust-anchor path (%s). Matched by name without parsing, so it may only read it. Confirmation required. Surfaced, not blocked."}\n' "$TOOL_NAME" "$SHOWN"
+      echo "TRUST-ANCHOR FILE EDIT: $TOOL_NAME command names a trust-anchor path ($MATCH). Matched by name without parsing. Confirmation required. Surfaced, not blocked." >&2
+      echo "[$TIMESTAMP] $TOOL_NAME (matched by name, unparsed): $MATCH" >> "$LOG_FILE" 2>/dev/null
+    fi
   fi
 fi
 

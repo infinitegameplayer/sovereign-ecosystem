@@ -115,7 +115,9 @@ Script-based dispatch is the integration mode. The single dispatch entry point i
 - Returns structured output to stdout. Plain text by default. JSON when `--format json`.
 - Applies the Ambassador Doctrine sub-agent prompt pattern automatically.
 - Logs dispatch metadata to `.runtime/external-worker-log.txt`. Fields: provider, model, prompt-hash, latency, token count if available.
-- Fails loud on missing keys or rate-limit errors. No silent fallback.
+- Refuses partner and client material before any send (since v3.25.0): a `--context-pack` under `Collaborations/` and a prompt carrying a partner's full name. No override. Extend the rule in `Council Chamber/scripts/client-material.config.json`; the example beside it shows the shape.
+- Runs a redaction gate before any send (since v3.25.0): email addresses, card-like digit runs, payment ids, key-shaped strings and long encoded blobs stop the dispatch, and the message names the class, never the value. `--allow-sensitive` overrides with a warning and a logged line.
+- Fails loud on missing keys or rate-limit errors. No silent fallback. Both gates run before the key check, so a refusal never depends on a key.
 
 Invocation shape:
 
@@ -125,7 +127,7 @@ node "Council Chamber/scripts/external-worker.mjs" \
   --model cohere/north-mini-code:free \
   --prompt "..." \
   --context-pack path/to/context.md \
-  [--trace] [--max-tokens 4096] [--format json]
+  [--trace] [--max-tokens 4096] [--format json] [--allow-sensitive]
 ```
 
 `--provider` accepts `openrouter`, `nvidia-nim`, `deepseek`, `groq`. Each provider adapter reads its key from the matching env var and hits its own base URL. OpenRouter, NVIDIA NIM and Groq use the OpenAI-compatible Chat Completions shape. DeepSeek uses the Anthropic-compatible Messages shape at `api.deepseek.com/anthropic`.

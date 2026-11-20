@@ -94,12 +94,24 @@ case "$FILE_PATH" in
     # More precise check using grep
     if printf '%s' "$FILE_PATH" | grep -qE 'Council Chamber[/\\]Skills[/\\][^/\\]+[/\\]SKILL\.md$'; then
       if [ -n "$SKILLS_REGEN_CMD" ]; then
-        eval "$SKILLS_REGEN_CMD" >/dev/null 2>&1
+        # The builder reads relative paths, so it runs from the vault root even
+        # when the session has moved into a subfolder.
+        REGEN_ERR=$(cd "$VAULT_ROOT" 2>/dev/null && eval "$SKILLS_REGEN_CMD" 2>&1 >/dev/null)
         STATUS=$?
         if [ $STATUS -eq 0 ]; then
           log "skills-index regenerated after write to: $FILE_PATH"
         else
           log "skills-index regen FAILED (status $STATUS) after write to: $FILE_PATH"
+          # A failed rebuild leaves the skill out of the index, so it is said to
+          # the AI, never only logged (v3.25.0). The builder refuses a skill whose
+          # tier is missing and names it; the AI reads that beside the write.
+          # Plain stdout on a PostToolUse exit 0 reaches only the debug log (see
+          # emit-context.mjs). Without the helper it falls back to plain text.
+          HOOK_DIR="$(cd "$(dirname "$0")" && pwd)"
+          {
+            echo "[WARN] The Skills Index was not rebuilt after this write, so the skill may be missing from it:"
+            printf '%s\n' "$REGEN_ERR"
+          } | if [ -f "$HOOK_DIR/emit-context.mjs" ]; then node "$HOOK_DIR/emit-context.mjs"; else cat; fi
         fi
       else
         log "skills-index trigger detected (no regen cmd configured): $FILE_PATH"
