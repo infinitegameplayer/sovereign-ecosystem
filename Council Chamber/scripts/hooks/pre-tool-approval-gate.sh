@@ -24,7 +24,7 @@
 #   node_modules, .runtime/    -- regenerable or not a container
 #   a search that names a delete verb (grep, rg), a commit message or echo text
 #   that names a delete, a dry run (git clean -n), a delete outside the vault,
-#   a path built at run time, and the same container names in another repo
+#   a path built at run time that names no container, and the same container names in another repo
 #   (the session cwd sits outside the vault)
 #
 # A gate written against one shell tool does not automatically cover a

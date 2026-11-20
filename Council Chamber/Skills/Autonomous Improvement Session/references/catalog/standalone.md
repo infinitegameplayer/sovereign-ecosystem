@@ -63,7 +63,7 @@ parent: "[[Council Chamber/Skills/Autonomous Improvement Session/SKILL]]"
 **Verb:** Acts.
 
 **Execution:**
-1. For each gitignored operational log under `.runtime/` or your scripts log directory (session-stop log, approval-gate log, dispatch log, index-regen log and peers), if it exceeds the line cap, truncate to the last N lines (default cap 2000). This is operational maintenance of a transient append log, not content deletion.
+1. For each gitignored operational log under `.runtime/` or your scripts log directory (session-stop log, approval-gate log, dispatch log, index-regen log, the Outward Gate's `outward-gate.log` and peers), if it exceeds the line cap, truncate to the last N lines (default cap 2000). This is operational maintenance of a transient append log, not content deletion.
 2. List stale `.runtime` files (30+ days old, not active state files) as Sovereign-approved removal candidates. Do not delete them. File deletion is the Permanent Floor, so the purge stays surfaced, not autonomous. List literal filenames, never ranges or shorthand, in the purge-surfaced list.
 3. Track already-surfaced purge candidates in the log frontmatter `runtime_purge_surfaced` list. Each run, surface only files not already on that list, and add a tail note counting how many previously-surfaced files still await an approved purge. When the Sovereign approves and the purge executes, clear `runtime_purge_surfaced`.
 4. Never touch a tracked governance or content file, only the named operational logs.

@@ -42,6 +42,8 @@ const HOOK = path.join(HERE, 'pre-tool-approval-gate.sh');
 const VAULT_ROOT = (
   process.env.SOVEREIGN_VAULT_ROOT || path.resolve(HERE, '..', '..', '..')
 ).replace(/\\/g, '/');
+// The vault folder's own name, for the cases that build its path from a variable.
+const VAULT_NAME = path.basename(VAULT_ROOT);
 
 // A protected content file that lives inside the vault, path relative to root.
 const DOC = 'Council Chamber/Codices/Humor Codex.md';
@@ -152,6 +154,18 @@ const cases = [
   ['container: shred -u', 'Bash', 'shred -u Library/x.json', BLOCK, { cwd: VAULT_ROOT }],
   ['container: git -C . rm', 'Bash', 'git -C . rm Library/x.json', BLOCK, { cwd: VAULT_ROOT }],
   ['container: git clean a container', 'Bash', 'git clean -fd Library', BLOCK, { cwd: VAULT_ROOT }],
+  // v3.24.0: global git options other than the four the loop knew ended it
+  // early and hid the rm after them, and a target built from a variable passed
+  // even when its literal text named a container or the vault itself.
+  ['container: git --git-dir= then rm', 'Bash', 'git --git-dir=.git rm -r "Inbox/old exports"', BLOCK, { cwd: VAULT_ROOT }],
+  ['container: git -C . --no-pager rm', 'Bash', 'git -C . --no-pager rm Library/x.json', BLOCK, { cwd: VAULT_ROOT }],
+  ['container: git -c key=value then clean', 'Bash', 'git -c core.quotepath=off clean -fd Library', BLOCK, { cwd: VAULT_ROOT }],
+  ['container: variable root, container named', 'Bash', `rm -rf "$HOME/${VAULT_NAME}/Library/Datasets"`, BLOCK, { cwd: VAULT_ROOT }],
+  ['container: PS variable root, the vault itself', 'PowerShell', `Remove-Item -Recurse -Force "$env:USERPROFILE/${VAULT_NAME}"`, BLOCK, { cwd: VAULT_ROOT }],
+  ['container: cmd variable root, container named', 'Bash', `cmd /c rmdir /s /q "%USERPROFILE%\\${VAULT_NAME}\\Inbox"`, BLOCK, { cwd: VAULT_ROOT }],
+  ['ALLOW: container: git --no-pager log', 'Bash', 'git --no-pager log -1', ALLOW, { cwd: VAULT_ROOT }],
+  ['ALLOW: container: variable path into .runtime', 'Bash', 'rm -rf "$D/.runtime/x"', ALLOW, { cwd: VAULT_ROOT }],
+  ['ALLOW: container: variable path, container word inside a file name', 'Bash', 'rm -f "$SCRATCH/Library-notes.txt"', ALLOW, { cwd: VAULT_ROOT }],
   ['container: find -exec rm', 'Bash', 'find Library -name x -exec rm {} \\;', BLOCK, { cwd: VAULT_ROOT }],
   ['container: lone ampersand', 'Bash', 'echo a & rm Library/x.json', BLOCK, { cwd: VAULT_ROOT }],
   ['container: escaped space in the path', 'Bash', 'rm Council\\ Chamber/scripts/x.json', BLOCK, { cwd: VAULT_ROOT }],

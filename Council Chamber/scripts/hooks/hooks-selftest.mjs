@@ -497,6 +497,14 @@ const mojibake = (s) => [...Buffer.from(s, 'utf8')].map((b) => CP1252[b] ?? Stri
   record('outward-gate: a script not in the config passes', silent(r), `code=${r.code} out=${r.out.trim().slice(0, 40)}`, 'quiet');
   r = fire(H, mcp('mcp__localdocs__create_note', sid), WITH_CONFIG);
   record('outward-gate: a configured open server passes whole', silent(r), `code=${r.code} out=${r.out.trim().slice(0, 40)}`, 'quiet');
+  // v3.24.0: a --dry-run anywhere in the command used to stand the whole gate down,
+  // so a live send chained after its own dry run passed with no ask.
+  r = fire(H, sh('node "Council Chamber/scripts/send-newsletter.mjs" --dry-run && node "Council Chamber/scripts/send-newsletter.mjs" --live', session()), WITH_CONFIG);
+  record('outward-gate: a live send chained after its own dry run asks', asks(r) && /resend/.test(r.out), `code=${r.code} out=${r.out.trim().slice(0, 40)}`, 'reacts');
+  r = fire(H, sh('node "Council Chamber/scripts/send-newsletter.mjs" --live --note "checked after the --dry-run"', session()), WITH_CONFIG);
+  record('outward-gate: a live send whose quoted note names the flag asks', asks(r) && /resend/.test(r.out), `code=${r.code} out=${r.out.trim().slice(0, 40)}`, 'reacts');
+  r = fire(H, { hook_event_name: 'PreToolUse', session_id: session(), tool_name: 'PowerShell', tool_input: { command: 'node "C:\\vault\\Council Chamber\\scripts\\send-newsletter.mjs" --dry-run' } }, WITH_CONFIG);
+  record('outward-gate: --dry-run passes in the PowerShell form', silent(r), `code=${r.code} out=${r.out.trim().slice(0, 40)}`, 'quiet');
   r = fire(H, sh('node "Council Chamber/scripts/send-newsletter.mjs" --live', sid), NO_CONFIG);
   record('outward-gate: with no config the default list is empty', silent(r), `code=${r.code} out=${r.out.trim().slice(0, 40)}`, 'quiet');
 
@@ -539,6 +547,9 @@ const mojibake = (s) => [...Buffer.from(s, 'utf8')].map((b) => CP1252[b] ?? Stri
   // An asking act in the same command outranks a quiet one.
   r = fire(H, sh('npx wrangler deploy && npx wrangler secret put API_KEY', session()), NO_CONFIG);
   record('outward-gate: a deploy chained to a secret write asks', asks(r) && r.out.includes('outward act on cloudflare '), `code=${r.code} out=${r.out.trim().slice(0, 40)}`, 'reacts');
+  // v3.24.0: the dry run excuses only its own segment.
+  r = fire(H, sh('npx wrangler deploy --dry-run; npx wrangler secret put API_KEY', session()), NO_CONFIG);
+  record('outward-gate: a secret write after a dry-run deploy asks', asks(r) && r.out.includes('outward act on cloudflare '), `code=${r.code} out=${r.out.trim().slice(0, 40)}`, 'reacts');
 
   // A quiet deploy that ran records no consent, so a later secret write still asks.
   sid = session();
@@ -700,14 +711,17 @@ if (audit.error) {
 
   // The settings deny reading a .env file anywhere in the vault (v3.21.0), so a key
   // kept there never enters a session's context. Claude Code enforces the rule; this
-  // row proves the rule is still in the file.
+  // row proves the rule is still in the file. v3.24.0: every common spelling, since a
+  // key in .env.local was read as freely as no rule at all.
   try {
     const settings = JSON.parse(readFileSync(path.join(ROOT, '.claude', 'settings.json'), 'utf8'));
     const deny = settings.permissions?.deny || [];
+    const ENV_SPELLINGS = ['.env', '.env.local', '.env.*.local', '.env.development', '.env.production', '.env.test'].map((s) => `Read(**/${s})`);
+    const missing = ENV_SPELLINGS.filter((r) => !deny.includes(r));
     registrationRows.push({
       name: 'registration: settings deny reading .env files',
-      ok: deny.includes('Read(**/.env)'),
-      detail: deny.includes('Read(**/.env)') ? 'Read(**/.env) denied' : 'NO DENY for Read(**/.env)',
+      ok: missing.length === 0,
+      detail: missing.length === 0 ? `${ENV_SPELLINGS.length} .env spellings denied` : `NO DENY for ${missing.join(', ')}`,
     });
   } catch (e) {
     registrationRows.push({ name: 'registration: settings deny reading .env files', ok: false, detail: `cannot read: ${e.message}` });

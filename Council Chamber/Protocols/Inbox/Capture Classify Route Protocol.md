@@ -3,7 +3,7 @@ version: 0.1
 status: draft
 created: 2026-02-22
 ---
-# Capture ? Classify ? Route Protocol
+# Capture Classify Route Protocol
 
 Purpose: Define a lightweight, manual Inbox flow that routes all incoming information through `Inbox/`.
 

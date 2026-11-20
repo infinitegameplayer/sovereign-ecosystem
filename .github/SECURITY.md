@@ -57,9 +57,9 @@ It does not amend the MIT License, which still governs the code. It applies to e
 The hooks in `.claude/settings.json` catch common mistakes. They do not contain an agent that is working to get around them.
 
 - **The trust-anchor guard surfaces and does not block.** It names any edit to settings, `CLAUDE.md`, MCP and plugin files, and it watches the Write and Edit tools only. A shell command that writes the same file passes it.
-- **The delete gate blocks by reading the command text.** It stops deletes and moves inside your containers. Its own header lists its blind spots: a path built at run time, a delete fed by a pipe, a string passed to an interpreter script as an argument and a file sitting directly in the vault root.
+- **The delete gate blocks by reading the command text.** It stops deletes and moves inside your containers. Its own header lists its blind spots: a path built at run time that names no container in its literal text (since v3.24.0 a variable path that names one is refused), a delete fed by a pipe, a string passed to an interpreter script as an argument and a file sitting directly in the vault root.
 - **The Outward Gate asks before what it lists.** That means secret writes on fly, wrangler and vercel, writes through a connected MCP server and the scripts and commands you name in its config. Built-in deploys are logged and not asked. Anything off its lists passes.
-- **The settings deny reading `.env` files** (from v3.21.0). Claude Code enforces the rule on its file tools and on the shell readers it recognizes. A script you run can still read the file, which is how your scripts get their keys.
+- **The settings deny reading `.env` files** (from v3.21.0; since v3.24.0 also `.env.local`, `.env.*.local`, `.env.development`, `.env.production` and `.env.test`). Claude Code enforces the rule on its file tools and on the shell readers it recognizes. A script you run can still read the file, which is how your scripts get their keys.
 
 Containment comes from your operating system and from what you allow: your user account, Claude Code's permission prompts and its sandbox where your platform supports it.
 

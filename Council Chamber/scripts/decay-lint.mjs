@@ -65,7 +65,7 @@
 //   node "Council Chamber/scripts/decay-lint.mjs" --list             every finding, not only counts
 //   node "Council Chamber/scripts/decay-lint.mjs" --json
 //   node "Council Chamber/scripts/decay-lint.mjs" --ratchet          exit 1 if a count rose above the baseline
-//   node "Council Chamber/scripts/decay-lint.mjs" --update-baseline  record current counts (refused if any rose)
+//   node "Council Chamber/scripts/decay-lint.mjs" --update-baseline  lower each count that fell; a risen count keeps its line (exit 1)
 //   node "Council Chamber/scripts/decay-lint.mjs" --positive-control
 //   Options: --due-days=90 (memory) --stamp-days=180 (as-of stamps)
 //
@@ -79,6 +79,7 @@ import { execFileSync, spawnSync } from 'node:child_process';
 import { tmpdir } from 'node:os';
 import { fileURLToPath } from 'node:url';
 import { isRecordDir, isMarkedRecord } from './doctrine-records.mjs';
+import { localDate } from './lib/local-date.mjs';
 
 const SCRIPT_PATH = fileURLToPath(import.meta.url);
 const SCRIPT_DIR = dirname(SCRIPT_PATH);
@@ -100,7 +101,8 @@ const BARE_FLAGS = new Set(['--list', '--json', '--ratchet', '--update-baseline'
 const EQ_FLAGS = new Set(['lane', 'due-days', 'stamp-days', 'memory-dir']);
 
 function daysBetween(a, b) { return Math.floor((Date.parse(b) - Date.parse(a)) / 86400000); }
-const today = () => new Date().toISOString().slice(0, 10);
+// The local day, not the UTC one, which reads tomorrow in the evening west of Greenwich.
+const today = () => localDate();
 
 // Canonical lane
 
@@ -228,10 +230,20 @@ export function ratchet(current, update, baselinePath = BASELINE) {
   const keys = Object.keys(current);
   const rose = base ? keys.filter(k => Number.isInteger(base[k]) && current[k] > base[k]) : [];
   if (update) {
-    if (rose.length) { rose.forEach(k => console.error(`Ratchet: ${k} ${current[k]} is above the baseline ${base[k]}. The baseline only moves down.`)); return 1; }
-    writeFileSync(baselinePath, JSON.stringify({ ...(base || {}), ...current, recorded: today(), note: 'Written by decay-lint.mjs --update-baseline. Only ever lowered.' }, null, 2) + '\n', 'utf8');
-    console.log(`Ratchet: baseline recorded ${today()}: ${keys.map(k => `${k} ${current[k]}`).join(', ')}.`);
-    return 0;
+    // Each count that fell is locked and each risen count keeps its line. Through
+    // v3.23.0 one risen count refused the whole write, so a real fall elsewhere
+    // could not be locked in (v3.24.0).
+    rose.forEach(k => console.error(`Ratchet: ${k} ${current[k]} is above the baseline ${base[k]}. The baseline only moves down.`));
+    const lower = keys.filter(k => !base || !Number.isInteger(base[k]) || current[k] < base[k]);
+    if (lower.length) {
+      const next = { ...(base || {}) };
+      for (const k of lower) next[k] = current[k];
+      writeFileSync(baselinePath, JSON.stringify({ ...next, recorded: today(), note: 'Written by decay-lint.mjs --update-baseline. Only ever lowered.' }, null, 2) + '\n', 'utf8');
+      console.log(`Ratchet: baseline recorded ${today()}: ${lower.map(k => `${k} ${current[k]}`).join(', ')}.`);
+    } else if (!rose.length) {
+      console.log('Ratchet: every count holds its baseline. Nothing to lower.');
+    }
+    return rose.length ? 1 : 0;
   }
   if (!base) {
     console.error(`Ratchet: NO BASELINE at ${baselinePath}. The ratchet is not enforced and this is not a clean result. Current counts: ${keys.map(k => `${k} ${current[k]}`).join(', ')}. Run --update-baseline once to record the first baseline.`);
@@ -320,6 +332,16 @@ function positiveControl() {
     ok(quiet(() => ratchet({ ...cur, canonical_undated: 6 }, false, bl)) === 1, 'ratchet fails when a count rises');
     ok(quiet(() => ratchet({ ...cur, canonical_undated: 6 }, true, bl)) === 1, 'update-baseline refuses to raise the baseline');
     ok(quiet(() => ratchet({ ...cur, canonical_undated: 3 }, true, bl)) === 0 && JSON.parse(readFileSync(bl, 'utf8')).canonical_undated === 3, 'update-baseline lowers the baseline');
+    // v3.24.0: one risen count used to refuse the whole write, so a real fall elsewhere
+    // could not be locked in. A fallen count locks; a risen count keeps its line.
+    writeFileSync(bl, JSON.stringify({ a: 10, b: 5, recorded: '2026-10-20' }), 'utf8');
+    const mixed = quiet(() => ratchet({ a: 8, b: 7 }, true, bl));
+    const after = JSON.parse(readFileSync(bl, 'utf8'));
+    ok(mixed === 1, 'update with one risen count exits 1');
+    ok(after.a === 8, 'update locks a count that fell while another rose');
+    ok(after.b === 5, 'update keeps the line of a count that rose');
+    ok(quiet(() => ratchet({ a: 8, b: 5 }, true, bl)) === 0, 'update with every count held exits 0');
+    ok(quiet(() => ratchet({ a: 9, b: 5 }, false, bl)) === 1, 'the ratchet reads the locked line, so a rise above it fails');
     writeFileSync(bl, '{not json', 'utf8');
     ok(quiet(() => ratchet(cur, false, bl)) === 1, 'a corrupt baseline exits 1 without a stack trace');
 

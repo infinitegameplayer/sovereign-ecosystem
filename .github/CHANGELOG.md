@@ -6,6 +6,23 @@ Each entry corresponds to one publish cycle. For full implementation details, se
 
 ---
 
+## v3.24.0, 2026-11-19
+
+Every Spelling Counts.
+
+**If you installed any version through v3.23.0, apply this update.** Two of your guards could be walked around by spelling the same act a different way. The delete gate missed a `git rm` behind a git option it did not know, and a delete whose path was built from a variable. The Outward Gate let a whole chained command through when any part of it said `--dry-run`, so a live send chained after its own dry run never asked.
+
+- **The delete gate reads every git option.** `git --git-dir=.git rm`, `git -C . --no-pager rm` and their kin are refused like a plain `git rm`.
+- **A variable path that names a container is refused.** `rm -rf "$HOME/<your vault>/Library/x"` and `Remove-Item "$env:USERPROFILE/<your vault>"` are read by their literal text. A bare `"$X"` still passes, a limit named in the gate's header.
+- **A dry run excuses only itself.** `send --dry-run && send --live` asks. So does a secret write after a dry-run deploy, and a live send whose quoted note mentions the flag.
+- **Every common `.env` spelling is denied to reads:** `.env.local`, `.env.*.local`, `.env.development`, `.env.production` and `.env.test` join `.env`.
+- **The decay ratchet locks a fall even when another count rose,** and stamps the local day rather than the UTC one.
+- Three small repairs: the improvement session's log sweep names the Outward Gate's log, a protocol heading lost its damaged characters and a watched repo's link follows its move to `obsidianmd/obsidian-skills`.
+
+Full detail and the implementation spec: `.github/UPDATES/2026-11-19-v3.24.0-every-spelling-counts.md`.
+
+---
+
 ## v3.23.0, 2026-11-12
 
 The Lessons Travel.

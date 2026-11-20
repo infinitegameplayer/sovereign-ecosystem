@@ -34,7 +34,8 @@
 //   Bash, PowerShell       Outward when the command runs a script named in
 //                          outwardScripts, runs a CLI deploy or secret write
 //                          (OUTWARD_COMMANDS, built in), or runs a command named
-//                          in outwardCommands, unless it carries --dry-run.
+//                          in outwardCommands, unless that command segment carries
+//                          --dry-run as a bare word.
 //   Outward with no consent for its service this session: print permissionDecision
 //   "ask". Per the hooks reference, an ask forces a prompt in auto mode too.
 // PostToolUse
@@ -141,6 +142,34 @@ function loadConfig() {
 
 function escapeRe(s) { return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); }
 
+// Splits a shell command on unquoted ; & | and line breaks. Each segment keeps its
+// own text for the matchers and records whether it carries --dry-run as a bare word
+// outside quotes. Through v3.23.0 the flag was read across the whole command, so
+// `send-newsletter.mjs --dry-run && send-newsletter.mjs --live` passed with no ask.
+// Kept inline rather than imported, so this fail-closed gate loads no other file.
+// An unclosed quote keeps the rest of the command in one segment, which can only
+// add matches, never hide one.
+function shellSegments(cmd) {
+  const out = [];
+  let text = '';
+  let word = '';
+  let quoted = false;
+  let q = null;
+  let dry = false;
+  const endWord = () => { if (!quoted && word === '--dry-run') dry = true; word = ''; quoted = false; };
+  const endSeg = () => { endWord(); if (text.trim()) out.push({ text, dry }); text = ''; dry = false; };
+  for (const c of cmd) {
+    if (q) { text += c; if (c === q) q = null; else word += c; continue; }
+    if (c === '"' || c === "'") { q = c; quoted = true; text += c; continue; }
+    if (c === ';' || c === '&' || c === '|' || c === '\n' || c === '\r') { endSeg(); continue; }
+    text += c;
+    if (c === ' ' || c === '\t') { endWord(); continue; }
+    word += c;
+  }
+  endSeg();
+  return out;
+}
+
 function classify(payload, cfg) {
   const tool = String(payload.tool_name || '');
   const m = tool.match(/^mcp__(.+?)__(.+)$/);
@@ -163,15 +192,18 @@ function classify(payload, cfg) {
   }
   if (tool === 'Bash' || tool === 'PowerShell') {
     const cmd = String((payload.tool_input || {}).command || '');
-    if (/--dry-run\b/.test(cmd)) return null;
     // Collect every outward act in the command; an asking act outranks a quiet one.
+    // A dry run excuses only its own segment, and only as a bare word outside quotes.
     const hits = [];
-    for (const [script, service] of Object.entries(cfg.outwardScripts)) {
-      if (new RegExp(`(^|[\\\\/\\s"'])${escapeRe(script)}\\.mjs\\b`).test(cmd)) hits.push({ service, act: `${script}.mjs`, quiet: false });
-    }
-    for (const { re, service, quiet } of [...OUTWARD_COMMANDS, ...cfg.outwardCommands]) {
-      const hit = cmd.match(re);
-      if (hit) hits.push({ service, act: hit[0].trim().replace(/^[;&|("']+/, ''), quiet: Boolean(quiet) });
+    for (const seg of shellSegments(cmd)) {
+      if (seg.dry) continue;
+      for (const [script, service] of Object.entries(cfg.outwardScripts)) {
+        if (new RegExp(`(^|[\\\\/\\s"'])${escapeRe(script)}\\.mjs\\b`).test(seg.text)) hits.push({ service, act: `${script}.mjs`, quiet: false });
+      }
+      for (const { re, service, quiet } of [...OUTWARD_COMMANDS, ...cfg.outwardCommands]) {
+        const hit = seg.text.match(re);
+        if (hit) hits.push({ service, act: hit[0].trim().replace(/^[;&|("']+/, ''), quiet: Boolean(quiet) });
+      }
     }
     return hits.find((h) => !h.quiet) || hits[0] || null;
   }

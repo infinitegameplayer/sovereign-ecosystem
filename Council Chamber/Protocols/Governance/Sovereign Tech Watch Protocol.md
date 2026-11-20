@@ -74,7 +74,7 @@ Starter list: add, remove, or replace as your ecosystem evolves.
 |------|----------------|---------------|
 | github.com/affaan-m/ECC | Claude Code hooks, skills, commands, MCP patterns, cost optimization, agentic engineering. Formerly affaan-m/everything-claude-code, renamed upstream; the old URL redirects. | [not yet reviewed] |
 | github.com/Crosstalk-Solutions/project-nomad | Offline-first local knowledge server: Ollama (local LLM), Qdrant (vector search), Kiwix (reference library), offline maps, document OCR/RAG | [not yet reviewed] |
-| github.com/kepano/obsidian-skills | Obsidian-native agent skills by vault creator (Steph Ango). Candidates worth watching: obsidian-bases, json-canvas, defuddle. MIT license. | [not yet reviewed] |
+| github.com/obsidianmd/obsidian-skills | Obsidian-native agent skills by vault creator (Steph Ango). Candidates worth watching: obsidian-bases, json-canvas, defuddle. MIT license. | [not yet reviewed] |
 | github.com/hesreallyhim/awesome-claude-code | Curated Claude Code catalog (skills, hooks, slash commands, MCP servers, clients). CC BY-NC-ND 4.0, reference use only, no commercial derivatives. | [not yet reviewed] |
 | github.com/czlonkowski/n8n-mcp | MCP server bridging Claude and n8n workflow automation. 1,084 indexed nodes, 2,709 templates. Relevant if you adopt n8n as an automation layer. MIT license. | [not yet reviewed] |
 | github.com/shanraisshan/claude-code-best-practice | Comprehensive Claude Code feature examples: commands, subagents, skills, hooks. 18,000+ stars. Updated in real time as Claude Code ships new versions. | [not yet reviewed] |

@@ -11,7 +11,8 @@
 // `find Scriptorium -delete` no longer pass for lack of a .md in the command.
 //
 // Allowed: node_modules anywhere (regenerable), anything outside the vault,
-// a path built at run time (a variable or $(...)), a search or print that only
+// a path built at run time (a variable or $(...)) whose literal text names no
+// container and does not end in the vault's own folder name, a search or print that only
 // mentions a delete verb, a commit message or echo text that names a delete,
 // a dry run, and the same container names in a different repo (the session cwd
 // sits outside the vault).
@@ -29,7 +30,7 @@
 // a Floor guard resolves no verdict toward refusal.
 //
 // Known limits, named so nobody reads silence as coverage: a path built at run
-// time, a delete fed by a pipe (xargs rm, Get-ChildItem | Remove-Item), a
+// time whose literal text names no container (rm -rf "$X"), a delete fed by a pipe (xargs rm, Get-ChildItem | Remove-Item), a
 // string passed to an interpreter script as an argument, and a file sitting
 // directly in the vault root.
 //
@@ -103,9 +104,12 @@ function containerDelete(cmd, cwd, escapes) {
       targets = operands(words.slice(1));
     } else if (head === 'git') {
       let i = 1;
-      while (i < words.length && /^(-C|-c|--git-dir|--work-tree)$/.test(words[i])) {
+      // Every global option before the subcommand is skipped, not only the four
+      // that take a separate value: --git-dir=x, --no-pager, -P and the rest used
+      // to end the loop and hide the rm after them (v3.24.0).
+      while (i < words.length && words[i].startsWith('-')) {
         if (words[i] === '-C' && words[i + 1]) at = resolvePath(at, words[i + 1]);
-        i += 2;
+        i += /^(-C|-c|--git-dir|--work-tree|--namespace|--config-env)$/.test(words[i]) ? 2 : 1;
       }
       const rest = words.slice(i + 1);
       if (words[i] === 'rm') targets = operands(rest);
@@ -294,7 +298,17 @@ function globHitsContainer(component) {
 
 // True when target, resolved from cwd, lands in a container or on the vault root.
 function inContainer(cwd, target) {
-  if (!target || /[$%]/.test(target)) return false;   // unresolvable at read time
+  if (!target) return false;
+  // A path built at run time cannot be resolved, so it is judged by its literal
+  // text: a container named as a whole path part, or a path ending in the vault
+  // folder's own name, is refused. A bare "$X" names neither and passes, a
+  // named limit (v3.24.0).
+  if (/[$%]/.test(target)) {
+    const lit = String(target).replace(/\\/g, '/').replace(/["']/g, '').replace(/\/+$/, '');
+    const vaultName = VAULT.split('/').pop().toLowerCase();
+    if (vaultName && lit.toLowerCase().endsWith('/' + vaultName)) return true;
+    return lit.split('/').some((part) => CONTAINERS_LC.includes(part.toLowerCase()));
+  }
   const full = resolvePath(cwd, target);
   if (/(^|\/)node_modules(\/|$)/i.test(full)) return false;
   const fullLc = full.toLowerCase();

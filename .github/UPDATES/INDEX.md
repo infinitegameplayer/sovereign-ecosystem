@@ -6,6 +6,7 @@ Run the Ecosystem Update Check Skill to discover which updates apply to your bui
 
 | Date | Type | Optional | Slug | Title |
 |---|---|---|---|---|
+| 2026-11-19 | core | no | v3.24.0-every-spelling-counts | v3.24.0 Every Spelling Counts. The Delete Gate Reads Every Git Option and Every Variable Path, a Dry Run Excuses Only Itself and Every .env Is Closed |
 | 2026-11-12 | core | no | v3.23.0-the-lessons-travel | v3.23.0 The Lessons Travel. What the Source Vault Learned About Honesty, Practice and Its Own Tools Since October |
 | 2026-11-11 | core | no | v3.22.0-the-warnings-arrive | v3.22.0 The Warnings Arrive. Three Hooks Speak Where the AI Reads, and the Encoding Check Sees Real Damage |
 | 2026-11-03 | core | no | v3.21.0-every-fix-can-arrive | v3.21.0 Every Fix Can Arrive. The Update Script Can Deliver the Gate, and Two Skills Keep Their Rules After a Compaction |
