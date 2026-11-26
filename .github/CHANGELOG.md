@@ -2,7 +2,23 @@
 
 All updates to the Sovereign Ecosystem are recorded here, newest first.
 
-Each entry corresponds to one publish cycle. For full implementation details, see the matching file in `UPDATES/`.
+Each entry corresponds to one publish cycle. For full implementation details, see the matching file in `.github/UPDATES/`.
+
+---
+
+## v3.26.0, 2026-11-25
+
+The Channel Opens.
+
+**If you installed any version before this one, apply this update by hand. Your Ecosystem Update Check cannot show it to you.** The skill fetched a branch and a folder that never held the updates, and halted on a 404 every time it ran. No update has reached a vault through it. And if your agent fetches web pages with the Playwright skill, its fetcher would read `localhost`, your router and cloud metadata addresses when a page handed it one.
+
+- **The Update Check reaches its updates.** The right branch and folder, a fetch that fails loudly on a missing page, and a CI step that checks every upstream address the template ships.
+- **An update can say it is already in your vault,** through a Detection section the Update Check runs first. This release carries the first one.
+- **The browser fetcher refuses your machine and network:** local names, loopback, private, link-local, CGNAT and metadata addresses, on the URL, after DNS and on every request. `--allow-private` opens it for a local site. 36 planted cases; CI fires the 26 that need no browser.
+- **The trust anchor is 183 lines, from 278.** Claim Integrity lives in full in Governance Principles (with a new face, the outward reach), the Pending Plan rules load only when a session touches a plan, and the cross-model questions have their own codex. Two sections that described the template wrongly now describe it as it is.
+- General practice from the source vault: Source Harvest reads a repo's agent files as intake, the Weekly Story saves on approval in your own words, Researcher labels how each quote was read, and more. 28 serial commas removed.
+
+Full detail and the implementation spec: `.github/UPDATES/2026-11-25-v3.26.0-the-channel-opens.md`.
 
 ---
 

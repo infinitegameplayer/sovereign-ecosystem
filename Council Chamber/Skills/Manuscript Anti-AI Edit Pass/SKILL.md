@@ -1,6 +1,6 @@
 ---
 name: manuscript-anti-ai-edit-pass
-description: Use when a long-form manuscript (book chapter, ebook, multi-chapter playbook, long-form digital product) needs an editing pass to identify and remove AI writing tells against the Anti-AI Writing Patterns Codex. Triggered by the Sovereign after draft completion, by a Pending Plan handover map naming this skill at the edit phase, or by any post-draft state where AI-assisted prose needs the anti-pattern sweep before final review.
+description: Use when a long-form manuscript (book chapter, ebook, multi-chapter playbook, long-form digital product) needs an editing pass to identify and remove AI writing tells against the Anti-AI Writing Patterns Codex. Triggered by the Sovereign after draft completion, by a Pending Plan handover map naming this skill at the edit phase or by any post-draft state where AI-assisted prose needs the anti-pattern sweep before final review.
 status: active
 tier: foundational
 contrast_tier: 1
@@ -218,6 +218,8 @@ Output: edit application log, with file:line of every change applied.
 **Step 15. Verification Pass.**
 
 Re-run a lightweight version of Steps 3, 5, 7 and 10 against the edited manuscript. Goal: confirm fixes landed and did not introduce new tells. Replacement sentences should not themselves contain em dashes, Oxford commas or new AI tics.
+
+**Fact preservation.** Diff the pre-edit and post-edit text for every quotation, number and proper name. Each one survives unchanged, or its change is listed in the edit packet for the Sovereign with the reason. An anti-AI pass is the same kind of tool as a text humanizer and carries the same risk of altering or dropping such a unit. A unit that changed without a listed reason fails the pass.
 
 If verification surfaces new findings, loop back to Step 12 with a second-pass edit packet (typically much smaller than the first).
 

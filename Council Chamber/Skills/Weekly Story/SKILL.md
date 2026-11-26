@@ -14,7 +14,9 @@ cadence: weekly (Fridays primary, Saturdays backup)
 
 **Output:** Story file at `Scriptorium/Weekly Stories/YYYY-MM-DD - [Title].md`
 
-**Hard gate:** Sovereign must explicitly confirm ("Save it" or equivalent) before the file is written.
+**Hard gate:** the file is written only once the Sovereign approves the story in their own words ("looks good", "let's proceed", "save it" and the like). No magic phrase. Hold the save only while they are asking for changes or asking a question.
+
+**The story runs whole.** Every step runs in full whatever the clock says. Skipping, shortening or compressing a worker, a continuity read or a step is never a silent judgment call. When a step may not fit, ask whether to continue now or after.
 
 ---
 
@@ -78,8 +80,8 @@ Present the full story text to the Sovereign, frontmatter included.
 Do not write the file yet.
 
 Sovereign responds with one of:
-- "Save it" (or equivalent) → proceed to Step 5
-- Edits or requests for revision → revise and re-present
+- Approval in their own words ("looks good", "let's proceed", "save it" and the like) → proceed to Step 5
+- Edits, requests for revision or a question → revise or answer, then re-present
 - Decline → hold, do not write
 
 ---
@@ -96,7 +98,7 @@ On approval:
 
 ## Planning Mode Rule
 
-Status is `active`. Authorized to generate and present without additional approval gates. The only hard gate is Step 4. Sovereign must explicitly confirm before the file is written.
+Status is `active`. Authorized to generate and present without additional approval gates. The only hard gate is Step 4. The Sovereign's approval in their own words is the confirmation before the file is written.
 
 ---
 

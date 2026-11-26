@@ -63,6 +63,8 @@ Scope: One Quest note per update session, including standalone Quest updates and
 12. Apply Updates
    - Update the Quest note after approval.
 
+The skill owns one completion step this protocol does not repeat: 7b (the Completion Reading when status becomes `completed`). See [[Council Chamber/Skills/Quest Progress Update/SKILL]].
+
 ## Recommended Question Set (Minimum)
 - What happened in the real world since the last Quest update?
 - What did you do that moved this Quest forward?

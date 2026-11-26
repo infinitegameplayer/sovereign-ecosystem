@@ -23,6 +23,10 @@ Sovereign-triggered anytime. Quarterly is the default maintenance expectation fo
 
 ## What to Review
 
+**Step 0: What the machine runs, against what the record says**
+
+Before any lane goes out, read the installed state and diff it against this protocol's rows: plugin versions and their last-updated dates (`~/.claude/plugins/installed_plugins.json`), the hooks each plugin registers (its `hooks/hooks.json` in the plugin cache, beside the prior version's when both are cached) and the Claude Code build (`claude --version` and the editor extension folder). Anything the machine runs that the record does not name goes first in the report, read at the local cache rather than through a web lane. Updates arrive without asking, so only this read finds a plugin that moved overnight or a hook added to every tool call.
+
 **Step 1: Watched Repos**
 
 For each repo in the Watched Repos table below, check changelogs or recent commits since the last review date. Surface new patterns, hook types, MCP tools, skills or workflow templates added since the last check.
@@ -64,11 +68,11 @@ Proposed changes are presented to Sovereign before writing. No automatic status 
 
 ## Ambassador Doctrine
 
-This protocol operates under the [[Council Chamber/Protocols/Governance/Ambassador Doctrine]]. Sovereign Tech Watch is a pure Āsana practice. It observes, classifies, and defers. No external action is taken. Intelligence returns to the Sovereign before any adoption decision moves forward.
+This protocol operates under the [[Council Chamber/Protocols/Governance/Ambassador Doctrine]]. Sovereign Tech Watch is a pure Āsana practice. It observes, classifies and defers. No external action is taken. Intelligence returns to the Sovereign before any adoption decision moves forward.
 
 ## Watched Repos
 
-Starter list: add, remove, or replace as your ecosystem evolves.
+Starter list: add, remove or replace as your ecosystem evolves.
 
 | Repo | What it covers | Last reviewed |
 |------|----------------|---------------|

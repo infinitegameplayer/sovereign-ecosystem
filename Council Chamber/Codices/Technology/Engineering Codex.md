@@ -58,7 +58,7 @@ This is the fix for a real drift: handing the Sovereign implementation detail th
 
 **Deferred to Follow-Up Work.** Tangential "while we're here" ideas go to their own subsection. Never into an active unit. This is the compound-opportunity sweep, applied at plan time.
 
-**A fence counts every door.** A plan that keeps a category of content inside one room lists every way the content could leave it before naming the check: each route that reads it, each prompt the system builds out of stored rows, and each write that a later session loads. An edit that answers with the body is a read. The category's mark lives on the rows that hold the content, set when they are written, never looked up through a link that can dangle once its parent is deleted.
+**A fence counts every door.** A plan that keeps a category of content inside one room lists every way the content could leave it before naming the check: each route that reads it, each prompt the system builds out of stored rows and each write that a later session loads. An edit that answers with the body is a read. The category's mark lives on the rows that hold the content, set when they are written, never looked up through a link that can dangle once its parent is deleted.
 
 ## II. Build
 
@@ -74,13 +74,31 @@ This is the fix for a real drift: handing the Sovereign implementation detail th
 
 The gate: **do not write the test and the implementation in the same step, and never skip watching the new test fail for the expected reason before implementing.** A test written after the code, to match the code, proves only that the code is the code.
 
+**The reasons to skip the gate, answered.** Each line on the left is a reason an agent gives itself for writing the code first. Each answer holds the gate.
+
+| The reason given | The answer |
+|---|---|
+| "Too simple to test." | Simple code breaks. The test takes a minute. |
+| "I'll test after." | A test written after passes the first time it runs, so it was never seen to catch anything. It may test the code instead of the behavior. |
+| "Tests after reach the same goal." | A test written after asks what the code does. A test written first asks what it should do. The first checks the cases remembered; the second finds the ones not yet thought of. |
+| "I already tried it by hand." | A hand check leaves no record of what it covered and cannot rerun when the code changes. "It worked when I tried it" covers one path once. |
+| "Deleting this work wastes the time spent." | The time is spent either way. The choice is code proven by a test that failed first, or code nobody can trust with tests bolted on. Keeping untrusted code is the waste. |
+| "I'll keep it as a reference and write the test first." | The reference gets adapted, which is testing after. Delete it. Git keeps it. |
+| "I need to explore first." | Explore, then throw the exploration away and start from the failing test. |
+| "This is hard to test." | Hard to test means hard to use. The test is reporting on the design. |
+| "Test-first is slower." | It catches the bug before the commit and lets the code change later without fear. The shortcut is debugging in production, which is slower. |
+| "The existing code has no tests." | The change is improving it. Add tests for the existing behavior it touches, and the new test arrives with the change. |
+| "The suite is already green." | A green suite proves only what it tests. A new branch of logic with no test that failed first is uncovered, however green the run. |
+
+**The stop signs.** Code written before its test, a new test that passes the first time it runs, a failure nobody can explain or "this case is different" each mean one thing: delete the code and start again from a failing test. Git keeps what was deleted, so nothing is lost but the shortcut. The one door out is option 5 above, the recorded no-test exception, chosen before the edit and never after it.
+
 **The two-hop trace.** Before calling a task done, trace two levels out. What fires when this runs? Callbacks, middleware, event handlers, webhooks. Do the tests exercise the real chain or only a mock? Can a failure leave orphaned state? This catches the class of bug a small server runner produces most: state left half-updated after a failed external call.
 
 **Bounded worker packets.** Never dispatch "read the whole plan" as a worker prompt. Each worker receives the goal capsule, the definition of done, its one unit's section and the cited excerpts. Nothing more.
 
 **Evidence is non-reconstructable.** A worker reports its changed files AND its verification evidence, because the evidence fields cannot be recovered from the tree afterward. A worker that omits them forces the orchestrator to guess, and a guessed "tests passed" is a fabricated claim. This is Claim Integrity at the worker boundary.
 
-**The parallel safety check.** File overlap is necessary and insufficient. Also serialize on contention that no `Files:` list shows: shared types, database migrations, generated artifacts, lockfiles, and environment singletons (one dev server, one port, one database, one browser session). Cap concurrency at three to five workers. Over-parallelizing costs more in merge and integration than it saves.
+**The parallel safety check.** File overlap is necessary and insufficient. Also serialize on contention that no `Files:` list shows: shared types, database migrations, generated artifacts, lockfiles and environment singletons (one dev server, one port, one database, one browser session). Cap concurrency at three to five workers. Over-parallelizing costs more in merge and integration than it saves.
 
 **The incremental commit heuristic.** Can you write a commit message describing a complete, valuable change? Commit. Would the message be "WIP" or "partial X"? Wait. Commit before switching context and before attempting anything risky.
 
@@ -223,6 +241,8 @@ The vault stays canonical. The repo anchor is a local mirror of ratified decisio
 
 The failure this prevents: a ratified ceiling that exists only in a document the working agent never loads is not a ceiling. It is a wish.
 
+**An anchor stays under 200 lines.** The Claude Code docs set the target, because longer files cost context and lower adherence. An `@import` saves nothing, since the imported file loads with its importer, and a rule file without `paths:` loads every session just as the anchor does. An anchor gets shorter by moving each rule to where it is used (a `paths:`-scoped rule file in `.claude/rules/`, a skill) and by moving a rule's full statement to its canonical home while the anchor keeps one line pointing there. The vault's own `.claude/CLAUDE.md` follows this rule: Claim Integrity lives in full in Governance Principles and the Pending Plan rules in `.claude/rules/pending-plans.md`. The same docs keep a skill whole through a compaction only up to its first 5,000 tokens, so a skill's binding steps and constraints come first and its log comes last or lives in a file beside it.
+
 **In someone else's repo, work in their toolchain.** A collaborator's repo often exports the owner's own setup (its `CLAUDE.md`, the plugins its `.claude/settings.json` turns on) so a second agent works the way theirs does. That parity is the point. Wherever your side differs from it, the gap is the first place to look. Run the reviewer they will run, before they run it, and answer its findings in their shape. Bring design work in the shape and folder their agent reads.
 
 ## VIII-b. Upgrade
@@ -325,6 +345,8 @@ Whether the session orchestrator does the work itself or dispatches it. This ans
 Failure modes most tied to this fork: Summary collapse (careless dispatch) and Self-agreement as consensus (over-trusted inline self-review), both in IX.
 
 **Parallel workers write scratch files under their own subfolder** (`scratchpad/<worker>/`), never the shared scratchpad root. Two parallel workers sharing one root can overwrite each other's scripts, and one can run the other's script against the wrong file. The orchestrator names the subfolder in each worker's brief.
+
+**A heavy skill that works from a file runs in its own session.** A run's cost is the conversation it inherits, re-read on every reply, more than the skill's own text. A skill whose input sits in a file (a batch, a plan, a transcript) opens fresh from a paste-ready opener that names the file. A skill that draws on the conversation itself, the way social drafting draws on the Sovereign's words from the article's engagements, stays where those words are. When work inside a session turns into a build, the build gets its own session.
 
 ## Verification Loops
 

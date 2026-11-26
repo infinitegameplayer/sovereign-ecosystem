@@ -49,6 +49,8 @@ Separate workers that read the open web from workers that read your private file
 
 Report-to-file dispatch: a worker with long findings writes them to a file and returns the path plus a short gist. A web worker with no file access returns its claims inline, and you write the file.
 
+A background worker's task output file can be empty (0 bytes) even when its report arrived in full through the hand-back. Write each worker's findings into the saved report from the hand-back itself, and check a file's size before treating it as a source.
+
 **Phase 3: Synthesize**
 
 Aggregate all worker outputs into a single structured report.
@@ -82,6 +84,8 @@ Date: [YYYY-MM-DD]
 **Phase 4: Verify**
 
 Before presenting, check the claims the report rests on against current files and repos. Report anything unchecked as unverified, never as fact.
+
+A quote the report leans on is verified to the end of its sentence, since a cut sentence can reverse its sense. Every quote carries how it was read: "verified" (a page reader or checker confirmed it, listed in a verification record filed beside the report) or "worker extract". A page reader's hand-back is written to that record in the same session, since it exists only inline.
 
 **Phase 5: Save and present**
 

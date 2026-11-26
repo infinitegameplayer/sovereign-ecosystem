@@ -12,7 +12,7 @@ Purpose: Close a session fast, leave the breadcrumbs that future review actually
 
 The durable trail already lives in three places: the git commit body (the backward record of what the session did), archived vault artifacts (plans, codices, their activity logs) and governance breadcrumbs annotated where each change happened. The Primer carries the forward handoff. Closeout feeds those trails. It does not duplicate them.
 
-Trigger: a session that made commits or governance-level changes. **Skip rule:** a small session that only saves, files or commits one reference note closes with the commit alone, with no full Session Closeout.
+Trigger: a session that made commits or governance-level changes. **Skip rule:** a small session that only saves, files or commits one reference note closes with the commit alone, with no full Session Closeout. **On a short session that made a commit or two and no governance change, offer the close in one line at the end and run it only on the Sovereign's yes.** A longer session or one with governance changes closes in full, unasked.
 Inputs: what shipped, what got touched, what comes next.
 Outputs: breadcrumbs in the artifacts touched, a refreshed Primer, a light-touch Sovereign Command, a commit with a readable body.
 Related Protocols/Codices: [[Council Chamber/Protocols/Session/Session Closeout Protocol]] (doctrine; this skill is operational authority), [[Council Chamber/Skills/Autonomous Improvement Session/SKILL]].

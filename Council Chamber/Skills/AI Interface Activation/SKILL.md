@@ -33,6 +33,7 @@ Constraints:
 - Before asking the Sovereign for a source or re-processing one (a transcript, a partner site, a shared file), search the vault and prior sessions for the saved copy. A ruling the Sovereign already gave is never re-asked: search the session and the Decision Journal first.
 - A standing ruling is read with discernment, not followed blindly. When the world has moved (better information, a new platform, a changed process) and a ruling now limits the work, raise it with the evidence rather than re-asking it bare.
 - When the Sovereign says they are leaving, the work that can run without them goes first in the session. Decisions that need them wait until they return.
+- If the opening prompt names a model and the session runs on another, say so in one line in the first reply, before any work. The session's own model is in the system context, so this needs no file read.
 
 ## Steps
 1. Load required governance documents.

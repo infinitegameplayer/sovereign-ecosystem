@@ -54,7 +54,7 @@ You need five things before you begin.
 
 **Node.js**: the runtime for this vault's scripts and the guard hooks that protect your files. Claude Code no longer installs it for you, so install the LTS version from [nodejs.org](https://nodejs.org) and confirm `node -v` prints a version. The guards refuse shell commands when they cannot reach Node, so a missing install shows up as a clear message rather than a silent gap.
 
-**Git**: version control tool used by the Ecosystem Update Check skill to fetch updates and by the scripts folder if you use the backup automation. Most Mac and Linux users already have it. Windows users can download it at [git-scm.com](https://git-scm.com) or install [GitHub Desktop](https://desktop.github.com) for a GUI version.
+**Git**: version control tool used by the update script (`se-update.mjs`) to compare your files with this repo and by the scripts folder if you use the backup automation. Most Mac and Linux users already have it. Windows users can download it at [git-scm.com](https://git-scm.com) or install [GitHub Desktop](https://desktop.github.com) for a GUI version.
 
 **A GitHub account**: free at [github.com](https://github.com). Needed if you want to receive notifications when new ecosystem updates are published, or if you eventually want to publish your own version. Not required to complete the Foundation build.
 
@@ -177,6 +177,8 @@ The Sovereign Ecosystem is a living template. New modules, refinements and impro
 
 **Running the update check:**
 Use the Ecosystem Update Check Skill from inside your vault. Your AI will fetch the current update index, show you what is new and help you apply only what fits your build. Nothing is applied without your approval.
+
+**If you installed before v3.26.0:** your copy of that skill fetched an address that never held the updates, and it halted on every run. Read `.github/CHANGELOG.md` from your version forward and apply v3.26.0 by hand (`.github/UPDATES/2026-11-25-v3.26.0-the-channel-opens.md`), or run `node "Council Chamber/scripts/se-update.mjs" --check`, which compares your framework files with this repo and always worked.
 
 **Ambient reminder:**
 Your CLAUDE.md is set to notice if you have not checked for updates in more than 30 days. Your AI will mention it lightly at the start of a session. No alarm. Just a signal.

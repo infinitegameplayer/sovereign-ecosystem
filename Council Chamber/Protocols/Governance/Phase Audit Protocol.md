@@ -17,7 +17,7 @@ Run a Phase Audit when:
 - A significant governance document or codex has been finalized and a Gemini challenger pass was not run during creation
 - You want a full-sweep review of accumulated outputs before a strategic pivot
 
-Do not run for: operational outputs, scripts, sync results, logs, or single-session incremental work.
+Do not run for: operational outputs, scripts, sync results, logs or single-session incremental work.
 
 ---
 
@@ -32,7 +32,7 @@ Run two passes concurrently in a single message (parallel subagents).
 **Scope:** Read all output artifacts for the phase sequence in full. Work through a structured checklist covering:
 - Expression standard compliance (no em dashes, no Oxford commas, positive framing)
 - Attribution and citation completeness (all claims sourced; stats have inline citations)
-- Cross-reference accuracy (wikilinks, file paths, and session labels in the master plan match actual state)
+- Cross-reference accuracy (wikilinks, file paths and session labels in the master plan match actual state)
 - Output artifact existence (every artifact listed in the plan's Output Artifacts table exists at its stated path)
 - Forward obligations (every "Phase N will..." or "upgrade pending" reference is captured in an existing Pending Plan or named breadcrumb)
 - Deferred items (every deferral has a named destination, not just "later")
@@ -40,6 +40,8 @@ Run two passes concurrently in a single message (parallel subagents).
 **Output format:** numbered findings list. Each finding: item description, file + location, severity (fix-in-session / defer), recommended action.
 
 ### Pass 2: Gemini Challenger Pass
+
+**Pass 2 does not run on material whose identifiers must not reach a third party.** A free-tier outside-model key may let the provider's human reviewers read the input. A plan whose outputs carry sensitive identifiers, legal or financial instruments or the names of private people runs Pass 1 alone and names the reason in its Outcome. It takes an outside read another way.
 
 **Method:** Call your configured Gemini interface tool with the full text of the primary strategic documents inline.
 
@@ -62,7 +64,7 @@ After both passes return:
    - **Fix in session:** small, clear, low-risk (expression standard violations, missing inline citations, minor phrasing issues)
    - **Defer:** structural, requires operator decision, or belongs to a future phase (name the destination phase and add to the master plan breadcrumbs)
 3. Apply all in-session fixes directly
-4. Add a breadcrumb to the master plan: "Phase X Audit complete" with findings summary, fixes applied, and phase-tagged deferred context
+4. Add a breadcrumb to the master plan: "Phase X Audit complete" with findings summary, fixes applied and phase-tagged deferred context
 
 ---
 
@@ -89,7 +91,7 @@ Every audit includes a dedicated expression standard scan on all prose documents
 
 Phase Audit findings and outcomes are recorded in two places:
 
-1. **Master plan breadcrumbs:** "Phase X Audit complete" entry with fixes, deferred items, and phase-tagged context for forward phases
+1. **Master plan breadcrumbs:** "Phase X Audit complete" entry with fixes, deferred items and phase-tagged context for forward phases
 2. **Audited document Refinements section:** only if a finding represents a recurring structural pattern or blind spot. One date-stamped entry. Not a findings transcript.
 
 ---

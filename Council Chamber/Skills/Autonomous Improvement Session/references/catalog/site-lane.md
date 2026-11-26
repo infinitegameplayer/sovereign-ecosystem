@@ -15,3 +15,5 @@ When active, this is a third execution surface distinct from Acts (vault edits l
 **The climb.** A class with a clean track record of merged PRs and zero breakage climbs one ratified step at a time: propose to auto-PR (the Sovereign merges) to auto-merge on green build. Every climb passes the Flywheel Three Laws coherence check.
 
 **Class registry.** Each class carries: the finding type it serves, the exact edit shape, the build-verification command, the PR-title convention and its current rung (propose, auto-PR or auto-merge). The class registry is empty at template initialization. Add classes as your ecosystem earns them through the climb.
+
+**Build in the worktree from a fresh `npm ci`.** A bundler may refuse a `node_modules` junction pointing back to the main checkout, so a junctioned worktree build fails on the link and says nothing about the change.

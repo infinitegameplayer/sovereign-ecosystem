@@ -42,6 +42,10 @@ Run these gates before Step 1. All must pass before execution begins.
    **Skill Handover Map.** Before executing, scan the plan for a `## Skill Handover Map` section. If present, treat it as canonical phase-by-phase orchestration. For each named phase, invoke the specified skill with the context payload the map provides, and capture output before advancing to the next phase. Plans without a Skill Handover Map execute normally through the steps below.
 
    **Archival discipline.** When the plan includes a file archival step, never write a new copy and delete the original as two separate operations. Move or rename directly. `rm` commands are for actual deletions only, not for clearing a replaced copy.
+
+   **Edit discipline.** Edit failures come from a stale Read or a thin `old_string`. Read the exact region right before each Edit, and give `old_string` enough surrounding context to be unique.
+
+   **A just-written agent type is not dispatchable in the session that wrote it.** The agent registry loads at session start. A plan step that dispatches a just-written agent type runs in the next session, or uses a general-purpose agent with the agent file's text as its brief.
 5. Update `Evidence / Implementation Refs` and `Implementation Outcome (This Run)`.
 
    **Plan-alignment check (every run that changed files).** Before writing the Outcome, dispatch one fresh Sonnet agent (`model: "sonnet"`) with three inputs: the plan's `Approved Execution Scope (This Run)`, its `Proposed Changes` and `Design Decisions`, and the run's diff from the starting commit recorded in Step 2 (plus any uncommitted changes). It asks the question of [[Council Chamber/Skills/PR Code Review/SKILL]] Lens 6: **does this implementation match the plan that authorized it, and where it deviates, is the deviation a justified improvement or a quiet departure?** It uses the same four verdicts (problematic departure, unimplemented scope, unplanned addition, justified improvement), the same two-sided quoting and the same absence rule. Pass it the Agent 6 text from that skill verbatim.

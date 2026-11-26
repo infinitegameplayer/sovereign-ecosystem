@@ -144,6 +144,21 @@ jobs:
       - name: Update script reports renames, edits and no-change
         run: node "Council Chamber/scripts/se-update-selftest.mjs"
 
+      # Every upstream address an installed vault is told to fetch must exist. Through
+      # v3.25.0 the Ecosystem Update Check fetched a branch and a folder that never held
+      # the updates, and no step here ever read an address.
+      - name: Update channel checker positive control
+        run: node "Council Chamber/scripts/update-channel-check.mjs" --selftest
+
+      - name: Every upstream address points at a file this repo ships
+        run: node "Council Chamber/scripts/update-channel-check.mjs"
+
+      # The browser skill's fetcher refuses local, private and cloud-metadata
+      # addresses. The offline group needs no browser; the full suite (a local
+      # canary, redirects) runs where Playwright is installed.
+      - name: Browser fetcher address guard positive control
+        run: node "Council Chamber/Skills/Playwright/scripts/guard-plants.mjs" --offline
+
       # A shipped file the manifest does not name is a user file, and --apply
       # refuses every fix to it. Through v3.20.0 the Outward Gate was one. Upstream
       # only: an installed vault's own skills and scripts are user files by design.

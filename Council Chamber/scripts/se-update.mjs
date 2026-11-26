@@ -280,7 +280,7 @@ function printChangeList(classChanges) {
     console.log(`  > ${from} -> ${to}  [renamed in upstream]`);
   }
   if (classChanges.renamed.length > 0) {
-    console.log('    A rename: rename your own copy and update links to it, so your content travels with it. The UPDATES/ note for the release says how.');
+    console.log('    A rename: rename your own copy and update links to it, so your content travels with it. The .github/UPDATES/ note for the release says how.');
   }
 }
 

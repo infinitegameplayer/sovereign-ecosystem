@@ -12,6 +12,7 @@ Purpose: Map the codices currently shipped in the Sovereign Ecosystem Foundation
 - [[Council Chamber/Codices/Contrast Layer Codex]]
 - [[Council Chamber/Codices/Conduction Codex]]
 - [[Council Chamber/Codices/Humor Codex]]
+- [[Council Chamber/Codices/Cross-Model Perspectives Codex]]. The four standing questions for reaching another AI substrate at a decision-density moment, the sanitization rule and consult durability. The trust anchor carries its trigger phrase.
 
 ## Expression
 - [[Council Chamber/Codices/Expression/Writing Style Codex]]. Placeholder, complete during onboarding.

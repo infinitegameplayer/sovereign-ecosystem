@@ -27,10 +27,12 @@ Status: active
 Fetch the current update index from the public repo:
 
 ```
-curl -s https://raw.githubusercontent.com/infinitegameplayer/sovereign-ecosystem/main/UPDATES/INDEX.md
+curl -fsSL https://raw.githubusercontent.com/infinitegameplayer/sovereign-ecosystem/master/.github/UPDATES/INDEX.md
 ```
 
-If the fetch fails, surface the error and halt: "Could not reach the Sovereign Ecosystem repo. Check your internet connection and try again."
+The repo's branch is `master` and the updates live in `.github/UPDATES/`. `-f` makes a missing page an error rather than a page reading "404: Not Found", so a broken address cannot pass for an empty index.
+
+If the fetch fails, surface curl's own error line and halt. A 404 means the address is wrong, not your connection: "Could not read the update index ([curl's error]). Check https://github.com/infinitegameplayer/sovereign-ecosystem/releases for the latest release, and report the broken address as an issue on the repo." Any other error: "Could not reach the Sovereign Ecosystem repo ([curl's error]). Check your internet connection and try again."
 
 Read the local sync state file at `Council Chamber/Skills/Ecosystem Update Check/sync-state.json`.
 
@@ -53,11 +55,15 @@ If no new updates are found: report "No new updates since your last check ([last
 
 ### Step 2: Present New Updates
 
-For each new update, fetch the full update file:
+For each new update, fetch the full update file. Its name is the row's Date and Slug joined by a hyphen:
 
 ```
-curl -s https://raw.githubusercontent.com/infinitegameplayer/sovereign-ecosystem/main/UPDATES/[slug].md
+curl -fsSL https://raw.githubusercontent.com/infinitegameplayer/sovereign-ecosystem/master/.github/UPDATES/[date]-[slug].md
 ```
+
+For the index row `| 2026-11-19 | core | no | v3.25.0-the-fence-counts-every-door | ... |` that is `.github/UPDATES/2026-11-19-v3.25.0-the-fence-counts-every-door.md`. A failed fetch is named for that update and the others still present.
+
+**Detection.** If the update file has a `## Detection` section, run the check it gives before presenting the update. When it reports the change already present in this vault (for example because a later `se-update.mjs --apply` brought the file in), present the update as "Already in your vault" with its Detection output, and record it on approval without running its steps. When the check reports the change absent, or the file has no Detection section, present it as below. Detection reads; it never changes a file.
 
 Present each update in this format:
 

@@ -1,7 +1,7 @@
 {
   "_comment": "Sovereign Ecosystem Framework Manifest. Classifies every repo path into framework, seeded or user. Default rule: any path not matched by a pattern below is class 'user' and is never touched by upstream updates.",
-  "_version": "1.4.0",
-  "_updated": "2026-11-19",
+  "_version": "1.5.0",
+  "_updated": "2026-11-25",
   "default_class": "user",
   "classes": {
     "framework": {
@@ -43,6 +43,7 @@
         "Council Chamber/Codices/Codices Index.md",
         "Council Chamber/Codices/Conduction Codex.md",
         "Council Chamber/Codices/Contrast Layer Codex.md",
+        "Council Chamber/Codices/Cross-Model Perspectives Codex.md",
         "Council Chamber/Codices/Expression/**",
         "Council Chamber/Codices/External Model Routing Codex.md",
         "Council Chamber/Codices/Sovereignty/**",
@@ -65,6 +66,7 @@
         "Council Chamber/scripts/plan-hash.mjs",
         "Council Chamber/scripts/quote-check.mjs",
         "Council Chamber/scripts/decay-lint.mjs",
+        "Council Chamber/scripts/update-channel-check.mjs",
         "Council Chamber/scripts/build-skills-index.mjs",
         "Council Chamber/scripts/link-skills.mjs",
         "Council Chamber/scripts/link-skills-selftest.mjs",
@@ -91,6 +93,7 @@
         "Council Chamber/scripts/framework-manifest.json",
         ".mcp.json.example",
         ".claude/CLAUDE.md",
+        ".claude/rules/pending-plans.md",
         "AGENTS.md",
         ".github/CHANGELOG.md",
         "MODULES.md",

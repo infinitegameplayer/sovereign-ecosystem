@@ -19,7 +19,7 @@ Final blockers in a release are almost never structural. They are export-truth i
 
 ### 1. Export-Truth Audit
 
-Always audit the exported workspace directly. Private-source confidence is not enough. The vault may look clean. The export surface is where corruption, missing links, and encoding issues appear. Start there.
+Always audit the exported workspace directly. Private-source confidence is not enough. The vault may look clean. The export surface is where corruption, missing links and encoding issues appear. Start there.
 
 ### 2. Two-Tier Publish Gate
 
@@ -38,7 +38,7 @@ When in doubt: if it identifies a real person or private system, it does not shi
 
 ### 4. Public-Safe Automation Rule
 
-Ship `*.example` config files. `.gitignore` the live local config. No personal paths, API keys, secrets, or local environment assumptions may appear in any automation artifact included in a public export.
+Ship `*.example` config files. `.gitignore` the live local config. No personal paths, API keys, secrets or local environment assumptions may appear in any automation artifact included in a public export.
 
 Checklist before any script or config ships:
 - [ ] No hardcoded personal file paths
@@ -69,7 +69,7 @@ Ad hoc fixes compound. One deterministic pass is the rule.
 
 Before any publish, verify:
 - [ ] All linked notes in the export resolve (no broken wikilinks or dead references)
-- [ ] README handoffs are complete (links, paths, and instructions work from outside the vault)
+- [ ] README handoffs are complete (links, paths and instructions work from outside the vault)
 - [ ] No hidden assumptions exist inside the exported structure (no "just knows" that only a vault-native reader would understand)
 
 If any item fails: fix before publish, or explicitly document as a known limitation.
@@ -80,7 +80,7 @@ Before any `git push` to a Vercel-linked repo, run a pre-deploy review:
 
 > Review the changes I'm about to push.
 > Check for: bugs and unhandled edge cases, security vulnerabilities (injection, auth gaps, data exposure), performance issues (blocking calls, N+1 patterns), missing error handling, anything that breaks under concurrent load.
-> For each issue: file, line range, problem, and fix.
+> For each issue: file, line range, problem and fix.
 
 Gate: do not push until all severity-high findings are resolved. Severity-low findings may be deferred with a note.
 

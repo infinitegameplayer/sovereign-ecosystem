@@ -11,7 +11,7 @@ Template Status: Placeholder
 
 ## Purpose
 
-Define the creator's preferred writing style for AI collaboration in a way that supports clarity, authenticity, and consistent voice across all output surfaces.
+Define the creator's preferred writing style for AI collaboration in a way that supports clarity, authenticity and consistent voice across all output surfaces.
 
 ## Onboarding Tokens
 
@@ -21,7 +21,7 @@ Define the creator's preferred writing style for AI collaboration in a way that 
 ## Calibration Prompts
 
 1. How would you describe your natural writing voice in three words?
-2. What sentence length feels most natural to you: short and punchy, long and layered, or mixed?
+2. What sentence length feels most natural to you: short and punchy, long and layered or mixed?
 3. What is your relationship to formality: academic, conversational, somewhere in between?
 4. Are there structural patterns you return to: lists, narrative arcs, questions, declarative statements?
 5. What writing do you admire most and why?
@@ -31,6 +31,8 @@ Define the creator's preferred writing style for AI collaboration in a way that 
 ## Style Markers
 
 *Complete these from your answers above or from patterns surfaced in Session 0.5.*
+
+**Familiarity is the bridge.** The ideas often live at a higher paradigm. Simple words and simple stories meet the reader where they already stand and carry them across to it. Keeping the words and the story familiar underneath leaves the paradigm free to be new. Knowing the structure is what frees the texture to be unexpected.
 
 - **Voice:** [fill in]
 - **Sentence rhythm:** [fill in]

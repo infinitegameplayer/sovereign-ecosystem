@@ -32,6 +32,9 @@ So the burden is shared, and here is each half of it.
   ```
   These fire the guards rather than reading them. A guard that has never refused anything is not known to work.
 - **Check `.github/CHANGELOG.md`** against the version you installed, whenever you next open the vault.
+- **Run `node "Council Chamber/scripts/se-update.mjs" --check`.** It compares your framework files with this repo's and names every one that changed.
+
+**Through v3.25.0 the Ecosystem Update Check skill could not read a single update.** It fetched a branch and a folder that never held them, and halted on a 404 every time it ran. If you installed any version before v3.26.0 and relied on that skill, it has told you nothing since you installed. Read the CHANGELOG from your version forward, and apply v3.26.0 to get a skill that works. A CI step now checks every upstream address the template ships.
 
 ## Responsible Use
 
@@ -61,6 +64,7 @@ The hooks in `.claude/settings.json` catch common mistakes. They do not contain 
 - **The Outward Gate asks before what it lists.** That means secret writes on fly, wrangler and vercel, writes through a connected MCP server and the scripts and commands you name in its config. Built-in deploys are logged and not asked. Anything off its lists passes.
 - **The git guards read a command as tokens** (since v3.25.0). One refuses a sweeping `git add -A`, `git add .` or `git commit -a` in this vault, where another session may have work in progress, and asks when the folder comes from a variable or a command it cannot read. The other asks before a git command that destroys work (`branch -D`, `reset --hard`, `clean -f`, a forced or deleting push) in any spelling. Both read one level into `bash -c` and `powershell -Command`. A git command run from inside a script you call is beyond them.
 - **Outside models refuse partner material** (since v3.25.0). `external-worker.mjs` refuses a context pack under `Collaborations/` and a prompt carrying a partner's full name (a `Collaborations/` folder name with a space, or one you list in `client-material.config.json`). It also blocks email addresses, card-like digit runs, payment ids, key-shaped strings and long encoded blobs unless you pass `--allow-sensitive`, which is logged. Text about a partner that never names them in full passes.
+- **The browser fetcher refuses your own machine and network** (since v3.26.0). The Playwright skill's `run.js` fetches only http and https, and never a local name, loopback, private, link-local, CGNAT or cloud metadata address, checked on the URL, after DNS and on every request the page makes. Through v3.25.0 it fetched any URL it was handed, so a page that planted `http://169.254.169.254/` or `http://127.0.0.1/admin` could read your machine or network into the agent's context. `--allow-private` opens it for testing a site on your own machine. A name that resolves to a public address at the check and a private one at the connect is beyond it.
 - **The settings deny reading `.env` files** (from v3.21.0; since v3.24.0 also `.env.local`, `.env.*.local`, `.env.development`, `.env.production` and `.env.test`). Claude Code enforces the rule on its file tools and on the shell readers it recognizes. A script you run can still read the file, which is how your scripts get their keys.
 
 Containment comes from your operating system and from what you allow: your user account, Claude Code's permission prompts and its sandbox where your platform supports it.
