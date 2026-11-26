@@ -6,6 +6,19 @@ Each entry corresponds to one publish cycle. For full implementation details, se
 
 ---
 
+## v3.26.1, 2026-11-25
+
+What You Installed Counts.
+
+**If you installed v3.26.0 or applied it, apply this update before your first Ecosystem Update Check.** With the channel open, the first check on a fresh install listed all 57 earlier updates as not yet applied, though a fresh copy holds every one.
+
+- On the first check only, the skill reads your installed version from `AGENTS.md` and records every update at or below it as applied, in one line. The next check starts from that baseline.
+- Fired in two fresh clones: at v3.26.1 it reports nothing new; planted at v3.20.0 it lists exactly the six later releases.
+
+Full detail and the implementation spec: `.github/UPDATES/2026-11-25-v3.26.1-what-you-installed-counts.md`.
+
+---
+
 ## v3.26.0, 2026-11-25
 
 The Channel Opens.

@@ -47,9 +47,11 @@ If the sync state file does not exist yet, create it now with this content:
 }
 ```
 
+**On the first check only (`last_check_date` is null), set the baseline from what you installed.** A fresh install already holds every update up to its own version, so none of those is new to it. Read the installed version from the `**Version:**` line of `AGENTS.md` at the vault root. Each index row's version is the start of its slug (`v3.25.0-the-fence...` is 3.25.0; a missing part reads as 0, so `v1-initial-release` is 1.0.0). Every row at or below the installed version goes into `applied_updates` without being presented, and the report says so in one line: "[N] updates came with your install (through v[version]); they are recorded as applied." If `AGENTS.md` has no version line, say so and treat every row as new. Detection reads; this baseline changes only the sync state, never a vault file.
+
 Compare the fetched index against `applied_updates` in sync state. Identify entries that are new, not previously applied, skipped or deferred.
 
-If no new updates are found: report "No new updates since your last check ([last_check_date])." and stop.
+If no new updates are found: report "No new updates since your last check ([last_check_date])." and stop. On a first check, say instead: "Your install is current with upstream (v[version])." Before stopping, write the sync state as Step 5 does (today's `last_check_date` and the baseline in `applied_updates`), so the next check starts from it.
 
 ---
 
